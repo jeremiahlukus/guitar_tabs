@@ -8,8 +8,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/infrastructure/webapp_authenticator.dart';
-import 'package:flutter_template/auth/presentation/authorization_page.dart';
+import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
+import 'package:joyful_noise/auth/presentation/authorization_page.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 

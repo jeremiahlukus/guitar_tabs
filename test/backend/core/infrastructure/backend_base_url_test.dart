@@ -7,7 +7,7 @@ import 'package:platform/platform.dart';
 import 'package:test/test.dart';
 
 // Project imports:
-import 'package:flutter_template/backend/core/infrastructure/backend_base_url.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_base_url.dart';
 
 void main() {
   group('.backendUrl', () {

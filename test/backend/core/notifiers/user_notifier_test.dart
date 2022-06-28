@@ -4,10 +4,10 @@ import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 // Project imports:
-import 'package:flutter_template/backend/core/domain/backend_failure.dart';
-import 'package:flutter_template/backend/core/domain/user.dart';
-import 'package:flutter_template/backend/core/infrastructure/user_repository.dart';
-import 'package:flutter_template/backend/core/notifiers/user_notifier.dart';
+import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
+import 'package:joyful_noise/backend/core/domain/user.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
+import 'package:joyful_noise/backend/core/notifiers/user_notifier.dart';
 
 class MockUserRepository extends Mock implements UserRepository {}
 

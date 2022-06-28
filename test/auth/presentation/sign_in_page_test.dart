@@ -8,12 +8,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/infrastructure/webapp_authenticator.dart';
-import 'package:flutter_template/auth/notifiers/auth_notifier.dart';
-import 'package:flutter_template/auth/presentation/authorization_page.dart';
-import 'package:flutter_template/auth/presentation/sign_in_page.dart';
-import 'package:flutter_template/auth/shared/providers.dart';
-import 'package:flutter_template/core/presentation/routes/app_router.gr.dart';
+import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
+import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
+import 'package:joyful_noise/auth/presentation/authorization_page.dart';
+import 'package:joyful_noise/auth/presentation/sign_in_page.dart';
+import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 
 class MockAuthNotifier extends Mock implements AuthNotifier {}
 

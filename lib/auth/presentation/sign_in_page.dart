@@ -11,8 +11,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/shared/providers.dart';
-import 'package:flutter_template/core/presentation/routes/app_router.gr.dart';
+import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 
 class SignInPage extends ConsumerWidget {
   const SignInPage({Key? key}) : super(key: key);

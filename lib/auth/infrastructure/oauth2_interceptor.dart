@@ -2,8 +2,8 @@
 import 'package:dio/dio.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/infrastructure/webapp_authenticator.dart';
-import 'package:flutter_template/auth/notifiers/auth_notifier.dart';
+import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
+import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
 
 class OAuth2Interceptor extends Interceptor {
   final WebAppAuthenticator _authenticator;

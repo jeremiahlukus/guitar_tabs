@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:test/test.dart';
 
 // Project imports:
-import 'package:flutter_template/backend/core/infrastructure/backend_headers.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_headers.dart';
 
 void main() {
   group('BackendHeaders', () {

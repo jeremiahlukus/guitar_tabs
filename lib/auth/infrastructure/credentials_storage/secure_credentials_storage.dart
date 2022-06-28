@@ -8,7 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:oauth2/src/credentials.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/infrastructure/credentials_storage/credentials_storage.dart';
+import 'package:joyful_noise/auth/infrastructure/credentials_storage/credentials_storage.dart';
 
 class SecureCredentialsStorage implements CredentialsStorage {
   SecureCredentialsStorage(this._storage);

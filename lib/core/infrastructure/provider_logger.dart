@@ -4,7 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
-import 'package:flutter_template/core/presentation/bootstrap.dart' as bootstrap;
+import 'package:joyful_noise/core/presentation/bootstrap.dart' as bootstrap;
 
 class ProviderLogger extends ProviderObserver {
   ProviderLogger({this.loggerInstance}) {

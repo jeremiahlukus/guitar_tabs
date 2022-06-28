@@ -4,14 +4,14 @@ import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 // Project imports:
-import 'package:flutter_template/backend/core/domain/backend_failure.dart';
-import 'package:flutter_template/backend/core/domain/user.dart';
-import 'package:flutter_template/backend/core/infrastructure/user_dto.dart';
-import 'package:flutter_template/backend/core/infrastructure/user_local_service.dart';
-import 'package:flutter_template/backend/core/infrastructure/user_remote_service.dart';
-import 'package:flutter_template/backend/core/infrastructure/user_repository.dart';
-import 'package:flutter_template/core/infrastructure/network_exceptions.dart';
-import 'package:flutter_template/core/infrastructure/remote_response.dart';
+import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
+import 'package:joyful_noise/backend/core/domain/user.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_dto.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_local_service.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_remote_service.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
+import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
+import 'package:joyful_noise/core/infrastructure/remote_response.dart';
 
 class MockUserRemoteService extends Mock implements UserRemoteService {}
 

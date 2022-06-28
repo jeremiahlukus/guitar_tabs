@@ -2,7 +2,7 @@
 import 'package:test/test.dart';
 
 // Project imports:
-import 'package:flutter_template/backend/core/domain/user.dart';
+import 'package:joyful_noise/backend/core/domain/user.dart';
 
 void main() {
   group('User', () {

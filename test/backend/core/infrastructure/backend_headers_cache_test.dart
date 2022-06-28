@@ -5,9 +5,9 @@ import 'package:sembast/sembast_memory.dart';
 import 'package:test/test.dart';
 
 // Project imports:
-import 'package:flutter_template/backend/core/infrastructure/backend_headers.dart';
-import 'package:flutter_template/backend/core/infrastructure/backend_headers_cache.dart';
-import 'package:flutter_template/core/infrastructure/sembast_database.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_headers.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_headers_cache.dart';
+import 'package:joyful_noise/core/infrastructure/sembast_database.dart';
 
 class FakeSembastDatabase extends Fake implements SembastDatabase {
   FakeSembastDatabase(this._database);

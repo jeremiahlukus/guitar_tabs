@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:sembast/sembast.dart';
 
 // Project imports:
-import 'package:flutter_template/backend/core/infrastructure/backend_headers.dart';
-import 'package:flutter_template/core/infrastructure/sembast_database.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_headers.dart';
+import 'package:joyful_noise/core/infrastructure/sembast_database.dart';
 
 class BackendHeadersCache {
   final SembastDatabase _sembastDatabase;

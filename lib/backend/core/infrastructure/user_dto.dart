@@ -2,7 +2,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 // Project imports:
-import 'package:flutter_template/backend/core/domain/user.dart';
+import 'package:joyful_noise/backend/core/domain/user.dart';
 
 part 'user_dto.freezed.dart';
 part 'user_dto.g.dart';

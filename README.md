@@ -11,7 +11,7 @@
 2) run the script
 
 ### To replace the signin screen url
-https://github.com/jeremiahlukus/flutter_template/blob/master/lib/auth/infrastructure/webapp_authenticator.dart#L47-L56
+https://github.com/jeremiahlukus/joyful_noise/blob/master/lib/auth/infrastructure/webapp_authenticator.dart#L47-L56
 
 # What to accomplish
 1) has tests

@@ -3,8 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sembast/sembast.dart';
 
 // Project imports:
-import 'package:flutter_template/backend/core/infrastructure/user_dto.dart';
-import 'package:flutter_template/core/infrastructure/sembast_database.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_dto.dart';
+import 'package:joyful_noise/core/infrastructure/sembast_database.dart';
 
 class UserLocalService {
   final SembastDatabase _sembastDatabase;

@@ -4,11 +4,11 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:riverpod/riverpod.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/infrastructure/credentials_storage/credentials_storage.dart';
-import 'package:flutter_template/auth/infrastructure/credentials_storage/secure_credentials_storage.dart';
-import 'package:flutter_template/auth/infrastructure/oauth2_interceptor.dart';
-import 'package:flutter_template/auth/infrastructure/webapp_authenticator.dart';
-import 'package:flutter_template/auth/notifiers/auth_notifier.dart';
+import 'package:joyful_noise/auth/infrastructure/credentials_storage/credentials_storage.dart';
+import 'package:joyful_noise/auth/infrastructure/credentials_storage/secure_credentials_storage.dart';
+import 'package:joyful_noise/auth/infrastructure/oauth2_interceptor.dart';
+import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
+import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
 
 // Only for the auth feature, everything else uses oAuth2InterceptorProvider which adds the correct headers
 final dioForAuthProvider = Provider((ref) => Dio());

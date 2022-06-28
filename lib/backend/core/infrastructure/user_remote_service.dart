@@ -2,13 +2,13 @@
 import 'package:dio/dio.dart';
 
 // Project imports:
-import 'package:flutter_template/backend/core/infrastructure/backend_base_url.dart';
-import 'package:flutter_template/backend/core/infrastructure/backend_headers.dart';
-import 'package:flutter_template/backend/core/infrastructure/backend_headers_cache.dart';
-import 'package:flutter_template/backend/core/infrastructure/user_dto.dart';
-import 'package:flutter_template/core/infrastructure/dio_extensions.dart';
-import 'package:flutter_template/core/infrastructure/network_exceptions.dart';
-import 'package:flutter_template/core/infrastructure/remote_response.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_base_url.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_headers.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_headers_cache.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_dto.dart';
+import 'package:joyful_noise/core/infrastructure/dio_extensions.dart';
+import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
+import 'package:joyful_noise/core/infrastructure/remote_response.dart';
 
 class UserRemoteService {
   UserRemoteService(this._dio, this._backendHeadersCache);

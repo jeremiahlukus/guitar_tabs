@@ -14,9 +14,9 @@ import 'package:platform/platform.dart';
 import 'package:test/test.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/domain/auth_failure.dart';
-import 'package:flutter_template/auth/infrastructure/credentials_storage/credentials_storage.dart';
-import 'package:flutter_template/auth/infrastructure/webapp_authenticator.dart';
+import 'package:joyful_noise/auth/domain/auth_failure.dart';
+import 'package:joyful_noise/auth/infrastructure/credentials_storage/credentials_storage.dart';
+import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
 
 class MockCredentialStorage extends Mock implements CredentialsStorage {}
 

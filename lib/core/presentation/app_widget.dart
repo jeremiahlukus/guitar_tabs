@@ -9,10 +9,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/notifiers/auth_notifier.dart';
-import 'package:flutter_template/auth/shared/providers.dart';
-import 'package:flutter_template/core/presentation/routes/app_router.gr.dart';
-import 'package:flutter_template/core/shared/providers.dart';
+import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
+import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
+import 'package:joyful_noise/core/shared/providers.dart';
 
 final initializationProvider = FutureProvider<Unit>(
   (ref) async {

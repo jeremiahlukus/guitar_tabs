@@ -5,7 +5,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 // Project imports:
-import 'package:flutter_template/core/infrastructure/provider_logger.dart';
+import 'package:joyful_noise/core/infrastructure/provider_logger.dart';
 
 class MockLogger extends Mock implements Logger {}
 

@@ -10,7 +10,7 @@ import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
-import 'package:flutter_template/core/infrastructure/provider_logger.dart';
+import 'package:joyful_noise/core/infrastructure/provider_logger.dart';
 
 // Flutter imports:
 

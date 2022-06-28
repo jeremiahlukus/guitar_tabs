@@ -9,10 +9,10 @@ import 'package:oauth2/oauth2.dart';
 import 'package:platform/platform.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/domain/auth_failure.dart';
-import 'package:flutter_template/auth/infrastructure/credentials_storage/credentials_storage.dart';
-import 'package:flutter_template/core/infrastructure/dio_extensions.dart';
-import 'package:flutter_template/core/presentation/bootstrap.dart';
+import 'package:joyful_noise/auth/domain/auth_failure.dart';
+import 'package:joyful_noise/auth/infrastructure/credentials_storage/credentials_storage.dart';
+import 'package:joyful_noise/core/infrastructure/dio_extensions.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class WebAppAuthenticator {
   WebAppAuthenticator(

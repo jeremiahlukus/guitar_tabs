@@ -1,6 +1,6 @@
 // Project imports:
-import 'package:flutter_template/core/presentation/app_widget.dart';
-import 'package:flutter_template/core/presentation/bootstrap.dart';
+import 'package:joyful_noise/core/presentation/app_widget.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 void main() {
   bootstrap(

@@ -5,7 +5,7 @@ import 'package:oauth2/oauth2.dart';
 import 'package:test/test.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/infrastructure/credentials_storage/secure_credentials_storage.dart';
+import 'package:joyful_noise/auth/infrastructure/credentials_storage/secure_credentials_storage.dart';
 
 class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}
 

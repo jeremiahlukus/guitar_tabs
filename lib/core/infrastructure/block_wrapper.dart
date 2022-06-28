@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 // Project imports:
-import 'package:flutter_template/constants/spacing.dart';
+import 'package:joyful_noise/constants/spacing.dart';
 
 /// A convenience widget to wrap main blocks with:
 ///  - ResponsiveContraints for max width.

@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Project imports:
-import 'package:flutter_template/auth/shared/providers.dart';
-import 'package:flutter_template/backend/core/shared/providers.dart';
+import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:joyful_noise/backend/core/shared/providers.dart';
 
 class DashboardPage extends ConsumerStatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
