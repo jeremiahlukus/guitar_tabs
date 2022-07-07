@@ -1,11 +1,11 @@
 {
-    "name": "Flutter Template",
-    "short_name": "Flutter Template",
+    "name": "Joyful Noise",
+    "short_name": "Joyful Noise",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A Very Good Project created by Very Good CLI.",
+    "description": "A guitar chord application.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

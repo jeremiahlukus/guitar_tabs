@@ -32,6 +32,7 @@ class SignInPage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Center(
+                    // TODO(jeremiahlukus): replace with own logo
                     child: FaIcon(
                       FontAwesomeIcons.gitkraken,
                       size: 150,
@@ -41,7 +42,7 @@ class SignInPage extends ConsumerWidget {
                     height: 16,
                   ),
                   AutoSizeText(
-                    'Welcome to \nFlutter Template',
+                    'Welcome to \nJoyful Noise',
                     style: Theme.of(context).textTheme.headline3,
                     textAlign: TextAlign.center,
                     maxLines: 2,

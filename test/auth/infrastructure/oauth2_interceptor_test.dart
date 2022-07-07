@@ -24,11 +24,13 @@ class MockDio extends Mock implements Dio {}
 
 class MockRequestOptions extends Mock implements RequestOptions {}
 
-class MockRequestInterceptorHandler extends Mock implements RequestInterceptorHandler {}
+class MockRequestInterceptorHandler extends Mock
+    implements RequestInterceptorHandler {}
 
 class MockDioError extends Mock implements DioError {}
 
-class MockErrorInterceptorHandler extends Mock implements ErrorInterceptorHandler {}
+class MockErrorInterceptorHandler extends Mock
+    implements ErrorInterceptorHandler {}
 
 class FakeResponse extends Fake implements Response<dynamic> {}
 
@@ -52,10 +54,12 @@ void main() {
       test(
           "calls the handler's next method with an unmodified request options when WebAppAuthenticator returns null signed credentials ",
           () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+        final WebAppAuthenticator mockWebAppAuthenticator =
+            MockWebAppAuthenticator();
         final AuthNotifier mockAuthNotifier = MockAuthNotifier();
         final Dio mockDio = MockDio();
-        when(mockWebAppAuthenticator.getSignedInCredentials).thenAnswer((invocation) => Future.value(null));
+        when(mockWebAppAuthenticator.getSignedInCredentials)
+            .thenAnswer((invocation) => Future.value(null));
 
         final oAuth2Interceptor = OAuth2Interceptor(
           mockWebAppAuthenticator,
@@ -64,26 +68,30 @@ void main() {
         );
 
         final requestOptions = RequestOptions(path: '');
-        final RequestInterceptorHandler mockRequestInterceptorHandler = MockRequestInterceptorHandler();
+        final RequestInterceptorHandler mockRequestInterceptorHandler =
+            MockRequestInterceptorHandler();
 
         await oAuth2Interceptor.onRequest(
           requestOptions,
           mockRequestInterceptorHandler,
         );
 
-        verify<void>(() => mockRequestInterceptorHandler.next(requestOptions)).called(1);
+        verify<void>(() => mockRequestInterceptorHandler.next(requestOptions))
+            .called(1);
       });
 
       test(
           "calls the handler's next method with a modified request options when WebAppAuthenticator returns null signed credentials ",
           () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+        final WebAppAuthenticator mockWebAppAuthenticator =
+            MockWebAppAuthenticator();
         final AuthNotifier mockAuthNotifier = MockAuthNotifier();
         final Dio mockDio = MockDio();
 
         final mockCredentials = Credentials.fromJson(mockCredentialJson);
 
-        when(mockWebAppAuthenticator.getSignedInCredentials).thenAnswer((invocation) => Future.value(mockCredentials));
+        when(mockWebAppAuthenticator.getSignedInCredentials)
+            .thenAnswer((invocation) => Future.value(mockCredentials));
 
         final oAuth2Interceptor = OAuth2Interceptor(
           mockWebAppAuthenticator,
@@ -92,7 +100,8 @@ void main() {
         );
 
         final requestOptions = RequestOptions(path: '');
-        final RequestInterceptorHandler mockRequestInterceptorHandler = MockRequestInterceptorHandler();
+        final RequestInterceptorHandler mockRequestInterceptorHandler =
+            MockRequestInterceptorHandler();
 
         await oAuth2Interceptor.onRequest(
           requestOptions,
@@ -100,7 +109,9 @@ void main() {
         );
 
         final expectedRequestOptions = requestOptions
-          ..headers.addAll(<String, String>{'Authorization': 'bearer ${mockCredentials.accessToken}'});
+          ..headers.addAll(<String, String>{
+            'Authorization': 'bearer ${mockCredentials.accessToken}'
+          });
 
         verify<void>(
           () => mockRequestInterceptorHandler.next(expectedRequestOptions),
@@ -109,8 +120,11 @@ void main() {
     });
 
     group('.onError', () {
-      test("calls the handler's next method with the passed DioError object if error response is null", () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+      test(
+          "calls the handler's next method with the passed DioError object if error response is null",
+          () async {
+        final WebAppAuthenticator mockWebAppAuthenticator =
+            MockWebAppAuthenticator();
         final AuthNotifier mockAuthNotifier = MockAuthNotifier();
         final Dio mockDio = MockDio();
 
@@ -121,7 +135,8 @@ void main() {
         );
 
         final DioError mockDioError = MockDioError();
-        final ErrorInterceptorHandler mockErrorInterceptorHandler = MockErrorInterceptorHandler();
+        final ErrorInterceptorHandler mockErrorInterceptorHandler =
+            MockErrorInterceptorHandler();
 
         when(() => mockDioError.response).thenReturn(null);
 
@@ -130,13 +145,15 @@ void main() {
           mockErrorInterceptorHandler,
         );
 
-        verify<void>(() => mockErrorInterceptorHandler.next(mockDioError)).called(1);
+        verify<void>(() => mockErrorInterceptorHandler.next(mockDioError))
+            .called(1);
       });
 
       test(
           "calls the handler's next method with the passed DioError object if error response has a status code that is not 401 ",
           () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+        final WebAppAuthenticator mockWebAppAuthenticator =
+            MockWebAppAuthenticator();
         final AuthNotifier mockAuthNotifier = MockAuthNotifier();
         final Dio mockDio = MockDio();
 
@@ -147,7 +164,8 @@ void main() {
         );
 
         final DioError mockDioError = MockDioError();
-        final ErrorInterceptorHandler mockErrorInterceptorHandler = MockErrorInterceptorHandler();
+        final ErrorInterceptorHandler mockErrorInterceptorHandler =
+            MockErrorInterceptorHandler();
         final requestOptions = RequestOptions(path: '');
 
         final httpErrorCodesThatAreNot401 = <int>[
@@ -215,14 +233,16 @@ void main() {
             mockErrorInterceptorHandler,
           );
 
-          verify<void>(() => mockErrorInterceptorHandler.next(mockDioError)).called(1);
+          verify<void>(() => mockErrorInterceptorHandler.next(mockDioError))
+              .called(1);
         }
       });
 
       test(
           "calls the handler's resolve method with the result of Dio fetch DioError object if error response is not null with 401 status code",
           () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+        final WebAppAuthenticator mockWebAppAuthenticator =
+            MockWebAppAuthenticator();
         final AuthNotifier mockAuthNotifier = MockAuthNotifier();
         final Dio mockDio = MockDio();
 
@@ -230,11 +250,13 @@ void main() {
 
         final requestOptions = RequestOptions(path: '');
 
-        when(mockWebAppAuthenticator.getSignedInCredentials).thenAnswer((invocation) => Future.value(mockCredentials));
+        when(mockWebAppAuthenticator.getSignedInCredentials)
+            .thenAnswer((invocation) => Future.value(mockCredentials));
         when(mockWebAppAuthenticator.clearCredentialsStorage).thenAnswer(
           (invocation) => Future.value(left(const AuthFailure.storage())),
         );
-        when(mockAuthNotifier.checkAndUpdateAuthStatus).thenAnswer((invocation) => Future.value());
+        when(mockAuthNotifier.checkAndUpdateAuthStatus)
+            .thenAnswer((invocation) => Future.value());
         when(() => mockDio.fetch<Response<dynamic>>(any())).thenAnswer(
           (_) => Future.value(
             Response(
@@ -254,7 +276,8 @@ void main() {
         );
 
         final DioError mockDioError = MockDioError();
-        final ErrorInterceptorHandler mockErrorInterceptorHandler = MockErrorInterceptorHandler();
+        final ErrorInterceptorHandler mockErrorInterceptorHandler =
+            MockErrorInterceptorHandler();
 
         when(() => mockDioError.response).thenReturn(
           Response<dynamic>(requestOptions: requestOptions, statusCode: 401),
@@ -265,7 +288,8 @@ void main() {
           mockErrorInterceptorHandler,
         );
 
-        verify<void>(() => mockErrorInterceptorHandler.resolve(any())).called(1);
+        verify<void>(() => mockErrorInterceptorHandler.resolve(any()))
+            .called(1);
       });
     });
   });

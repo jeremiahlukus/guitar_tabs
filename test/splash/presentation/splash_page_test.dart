@@ -20,7 +20,8 @@ void main() {
       await tester.pump(Duration.zero);
 
       final githubIconFinder = find.byWidgetPredicate(
-        (Widget widget) => widget is FaIcon && widget.icon == FontAwesomeIcons.github,
+        (Widget widget) =>
+            widget is FaIcon && widget.icon == FontAwesomeIcons.github,
       );
 
       expect(githubIconFinder, findsOneWidget);

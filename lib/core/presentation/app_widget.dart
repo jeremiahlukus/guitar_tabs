@@ -71,7 +71,7 @@ class AppWidget extends ConsumerWidget {
         ],
       ),
       theme: FlexThemeData.light(scheme: FlexScheme.materialHc),
-      title: 'Flutter Template',
+      title: 'Joyful Noise',
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
     );

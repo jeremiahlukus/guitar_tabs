@@ -62,7 +62,8 @@ void main() {
     });
 
     group('PaginationLink', () {
-      test('.fromJson returns a PaginationLink object with the correct maxPage', () {
+      test('.fromJson returns a PaginationLink object with the correct maxPage',
+          () {
         final paginationJson = {'maxPage': 2};
         final paginationLink = PaginationLink.fromJson(paginationJson);
 

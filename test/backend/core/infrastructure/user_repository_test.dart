@@ -24,9 +24,11 @@ void main() {
         final UserRemoteService mockUserRemoteService = MockUserRemoteService();
         final UserLocalService mockUserLocalService = MockUserLocalService();
 
-        when(mockUserRemoteService.getUserDetails).thenThrow(RestApiException(400));
+        when(mockUserRemoteService.getUserDetails)
+            .thenThrow(RestApiException(400));
 
-        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
+        final userRepository =
+            UserRepository(mockUserRemoteService, mockUserLocalService);
 
         final actualResult = await userRepository.getUserPage();
         final expectedResult = isA<Left<BackendFailure, User>>();
@@ -34,19 +36,24 @@ void main() {
         expect(actualResult, expectedResult);
       });
 
-      test('returns Right<BackendFailure, User> when UserRemoteService returns RemoteResponse.noConnection', () async {
+      test(
+          'returns Right<BackendFailure, User> when UserRemoteService returns RemoteResponse.noConnection',
+          () async {
         final UserRemoteService mockUserRemoteService = MockUserRemoteService();
         final UserLocalService mockUserLocalService = MockUserLocalService();
 
-        const userDTO = UserDTO(avatarUrl: 'www.example.com/avatarUrl', name: 'Name');
+        const userDTO =
+            UserDTO(avatarUrl: 'www.example.com/avatarUrl', name: 'Name');
 
         when(mockUserRemoteService.getUserDetails).thenAnswer((_) {
           return Future.value(const RemoteResponse<UserDTO>.noConnection());
         });
 
-        when(mockUserLocalService.getUser).thenAnswer((_) => Future.value(userDTO));
+        when(mockUserLocalService.getUser)
+            .thenAnswer((_) => Future.value(userDTO));
 
-        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
+        final userRepository =
+            UserRepository(mockUserRemoteService, mockUserLocalService);
 
         final actualResult = await userRepository.getUserPage();
         final expectedResult = isA<Right<BackendFailure, User>>();
@@ -54,19 +61,24 @@ void main() {
         expect(actualResult, expectedResult);
       });
 
-      test('returns Right<BackendFailure, User> when UserRemoteService returns RemoteResponse.notModified', () async {
+      test(
+          'returns Right<BackendFailure, User> when UserRemoteService returns RemoteResponse.notModified',
+          () async {
         final UserRemoteService mockUserRemoteService = MockUserRemoteService();
         final UserLocalService mockUserLocalService = MockUserLocalService();
 
-        const userDTO = UserDTO(avatarUrl: 'www.example.com/avatarUrl', name: 'Name');
+        const userDTO =
+            UserDTO(avatarUrl: 'www.example.com/avatarUrl', name: 'Name');
 
         when(mockUserRemoteService.getUserDetails).thenAnswer((_) {
           return Future.value(const RemoteResponse<UserDTO>.notModified());
         });
 
-        when(mockUserLocalService.getUser).thenAnswer((_) => Future.value(userDTO));
+        when(mockUserLocalService.getUser)
+            .thenAnswer((_) => Future.value(userDTO));
 
-        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
+        final userRepository =
+            UserRepository(mockUserRemoteService, mockUserLocalService);
 
         final actualResult = await userRepository.getUserPage();
         final expectedResult = isA<Right<BackendFailure, User>>();
@@ -74,11 +86,14 @@ void main() {
         expect(actualResult, expectedResult);
       });
 
-      test('returns Right<BackendFailure, User> when UserRemoteService returns RemoteResponse.withNewData', () async {
+      test(
+          'returns Right<BackendFailure, User> when UserRemoteService returns RemoteResponse.withNewData',
+          () async {
         final UserRemoteService mockUserRemoteService = MockUserRemoteService();
         final UserLocalService mockUserLocalService = MockUserLocalService();
 
-        const userDTO = UserDTO(avatarUrl: 'www.example.com/avatarUrl', name: 'Name');
+        const userDTO =
+            UserDTO(avatarUrl: 'www.example.com/avatarUrl', name: 'Name');
 
         when(mockUserRemoteService.getUserDetails).thenAnswer((_) {
           return Future.value(
@@ -86,9 +101,11 @@ void main() {
           );
         });
 
-        when(() => mockUserLocalService.saveUser(userDTO)).thenAnswer((_) => Future.value());
+        when(() => mockUserLocalService.saveUser(userDTO))
+            .thenAnswer((_) => Future.value());
 
-        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
+        final userRepository =
+            UserRepository(mockUserRemoteService, mockUserLocalService);
 
         final actualResult = await userRepository.getUserPage();
         final expectedResult = isA<Right<BackendFailure, User>>();
