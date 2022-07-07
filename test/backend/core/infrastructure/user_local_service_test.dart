@@ -25,23 +25,17 @@ void main() {
 
         final memoryDatabase = await factory.openDatabase('test.db');
 
-        final SembastDatabase fakeSembastDatabase =
-            FakeSembastDatabase(memoryDatabase);
+        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
 
         final userLocalService = UserLocalService(fakeSembastDatabase);
 
-        final userJson = {
-          'name': 'John Doe',
-          'avatar_url': 'https://example.com/avatarUrl'
-        };
+        final userJson = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl'};
 
         final userDTO = UserDTO.fromJson(userJson);
 
         await userLocalService.saveUser(userDTO);
 
-        final actualData = await UserLocalService.store
-            .record(UserLocalService.key)
-            .get(fakeSembastDatabase.instance);
+        final actualData = await UserLocalService.store.record(UserLocalService.key).get(fakeSembastDatabase.instance);
 
         final expectedData = userJson;
 
@@ -55,21 +49,15 @@ void main() {
 
         final memoryDatabase = await factory.openDatabase('test.db');
 
-        final SembastDatabase fakeSembastDatabase =
-            FakeSembastDatabase(memoryDatabase);
+        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
 
         final userLocalService = UserLocalService(fakeSembastDatabase);
 
-        final userJson = {
-          'name': 'John Doe',
-          'avatar_url': 'https://example.com/avatarUrl'
-        };
+        final userJson = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl'};
 
         final userDTO = UserDTO.fromJson(userJson);
 
-        await UserLocalService.store
-            .record(UserLocalService.key)
-            .put(fakeSembastDatabase.instance, userJson);
+        await UserLocalService.store.record(UserLocalService.key).put(fakeSembastDatabase.instance, userJson);
 
         final actualData = await userLocalService.getUser();
 
@@ -85,25 +73,17 @@ void main() {
 
         final memoryDatabase = await factory.openDatabase('test.db');
 
-        final SembastDatabase fakeSembastDatabase =
-            FakeSembastDatabase(memoryDatabase);
+        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
 
         final userLocalService = UserLocalService(fakeSembastDatabase);
 
-        final userJson = {
-          'name': 'John Doe',
-          'avatar_url': 'https://example.com/avatarUrl'
-        };
+        final userJson = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl'};
 
-        await UserLocalService.store
-            .record(UserLocalService.key)
-            .put(fakeSembastDatabase.instance, userJson);
+        await UserLocalService.store.record(UserLocalService.key).put(fakeSembastDatabase.instance, userJson);
 
         await userLocalService.deleteUser();
 
-        final actualData = await UserLocalService.store
-            .record(UserLocalService.key)
-            .get(fakeSembastDatabase.instance);
+        final actualData = await UserLocalService.store.record(UserLocalService.key).get(fakeSembastDatabase.instance);
 
         // ignore: prefer_void_to_null
         const Null expectedData = null;

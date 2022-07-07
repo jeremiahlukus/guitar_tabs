@@ -16,8 +16,7 @@ void main() {
         BackendConstants.platform = null;
       });
 
-      test('returns the value of BackendConstants().backendBaseUrl when IOS',
-          () async {
+      test('returns the value of BackendConstants().backendBaseUrl when IOS', () async {
         BackendConstants.isDebugMode = true;
         BackendConstants.platform = FakePlatform(operatingSystem: Platform.iOS);
 
@@ -26,12 +25,9 @@ void main() {
 
         expect(actualAuthorizationUrl, expectedAuthorizationUrl);
       });
-      test(
-          'returns the value of BackendConstants().backendBaseUrl when Android',
-          () async {
+      test('returns the value of BackendConstants().backendBaseUrl when Android', () async {
         BackendConstants.isDebugMode = true;
-        BackendConstants.platform =
-            FakePlatform(operatingSystem: Platform.android);
+        BackendConstants.platform = FakePlatform(operatingSystem: Platform.android);
 
         final actualAuthorizationUrl = BackendConstants().backendBaseUrl();
         const expectedAuthorizationUrl = '10.0.2.2:3000';
@@ -40,9 +36,7 @@ void main() {
       });
     });
 
-    test(
-        'returns the value of BackendConstants().backendBaseUrl when in release mode',
-        () async {
+    test('returns the value of BackendConstants().backendBaseUrl when in release mode', () async {
       BackendConstants.isDebugMode = false;
 
       final actualAuthorizationUrl = BackendConstants().backendBaseUrl();

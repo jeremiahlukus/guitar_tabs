@@ -42,20 +42,16 @@ void main() {
       await tester.pump(Duration.zero);
 
       final welcomeTextFinder = find.byWidgetPredicate(
-        (Widget widget) =>
-            widget is Text && widget.data == 'Welcome to \nJoyful Noise',
+        (Widget widget) => widget is Text && widget.data == 'Welcome to \nJoyful Noise',
       );
 
       expect(welcomeTextFinder, findsOneWidget);
     });
 
-    testWidgets(
-        "clicking on Sign In button triggers provided AuthNotifier's signIn method",
-        (tester) async {
+    testWidgets("clicking on Sign In button triggers provided AuthNotifier's signIn method", (tester) async {
       final AuthNotifier mockAuthNotifier = MockAuthNotifier();
 
-      when(() => mockAuthNotifier.signIn(any()))
-          .thenAnswer((_) => Future.value());
+      when(() => mockAuthNotifier.signIn(any())).thenAnswer((_) => Future.value());
 
       await tester.pumpWidget(
         ProviderScope(
@@ -80,12 +76,10 @@ void main() {
 
       verify(() => mockAuthNotifier.signIn(any())).called(1);
     });
-    testWidgets('clicking on Sign In button navigates to AuthorizationPage',
-        (tester) async {
+    testWidgets('clicking on Sign In button navigates to AuthorizationPage', (tester) async {
       final mockWebAppAuthenticator = MockWebAppAuthenticator();
 
-      when(mockWebAppAuthenticator.getAuthorizationUrl)
-          .thenAnswer((invocation) => Uri(path: '/test'));
+      when(mockWebAppAuthenticator.getAuthorizationUrl).thenAnswer((invocation) => Uri(path: '/test'));
 
       final mockAuthNotifier = AuthNotifier(mockWebAppAuthenticator);
 

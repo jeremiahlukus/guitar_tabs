@@ -33,11 +33,8 @@ class MockAuthNotifier extends Mock implements AuthNotifier {}
 
 void main() {
   group('DashboardPage', () {
-    testWidgets(
-        "shows a CircleAvatar widget if the user's avatar url is not empty",
-        (tester) async {
-      final UserNotifier fakeUserNotifier =
-          FakeUserNotifier(MockUserRepository());
+    testWidgets("shows a CircleAvatar widget if the user's avatar url is not empty", (tester) async {
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
@@ -58,11 +55,8 @@ void main() {
       expect(circleAvatarFinder, findsOneWidget);
     });
 
-    testWidgets(
-        "clicking on Sign Out button triggers provided AuthNotifier's signOut method",
-        (tester) async {
-      final UserNotifier fakeUserNotifier =
-          FakeUserNotifier(MockUserRepository());
+    testWidgets("clicking on Sign Out button triggers provided AuthNotifier's signOut method", (tester) async {
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
       final AuthNotifier mockAuthNotifier = MockAuthNotifier();
 
       when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
@@ -85,8 +79,7 @@ void main() {
 
       await tester.pump(Duration.zero);
 
-      final signOutButtonFinder =
-          find.byKey(DashboardPageState.signOutButtonKey);
+      final signOutButtonFinder = find.byKey(DashboardPageState.signOutButtonKey);
 
       await tester.tap(signOutButtonFinder);
 

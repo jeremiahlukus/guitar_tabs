@@ -55,8 +55,7 @@ void main() {
       expect(backButtonFinder, findsOneWidget);
     });
 
-    testWidgets('clicking on the back button pops the navigation',
-        (tester) async {
+    testWidgets('clicking on the back button pops the navigation', (tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(
         MaterialApp(
@@ -79,8 +78,7 @@ void main() {
       verify(() => mockObserver.didPop(any(), any()));
     });
 
-    testWidgets('WebViewController clears cached when webview is created',
-        (tester) async {
+    testWidgets('WebViewController clears cached when webview is created', (tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(
         MaterialApp(
@@ -100,8 +98,7 @@ void main() {
 
       final mockWebViewController = MockWebViewController();
 
-      when(mockWebViewController.clearCache)
-          .thenAnswer((invocation) => Future.value());
+      when(mockWebViewController.clearCache).thenAnswer((invocation) => Future.value());
 
       webView.onWebViewCreated?.call(mockWebViewController);
 
@@ -113,19 +110,16 @@ void main() {
         (tester) async {
       final mockObserver = MockNavigatorObserver();
 
-      final OnAuthorizationCodeRedirectAttemptCallback
-          mockOnAuthorizationCodeRedirectAttemptCallback =
+      final OnAuthorizationCodeRedirectAttemptCallback mockOnAuthorizationCodeRedirectAttemptCallback =
           MockOnAuthorizationCodeRedirectAttemptCallback();
 
-      when(mockOnAuthorizationCodeRedirectAttemptCallback.call)
-          .thenReturn((_) {});
+      when(mockOnAuthorizationCodeRedirectAttemptCallback.call).thenReturn((_) {});
 
       await tester.pumpWidget(
         MaterialApp(
           home: AuthorizationPage(
             authorizationUrl: Uri(scheme: ''),
-            onAuthorizationCodeRedirectAttempt:
-                mockOnAuthorizationCodeRedirectAttemptCallback(),
+            onAuthorizationCodeRedirectAttempt: mockOnAuthorizationCodeRedirectAttemptCallback(),
           ),
           navigatorObservers: [mockObserver],
         ),
@@ -139,13 +133,11 @@ void main() {
 
       final mockWebViewController = MockWebViewController();
 
-      when(mockWebViewController.clearCache)
-          .thenAnswer((invocation) => Future.value());
+      when(mockWebViewController.clearCache).thenAnswer((invocation) => Future.value());
 
       final NavigationRequest mockNavigationRequest = MockNavigationRequest();
 
-      when(() => mockNavigationRequest.url)
-          .thenReturn('${WebAppAuthenticator.redirectUrl()}');
+      when(() => mockNavigationRequest.url).thenReturn('${WebAppAuthenticator.redirectUrl()}');
 
       webView.navigationDelegate?.call(mockNavigationRequest);
 
@@ -153,26 +145,21 @@ void main() {
       verify(() => mockOnAuthorizationCodeRedirectAttemptCallback()).called(1);
     });
 
-    testWidgets(
-        'sets WebView.platform to SurfaceAndroidWebView when the running Platform is Android',
-        (tester) async {
+    testWidgets('sets WebView.platform to SurfaceAndroidWebView when the running Platform is Android', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
 
       final mockObserver = MockNavigatorObserver();
 
-      final OnAuthorizationCodeRedirectAttemptCallback
-          mockOnAuthorizationCodeRedirectAttemptCallback =
+      final OnAuthorizationCodeRedirectAttemptCallback mockOnAuthorizationCodeRedirectAttemptCallback =
           MockOnAuthorizationCodeRedirectAttemptCallback();
 
-      when(mockOnAuthorizationCodeRedirectAttemptCallback.call)
-          .thenReturn((_) {});
+      when(mockOnAuthorizationCodeRedirectAttemptCallback.call).thenReturn((_) {});
 
       await tester.pumpWidget(
         MaterialApp(
           home: AuthorizationPage(
             authorizationUrl: Uri(scheme: ''),
-            onAuthorizationCodeRedirectAttempt:
-                mockOnAuthorizationCodeRedirectAttemptCallback(),
+            onAuthorizationCodeRedirectAttempt: mockOnAuthorizationCodeRedirectAttemptCallback(),
           ),
           navigatorObservers: [mockObserver],
         ),

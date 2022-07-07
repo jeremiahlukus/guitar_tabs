@@ -14,14 +14,11 @@ class MockUserRepository extends Mock implements UserRepository {}
 void main() {
   group('UserNotifier', () {
     group('.getUserPage', () {
-      test(
-          'sets state to UserState.loadFailure if UserRepository.getUserPage returns a BackendFailure',
-          () async {
+      test('sets state to UserState.loadFailure if UserRepository.getUserPage returns a BackendFailure', () async {
         final UserRepository mockUserRepository = MockUserRepository();
 
         when(mockUserRepository.getUserPage).thenAnswer(
-          (invocation) =>
-              Future.value(left(const BackendFailure.api(400, 'message'))),
+          (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
         final userNotifier = UserNotifier(mockUserRepository);
         const defaultUser = User(name: 'name', avatarUrl: 'avatarUrl');
@@ -43,9 +40,7 @@ void main() {
         expect(actualStateResult, expectedStateResultMatcher);
       });
 
-      test(
-          'sets state to UserState.loadSuccess if UserRepository.getUserPage returns a User',
-          () async {
+      test('sets state to UserState.loadSuccess if UserRepository.getUserPage returns a User', () async {
         final UserRepository mockUserRepository = MockUserRepository();
         when(mockUserRepository.getUserPage).thenAnswer(
           (invocation) => Future.value(

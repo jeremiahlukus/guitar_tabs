@@ -25,8 +25,7 @@ void main() {
 
         final memoryDatabase = await factory.openDatabase('test.db');
 
-        final SembastDatabase fakeSembastDatabase =
-            FakeSembastDatabase(memoryDatabase);
+        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
 
         final backendHeadersCache = BackendHeadersCache(fakeSembastDatabase);
 
@@ -39,9 +38,7 @@ void main() {
 
         await backendHeadersCache.saveHeaders(uri, backendHeaders);
 
-        final actualData = await BackendHeadersCache.store
-            .record(uri.toString())
-            .get(fakeSembastDatabase.instance);
+        final actualData = await BackendHeadersCache.store.record(uri.toString()).get(fakeSembastDatabase.instance);
         final expectedData = backendHeaders.toJson();
 
         expect(actualData, expectedData);
@@ -54,8 +51,7 @@ void main() {
 
         final memoryDatabase = await factory.openDatabase('test.db');
 
-        final SembastDatabase fakeSembastDatabase =
-            FakeSembastDatabase(memoryDatabase);
+        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
 
         final backendHeadersCache = BackendHeadersCache(fakeSembastDatabase);
 
@@ -67,9 +63,7 @@ void main() {
 
         final backendHeaders = BackendHeaders.fromJson(backendHeadersJson);
 
-        await BackendHeadersCache.store
-            .record(uri.toString())
-            .put(fakeSembastDatabase.instance, backendHeadersJson);
+        await BackendHeadersCache.store.record(uri.toString()).put(fakeSembastDatabase.instance, backendHeadersJson);
 
         final actualData = await backendHeadersCache.getHeaders(uri);
 
@@ -85,8 +79,7 @@ void main() {
 
         final memoryDatabase = await factory.openDatabase('test.db');
 
-        final SembastDatabase fakeSembastDatabase =
-            FakeSembastDatabase(memoryDatabase);
+        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
 
         final backendHeadersCache = BackendHeadersCache(fakeSembastDatabase);
 
@@ -96,15 +89,11 @@ void main() {
           'etag': '33a64df551425fcc55e4d42a148795d9f25f89d4',
         };
 
-        await BackendHeadersCache.store
-            .record(uri.toString())
-            .put(fakeSembastDatabase.instance, backendHeadersJson);
+        await BackendHeadersCache.store.record(uri.toString()).put(fakeSembastDatabase.instance, backendHeadersJson);
 
         await backendHeadersCache.deleteHeaders(uri);
 
-        final actualData = await BackendHeadersCache.store
-            .record(uri.toString())
-            .get(fakeSembastDatabase.instance);
+        final actualData = await BackendHeadersCache.store.record(uri.toString()).get(fakeSembastDatabase.instance);
 
         // ignore: prefer_void_to_null
         const Null expectedData = null;
