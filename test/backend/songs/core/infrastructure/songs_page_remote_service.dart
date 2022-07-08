@@ -1,10 +1,8 @@
 // Dart imports:
-import 'dart:convert';
 import 'dart:io';
 
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:joyful_noise/backend/songs/core/infrastructure/songs_page_remote_service.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -12,7 +10,7 @@ import 'package:test/test.dart';
 import 'package:joyful_noise/backend/core/infrastructure/backend_headers.dart';
 import 'package:joyful_noise/backend/core/infrastructure/backend_headers_cache.dart';
 import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
-import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_remote_service.dart';
+import 'package:joyful_noise/backend/songs/core/infrastructure/songs_page_remote_service.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
 
