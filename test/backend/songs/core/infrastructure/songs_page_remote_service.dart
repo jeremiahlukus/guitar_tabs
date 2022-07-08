@@ -26,8 +26,8 @@ void main() {
     registerFallbackValue(Options());
     registerFallbackValue(const BackendHeaders());
   });
-  group('FavoriteSongsRemoteService', () {
-    group('.getFavoriteSongsPage', () {
+  group('SongsPageRemoteService', () {
+    group('.getPage', () {
       test('returns RemoteResponse.notModified when response status code is 304 ', () async {
         final Dio mockDio = MockDio();
         final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
@@ -47,9 +47,19 @@ void main() {
           (invocation) => Future.value(),
         );
 
-        final favoriteSongRemoteService = FavoriteSongsRemoteService(mockDio, mockBackendHeadersCache);
+        final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
-        final actualResult = await favoriteSongRemoteService.getFavoriteSongsPage(1);
+        final actualResult = await songsRemoteService.getPage(
+          requestUri: Uri.https(
+            'example.com',
+            '/api/v1/user_favorite_songs',
+            <String, String>{
+              'page': '1',
+              'per_page': '50',
+            },
+          ),
+          jsonDataSelector: (dynamic json) => json as List<dynamic>,
+        );
         const expectedResult = RemoteResponse<List<SongDTO>>.notModified(maxPage: 0);
 
         expect(actualResult, expectedResult);
@@ -97,9 +107,19 @@ void main() {
           (invocation) => Future.value(),
         );
 
-        final favoriteSongsRemoteService = FavoriteSongsRemoteService(mockDio, mockBackendHeadersCache);
+        final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
-        final actualResult = await favoriteSongsRemoteService.getFavoriteSongsPage(1);
+        final actualResult = await songsRemoteService.getPage(
+          requestUri: Uri.https(
+            'example.com',
+            '/api/v1/user_favorite_songs',
+            <String, String>{
+              'page': '1',
+              'per_page': '50',
+            },
+          ),
+          jsonDataSelector: (dynamic json) => json as List<dynamic>,
+        );
         final expectedResult = RemoteResponse<List<SongDTO>>.withNewData(convertedData, maxPage: 1);
 
         expect(actualResult, expectedResult);
@@ -124,9 +144,19 @@ void main() {
           (invocation) => Future.value(),
         );
 
-        final favoriteSongsRemoteService = FavoriteSongsRemoteService(mockDio, mockBackendHeadersCache);
+        final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
-        final actualResult = favoriteSongsRemoteService.getFavoriteSongsPage(1);
+        final actualResult = await songsRemoteService.getPage(
+          requestUri: Uri.https(
+            'example.com',
+            '/api/v1/user_favorite_songs',
+            <String, String>{
+              'page': '1',
+              'per_page': '50',
+            },
+          ),
+          jsonDataSelector: (dynamic json) => json as List<dynamic>,
+        );
         final expectedResult = throwsA(isA<RestApiException>());
 
         expect(actualResult, expectedResult);
@@ -149,9 +179,9 @@ void main() {
           (invocation) => Future.value(),
         );
 
-        final favoriteSongsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
+        final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
-        final actualResult = await favoriteSongsRemoteService.getPage(
+        final actualResult = await songsRemoteService.getPage(
           requestUri: Uri.https(
             'example.com',
             '/api/v1/user_favorite_songs',
@@ -184,9 +214,19 @@ void main() {
           (invocation) => Future.value(),
         );
 
-        final favoriteSongsRemoteService = FavoriteSongsRemoteService(mockDio, mockBackendHeadersCache);
+        final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
-        final actualResult = favoriteSongsRemoteService.getFavoriteSongsPage(1);
+        final actualResult = await songsRemoteService.getPage(
+          requestUri: Uri.https(
+            'example.com',
+            '/api/v1/user_favorite_songs',
+            <String, String>{
+              'page': '1',
+              'per_page': '50',
+            },
+          ),
+          jsonDataSelector: (dynamic json) => json as List<dynamic>,
+        );
         final expectedResult = throwsA(isA<RestApiException>());
 
         expect(actualResult, expectedResult);
