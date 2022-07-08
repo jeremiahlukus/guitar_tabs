@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'auth_failure.dart';
@@ -11,25 +12,7 @@ part of 'auth_failure.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$AuthFailureTearOff {
-  const _$AuthFailureTearOff();
-
-  _Server server([String? message]) {
-    return _Server(
-      message,
-    );
-  }
-
-  _Storage storage() {
-    return const _Storage();
-  }
-}
-
-/// @nodoc
-const $AuthFailure = _$AuthFailureTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$AuthFailure {
@@ -75,7 +58,9 @@ mixin _$AuthFailure {
 
 /// @nodoc
 abstract class $AuthFailureCopyWith<$Res> {
-  factory $AuthFailureCopyWith(AuthFailure value, $Res Function(AuthFailure) then) = _$AuthFailureCopyWithImpl<$Res>;
+  factory $AuthFailureCopyWith(
+          AuthFailure value, $Res Function(AuthFailure) then) =
+      _$AuthFailureCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -88,23 +73,26 @@ class _$AuthFailureCopyWithImpl<$Res> implements $AuthFailureCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ServerCopyWith<$Res> {
-  factory _$ServerCopyWith(_Server value, $Res Function(_Server) then) = __$ServerCopyWithImpl<$Res>;
+abstract class _$$_ServerCopyWith<$Res> {
+  factory _$$_ServerCopyWith(_$_Server value, $Res Function(_$_Server) then) =
+      __$$_ServerCopyWithImpl<$Res>;
   $Res call({String? message});
 }
 
 /// @nodoc
-class __$ServerCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res> implements _$ServerCopyWith<$Res> {
-  __$ServerCopyWithImpl(_Server _value, $Res Function(_Server) _then) : super(_value, (v) => _then(v as _Server));
+class __$$_ServerCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
+    implements _$$_ServerCopyWith<$Res> {
+  __$$_ServerCopyWithImpl(_$_Server _value, $Res Function(_$_Server) _then)
+      : super(_value, (v) => _then(v as _$_Server));
 
   @override
-  _Server get _value => super._value as _Server;
+  _$_Server get _value => super._value as _$_Server;
 
   @override
   $Res call({
     Object? message = freezed,
   }) {
-    return _then(_Server(
+    return _then(_$_Server(
       message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -130,16 +118,18 @@ class _$_Server extends _Server {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Server &&
+            other is _$_Server &&
             const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
-  _$ServerCopyWith<_Server> get copyWith => __$ServerCopyWithImpl<_Server>(this, _$identity);
+  _$$_ServerCopyWith<_$_Server> get copyWith =>
+      __$$_ServerCopyWithImpl<_$_Server>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -205,25 +195,30 @@ class _$_Server extends _Server {
 }
 
 abstract class _Server extends AuthFailure {
-  const factory _Server([String? message]) = _$_Server;
+  const factory _Server([final String? message]) = _$_Server;
   const _Server._() : super._();
 
-  String? get message;
+  String? get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$ServerCopyWith<_Server> get copyWith => throw _privateConstructorUsedError;
+  _$$_ServerCopyWith<_$_Server> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$StorageCopyWith<$Res> {
-  factory _$StorageCopyWith(_Storage value, $Res Function(_Storage) then) = __$StorageCopyWithImpl<$Res>;
+abstract class _$$_StorageCopyWith<$Res> {
+  factory _$$_StorageCopyWith(
+          _$_Storage value, $Res Function(_$_Storage) then) =
+      __$$_StorageCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$StorageCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res> implements _$StorageCopyWith<$Res> {
-  __$StorageCopyWithImpl(_Storage _value, $Res Function(_Storage) _then) : super(_value, (v) => _then(v as _Storage));
+class __$$_StorageCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
+    implements _$$_StorageCopyWith<$Res> {
+  __$$_StorageCopyWithImpl(_$_Storage _value, $Res Function(_$_Storage) _then)
+      : super(_value, (v) => _then(v as _$_Storage));
 
   @override
-  _Storage get _value => super._value as _Storage;
+  _$_Storage get _value => super._value as _$_Storage;
 }
 
 /// @nodoc
@@ -238,7 +233,8 @@ class _$_Storage extends _Storage {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _Storage);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Storage);
   }
 
   @override

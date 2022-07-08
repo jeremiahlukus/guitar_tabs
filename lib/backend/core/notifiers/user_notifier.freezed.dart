@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'user_notifier.dart';
@@ -11,45 +12,11 @@ part of 'user_notifier.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$UserStateTearOff {
-  const _$UserStateTearOff();
-
-  _Initial initial(User user) {
-    return _Initial(
-      user,
-    );
-  }
-
-  _LoadInProgress loadInProgress(User user) {
-    return _LoadInProgress(
-      user,
-    );
-  }
-
-  _LoadSuccess loadSuccess(User user) {
-    return _LoadSuccess(
-      user,
-    );
-  }
-
-  _LoadFailure loadFailure(User user, BackendFailure failure) {
-    return _LoadFailure(
-      user,
-      failure,
-    );
-  }
-}
-
-/// @nodoc
-const $UserState = _$UserStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$UserState {
   User get user => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(User user) initial,
@@ -102,12 +69,14 @@ mixin _$UserState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UserStateCopyWith<UserState> get copyWith => throw _privateConstructorUsedError;
+  $UserStateCopyWith<UserState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UserStateCopyWith<$Res> {
-  factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) = _$UserStateCopyWithImpl<$Res>;
+  factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
+      _$UserStateCopyWithImpl<$Res>;
   $Res call({User user});
 
   $UserCopyWith<$Res> get user;
@@ -142,8 +111,10 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$InitialCopyWith<$Res> implements $UserStateCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) = __$InitialCopyWithImpl<$Res>;
+abstract class _$$_InitialCopyWith<$Res> implements $UserStateCopyWith<$Res> {
+  factory _$$_InitialCopyWith(
+          _$_Initial value, $Res Function(_$_Initial) then) =
+      __$$_InitialCopyWithImpl<$Res>;
   @override
   $Res call({User user});
 
@@ -152,17 +123,19 @@ abstract class _$InitialCopyWith<$Res> implements $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res> implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then) : super(_value, (v) => _then(v as _Initial));
+class __$$_InitialCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+    implements _$$_InitialCopyWith<$Res> {
+  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+      : super(_value, (v) => _then(v as _$_Initial));
 
   @override
-  _Initial get _value => super._value as _Initial;
+  _$_Initial get _value => super._value as _$_Initial;
 
   @override
   $Res call({
     Object? user = freezed,
   }) {
-    return _then(_Initial(
+    return _then(_$_Initial(
       user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -188,16 +161,18 @@ class _$_Initial extends _Initial {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Initial &&
+            other is _$_Initial &&
             const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
-  _$InitialCopyWith<_Initial> get copyWith => __$InitialCopyWithImpl<_Initial>(this, _$identity);
+  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -275,20 +250,23 @@ class _$_Initial extends _Initial {
 }
 
 abstract class _Initial extends UserState {
-  const factory _Initial(User user) = _$_Initial;
+  const factory _Initial(final User user) = _$_Initial;
   const _Initial._() : super._();
 
   @override
-  User get user;
+  User get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$InitialCopyWith<_Initial> get copyWith => throw _privateConstructorUsedError;
+  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$LoadInProgressCopyWith<$Res> implements $UserStateCopyWith<$Res> {
-  factory _$LoadInProgressCopyWith(_LoadInProgress value, $Res Function(_LoadInProgress) then) =
-      __$LoadInProgressCopyWithImpl<$Res>;
+abstract class _$$_LoadInProgressCopyWith<$Res>
+    implements $UserStateCopyWith<$Res> {
+  factory _$$_LoadInProgressCopyWith(
+          _$_LoadInProgress value, $Res Function(_$_LoadInProgress) then) =
+      __$$_LoadInProgressCopyWithImpl<$Res>;
   @override
   $Res call({User user});
 
@@ -297,19 +275,21 @@ abstract class _$LoadInProgressCopyWith<$Res> implements $UserStateCopyWith<$Res
 }
 
 /// @nodoc
-class __$LoadInProgressCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
-    implements _$LoadInProgressCopyWith<$Res> {
-  __$LoadInProgressCopyWithImpl(_LoadInProgress _value, $Res Function(_LoadInProgress) _then)
-      : super(_value, (v) => _then(v as _LoadInProgress));
+class __$$_LoadInProgressCopyWithImpl<$Res>
+    extends _$UserStateCopyWithImpl<$Res>
+    implements _$$_LoadInProgressCopyWith<$Res> {
+  __$$_LoadInProgressCopyWithImpl(
+      _$_LoadInProgress _value, $Res Function(_$_LoadInProgress) _then)
+      : super(_value, (v) => _then(v as _$_LoadInProgress));
 
   @override
-  _LoadInProgress get _value => super._value as _LoadInProgress;
+  _$_LoadInProgress get _value => super._value as _$_LoadInProgress;
 
   @override
   $Res call({
     Object? user = freezed,
   }) {
-    return _then(_LoadInProgress(
+    return _then(_$_LoadInProgress(
       user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -335,17 +315,18 @@ class _$_LoadInProgress extends _LoadInProgress {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LoadInProgress &&
+            other is _$_LoadInProgress &&
             const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
-  _$LoadInProgressCopyWith<_LoadInProgress> get copyWith =>
-      __$LoadInProgressCopyWithImpl<_LoadInProgress>(this, _$identity);
+  _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith =>
+      __$$_LoadInProgressCopyWithImpl<_$_LoadInProgress>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -423,20 +404,23 @@ class _$_LoadInProgress extends _LoadInProgress {
 }
 
 abstract class _LoadInProgress extends UserState {
-  const factory _LoadInProgress(User user) = _$_LoadInProgress;
+  const factory _LoadInProgress(final User user) = _$_LoadInProgress;
   const _LoadInProgress._() : super._();
 
   @override
-  User get user;
+  User get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$LoadInProgressCopyWith<_LoadInProgress> get copyWith => throw _privateConstructorUsedError;
+  _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$LoadSuccessCopyWith<$Res> implements $UserStateCopyWith<$Res> {
-  factory _$LoadSuccessCopyWith(_LoadSuccess value, $Res Function(_LoadSuccess) then) =
-      __$LoadSuccessCopyWithImpl<$Res>;
+abstract class _$$_LoadSuccessCopyWith<$Res>
+    implements $UserStateCopyWith<$Res> {
+  factory _$$_LoadSuccessCopyWith(
+          _$_LoadSuccess value, $Res Function(_$_LoadSuccess) then) =
+      __$$_LoadSuccessCopyWithImpl<$Res>;
   @override
   $Res call({User user});
 
@@ -445,18 +429,20 @@ abstract class _$LoadSuccessCopyWith<$Res> implements $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadSuccessCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res> implements _$LoadSuccessCopyWith<$Res> {
-  __$LoadSuccessCopyWithImpl(_LoadSuccess _value, $Res Function(_LoadSuccess) _then)
-      : super(_value, (v) => _then(v as _LoadSuccess));
+class __$$_LoadSuccessCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+    implements _$$_LoadSuccessCopyWith<$Res> {
+  __$$_LoadSuccessCopyWithImpl(
+      _$_LoadSuccess _value, $Res Function(_$_LoadSuccess) _then)
+      : super(_value, (v) => _then(v as _$_LoadSuccess));
 
   @override
-  _LoadSuccess get _value => super._value as _LoadSuccess;
+  _$_LoadSuccess get _value => super._value as _$_LoadSuccess;
 
   @override
   $Res call({
     Object? user = freezed,
   }) {
-    return _then(_LoadSuccess(
+    return _then(_$_LoadSuccess(
       user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -482,16 +468,18 @@ class _$_LoadSuccess extends _LoadSuccess {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LoadSuccess &&
+            other is _$_LoadSuccess &&
             const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
-  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith => __$LoadSuccessCopyWithImpl<_LoadSuccess>(this, _$identity);
+  _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
+      __$$_LoadSuccessCopyWithImpl<_$_LoadSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -569,20 +557,23 @@ class _$_LoadSuccess extends _LoadSuccess {
 }
 
 abstract class _LoadSuccess extends UserState {
-  const factory _LoadSuccess(User user) = _$_LoadSuccess;
+  const factory _LoadSuccess(final User user) = _$_LoadSuccess;
   const _LoadSuccess._() : super._();
 
   @override
-  User get user;
+  User get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith => throw _privateConstructorUsedError;
+  _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$LoadFailureCopyWith<$Res> implements $UserStateCopyWith<$Res> {
-  factory _$LoadFailureCopyWith(_LoadFailure value, $Res Function(_LoadFailure) then) =
-      __$LoadFailureCopyWithImpl<$Res>;
+abstract class _$$_LoadFailureCopyWith<$Res>
+    implements $UserStateCopyWith<$Res> {
+  factory _$$_LoadFailureCopyWith(
+          _$_LoadFailure value, $Res Function(_$_LoadFailure) then) =
+      __$$_LoadFailureCopyWithImpl<$Res>;
   @override
   $Res call({User user, BackendFailure failure});
 
@@ -592,19 +583,21 @@ abstract class _$LoadFailureCopyWith<$Res> implements $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadFailureCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res> implements _$LoadFailureCopyWith<$Res> {
-  __$LoadFailureCopyWithImpl(_LoadFailure _value, $Res Function(_LoadFailure) _then)
-      : super(_value, (v) => _then(v as _LoadFailure));
+class __$$_LoadFailureCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+    implements _$$_LoadFailureCopyWith<$Res> {
+  __$$_LoadFailureCopyWithImpl(
+      _$_LoadFailure _value, $Res Function(_$_LoadFailure) _then)
+      : super(_value, (v) => _then(v as _$_LoadFailure));
 
   @override
-  _LoadFailure get _value => super._value as _LoadFailure;
+  _$_LoadFailure get _value => super._value as _$_LoadFailure;
 
   @override
   $Res call({
     Object? user = freezed,
     Object? failure = freezed,
   }) {
-    return _then(_LoadFailure(
+    return _then(_$_LoadFailure(
       user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -643,18 +636,21 @@ class _$_LoadFailure extends _LoadFailure {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LoadFailure &&
+            other is _$_LoadFailure &&
             const DeepCollectionEquality().equals(other.user, user) &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user), const DeepCollectionEquality().hash(failure));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(failure));
 
   @JsonKey(ignore: true)
   @override
-  _$LoadFailureCopyWith<_LoadFailure> get copyWith => __$LoadFailureCopyWithImpl<_LoadFailure>(this, _$identity);
+  _$$_LoadFailureCopyWith<_$_LoadFailure> get copyWith =>
+      __$$_LoadFailureCopyWithImpl<_$_LoadFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -732,13 +728,15 @@ class _$_LoadFailure extends _LoadFailure {
 }
 
 abstract class _LoadFailure extends UserState {
-  const factory _LoadFailure(User user, BackendFailure failure) = _$_LoadFailure;
+  const factory _LoadFailure(final User user, final BackendFailure failure) =
+      _$_LoadFailure;
   const _LoadFailure._() : super._();
 
   @override
-  User get user;
-  BackendFailure get failure;
+  User get user => throw _privateConstructorUsedError;
+  BackendFailure get failure => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$LoadFailureCopyWith<_LoadFailure> get copyWith => throw _privateConstructorUsedError;
+  _$$_LoadFailureCopyWith<_$_LoadFailure> get copyWith =>
+      throw _privateConstructorUsedError;
 }
