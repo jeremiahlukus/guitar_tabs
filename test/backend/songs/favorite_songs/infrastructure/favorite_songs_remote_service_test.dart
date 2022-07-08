@@ -1,8 +1,10 @@
 // Dart imports:
+import 'dart:convert';
 import 'dart:io';
 
 // Package imports:
 import 'package:dio/dio.dart';
+import 'package:joyful_noise/backend/songs/core/infrastructure/songs_page_remote_service.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -147,9 +149,19 @@ void main() {
           (invocation) => Future.value(),
         );
 
-        final favoriteSongsRemoteService = FavoriteSongsRemoteService(mockDio, mockBackendHeadersCache);
+        final favoriteSongsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
-        final actualResult = await favoriteSongsRemoteService.getFavoriteSongsPage(1);
+        final actualResult = await favoriteSongsRemoteService.getPage(
+          requestUri: Uri.https(
+            'example.com',
+            '/api/v1/user_favorite_songs',
+            <String, String>{
+              'page': '1',
+              'per_page': '50',
+            },
+          ),
+          jsonDataSelector: (dynamic json) => json as List<dynamic>,
+        );
         const expectedResult = RemoteResponse<List<SongDTO>>.noConnection();
 
         expect(actualResult, expectedResult);
