@@ -1,8 +1,17 @@
+// ignore_for_file: invalid_annotation_target
+
 // Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
 
 part 'song_dto.freezed.dart';
+part 'song_dto.g.dart';
+
+String _nullFromJson(Object? json) {
+  return (json as String?) ?? '';
+}
 
 @freezed
 class SongDTO with _$SongDTO {
@@ -12,10 +21,9 @@ class SongDTO with _$SongDTO {
     required String title,
     required String lyrics,
     required String category,
-    required String artist,
-    required String chords,
-    required String url,
-    // ignore: invalid_annotation_target
+    @JsonKey(fromJson: _nullFromJson) required String artist,
+    @JsonKey(fromJson: _nullFromJson) required String chords,
+    @JsonKey(fromJson: _nullFromJson) required String url,
     @JsonKey(name: 'song_number') required int songNumber,
   }) = _SongDTO;
 

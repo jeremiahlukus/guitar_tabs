@@ -24,10 +24,12 @@ mixin _$SongDTO {
   String get title => throw _privateConstructorUsedError;
   String get lyrics => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _nullFromJson)
   String get artist => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _nullFromJson)
   String get chords => throw _privateConstructorUsedError;
-  String get url =>
-      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(fromJson: _nullFromJson)
+  String get url => throw _privateConstructorUsedError;
   @JsonKey(name: 'song_number')
   int get songNumber => throw _privateConstructorUsedError;
 
@@ -45,9 +47,9 @@ abstract class $SongDTOCopyWith<$Res> {
       String title,
       String lyrics,
       String category,
-      String artist,
-      String chords,
-      String url,
+      @JsonKey(fromJson: _nullFromJson) String artist,
+      @JsonKey(fromJson: _nullFromJson) String chords,
+      @JsonKey(fromJson: _nullFromJson) String url,
       @JsonKey(name: 'song_number') int songNumber});
 }
 
@@ -118,9 +120,9 @@ abstract class _$$_SongDTOCopyWith<$Res> implements $SongDTOCopyWith<$Res> {
       String title,
       String lyrics,
       String category,
-      String artist,
-      String chords,
-      String url,
+      @JsonKey(fromJson: _nullFromJson) String artist,
+      @JsonKey(fromJson: _nullFromJson) String chords,
+      @JsonKey(fromJson: _nullFromJson) String url,
       @JsonKey(name: 'song_number') int songNumber});
 }
 
@@ -189,9 +191,9 @@ class _$_SongDTO extends _SongDTO {
       required this.title,
       required this.lyrics,
       required this.category,
-      required this.artist,
-      required this.chords,
-      required this.url,
+      @JsonKey(fromJson: _nullFromJson) required this.artist,
+      @JsonKey(fromJson: _nullFromJson) required this.chords,
+      @JsonKey(fromJson: _nullFromJson) required this.url,
       @JsonKey(name: 'song_number') required this.songNumber})
       : super._();
 
@@ -207,12 +209,14 @@ class _$_SongDTO extends _SongDTO {
   @override
   final String category;
   @override
+  @JsonKey(fromJson: _nullFromJson)
   final String artist;
   @override
+  @JsonKey(fromJson: _nullFromJson)
   final String chords;
   @override
+  @JsonKey(fromJson: _nullFromJson)
   final String url;
-// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'song_number')
   final int songNumber;
@@ -268,9 +272,9 @@ abstract class _SongDTO extends SongDTO {
           required final String title,
           required final String lyrics,
           required final String category,
-          required final String artist,
-          required final String chords,
-          required final String url,
+          @JsonKey(fromJson: _nullFromJson) required final String artist,
+          @JsonKey(fromJson: _nullFromJson) required final String chords,
+          @JsonKey(fromJson: _nullFromJson) required final String url,
           @JsonKey(name: 'song_number') required final int songNumber}) =
       _$_SongDTO;
   const _SongDTO._() : super._();
@@ -286,12 +290,15 @@ abstract class _SongDTO extends SongDTO {
   @override
   String get category => throw _privateConstructorUsedError;
   @override
+  @JsonKey(fromJson: _nullFromJson)
   String get artist => throw _privateConstructorUsedError;
   @override
+  @JsonKey(fromJson: _nullFromJson)
   String get chords => throw _privateConstructorUsedError;
   @override
+  @JsonKey(fromJson: _nullFromJson)
   String get url => throw _privateConstructorUsedError;
-  @override // ignore: invalid_annotation_target
+  @override
   @JsonKey(name: 'song_number')
   int get songNumber => throw _privateConstructorUsedError;
   @override
