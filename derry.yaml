@@ -1,5 +1,6 @@
 build_runner:
   - flutter pub run build_runner watch --delete-conflicting-outputs
+
 lint:
   - dart format lib .
   - flutter pub run import_sorter:main

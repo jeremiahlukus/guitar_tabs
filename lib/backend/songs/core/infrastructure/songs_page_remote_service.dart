@@ -8,6 +8,7 @@ import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
 import 'package:joyful_noise/core/infrastructure/dio_extensions.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class SongsPageRemoteService {
   final Dio _dio;

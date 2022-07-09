@@ -3,6 +3,7 @@ import 'dart:io';
 
 // Package imports:
 import 'package:dio/dio.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -144,20 +145,23 @@ void main() {
 
         final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
-        final actualResult = await songsRemoteService.getPage(
-          requestUri: Uri.https(
-            'example.com',
-            '/api/v1/user_favorite_songs',
-            <String, String>{
-              'page': '1',
-              'per_page': '50',
-            },
-          ),
-          jsonDataSelector: (dynamic json) => json as List<dynamic>,
-        );
-        final expectedResult = throwsA(isA<RestApiException>());
-
-        expect(actualResult, expectedResult);
+        try {
+          await songsRemoteService.getPage(
+            requestUri: Uri.https(
+              'example.com',
+              '/api/v1/user_favorite_songs',
+              <String, String>{
+                'page': '1',
+                'per_page': '50',
+              },
+            ),
+            jsonDataSelector: (dynamic json) => json as List<dynamic>,
+          );
+        } on RestApiException catch (e) {
+          expect(e.errorCode, 400);
+          return;
+        }
+        throw Exception('Test Failed');
       });
 
       test('returns RemoteResponse.noConnection on No Connection DioError ', () async {
@@ -190,6 +194,7 @@ void main() {
           ),
           jsonDataSelector: (dynamic json) => json as List<dynamic>,
         );
+
         const expectedResult = RemoteResponse<List<SongDTO>>.noConnection();
 
         expect(actualResult, expectedResult);
@@ -204,7 +209,7 @@ void main() {
         ).thenThrow(
           DioError(
             requestOptions: RequestOptions(path: ''),
-            response: Response<dynamic>(requestOptions: RequestOptions(path: '')),
+            response: Response<dynamic>(requestOptions: RequestOptions(path: ''), statusCode: 400, data: 'error'),
           ),
         );
 
@@ -214,20 +219,23 @@ void main() {
 
         final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
-        final actualResult = await songsRemoteService.getPage(
-          requestUri: Uri.https(
-            'example.com',
-            '/api/v1/user_favorite_songs',
-            <String, String>{
-              'page': '1',
-              'per_page': '50',
-            },
-          ),
-          jsonDataSelector: (dynamic json) => json as List<dynamic>,
-        );
-        final expectedResult = throwsA(isA<RestApiException>());
-
-        expect(actualResult, expectedResult);
+        try {
+          await songsRemoteService.getPage(
+            requestUri: Uri.https(
+              'example.com',
+              '/api/v1/user_favorite_songs',
+              <String, String>{
+                'page': '1',
+                'per_page': '50',
+              },
+            ),
+            jsonDataSelector: (dynamic json) => json as List<dynamic>,
+          );
+        } on RestApiException catch (e) {
+          expect(e.errorCode, 400);
+          return;
+        }
+        throw Exception('Test Failed');
       });
     });
   });
