@@ -1,8 +1,8 @@
 // Package imports:
-import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:test/test.dart';
 
 // Project imports:
+import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/core/domain/user.dart';
 
 void main() {

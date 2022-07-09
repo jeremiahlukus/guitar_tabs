@@ -3,7 +3,6 @@ import 'dart:io';
 
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -14,6 +13,7 @@ import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
 import 'package:joyful_noise/backend/songs/core/infrastructure/songs_page_remote_service.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class MockDio extends Mock implements Dio {}
 
