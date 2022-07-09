@@ -3,7 +3,6 @@ import 'package:test/test.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
-import 'package:joyful_noise/backend/core/domain/user.dart';
 
 void main() {
   group('Song', () {
@@ -16,7 +15,7 @@ void main() {
           category: 'category',
           artist: 'artist',
           chords: 'chords',
-          url: 'url');
+          url: 'url',);
       const expected = 'title';
 
       final actual = song.title;
