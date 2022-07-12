@@ -45,7 +45,7 @@ class AppWidget extends ConsumerWidget {
           orElse: () {},
           authenticated: (_) {
             _appRouter.pushAndPopUntil(
-              const DashboardRoute(),
+              const FavoriteSongsRoute(),
               predicate: (route) => false,
             );
           },

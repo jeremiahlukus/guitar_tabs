@@ -1,5 +1,7 @@
 // Package imports:
 import 'package:dartz/dartz.dart';
+import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_local_service.dart';
+import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_remote_service.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 

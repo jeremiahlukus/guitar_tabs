@@ -20,7 +20,8 @@ UserDTO _$UserDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserDTO {
-  String get name => throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  String get name =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'avatar_url')
   String get avatarUrl => throw _privateConstructorUsedError;
 
@@ -31,7 +32,8 @@ mixin _$UserDTO {
 
 /// @nodoc
 abstract class $UserDTOCopyWith<$Res> {
-  factory $UserDTOCopyWith(UserDTO value, $Res Function(UserDTO) then) = _$UserDTOCopyWithImpl<$Res>;
+  factory $UserDTOCopyWith(UserDTO value, $Res Function(UserDTO) then) =
+      _$UserDTOCopyWithImpl<$Res>;
   $Res call({String name, @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
@@ -63,13 +65,16 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
 
 /// @nodoc
 abstract class _$$_UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
-  factory _$$_UserDTOCopyWith(_$_UserDTO value, $Res Function(_$_UserDTO) then) = __$$_UserDTOCopyWithImpl<$Res>;
+  factory _$$_UserDTOCopyWith(
+          _$_UserDTO value, $Res Function(_$_UserDTO) then) =
+      __$$_UserDTOCopyWithImpl<$Res>;
   @override
   $Res call({String name, @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
 /// @nodoc
-class __$$_UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res> implements _$$_UserDTOCopyWith<$Res> {
+class __$$_UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
+    implements _$$_UserDTOCopyWith<$Res> {
   __$$_UserDTOCopyWithImpl(_$_UserDTO _value, $Res Function(_$_UserDTO) _then)
       : super(_value, (v) => _then(v as _$_UserDTO));
 
@@ -97,9 +102,13 @@ class __$$_UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res> impleme
 /// @nodoc
 @JsonSerializable()
 class _$_UserDTO extends _UserDTO {
-  const _$_UserDTO({required this.name, @JsonKey(name: 'avatar_url') required this.avatarUrl}) : super._();
+  const _$_UserDTO(
+      {required this.name,
+      @JsonKey(name: 'avatar_url') required this.avatarUrl})
+      : super._();
 
-  factory _$_UserDTO.fromJson(Map<String, dynamic> json) => _$$_UserDTOFromJson(json);
+  factory _$_UserDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_UserDTOFromJson(json);
 
   @override
   final String name;
@@ -125,11 +134,14 @@ class _$_UserDTO extends _UserDTO {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(name), const DeepCollectionEquality().hash(avatarUrl));
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(avatarUrl));
 
   @JsonKey(ignore: true)
   @override
-  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith => __$$_UserDTOCopyWithImpl<_$_UserDTO>(this, _$identity);
+  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith =>
+      __$$_UserDTOCopyWithImpl<_$_UserDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -138,7 +150,9 @@ class _$_UserDTO extends _UserDTO {
 }
 
 abstract class _UserDTO extends UserDTO {
-  const factory _UserDTO({required final String name, @JsonKey(name: 'avatar_url') required final String avatarUrl}) =
+  const factory _UserDTO(
+          {required final String name,
+          @JsonKey(name: 'avatar_url') required final String avatarUrl}) =
       _$_UserDTO;
   const _UserDTO._() : super._();
 
@@ -151,5 +165,6 @@ abstract class _UserDTO extends UserDTO {
   String get avatarUrl => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith => throw _privateConstructorUsedError;
+  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith =>
+      throw _privateConstructorUsedError;
 }

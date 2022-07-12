@@ -40,10 +40,10 @@ class SongsPageRemoteService {
         );
       } else if (response.statusCode == 200) {
         final headers = BackendHeaders.parse(response);
-
         await _headersCache.saveHeaders(requestUri, headers);
         final convertedData =
             jsonDataSelector(response.data).map((dynamic e) => SongDTO.fromJson(e as Map<String, dynamic>)).toList();
+
         return RemoteResponse.withNewData(
           convertedData,
           maxPage: headers.link?.maxPage ?? 1,

@@ -8,6 +8,8 @@ part 'backend_headers.g.dart';
 @freezed
 class BackendHeaders with _$BackendHeaders {
   const BackendHeaders._();
+  // ignore: invalid_annotation_target
+  @JsonSerializable(explicitToJson: true)
   const factory BackendHeaders({
     String? etag,
     PaginationLink? link,
@@ -15,7 +17,6 @@ class BackendHeaders with _$BackendHeaders {
 
   factory BackendHeaders.parse(Response response) {
     final link = response.headers.map['Link']?[0];
-
     return BackendHeaders(
       etag: response.headers.map['ETag']?[0],
       link: link == null
@@ -49,11 +50,14 @@ class PaginationLink with _$PaginationLink {
       ),
     );
   }
-
   static int _extractPageNumber(String value) {
-    final uriString = RegExp(
-      r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)',
-    ).stringMatch(value);
-    return int.parse(Uri.parse(uriString!).queryParameters['page']!);
+    final uriString =
+        RegExp(r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)')
+            .stringMatch(value);
+    if (uriString == null) {
+      // for local dev the regex returns null, this safe guards in case it happens in real life even though it shouldn't
+      return int.parse(value.replaceAll('<', '').replaceAll('>', '').split(';').first.split('page=').last);
+    }
+    return int.parse(Uri.parse(uriString).queryParameters['page']!);
   }
 }

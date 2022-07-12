@@ -40,7 +40,8 @@ mixin _$SongDTO {
 
 /// @nodoc
 abstract class $SongDTOCopyWith<$Res> {
-  factory $SongDTOCopyWith(SongDTO value, $Res Function(SongDTO) then) = _$SongDTOCopyWithImpl<$Res>;
+  factory $SongDTOCopyWith(SongDTO value, $Res Function(SongDTO) then) =
+      _$SongDTOCopyWithImpl<$Res>;
   $Res call(
       {int id,
       String title,
@@ -110,7 +111,9 @@ class _$SongDTOCopyWithImpl<$Res> implements $SongDTOCopyWith<$Res> {
 
 /// @nodoc
 abstract class _$$_SongDTOCopyWith<$Res> implements $SongDTOCopyWith<$Res> {
-  factory _$$_SongDTOCopyWith(_$_SongDTO value, $Res Function(_$_SongDTO) then) = __$$_SongDTOCopyWithImpl<$Res>;
+  factory _$$_SongDTOCopyWith(
+          _$_SongDTO value, $Res Function(_$_SongDTO) then) =
+      __$$_SongDTOCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
@@ -124,7 +127,8 @@ abstract class _$$_SongDTOCopyWith<$Res> implements $SongDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SongDTOCopyWithImpl<$Res> extends _$SongDTOCopyWithImpl<$Res> implements _$$_SongDTOCopyWith<$Res> {
+class __$$_SongDTOCopyWithImpl<$Res> extends _$SongDTOCopyWithImpl<$Res>
+    implements _$$_SongDTOCopyWith<$Res> {
   __$$_SongDTOCopyWithImpl(_$_SongDTO _value, $Res Function(_$_SongDTO) _then)
       : super(_value, (v) => _then(v as _$_SongDTO));
 
@@ -193,7 +197,8 @@ class _$_SongDTO extends _SongDTO {
       @JsonKey(name: 'song_number') required this.songNumber})
       : super._();
 
-  factory _$_SongDTO.fromJson(Map<String, dynamic> json) => _$$_SongDTOFromJson(json);
+  factory _$_SongDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_SongDTOFromJson(json);
 
   @override
   final int id;
@@ -233,7 +238,8 @@ class _$_SongDTO extends _SongDTO {
             const DeepCollectionEquality().equals(other.artist, artist) &&
             const DeepCollectionEquality().equals(other.chords, chords) &&
             const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.songNumber, songNumber));
+            const DeepCollectionEquality()
+                .equals(other.songNumber, songNumber));
   }
 
   @JsonKey(ignore: true)
@@ -251,7 +257,8 @@ class _$_SongDTO extends _SongDTO {
 
   @JsonKey(ignore: true)
   @override
-  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith => __$$_SongDTOCopyWithImpl<_$_SongDTO>(this, _$identity);
+  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith =>
+      __$$_SongDTOCopyWithImpl<_$_SongDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -261,14 +268,15 @@ class _$_SongDTO extends _SongDTO {
 
 abstract class _SongDTO extends SongDTO {
   const factory _SongDTO(
-      {required final int id,
-      required final String title,
-      required final String lyrics,
-      required final String category,
-      @JsonKey(fromJson: _nullFromJson) required final String artist,
-      @JsonKey(fromJson: _nullFromJson) required final String chords,
-      @JsonKey(fromJson: _nullFromJson) required final String url,
-      @JsonKey(name: 'song_number') required final int songNumber}) = _$_SongDTO;
+          {required final int id,
+          required final String title,
+          required final String lyrics,
+          required final String category,
+          @JsonKey(fromJson: _nullFromJson) required final String artist,
+          @JsonKey(fromJson: _nullFromJson) required final String chords,
+          @JsonKey(fromJson: _nullFromJson) required final String url,
+          @JsonKey(name: 'song_number') required final int songNumber}) =
+      _$_SongDTO;
   const _SongDTO._() : super._();
 
   factory _SongDTO.fromJson(Map<String, dynamic> json) = _$_SongDTO.fromJson;
@@ -295,5 +303,6 @@ abstract class _SongDTO extends SongDTO {
   int get songNumber => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith => throw _privateConstructorUsedError;
+  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith =>
+      throw _privateConstructorUsedError;
 }

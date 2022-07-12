@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'user_notifier.dart';
+part of 'paginated_songs_notifier.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,30 +15,37 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$UserState {
-  User get user => throw _privateConstructorUsedError;
+mixin _$PaginatedSongsState {
+  Fresh<List<Song>> get songs => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) initial,
-    required TResult Function(User user) loadInProgress,
-    required TResult Function(User user) loadSuccess,
-    required TResult Function(User user, BackendFailure failure) loadFailure,
+    required TResult Function(Fresh<List<Song>> songs) initial,
+    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage)
+        loadInProgress,
+    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)
+        loadSuccess,
+    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure)
+        loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? initial,
-    TResult Function(User user)? loadInProgress,
-    TResult Function(User user)? loadSuccess,
-    TResult Function(User user, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs)? initial,
+    TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? initial,
-    TResult Function(User user)? loadInProgress,
-    TResult Function(User user)? loadSuccess,
-    TResult Function(User user, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs)? initial,
+    TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,61 +76,65 @@ mixin _$UserState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UserStateCopyWith<UserState> get copyWith =>
+  $PaginatedSongsStateCopyWith<PaginatedSongsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserStateCopyWith<$Res> {
-  factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
-      _$UserStateCopyWithImpl<$Res>;
-  $Res call({User user});
+abstract class $PaginatedSongsStateCopyWith<$Res> {
+  factory $PaginatedSongsStateCopyWith(
+          PaginatedSongsState value, $Res Function(PaginatedSongsState) then) =
+      _$PaginatedSongsStateCopyWithImpl<$Res>;
+  $Res call({Fresh<List<Song>> songs});
 
-  $UserCopyWith<$Res> get user;
+  $FreshCopyWith<List<Song>, $Res> get songs;
 }
 
 /// @nodoc
-class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
-  _$UserStateCopyWithImpl(this._value, this._then);
+class _$PaginatedSongsStateCopyWithImpl<$Res>
+    implements $PaginatedSongsStateCopyWith<$Res> {
+  _$PaginatedSongsStateCopyWithImpl(this._value, this._then);
 
-  final UserState _value;
+  final PaginatedSongsState _value;
   // ignore: unused_field
-  final $Res Function(UserState) _then;
+  final $Res Function(PaginatedSongsState) _then;
 
   @override
   $Res call({
-    Object? user = freezed,
+    Object? songs = freezed,
   }) {
     return _then(_value.copyWith(
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      songs: songs == freezed
+          ? _value.songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as Fresh<List<Song>>,
     ));
   }
 
   @override
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
+  $FreshCopyWith<List<Song>, $Res> get songs {
+    return $FreshCopyWith<List<Song>, $Res>(_value.songs, (value) {
+      return _then(_value.copyWith(songs: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> implements $UserStateCopyWith<$Res> {
+abstract class _$$_InitialCopyWith<$Res>
+    implements $PaginatedSongsStateCopyWith<$Res> {
   factory _$$_InitialCopyWith(
           _$_Initial value, $Res Function(_$_Initial) then) =
       __$$_InitialCopyWithImpl<$Res>;
   @override
-  $Res call({User user});
+  $Res call({Fresh<List<Song>> songs});
 
   @override
-  $UserCopyWith<$Res> get user;
+  $FreshCopyWith<List<Song>, $Res> get songs;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+class __$$_InitialCopyWithImpl<$Res>
+    extends _$PaginatedSongsStateCopyWithImpl<$Res>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, (v) => _then(v as _$_Initial));
@@ -133,13 +144,13 @@ class __$$_InitialCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? user = freezed,
+    Object? songs = freezed,
   }) {
     return _then(_$_Initial(
-      user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      songs == freezed
+          ? _value.songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as Fresh<List<Song>>,
     ));
   }
 }
@@ -147,14 +158,14 @@ class __$$_InitialCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initial extends _Initial {
-  const _$_Initial(this.user) : super._();
+  const _$_Initial(this.songs) : super._();
 
   @override
-  final User user;
+  final Fresh<List<Song>> songs;
 
   @override
   String toString() {
-    return 'UserState.initial(user: $user)';
+    return 'PaginatedSongsState.initial(songs: $songs)';
   }
 
   @override
@@ -162,12 +173,12 @@ class _$_Initial extends _Initial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initial &&
-            const DeepCollectionEquality().equals(other.user, user));
+            const DeepCollectionEquality().equals(other.songs, songs));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(songs));
 
   @JsonKey(ignore: true)
   @override
@@ -177,36 +188,43 @@ class _$_Initial extends _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) initial,
-    required TResult Function(User user) loadInProgress,
-    required TResult Function(User user) loadSuccess,
-    required TResult Function(User user, BackendFailure failure) loadFailure,
+    required TResult Function(Fresh<List<Song>> songs) initial,
+    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage)
+        loadInProgress,
+    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)
+        loadSuccess,
+    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure)
+        loadFailure,
   }) {
-    return initial(user);
+    return initial(songs);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? initial,
-    TResult Function(User user)? loadInProgress,
-    TResult Function(User user)? loadSuccess,
-    TResult Function(User user, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs)? initial,
+    TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
   }) {
-    return initial?.call(user);
+    return initial?.call(songs);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? initial,
-    TResult Function(User user)? loadInProgress,
-    TResult Function(User user)? loadSuccess,
-    TResult Function(User user, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs)? initial,
+    TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(user);
+      return initial(songs);
     }
     return orElse();
   }
@@ -249,12 +267,12 @@ class _$_Initial extends _Initial {
   }
 }
 
-abstract class _Initial extends UserState {
-  const factory _Initial(final User user) = _$_Initial;
+abstract class _Initial extends PaginatedSongsState {
+  const factory _Initial(final Fresh<List<Song>> songs) = _$_Initial;
   const _Initial._() : super._();
 
   @override
-  User get user => throw _privateConstructorUsedError;
+  Fresh<List<Song>> get songs => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>
@@ -263,20 +281,20 @@ abstract class _Initial extends UserState {
 
 /// @nodoc
 abstract class _$$_LoadInProgressCopyWith<$Res>
-    implements $UserStateCopyWith<$Res> {
+    implements $PaginatedSongsStateCopyWith<$Res> {
   factory _$$_LoadInProgressCopyWith(
           _$_LoadInProgress value, $Res Function(_$_LoadInProgress) then) =
       __$$_LoadInProgressCopyWithImpl<$Res>;
   @override
-  $Res call({User user});
+  $Res call({Fresh<List<Song>> songs, int itemsPerPage});
 
   @override
-  $UserCopyWith<$Res> get user;
+  $FreshCopyWith<List<Song>, $Res> get songs;
 }
 
 /// @nodoc
 class __$$_LoadInProgressCopyWithImpl<$Res>
-    extends _$UserStateCopyWithImpl<$Res>
+    extends _$PaginatedSongsStateCopyWithImpl<$Res>
     implements _$$_LoadInProgressCopyWith<$Res> {
   __$$_LoadInProgressCopyWithImpl(
       _$_LoadInProgress _value, $Res Function(_$_LoadInProgress) _then)
@@ -287,13 +305,18 @@ class __$$_LoadInProgressCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? user = freezed,
+    Object? songs = freezed,
+    Object? itemsPerPage = freezed,
   }) {
     return _then(_$_LoadInProgress(
-      user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      songs == freezed
+          ? _value.songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as Fresh<List<Song>>,
+      itemsPerPage == freezed
+          ? _value.itemsPerPage
+          : itemsPerPage // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -301,14 +324,16 @@ class __$$_LoadInProgressCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadInProgress extends _LoadInProgress {
-  const _$_LoadInProgress(this.user) : super._();
+  const _$_LoadInProgress(this.songs, this.itemsPerPage) : super._();
 
   @override
-  final User user;
+  final Fresh<List<Song>> songs;
+  @override
+  final int itemsPerPage;
 
   @override
   String toString() {
-    return 'UserState.loadInProgress(user: $user)';
+    return 'PaginatedSongsState.loadInProgress(songs: $songs, itemsPerPage: $itemsPerPage)';
   }
 
   @override
@@ -316,12 +341,16 @@ class _$_LoadInProgress extends _LoadInProgress {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadInProgress &&
-            const DeepCollectionEquality().equals(other.user, user));
+            const DeepCollectionEquality().equals(other.songs, songs) &&
+            const DeepCollectionEquality()
+                .equals(other.itemsPerPage, itemsPerPage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(songs),
+      const DeepCollectionEquality().hash(itemsPerPage));
 
   @JsonKey(ignore: true)
   @override
@@ -331,36 +360,43 @@ class _$_LoadInProgress extends _LoadInProgress {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) initial,
-    required TResult Function(User user) loadInProgress,
-    required TResult Function(User user) loadSuccess,
-    required TResult Function(User user, BackendFailure failure) loadFailure,
+    required TResult Function(Fresh<List<Song>> songs) initial,
+    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage)
+        loadInProgress,
+    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)
+        loadSuccess,
+    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure)
+        loadFailure,
   }) {
-    return loadInProgress(user);
+    return loadInProgress(songs, itemsPerPage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? initial,
-    TResult Function(User user)? loadInProgress,
-    TResult Function(User user)? loadSuccess,
-    TResult Function(User user, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs)? initial,
+    TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
   }) {
-    return loadInProgress?.call(user);
+    return loadInProgress?.call(songs, itemsPerPage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? initial,
-    TResult Function(User user)? loadInProgress,
-    TResult Function(User user)? loadSuccess,
-    TResult Function(User user, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs)? initial,
+    TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
-      return loadInProgress(user);
+      return loadInProgress(songs, itemsPerPage);
     }
     return orElse();
   }
@@ -403,12 +439,15 @@ class _$_LoadInProgress extends _LoadInProgress {
   }
 }
 
-abstract class _LoadInProgress extends UserState {
-  const factory _LoadInProgress(final User user) = _$_LoadInProgress;
+abstract class _LoadInProgress extends PaginatedSongsState {
+  const factory _LoadInProgress(
+          final Fresh<List<Song>> songs, final int itemsPerPage) =
+      _$_LoadInProgress;
   const _LoadInProgress._() : super._();
 
   @override
-  User get user => throw _privateConstructorUsedError;
+  Fresh<List<Song>> get songs => throw _privateConstructorUsedError;
+  int get itemsPerPage => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith =>
@@ -417,19 +456,20 @@ abstract class _LoadInProgress extends UserState {
 
 /// @nodoc
 abstract class _$$_LoadSuccessCopyWith<$Res>
-    implements $UserStateCopyWith<$Res> {
+    implements $PaginatedSongsStateCopyWith<$Res> {
   factory _$$_LoadSuccessCopyWith(
           _$_LoadSuccess value, $Res Function(_$_LoadSuccess) then) =
       __$$_LoadSuccessCopyWithImpl<$Res>;
   @override
-  $Res call({User user});
+  $Res call({Fresh<List<Song>> songs, bool isNextPageAvailable});
 
   @override
-  $UserCopyWith<$Res> get user;
+  $FreshCopyWith<List<Song>, $Res> get songs;
 }
 
 /// @nodoc
-class __$$_LoadSuccessCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+class __$$_LoadSuccessCopyWithImpl<$Res>
+    extends _$PaginatedSongsStateCopyWithImpl<$Res>
     implements _$$_LoadSuccessCopyWith<$Res> {
   __$$_LoadSuccessCopyWithImpl(
       _$_LoadSuccess _value, $Res Function(_$_LoadSuccess) _then)
@@ -440,13 +480,18 @@ class __$$_LoadSuccessCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? user = freezed,
+    Object? songs = freezed,
+    Object? isNextPageAvailable = freezed,
   }) {
     return _then(_$_LoadSuccess(
-      user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      songs == freezed
+          ? _value.songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as Fresh<List<Song>>,
+      isNextPageAvailable: isNextPageAvailable == freezed
+          ? _value.isNextPageAvailable
+          : isNextPageAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -454,14 +499,17 @@ class __$$_LoadSuccessCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadSuccess extends _LoadSuccess {
-  const _$_LoadSuccess(this.user) : super._();
+  const _$_LoadSuccess(this.songs, {required this.isNextPageAvailable})
+      : super._();
 
   @override
-  final User user;
+  final Fresh<List<Song>> songs;
+  @override
+  final bool isNextPageAvailable;
 
   @override
   String toString() {
-    return 'UserState.loadSuccess(user: $user)';
+    return 'PaginatedSongsState.loadSuccess(songs: $songs, isNextPageAvailable: $isNextPageAvailable)';
   }
 
   @override
@@ -469,12 +517,16 @@ class _$_LoadSuccess extends _LoadSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadSuccess &&
-            const DeepCollectionEquality().equals(other.user, user));
+            const DeepCollectionEquality().equals(other.songs, songs) &&
+            const DeepCollectionEquality()
+                .equals(other.isNextPageAvailable, isNextPageAvailable));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(songs),
+      const DeepCollectionEquality().hash(isNextPageAvailable));
 
   @JsonKey(ignore: true)
   @override
@@ -484,36 +536,43 @@ class _$_LoadSuccess extends _LoadSuccess {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) initial,
-    required TResult Function(User user) loadInProgress,
-    required TResult Function(User user) loadSuccess,
-    required TResult Function(User user, BackendFailure failure) loadFailure,
+    required TResult Function(Fresh<List<Song>> songs) initial,
+    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage)
+        loadInProgress,
+    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)
+        loadSuccess,
+    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure)
+        loadFailure,
   }) {
-    return loadSuccess(user);
+    return loadSuccess(songs, isNextPageAvailable);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? initial,
-    TResult Function(User user)? loadInProgress,
-    TResult Function(User user)? loadSuccess,
-    TResult Function(User user, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs)? initial,
+    TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
   }) {
-    return loadSuccess?.call(user);
+    return loadSuccess?.call(songs, isNextPageAvailable);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? initial,
-    TResult Function(User user)? loadInProgress,
-    TResult Function(User user)? loadSuccess,
-    TResult Function(User user, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs)? initial,
+    TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess(user);
+      return loadSuccess(songs, isNextPageAvailable);
     }
     return orElse();
   }
@@ -556,12 +615,14 @@ class _$_LoadSuccess extends _LoadSuccess {
   }
 }
 
-abstract class _LoadSuccess extends UserState {
-  const factory _LoadSuccess(final User user) = _$_LoadSuccess;
+abstract class _LoadSuccess extends PaginatedSongsState {
+  const factory _LoadSuccess(final Fresh<List<Song>> songs,
+      {required final bool isNextPageAvailable}) = _$_LoadSuccess;
   const _LoadSuccess._() : super._();
 
   @override
-  User get user => throw _privateConstructorUsedError;
+  Fresh<List<Song>> get songs => throw _privateConstructorUsedError;
+  bool get isNextPageAvailable => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
@@ -570,20 +631,21 @@ abstract class _LoadSuccess extends UserState {
 
 /// @nodoc
 abstract class _$$_LoadFailureCopyWith<$Res>
-    implements $UserStateCopyWith<$Res> {
+    implements $PaginatedSongsStateCopyWith<$Res> {
   factory _$$_LoadFailureCopyWith(
           _$_LoadFailure value, $Res Function(_$_LoadFailure) then) =
       __$$_LoadFailureCopyWithImpl<$Res>;
   @override
-  $Res call({User user, BackendFailure failure});
+  $Res call({Fresh<List<Song>> songs, BackendFailure failure});
 
   @override
-  $UserCopyWith<$Res> get user;
+  $FreshCopyWith<List<Song>, $Res> get songs;
   $BackendFailureCopyWith<$Res> get failure;
 }
 
 /// @nodoc
-class __$$_LoadFailureCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+class __$$_LoadFailureCopyWithImpl<$Res>
+    extends _$PaginatedSongsStateCopyWithImpl<$Res>
     implements _$$_LoadFailureCopyWith<$Res> {
   __$$_LoadFailureCopyWithImpl(
       _$_LoadFailure _value, $Res Function(_$_LoadFailure) _then)
@@ -594,14 +656,14 @@ class __$$_LoadFailureCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? user = freezed,
+    Object? songs = freezed,
     Object? failure = freezed,
   }) {
     return _then(_$_LoadFailure(
-      user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      songs == freezed
+          ? _value.songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as Fresh<List<Song>>,
       failure == freezed
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -620,16 +682,16 @@ class __$$_LoadFailureCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadFailure extends _LoadFailure {
-  const _$_LoadFailure(this.user, this.failure) : super._();
+  const _$_LoadFailure(this.songs, this.failure) : super._();
 
   @override
-  final User user;
+  final Fresh<List<Song>> songs;
   @override
   final BackendFailure failure;
 
   @override
   String toString() {
-    return 'UserState.loadFailure(user: $user, failure: $failure)';
+    return 'PaginatedSongsState.loadFailure(songs: $songs, failure: $failure)';
   }
 
   @override
@@ -637,14 +699,14 @@ class _$_LoadFailure extends _LoadFailure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadFailure &&
-            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality().equals(other.songs, songs) &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(songs),
       const DeepCollectionEquality().hash(failure));
 
   @JsonKey(ignore: true)
@@ -655,36 +717,43 @@ class _$_LoadFailure extends _LoadFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) initial,
-    required TResult Function(User user) loadInProgress,
-    required TResult Function(User user) loadSuccess,
-    required TResult Function(User user, BackendFailure failure) loadFailure,
+    required TResult Function(Fresh<List<Song>> songs) initial,
+    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage)
+        loadInProgress,
+    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)
+        loadSuccess,
+    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure)
+        loadFailure,
   }) {
-    return loadFailure(user, failure);
+    return loadFailure(songs, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? initial,
-    TResult Function(User user)? loadInProgress,
-    TResult Function(User user)? loadSuccess,
-    TResult Function(User user, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs)? initial,
+    TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
   }) {
-    return loadFailure?.call(user, failure);
+    return loadFailure?.call(songs, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? initial,
-    TResult Function(User user)? loadInProgress,
-    TResult Function(User user)? loadSuccess,
-    TResult Function(User user, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs)? initial,
+    TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
-      return loadFailure(user, failure);
+      return loadFailure(songs, failure);
     }
     return orElse();
   }
@@ -727,13 +796,14 @@ class _$_LoadFailure extends _LoadFailure {
   }
 }
 
-abstract class _LoadFailure extends UserState {
-  const factory _LoadFailure(final User user, final BackendFailure failure) =
+abstract class _LoadFailure extends PaginatedSongsState {
+  const factory _LoadFailure(
+          final Fresh<List<Song>> songs, final BackendFailure failure) =
       _$_LoadFailure;
   const _LoadFailure._() : super._();
 
   @override
-  User get user => throw _privateConstructorUsedError;
+  Fresh<List<Song>> get songs => throw _privateConstructorUsedError;
   BackendFailure get failure => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
