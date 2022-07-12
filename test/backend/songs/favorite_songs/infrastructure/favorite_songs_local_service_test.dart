@@ -1,17 +1,15 @@
 // Package imports:
-import 'package:joyful_noise/backend/core/infrastructure/pagination_config.dart';
-import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
-import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_local_service.dart';
+import 'package:collection/collection.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_memory.dart';
 import 'package:test/test.dart';
 
 // Project imports:
-import 'package:joyful_noise/backend/core/infrastructure/user_dto.dart';
-import 'package:joyful_noise/backend/core/infrastructure/user_local_service.dart';
+import 'package:joyful_noise/backend/core/infrastructure/pagination_config.dart';
+import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
+import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_local_service.dart';
 import 'package:joyful_noise/core/infrastructure/sembast_database.dart';
-import 'package:collection/collection.dart';
 
 class FakeSembastDatabase extends Fake implements SembastDatabase {
   FakeSembastDatabase(this._database);

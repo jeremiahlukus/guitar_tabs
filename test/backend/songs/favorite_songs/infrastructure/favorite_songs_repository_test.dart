@@ -1,16 +1,16 @@
 // Package imports:
 import 'package:dartz/dartz.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:test/test.dart';
+
+// Project imports:
+import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_local_service.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_remote_service.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
-
-// Project imports:
-import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
 
@@ -46,22 +46,22 @@ void main() {
         const songDTO = [
           SongDTO(
             id: 1,
-            title: "title",
-            lyrics: "lyrics",
-            category: "category",
-            artist: "artist",
-            chords: "chords",
-            url: "url",
+            title: 'title',
+            lyrics: 'lyrics',
+            category: 'category',
+            artist: 'artist',
+            chords: 'chords',
+            url: 'url',
             songNumber: 1,
           ),
           SongDTO(
             id: 2,
-            title: "title 2",
-            lyrics: "lyrics 2",
-            category: "category 2",
-            artist: "artist 2",
-            chords: "chords 2",
-            url: "url 2",
+            title: 'title 2',
+            lyrics: 'lyrics 2',
+            category: 'category 2',
+            artist: 'artist 2',
+            chords: 'chords 2',
+            url: 'url 2',
             songNumber: 2,
           )
         ];
@@ -93,22 +93,22 @@ void main() {
         const songDTO = [
           SongDTO(
             id: 1,
-            title: "title",
-            lyrics: "lyrics",
-            category: "category",
-            artist: "artist",
-            chords: "chords",
-            url: "url",
+            title: 'title',
+            lyrics: 'lyrics',
+            category: 'category',
+            artist: 'artist',
+            chords: 'chords',
+            url: 'url',
             songNumber: 1,
           ),
           SongDTO(
             id: 2,
-            title: "title 2",
-            lyrics: "lyrics 2",
-            category: "category 2",
-            artist: "artist 2",
-            chords: "chords 2",
-            url: "url 2",
+            title: 'title 2',
+            lyrics: 'lyrics 2',
+            category: 'category 2',
+            artist: 'artist 2',
+            chords: 'chords 2',
+            url: 'url 2',
             songNumber: 2,
           )
         ];
@@ -138,22 +138,22 @@ void main() {
         const songDTO = [
           SongDTO(
             id: 1,
-            title: "title",
-            lyrics: "lyrics",
-            category: "category",
-            artist: "artist",
-            chords: "chords",
-            url: "url",
+            title: 'title',
+            lyrics: 'lyrics',
+            category: 'category',
+            artist: 'artist',
+            chords: 'chords',
+            url: 'url',
             songNumber: 1,
           ),
           SongDTO(
             id: 2,
-            title: "title 2",
-            lyrics: "lyrics 2",
-            category: "category 2",
-            artist: "artist 2",
-            chords: "chords 2",
-            url: "url 2",
+            title: 'title 2',
+            lyrics: 'lyrics 2',
+            category: 'category 2',
+            artist: 'artist 2',
+            chords: 'chords 2',
+            url: 'url 2',
             songNumber: 2,
           )
         ];

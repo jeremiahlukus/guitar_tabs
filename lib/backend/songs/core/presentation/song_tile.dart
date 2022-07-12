@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
 
 class SongTile extends StatelessWidget {

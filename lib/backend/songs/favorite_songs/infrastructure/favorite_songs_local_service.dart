@@ -1,9 +1,14 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:collection/collection.dart';
+import 'package:sembast/sembast.dart';
+
+// Project imports:
 import 'package:joyful_noise/backend/core/infrastructure/pagination_config.dart';
 import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
 import 'package:joyful_noise/core/infrastructure/sembast_database.dart';
-import 'package:sembast/sembast.dart';
-import 'package:collection/collection.dart';
 
 class FavoriteSongsLocalService {
   final SembastDatabase _sembastDatabase;
