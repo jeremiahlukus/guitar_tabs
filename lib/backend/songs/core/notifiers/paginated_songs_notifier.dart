@@ -38,13 +38,11 @@ class PaginatedSongsNotifier extends StateNotifier<PaginatedSongsState> {
 
   int _page = 1;
 
-  @protected
   void resetState() {
     _page = 1;
     state = PaginatedSongsState.initial(Fresh.yes([]));
   }
 
-  @protected
   Future<void> getNextPage(SongGetter getter) async {
     state = PaginatedSongsState.loadInProgress(
       state.songs,
