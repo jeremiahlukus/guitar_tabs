@@ -15,6 +15,8 @@ class FailureSongTile extends ConsumerWidget {
     required this.backendFailure,
   }) : super(key: key);
 
+  static const getNextFavoriteSongsButtonKey = ValueKey('getNextFavoriteSongsButtonKey');
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTileTheme(
@@ -37,6 +39,7 @@ class FailureSongTile extends ConsumerWidget {
             ),
           ),
           trailing: IconButton(
+            key: getNextFavoriteSongsButtonKey,
             icon: const Icon(Icons.refresh),
             onPressed: () {
               ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();

@@ -106,7 +106,7 @@ void main() {
         expect(actualStateResult, expectedStateResultMatcher);
       });
       test(
-          'sets state to PaginatedSongsState.loadFailure if FavoriteSongRepository.getFavoritePage returns a List<Song>',
+          'sets state to PaginatedSongsState.loadSuccess if FavoriteSongRepository.getFavoritePage returns a List<Song>',
           () async {
         final FavoriteSongsRepository mockFavoriteSongRepository = MockSongsRepository();
         const page = 1;
