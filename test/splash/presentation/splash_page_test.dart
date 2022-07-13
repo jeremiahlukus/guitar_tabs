@@ -10,7 +10,7 @@ import 'package:joyful_noise/splash/presentation/splash_page.dart';
 
 void main() {
   group('SplashPage', () {
-    testWidgets('contains the FontAwesomeIcons.github icon', (tester) async {
+    testWidgets('contains the FontAwesomeIcons.guitar icon', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: SplashPage(),
@@ -19,11 +19,11 @@ void main() {
 
       await tester.pump(Duration.zero);
 
-      final githubIconFinder = find.byWidgetPredicate(
-        (Widget widget) => widget is FaIcon && widget.icon == FontAwesomeIcons.github,
+      final guitarIconFinder = find.byWidgetPredicate(
+        (Widget widget) => widget is FaIcon && widget.icon == FontAwesomeIcons.guitar,
       );
 
-      expect(githubIconFinder, findsOneWidget);
+      expect(guitarIconFinder, findsOneWidget);
     });
 
     testWidgets('contains the LinearProgressIndicator', (tester) async {

@@ -113,7 +113,7 @@ class _PaginatedListView extends StatelessWidget {
             song: _.songs.entity[index],
           ),
           loadFailure: (_) => FailureSongTile(
-            githubFailure: _.failure,
+            backendFailure: _.failure,
           ),
         );
       },

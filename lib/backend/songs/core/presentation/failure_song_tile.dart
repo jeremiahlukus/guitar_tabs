@@ -9,10 +9,10 @@ import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
 
 class FailureSongTile extends ConsumerWidget {
-  final BackendFailure githubFailure;
+  final BackendFailure backendFailure;
   const FailureSongTile({
     Key? key,
-    required this.githubFailure,
+    required this.backendFailure,
   }) : super(key: key);
 
   @override
@@ -25,7 +25,7 @@ class FailureSongTile extends ConsumerWidget {
         child: ListTile(
           title: const Text('An error occurred please retry'),
           subtitle: Text(
-            githubFailure.map(api: (api) => 'API returned: ${api.errorCode}'),
+            backendFailure.map(api: (api) => 'API returned: ${api.errorCode}'),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
