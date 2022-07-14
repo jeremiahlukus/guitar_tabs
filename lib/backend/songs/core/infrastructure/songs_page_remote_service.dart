@@ -28,16 +28,12 @@ class SongsPageRemoteService {
       final response = await _dio.getUri<dynamic>(
         requestUri,
         options: Options(
-          headers: <String, String>{
-            'If-None-Match': previousHeaders?.etag ?? '',
-          },
+          headers: <String, String>{'If-None-Match': previousHeaders?.etag ?? ''},
         ),
       );
 
       if (response.statusCode == 304) {
-        return RemoteResponse.notModified(
-          maxPage: previousHeaders?.link?.maxPage ?? 0,
-        );
+        return RemoteResponse.notModified(maxPage: previousHeaders?.link?.maxPage ?? 0);
       } else if (response.statusCode == 200) {
         final headers = BackendHeaders.parse(response);
         await _headersCache.saveHeaders(requestUri, headers);

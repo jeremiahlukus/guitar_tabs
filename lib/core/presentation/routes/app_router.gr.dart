@@ -41,8 +41,7 @@ class AppRouter extends _i6.RootStackRouter {
           child: _i3.AuthorizationPage(
               key: args.key,
               authorizationUrl: args.authorizationUrl,
-              onAuthorizationCodeRedirectAttempt: args.onAuthorizationCodeRedirectAttempt,
-              onWebViewCreatedJsString: args.onWebViewCreatedJsString));
+              onAuthorizationCodeRedirectAttempt: args.onAuthorizationCodeRedirectAttempt));
     },
     DashboardRoute.name: (routeData) {
       return _i6.MaterialPageX<dynamic>(routeData: routeData, child: const _i4.DashboardPage());
@@ -82,27 +81,20 @@ class SignInRoute extends _i6.PageRouteInfo<void> {
 /// [_i3.AuthorizationPage]
 class AuthorizationRoute extends _i6.PageRouteInfo<AuthorizationRouteArgs> {
   AuthorizationRoute(
-      {_i7.Key? key,
-      required Uri authorizationUrl,
-      required void Function(Uri) onAuthorizationCodeRedirectAttempt,
-      String? onWebViewCreatedJsString})
+      {_i7.Key? key, required Uri authorizationUrl, required void Function(Uri) onAuthorizationCodeRedirectAttempt})
       : super(AuthorizationRoute.name,
             path: '/auth',
             args: AuthorizationRouteArgs(
                 key: key,
                 authorizationUrl: authorizationUrl,
-                onAuthorizationCodeRedirectAttempt: onAuthorizationCodeRedirectAttempt,
-                onWebViewCreatedJsString: onWebViewCreatedJsString));
+                onAuthorizationCodeRedirectAttempt: onAuthorizationCodeRedirectAttempt));
 
   static const String name = 'AuthorizationRoute';
 }
 
 class AuthorizationRouteArgs {
   const AuthorizationRouteArgs(
-      {this.key,
-      required this.authorizationUrl,
-      required this.onAuthorizationCodeRedirectAttempt,
-      this.onWebViewCreatedJsString});
+      {this.key, required this.authorizationUrl, required this.onAuthorizationCodeRedirectAttempt});
 
   final _i7.Key? key;
 
@@ -110,11 +102,9 @@ class AuthorizationRouteArgs {
 
   final void Function(Uri) onAuthorizationCodeRedirectAttempt;
 
-  final String? onWebViewCreatedJsString;
-
   @override
   String toString() {
-    return 'AuthorizationRouteArgs{key: $key, authorizationUrl: $authorizationUrl, onAuthorizationCodeRedirectAttempt: $onAuthorizationCodeRedirectAttempt, onWebViewCreatedJsString: $onWebViewCreatedJsString}';
+    return 'AuthorizationRouteArgs{key: $key, authorizationUrl: $authorizationUrl, onAuthorizationCodeRedirectAttempt: $onAuthorizationCodeRedirectAttempt}';
   }
 }
 
