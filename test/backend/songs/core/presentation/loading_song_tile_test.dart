@@ -3,14 +3,10 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:shimmer/shimmer.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/songs/core/presentation/loading_song_tile.dart';
-import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_song_notifier.dart';
-
-class MockFavoriteSongNotifier extends Mock implements FavoriteSongNotifier {}
 
 void main() {
   group('LoadingSongTile', () {
