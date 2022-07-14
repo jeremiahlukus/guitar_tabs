@@ -38,6 +38,34 @@ void main() {
       expect(find.text('artist'), findsOneWidget);
     });
 
-    testWidgets('when icon button pressed favorites song', (tester) async {});
+    testWidgets('when icon button pressed favorites song', (tester) async {
+      const song = Song(
+        id: 1,
+        title: 'title',
+        songNumber: 1,
+        lyrics: 'lyrics',
+        category: 'category',
+        artist: 'artist',
+        chords: 'chords',
+        url: 'url',
+      );
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: SongTile(
+              song: song,
+            ),
+          ),
+        ),
+      );
+      await tester.pump(Duration.zero);
+      final favoriteSongsButton = find.byKey(SongTile.favoriteSongButtonKey);
+      await tester.tap(favoriteSongsButton);
+      await tester.pumpAndSettle();
+
+      // TODO(jeremiah): once tap method implemented test and remove
+      final listTileFinder = find.byType(ListTile);
+      expect(listTileFinder, findsOneWidget);
+    });
   });
 }

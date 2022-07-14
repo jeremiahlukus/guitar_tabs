@@ -10,10 +10,7 @@ import 'package:joyful_noise/core/shared/providers.dart';
 
 class FailureSongTile extends ConsumerWidget {
   final BackendFailure backendFailure;
-  const FailureSongTile({
-    Key? key,
-    required this.backendFailure,
-  }) : super(key: key);
+  const FailureSongTile({Key? key, required this.backendFailure}) : super(key: key);
 
   static const getNextFavoriteSongsButtonKey = ValueKey('getNextFavoriteSongsButtonKey');
 
