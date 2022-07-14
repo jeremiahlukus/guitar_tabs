@@ -1,11 +1,35 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:shimmer/shimmer.dart';
+
+// Project imports:
+import 'package:joyful_noise/backend/songs/core/presentation/loading_song_tile.dart';
+import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_song_notifier.dart';
+
+class MockFavoriteSongNotifier extends Mock implements FavoriteSongNotifier {}
 
 void main() {
-  // Define a test. The TestWidgets function also provides a WidgetTester
-  // to work with. The WidgetTester allows you to build and interact
-  // with widgets in the test environment.
-  testWidgets('MyWidget has a title and message', (tester) async {
-    // Test code goes here.
+  group('LoadingSongTile', () {
+    testWidgets('contains Shimmer, ListTile and CircleAvatar', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: LoadingSongTile(),
+          ),
+        ),
+      );
+      await tester.pump(Duration.zero);
+      final shimmerFinder = find.byType(Shimmer);
+      final listTileFinder = find.byType(ListTile);
+      final circleAvatarFinder = find.byType(CircleAvatar);
+
+      expect(shimmerFinder, findsOneWidget);
+      expect(listTileFinder, findsOneWidget);
+      expect(circleAvatarFinder, findsOneWidget);
+    });
   });
 }
