@@ -19,7 +19,7 @@ final initializationProvider = FutureProvider<Unit>(
     await ref.read(sembastProvider).init();
     ref.read(dioProvider)
       ..options = BaseOptions(
-        headers: <String, String>{'Accept': 'application/vnd.github.v3.html+json'},
+        // headers: <String, String>{'Accept': 'application/vnd.github.v3.html+json'},
         validateStatus: (status) => status != null && status >= 200 && status < 400,
       )
       ..interceptors.add(
@@ -45,7 +45,7 @@ class AppWidget extends ConsumerWidget {
           orElse: () {},
           authenticated: (_) {
             _appRouter.pushAndPopUntil(
-              const DashboardRoute(),
+              const FavoriteSongsRoute(),
               predicate: (route) => false,
             );
           },

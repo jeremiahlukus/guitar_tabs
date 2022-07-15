@@ -12,7 +12,7 @@ part 'user_notifier.freezed.dart';
 @freezed
 class UserState with _$UserState {
   const UserState._();
-  // for easy access of repos, makes it present on all states and available on the state directly
+  // for easy access of user, makes it present on all states and available on the state directly
   const factory UserState.initial(User user) = _Initial;
   const factory UserState.loadInProgress(User user) = _LoadInProgress;
   const factory UserState.loadSuccess(

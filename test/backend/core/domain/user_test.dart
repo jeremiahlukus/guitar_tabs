@@ -13,11 +13,11 @@ void main() {
 
       const size = '24';
 
-      const expectedOverridenAvatarUrl = 'www.example.com/avatar?color=blue&size=$size';
+      const expectedOverriddenAvatarUrl = 'www.example.com/avatar?color=blue&size=$size';
 
-      final actualOverridenAvatarUrl = user.avatarUrlOverride(size);
+      final actualOverriddenAvatarUrl = user.avatarUrlOverride(size);
 
-      expect(actualOverridenAvatarUrl, expectedOverridenAvatarUrl);
+      expect(actualOverriddenAvatarUrl, expectedOverriddenAvatarUrl);
     });
   });
 }

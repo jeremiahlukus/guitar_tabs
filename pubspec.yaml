@@ -36,6 +36,7 @@ dependencies:
   cached_network_image: ^3.2.0
   sembast_web: ^2.0.1+1
   platform: ^3.1.0
+  shimmer: ^2.0.0
 
 
 dev_dependencies:

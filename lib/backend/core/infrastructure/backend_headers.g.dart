@@ -13,7 +13,7 @@ _$_BackendHeaders _$$_BackendHeadersFromJson(Map<String, dynamic> json) => _$_Ba
 
 Map<String, dynamic> _$$_BackendHeadersToJson(_$_BackendHeaders instance) => <String, dynamic>{
       'etag': instance.etag,
-      'link': instance.link,
+      'link': instance.link?.toJson(),
     };
 
 _$_PaginationLink _$$_PaginationLinkFromJson(Map<String, dynamic> json) => _$_PaginationLink(

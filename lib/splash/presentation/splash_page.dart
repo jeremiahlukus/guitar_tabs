@@ -16,7 +16,7 @@ class SplashPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             FaIcon(
-              FontAwesomeIcons.github,
+              FontAwesomeIcons.guitar,
               size: 150,
             ),
             SizedBox(height: 16),
