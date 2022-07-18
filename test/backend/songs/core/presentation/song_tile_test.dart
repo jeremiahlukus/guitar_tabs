@@ -7,22 +7,19 @@ import 'package:flutter_test/flutter_test.dart';
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_tile.dart';
+import 'package:mocktail/mocktail.dart';
+
+class MockSong extends Mock implements Song {}
 
 void main() {
   group('SongTile', () {
     testWidgets('contains the artist and title text in a ListTile', (tester) async {
-      const song = Song(
-        id: 1,
-        title: 'title',
-        songNumber: 1,
-        lyrics: 'lyrics',
-        category: 'category',
-        artist: 'artist',
-        chords: 'chords',
-        url: 'url',
-      );
+      final song = MockSong();
+      when(() => song.artist).thenReturn('artist');
+      when(() => song.title).thenReturn('title');
+
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Scaffold(
             body: SongTile(
               song: song,
@@ -39,18 +36,11 @@ void main() {
     });
 
     testWidgets('when icon button pressed favorites song', (tester) async {
-      const song = Song(
-        id: 1,
-        title: 'title',
-        songNumber: 1,
-        lyrics: 'lyrics',
-        category: 'category',
-        artist: 'artist',
-        chords: 'chords',
-        url: 'url',
-      );
+      final song = MockSong();
+      when(() => song.artist).thenReturn('artist');
+      when(() => song.title).thenReturn('title');
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Scaffold(
             body: SongTile(
               song: song,
