@@ -12,6 +12,8 @@ import 'package:joyful_noise/core/domain/fresh.dart';
 
 class MockSongsRepository extends Mock implements FavoriteSongsRepository {}
 
+class MockSong extends Mock implements Song {}
+
 void main() {
   group('PaginatedSongsNotifier', () {
     group('.resetState', () {
@@ -19,28 +21,7 @@ void main() {
         final FavoriteSongsRepository mockFavoriteSongRepository = MockSongsRepository();
         const page = 2;
         final paginatedSongNotifier = PaginatedSongsNotifier();
-        const songs = [
-          Song(
-            id: 1,
-            title: 'title',
-            lyrics: 'lyrics',
-            category: 'category',
-            artist: 'artist',
-            chords: 'chords',
-            url: 'url',
-            songNumber: 1,
-          ),
-          Song(
-            id: 2,
-            title: 'title 2',
-            lyrics: 'lyrics 2',
-            category: 'category 2',
-            artist: 'artist 2',
-            chords: 'chords 2',
-            url: 'url 2',
-            songNumber: 2,
-          )
-        ];
+        final songs = [MockSong(), MockSong()];
         paginatedSongNotifier
           // ignore: invalid_use_of_protected_member
           ..state = paginatedSongNotifier.state.copyWith(songs: Fresh.yes(songs))
@@ -66,28 +47,7 @@ void main() {
           (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
         final paginatedSongNotifier = PaginatedSongsNotifier();
-        const songs = [
-          Song(
-            id: 1,
-            title: 'title',
-            lyrics: 'lyrics',
-            category: 'category',
-            artist: 'artist',
-            chords: 'chords',
-            url: 'url',
-            songNumber: 1,
-          ),
-          Song(
-            id: 2,
-            title: 'title 2',
-            lyrics: 'lyrics 2',
-            category: 'category 2',
-            artist: 'artist 2',
-            chords: 'chords 2',
-            url: 'url 2',
-            songNumber: 2,
-          )
-        ];
+        final songs = [MockSong(), MockSong()];
 
         // ignore: invalid_use_of_protected_member
         paginatedSongNotifier.state = paginatedSongNotifier.state.copyWith(songs: Fresh.yes(songs));
@@ -111,28 +71,7 @@ void main() {
         final FavoriteSongsRepository mockFavoriteSongRepository = MockSongsRepository();
         const page = 1;
         final paginatedSongNotifier = PaginatedSongsNotifier();
-        const songs = [
-          Song(
-            id: 1,
-            title: 'title',
-            lyrics: 'lyrics',
-            category: 'category',
-            artist: 'artist',
-            chords: 'chords',
-            url: 'url',
-            songNumber: 1,
-          ),
-          Song(
-            id: 2,
-            title: 'title 2',
-            lyrics: 'lyrics 2',
-            category: 'category 2',
-            artist: 'artist 2',
-            chords: 'chords 2',
-            url: 'url 2',
-            songNumber: 2,
-          )
-        ];
+        final songs = [MockSong(), MockSong()];
         when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(
           (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
