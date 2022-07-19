@@ -12,7 +12,7 @@ class Device {
     this.devicePixelRatio = 1.0,
     this.textScaleFactor = 1.0,
     this.brightness = Brightness.light,
-    this.safeArea = const EdgeInsets.all(0),
+    this.safeArea = EdgeInsets.zero,
   });
 
   /// [smallPhone] one of the smallest phone screens

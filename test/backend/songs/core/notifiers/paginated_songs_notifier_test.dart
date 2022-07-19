@@ -18,8 +18,6 @@ void main() {
   group('PaginatedSongsNotifier', () {
     group('.resetState', () {
       test('resets the state to PaginatedSongsState.initial', () async {
-        final FavoriteSongsRepository mockFavoriteSongRepository = MockSongsRepository();
-        const page = 2;
         final paginatedSongNotifier = PaginatedSongsNotifier();
         final songs = [MockSong(), MockSong()];
         paginatedSongNotifier
