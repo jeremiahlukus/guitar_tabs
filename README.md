@@ -1,6 +1,7 @@
 # Flutter Template
 
-![coverage][coverage_badge]
+[![codecov](https://codecov.io/gh/jeremiahlukus/guitar_tabs/branch/jlp-favorite-songs/graph/badge.svg?token=85Z83653MO)](https://codecov.io/gh/jeremiahlukus/guitar_tabs)
+[![joyful_noise](https://github.com/jeremiahlukus/guitar_tabs/actions/workflows/main.yaml/badge.svg)](https://github.com/jeremiahlukus/guitar_tabs/actions/workflows/main.yaml)
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 
 
