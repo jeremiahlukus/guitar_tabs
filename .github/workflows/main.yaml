@@ -27,7 +27,8 @@ jobs:
         run: flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random
 
       - uses: codecov/codecov-action@v2
-        files: coverage/lcov.info
+        with:
+          files: coverage/lcov.info
 
   # id of job, a string that is unique to the "jobs" node above.
   # drive:
