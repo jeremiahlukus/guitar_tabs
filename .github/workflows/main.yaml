@@ -24,7 +24,7 @@ jobs:
         run: flutter analyze lib test
 
       - name: Run unit tests
-        run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
+        run: flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random
 
       - uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
         with:
