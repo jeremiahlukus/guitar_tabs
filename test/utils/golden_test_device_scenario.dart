@@ -1,6 +1,10 @@
-import 'package:alchemist/alchemist.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:alchemist/alchemist.dart';
+
+// Project imports:
 import 'device.dart';
 
 /// Wrapper for testing widgets (primarily screens) with device constraints
@@ -19,7 +23,7 @@ class GoldenTestDeviceScenario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GoldenTestScenario(
-      name: '${name} (device: ${device.name})',
+      name: '$name (device: ${device.name})',
       child: ClipRect(
         child: MediaQuery(
           data: MediaQuery.of(context).copyWith(

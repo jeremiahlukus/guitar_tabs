@@ -1,5 +1,6 @@
 // Copied and adapted from https://github.com/eBay/flutter_glove_box/blob/master/packages/golden_toolkit/lib/src/device.dart
 
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 /// This [Device] is a configuration for golden test.
@@ -21,14 +22,12 @@ class Device {
   static const Device iphone11 = Device(
     name: 'iphone11',
     size: Size(414, 896),
-    devicePixelRatio: 1.0,
     safeArea: EdgeInsets.only(top: 44, bottom: 34),
   );
 
   static const Device iphone11Landscape = Device(
     name: 'iphone11_landscape',
     size: Size(896, 414),
-    devicePixelRatio: 1.0,
     safeArea: EdgeInsets.only(left: 44, right: 34),
   );
 
@@ -69,7 +68,7 @@ class Device {
       size: size ?? this.size,
       devicePixelRatio: devicePixelRatio ?? this.devicePixelRatio,
       name: name ?? this.name,
-      textScaleFactor: textScale ?? this.textScaleFactor,
+      textScaleFactor: textScale ?? textScaleFactor,
       brightness: brightness ?? this.brightness,
       safeArea: safeArea ?? this.safeArea,
     );

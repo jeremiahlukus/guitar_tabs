@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:alchemist/alchemist.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +15,8 @@ import 'package:joyful_noise/auth/presentation/authorization_page.dart';
 import 'package:joyful_noise/auth/presentation/sign_in_page.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
+import '../../utils/device.dart';
+import '../../utils/golden_test_device_scenario.dart';
 
 class MockAuthNotifier extends Mock implements AuthNotifier {}
 
@@ -119,5 +122,39 @@ void main() {
 
       expect(authorizationPageFinder, findsOneWidget);
     });
+  });
+
+  Widget buildWidgetUnderTest() => const MaterialApp(
+        home: SignInPage(),
+      );
+
+  group('SignInPage Golden Test', () {
+    goldenTest(
+      'renders correctly on mobile',
+      fileName: 'SignInPage',
+      builder: () => GoldenTestGroup(
+        children: [
+          GoldenTestDeviceScenario(
+            device: Device.smallPhone,
+            name: 'golden test SongTile on small phone',
+            builder: buildWidgetUnderTest,
+          ),
+          GoldenTestDeviceScenario(
+            device: Device.tabletLandscape,
+            name: 'golden test SongTile on tablet landscape',
+            builder: buildWidgetUnderTest,
+          ),
+          GoldenTestDeviceScenario(
+            device: Device.tabletPortrait,
+            name: 'golden test SongTile on tablet Portrait',
+            builder: buildWidgetUnderTest,
+          ),
+          GoldenTestDeviceScenario(
+            name: 'golden test SongTile on iphone11',
+            builder: buildWidgetUnderTest,
+          ),
+        ],
+      ),
+    );
   });
 }
