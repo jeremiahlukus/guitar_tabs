@@ -42,6 +42,8 @@ class FakeUserNotifier extends UserNotifier {
 
 class MockAuthNotifier extends Mock implements AuthNotifier {}
 
+class MockSong extends Mock implements Song {}
+
 void main() {
   group('FavoriteSongsPage', () {
     testWidgets('contains the PaginatedSongsListView widget', (tester) async {
@@ -52,26 +54,26 @@ void main() {
           right(
             Fresh.yes(
               [
-                const Song(
-                    id: 1,
-                    title: 'title',
-                    songNumber: 1,
-                    lyrics: 'lyrics',
-                    category: 'category',
-                    artist: 'artist',
-                    chords: 'chords',
-                    url: 'url'),
+                MockSong(),
               ],
             ),
           ),
         ),
       );
 
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
       final mockFavoriteSongsNotifierProvider =
           AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
+        (ref) => mockProvider,
       );
 
+      // when(mockProvider.getNextFavoriteSongsPage).thenAnswer(
+      //   (invocation) async {
+      //     logger.e("message");
+      //     await mockFavoriteSongRepository.getFavoritePage(1);
+      //     return Future.value();
+      //   },
+      // );
       await tester.pumpWidget(
         ProviderScope(
           overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
@@ -82,11 +84,11 @@ void main() {
       );
 
       final finder = find.byType(PaginatedSongsListView);
-      final paginatedSongsListView = finder.evaluate().single.widget as PaginatedSongsListView;
-      expect(
-        paginatedSongsListView.noResultsMessage,
-        "That's everything we could find in your favorite songs right now.",
-      );
+
+      // verify<void>(
+      //   () => mockProvider.getNextFavoriteSongsPage,
+      // ).called(1);
+
       expect(finder, findsOneWidget);
     });
 
