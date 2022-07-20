@@ -66,14 +66,6 @@ void main() {
           AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
         (ref) => mockProvider,
       );
-
-      // when(mockProvider.getNextFavoriteSongsPage).thenAnswer(
-      //   (invocation) async {
-      //     logger.e("message");
-      //     await mockFavoriteSongRepository.getFavoritePage(1);
-      //     return Future.value();
-      //   },
-      // );
       await tester.pumpWidget(
         ProviderScope(
           overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
@@ -84,10 +76,6 @@ void main() {
       );
 
       final finder = find.byType(PaginatedSongsListView);
-
-      // verify<void>(
-      //   () => mockProvider.getNextFavoriteSongsPage,
-      // ).called(1);
 
       expect(finder, findsOneWidget);
     });
