@@ -11,6 +11,7 @@ import 'package:joyful_noise/backend/core/infrastructure/backend_headers_cache.d
 import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_remote_service.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
+import '../../../../_mocks/song/mock_song.dart';
 
 class MockDio extends Mock implements Dio {}
 
@@ -55,33 +56,9 @@ void main() {
         final Dio mockDio = MockDio();
         final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
 
-        const mockData = [
-          {
-            'id': 50098,
-            'title': 'new 1',
-            'song_number': 1,
-            'url': 'google',
-            'artist': 'New',
-            'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
-            'chords': null,
-            'created_at': '2022-06-29T11:42:10.614-04:00',
-            'updated_at': '2022-06-29T11:42:10.614-04:00',
-            'category': 'general',
-            'sub_category': null
-          },
-          {
-            'id': 50099,
-            'title': 'new 2',
-            'song_number': 1,
-            'url': 'google',
-            'artist': 'New',
-            'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
-            'chords': null,
-            'created_at': '2022-06-29T11:42:10.614-04:00',
-            'updated_at': '2022-06-29T11:42:10.614-04:00',
-            'category': 'general',
-            'sub_category': null
-          }
+        final mockData = [
+          mockSongJson(1),
+          mockSongJson(2),
         ];
 
         final convertedData = [SongDTO.fromJson(mockData.first), SongDTO.fromJson(mockData.last)];

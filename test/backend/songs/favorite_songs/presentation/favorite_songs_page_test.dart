@@ -1,8 +1,8 @@
 // Flutter imports:
-import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:alchemist/alchemist.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,7 +24,6 @@ import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_son
 import 'package:joyful_noise/backend/songs/favorite_songs/presentation/favorite_songs_page.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
-
 import '../../../../utils/device.dart';
 import '../../../../utils/golden_test_device_scenario.dart';
 
@@ -169,14 +168,15 @@ void main() {
           Fresh.yes(
             [
               const Song(
-                  id: 1,
-                  title: 'title',
-                  songNumber: 1,
-                  lyrics: 'lyrics',
-                  category: 'category',
-                  artist: 'artist',
-                  chords: 'chords',
-                  url: 'url'),
+                id: 1,
+                title: 'title',
+                songNumber: 1,
+                lyrics: 'lyrics',
+                category: 'category',
+                artist: 'artist',
+                chords: 'chords',
+                url: 'url',
+              ),
             ],
           ),
         ),

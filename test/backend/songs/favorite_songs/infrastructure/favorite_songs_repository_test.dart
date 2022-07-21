@@ -13,6 +13,7 @@ import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorit
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
+import '../../../../_mocks/song/mock_song.dart';
 
 class MockFavoriteSongRemoteService extends Mock implements FavoriteSongsRemoteService {}
 
@@ -43,27 +44,9 @@ void main() {
         final FavoriteSongsLocalService mockFavoriteSongLocalService = MockFavoriteSongLocalService();
         const page = 1;
 
-        const songDTO = [
-          SongDTO(
-            id: 1,
-            title: 'title',
-            lyrics: 'lyrics',
-            category: 'category',
-            artist: 'artist',
-            chords: 'chords',
-            url: 'url',
-            songNumber: 1,
-          ),
-          SongDTO(
-            id: 2,
-            title: 'title 2',
-            lyrics: 'lyrics 2',
-            category: 'category 2',
-            artist: 'artist 2',
-            chords: 'chords 2',
-            url: 'url 2',
-            songNumber: 2,
-          )
+        final songDTO = [
+          mockSongDTO(1),
+          mockSongDTO(2),
         ];
 
         when(() => mockFavoriteSongRemoteService.getFavoriteSongsPage(page)).thenAnswer((_) {
@@ -90,27 +73,9 @@ void main() {
         final FavoriteSongsLocalService mockFavoriteSongLocalService = MockFavoriteSongLocalService();
         const page = 1;
 
-        const songDTO = [
-          SongDTO(
-            id: 1,
-            title: 'title',
-            lyrics: 'lyrics',
-            category: 'category',
-            artist: 'artist',
-            chords: 'chords',
-            url: 'url',
-            songNumber: 1,
-          ),
-          SongDTO(
-            id: 2,
-            title: 'title 2',
-            lyrics: 'lyrics 2',
-            category: 'category 2',
-            artist: 'artist 2',
-            chords: 'chords 2',
-            url: 'url 2',
-            songNumber: 2,
-          )
+        final songDTO = [
+          mockSongDTO(1),
+          mockSongDTO(2),
         ];
 
         when(() => mockFavoriteSongRemoteService.getFavoriteSongsPage(page)).thenAnswer((_) {

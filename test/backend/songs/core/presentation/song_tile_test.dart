@@ -4,22 +4,17 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:alchemist/alchemist.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 // Project imports:
-import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_tile.dart';
+import '../../../../_mocks/song/mock_song.dart';
 import '../../../../utils/device.dart';
 import '../../../../utils/golden_test_device_scenario.dart';
-
-class MockSong extends Mock implements Song {}
 
 void main() {
   group('SongTile', () {
     testWidgets('contains the artist and title text in a ListTile', (tester) async {
-      final song = MockSong();
-      when(() => song.artist).thenReturn('artist');
-      when(() => song.title).thenReturn('title');
+      final song = mockSong(1);
 
       await tester.pumpWidget(
         MaterialApp(
@@ -39,9 +34,7 @@ void main() {
     });
 
     testWidgets('when icon button pressed favorites song', (tester) async {
-      final song = MockSong();
-      when(() => song.artist).thenReturn('artist');
-      when(() => song.title).thenReturn('title');
+      final song = mockSong(1);
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -62,27 +55,15 @@ void main() {
     });
   });
 
-  final song = MockSong();
-  when(() => song.artist).thenReturn('artist');
-  when(() => song.title).thenReturn('title');
-  Widget buildWidgetUnderTest() => const MaterialApp(
-        home: Scaffold(
-          body: SongTile(
-            song: Song(
-              id: 1,
-              title: 'title',
-              lyrics: 'lyrics',
-              category: 'category',
-              artist: 'artist',
-              chords: 'chords',
-              url: 'url',
-              songNumber: 1,
+  group('SongTile Golden Test', () {
+    Widget buildWidgetUnderTest() => MaterialApp(
+          home: Scaffold(
+            body: SongTile(
+              song: mockSong(1),
             ),
           ),
-        ),
-      );
+        );
 
-  group('SongTile Golden Test', () {
     goldenTest(
       'renders correctly on mobile',
       fileName: 'SongTile',

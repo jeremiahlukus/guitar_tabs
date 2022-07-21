@@ -10,6 +10,7 @@ import 'package:joyful_noise/backend/core/infrastructure/pagination_config.dart'
 import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_local_service.dart';
 import 'package:joyful_noise/core/infrastructure/sembast_database.dart';
+import '../../../../_mocks/song/mock_song.dart';
 
 class FakeSembastDatabase extends Fake implements SembastDatabase {
   FakeSembastDatabase(this._database);
@@ -32,26 +33,8 @@ void main() {
         final favoriteSongLocalService = FavoriteSongsLocalService(fakeSembastDatabase);
 
         final mockData = [
-          {
-            'id': 50098,
-            'title': 'new 1',
-            'song_number': 1,
-            'url': 'google',
-            'artist': 'New',
-            'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
-            'chords': '',
-            'category': 'general',
-          },
-          {
-            'id': 50099,
-            'title': 'new 2',
-            'song_number': 1,
-            'url': 'google',
-            'artist': 'New',
-            'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
-            'chords': '',
-            'category': 'general',
-          }
+          mockSongJson(1),
+          mockSongJson(2),
         ];
 
         final convertedData = [SongDTO.fromJson(mockData.first), SongDTO.fromJson(mockData.last)];
@@ -66,7 +49,10 @@ void main() {
             )
             .get(fakeSembastDatabase.instance);
 
-        final expectedData = mockData;
+        final expectedData = [
+          mockSongStrippedJson(1),
+          mockSongStrippedJson(2),
+        ];
 
         expect(actualData, expectedData);
       });
@@ -83,26 +69,8 @@ void main() {
         final favoriteSongLocalService = FavoriteSongsLocalService(fakeSembastDatabase);
 
         final mockData = [
-          {
-            'id': 50098,
-            'title': 'new 1',
-            'song_number': 1,
-            'url': 'google',
-            'artist': 'New',
-            'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
-            'chords': '',
-            'category': 'general',
-          },
-          {
-            'id': 50099,
-            'title': 'new 2',
-            'song_number': 1,
-            'url': 'google',
-            'artist': 'New',
-            'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
-            'chords': '',
-            'category': 'general',
-          }
+          mockSongJson(1),
+          mockSongJson(2),
         ];
 
         final convertedData = [SongDTO.fromJson(mockData.first), SongDTO.fromJson(mockData.last)];
@@ -134,26 +102,8 @@ void main() {
 
         final favoriteSongLocalService = FavoriteSongsLocalService(fakeSembastDatabase);
         final mockData = [
-          {
-            'id': 50098,
-            'title': 'new 1',
-            'song_number': 1,
-            'url': 'google',
-            'artist': 'New',
-            'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
-            'chords': '',
-            'category': 'general',
-          },
-          {
-            'id': 50099,
-            'title': 'new 2',
-            'song_number': 1,
-            'url': 'google',
-            'artist': 'New',
-            'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
-            'chords': '',
-            'category': 'general',
-          }
+          mockSongJson(1),
+          mockSongJson(2),
         ];
 
         final convertedData = [SongDTO.fromJson(mockData.first), SongDTO.fromJson(mockData.last)];
