@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -23,6 +24,9 @@ import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_son
 import 'package:joyful_noise/backend/songs/favorite_songs/presentation/favorite_songs_page.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
+
+import '../../../../utils/device.dart';
+import '../../../../utils/golden_test_device_scenario.dart';
 
 class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository {}
 
@@ -153,5 +157,78 @@ void main() {
 
       verify(mockAuthNotifier.signOut).called(1);
     });
+  });
+
+  group('DashboardPage Golden Test', () {
+    final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
+    final AuthNotifier mockAuthNotifier = MockAuthNotifier();
+    final mockFavoriteSongRepository = MockFavoriteSongRepository();
+    when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+      (invocation) => Future.value(
+        right(
+          Fresh.yes(
+            [
+              const Song(
+                  id: 1,
+                  title: 'title',
+                  songNumber: 1,
+                  lyrics: 'lyrics',
+                  category: 'category',
+                  artist: 'artist',
+                  chords: 'chords',
+                  url: 'url'),
+            ],
+          ),
+        ),
+      ),
+    );
+    final mockFavoriteSongsNotifierProvider =
+        AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
+      (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
+    );
+
+    when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
+
+    Widget buildWidgetUnderTest() => ProviderScope(
+          overrides: [
+            userNotifierProvider.overrideWithValue(
+              fakeUserNotifier,
+            ),
+            authNotifierProvider.overrideWithValue(
+              mockAuthNotifier,
+            ),
+            favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)
+          ],
+          child: const MaterialApp(
+            home: FavoriteSongsPage(),
+          ),
+        );
+    goldenTest(
+      'renders correctly on mobile',
+      fileName: 'FavoriteSongsPage',
+      builder: () => GoldenTestGroup(
+        children: [
+          GoldenTestDeviceScenario(
+            device: Device.smallPhone,
+            name: 'golden test FavoriteSongsPage on small phone',
+            builder: buildWidgetUnderTest,
+          ),
+          GoldenTestDeviceScenario(
+            device: Device.tabletLandscape,
+            name: 'golden test FavoriteSongsPage on tablet landscape',
+            builder: buildWidgetUnderTest,
+          ),
+          GoldenTestDeviceScenario(
+            device: Device.tabletPortrait,
+            name: 'golden test FavoriteSongsPage on tablet Portrait',
+            builder: buildWidgetUnderTest,
+          ),
+          GoldenTestDeviceScenario(
+            name: 'golden test FavoriteSongsPage on iphone11',
+            builder: buildWidgetUnderTest,
+          ),
+        ],
+      ),
+    );
   });
 }
