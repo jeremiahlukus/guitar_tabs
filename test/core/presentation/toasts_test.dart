@@ -1,5 +1,8 @@
-import 'package:flash/flash.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flash/flash.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:joyful_noise/core/presentation/toasts.dart';
 

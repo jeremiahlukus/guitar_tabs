@@ -13,6 +13,8 @@ import 'package:joyful_noise/core/domain/fresh.dart';
 
 class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository {}
 
+class MockSong extends Mock implements Song {}
+
 void main() {
   group('FavoriteSongNotifier', () {
     group('.getNextFavoriteSongsPage', () {
@@ -26,18 +28,7 @@ void main() {
         );
 
         final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
-        const defaultSong = [
-          Song(
-            id: 1,
-            title: 'title',
-            songNumber: 1,
-            lyrics: 'lyrics',
-            category: 'category',
-            artist: 'artist',
-            chords: 'chords',
-            url: 'url',
-          )
-        ];
+        final defaultSong = [MockSong()];
         // ignore: invalid_use_of_protected_member
         favoriteSongNotifier.state = favoriteSongNotifier.state.copyWith(songs: Fresh.yes(defaultSong));
 
@@ -60,18 +51,7 @@ void main() {
           () async {
         final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
         const page = 1;
-        const defaultSong = [
-          Song(
-            id: 1,
-            title: 'title',
-            songNumber: 1,
-            lyrics: 'lyrics',
-            category: 'category',
-            artist: 'artist',
-            chords: 'chords',
-            url: 'url',
-          )
-        ];
+        final defaultSong = [MockSong()];
         when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(
           (invocation) => Future.value(right(Fresh.yes(defaultSong))),
         );
@@ -110,32 +90,11 @@ void main() {
           () async {
         final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
         const page = 1;
-        final defaultSong = [
-          const Song(
-            id: 90,
-            title: 'title',
-            songNumber: 90,
-            lyrics: 'lyrics',
-            category: 'category',
-            artist: 'artist',
-            chords: 'chords',
-            url: 'url',
-          ),
-        ];
+        final defaultSong = [MockSong()];
         for (var i = 0; i < 100; i++) {
-          defaultSong.add(
-            Song(
-              id: i,
-              title: 'title',
-              songNumber: i,
-              lyrics: 'lyrics',
-              category: 'category',
-              artist: 'artist',
-              chords: 'chords',
-              url: 'url',
-            ),
-          );
+          defaultSong.add(MockSong());
         }
+
         // TODO(jeremiah): need to start at page 2 then make sure the paage is reset to 1
 
         when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(

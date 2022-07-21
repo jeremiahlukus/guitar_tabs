@@ -24,6 +24,7 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
     super.initState();
   }
 
+  static const signOutButtonKey = ValueKey('signOutButtonKey');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +32,7 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
         title: const Text('Favorite Songs'),
         actions: [
           IconButton(
+            key: signOutButtonKey,
             onPressed: () {
               ref.read(authNotifierProvider.notifier).signOut();
             },
