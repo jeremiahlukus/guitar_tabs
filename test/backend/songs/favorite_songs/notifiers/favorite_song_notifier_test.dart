@@ -114,6 +114,29 @@ void main() {
 
         expect(actualStateResult, expectedStateResultMatcher);
       });
+
+      test('resets the page to 2', () async {
+        final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
+        const page = 1;
+        final defaultSong = [MockSong()];
+        for (var i = 0; i < 100; i++) {
+          defaultSong.add(MockSong());
+        }
+
+        when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(
+          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+        );
+
+        final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository)..page = 10;
+
+        await favoriteSongNotifier.getFirstFavoriteSongsPage();
+
+        final actualPageResult = favoriteSongNotifier.page;
+
+        const expectedPageResult = 2;
+
+        expect(actualPageResult, expectedPageResult);
+      });
     });
   });
 }
