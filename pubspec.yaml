@@ -42,7 +42,7 @@ dependencies:
 dev_dependencies:
   auto_route_generator: ^4.0.0
   alchemist: ^0.3.3
-  build_runner: ^2.1.8
+  build_runner: ^2.2.0
   derry: ^1.4.3
   flutter_test:
     sdk: flutter
