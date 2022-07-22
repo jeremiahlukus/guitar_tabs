@@ -432,9 +432,7 @@ void main() {
         ),
       );
       final songs = [mockSong(1)];
-      for (var i = 2; i < 100; i++) {
-        songs.add(mockSong(i));
-      }
+
       // ignore: invalid_use_of_protected_member
       mockPaginatedSongsNotifier.state = PaginatedSongsState.loadSuccess(
         Fresh.yes(songs, isNextPageAvailable: true),

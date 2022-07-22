@@ -91,9 +91,6 @@ void main() {
         final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
         const page = 1;
         final defaultSong = [MockSong()];
-        for (var i = 0; i < 100; i++) {
-          defaultSong.add(MockSong());
-        }
 
         // TODO(jeremiah): need to start at page 2 then make sure the paage is reset to 1
 
@@ -120,9 +117,6 @@ void main() {
       final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
       const page = 1;
       final defaultSong = [MockSong()];
-      for (var i = 0; i < 100; i++) {
-        defaultSong.add(MockSong());
-      }
 
       when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(
         (invocation) => Future.value(right(Fresh.yes(defaultSong))),
