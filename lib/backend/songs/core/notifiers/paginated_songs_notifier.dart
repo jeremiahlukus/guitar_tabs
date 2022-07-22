@@ -36,7 +36,7 @@ class PaginatedSongsState with _$PaginatedSongsState {
 class PaginatedSongsNotifier extends StateNotifier<PaginatedSongsState> {
   PaginatedSongsNotifier({this.page = 1}) : super(PaginatedSongsState.initial(Fresh.yes([])));
 
-    @visibleForTesting
+  @visibleForTesting
   int page;
 
   void resetState() {
