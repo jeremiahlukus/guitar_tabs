@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/core/domain/song.dart';
-import 'package:joyful_noise/backend/songs/core/infrastructure/extentions.dart';
+import 'package:joyful_noise/backend/songs/core/infrastructure/extensions.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_local_service.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_remote_service.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';

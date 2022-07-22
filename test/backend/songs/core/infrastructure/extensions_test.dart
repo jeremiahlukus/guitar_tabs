@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
-import 'package:joyful_noise/backend/songs/core/infrastructure/extentions.dart';
+import 'package:joyful_noise/backend/songs/core/infrastructure/extensions.dart';
 import '../../../../_mocks/song/mock_song.dart';
 
 class MockSong extends Mock implements SongDTO {}

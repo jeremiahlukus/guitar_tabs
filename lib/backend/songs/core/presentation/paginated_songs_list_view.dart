@@ -37,12 +37,6 @@ class PaginatedSongsListViewState extends ConsumerState<PaginatedSongsListView> 
   bool hasAlreadyShownNoConnectionToast = false;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     ref.listen<PaginatedSongsState>(
       widget.paginatedSongsNotifierProvider,

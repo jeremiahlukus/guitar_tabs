@@ -29,6 +29,7 @@ class MockWidgetRef extends Mock implements WidgetRef {}
 
 class MockBuildContext extends Mock implements BuildContext {}
 
+// ignore: one_member_abstracts
 abstract class MyFunction {
   void call(WidgetRef ref, BuildContext context);
 }
