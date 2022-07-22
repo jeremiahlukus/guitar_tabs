@@ -11,7 +11,10 @@ import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_lis
 import 'package:joyful_noise/core/shared/providers.dart';
 
 class FavoriteSongsPage extends ConsumerStatefulWidget {
-  const FavoriteSongsPage({Key? key}) : super(key: key);
+  const FavoriteSongsPage({Key? key, this.getNextPage}) : super(key: key);
+
+  @visibleForTesting
+  final void Function(WidgetRef ref, BuildContext context)? getNextPage;
 
   @override
   FavoriteSongsPageState createState() => FavoriteSongsPageState();
@@ -45,9 +48,14 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
       body: PaginatedSongsListView(
         paginatedSongsNotifierProvider: favoriteSongsNotifierProvider,
         getNextPage: (ref, context) {
-          ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
+          widget.getNextPage != null
+              ? widget.getNextPage!.call(ref, context)
+              : ref
+                  .read(favoriteSongsNotifierProvider.notifier)
+                  .getNextFavoriteSongsPage();
         },
-        noResultsMessage: "That's everything we could find in your favorite songs right now.",
+        noResultsMessage:
+            "That's everything we could find in your favorite songs right now.",
       ),
     );
   }

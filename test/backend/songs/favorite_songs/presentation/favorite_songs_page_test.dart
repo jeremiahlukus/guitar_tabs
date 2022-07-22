@@ -28,9 +28,12 @@ import 'package:joyful_noise/core/shared/providers.dart';
 import '../../../../utils/device.dart';
 import '../../../../utils/golden_test_device_scenario.dart';
 
-class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository {}
+class MockFavoriteSongRepository extends Mock
+    implements FavoriteSongsRepository {}
 
 class MockUserRepository extends Mock implements UserRepository {}
+
+class MockFavoriteSongNotifier extends Mock implements FavoriteSongNotifier {}
 
 class FakeUserNotifier extends UserNotifier {
   FakeUserNotifier(UserRepository userRepository) : super(userRepository);
@@ -48,7 +51,13 @@ class MockAuthNotifier extends Mock implements AuthNotifier {}
 
 class MockSong extends Mock implements Song {}
 
+class MockBuildContext extends Mock implements BuildContext {}
+
 void main() {
+  setUpAll(() {
+    registerFallbackValue(MockWidgetRef());
+    registerFallbackValue(MockBuildContext());
+  });
   group('FavoriteSongsPage', () {
     testWidgets('contains the PaginatedSongsListView widget', (tester) async {
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
@@ -67,12 +76,16 @@ void main() {
 
       final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
       final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
+          AutoDisposeStateNotifierProvider<FavoriteSongNotifier,
+              PaginatedSongsState>(
         (ref) => mockProvider,
       );
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
+          overrides: [
+            favoriteSongsNotifierProvider
+                .overrideWithProvider(mockFavoriteSongsNotifierProvider)
+          ],
           child: const MaterialApp(
             home: FavoriteSongsPage(),
           ),
@@ -88,17 +101,22 @@ void main() {
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
 
       when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
-        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+        (invocation) =>
+            Future.value(left(const BackendFailure.api(400, 'message'))),
       );
 
       final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
+          AutoDisposeStateNotifierProvider<FavoriteSongNotifier,
+              PaginatedSongsState>(
         (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
       );
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
+          overrides: [
+            favoriteSongsNotifierProvider
+                .overrideWithProvider(mockFavoriteSongsNotifierProvider)
+          ],
           child: const MaterialApp(
             home: FavoriteSongsPage(),
           ),
@@ -107,24 +125,30 @@ void main() {
 
       final finder = find.byType(PaginatedSongsListView);
 
-      final paginatedSongsListView = finder.evaluate().single.widget as PaginatedSongsListView;
+      final paginatedSongsListView =
+          finder.evaluate().single.widget as PaginatedSongsListView;
 
       expect(
         paginatedSongsListView.noResultsMessage,
         "That's everything we could find in your favorite songs right now.",
       );
     });
-    testWidgets("clicking on Sign Out button triggers provided AuthNotifier's signOut method", (tester) async {
-      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
+    testWidgets(
+        "clicking on Sign Out button triggers provided AuthNotifier's signOut method",
+        (tester) async {
+      final UserNotifier fakeUserNotifier =
+          FakeUserNotifier(MockUserRepository());
       final AuthNotifier mockAuthNotifier = MockAuthNotifier();
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
 
       when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
-        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+        (invocation) =>
+            Future.value(left(const BackendFailure.api(400, 'message'))),
       );
 
       final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
+          AutoDisposeStateNotifierProvider<FavoriteSongNotifier,
+              PaginatedSongsState>(
         (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
       );
 
@@ -139,7 +163,8 @@ void main() {
             authNotifierProvider.overrideWithValue(
               mockAuthNotifier,
             ),
-            favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)
+            favoriteSongsNotifierProvider
+                .overrideWithProvider(mockFavoriteSongsNotifierProvider)
           ],
           child: const MaterialApp(
             home: FavoriteSongsPage(),
@@ -149,7 +174,8 @@ void main() {
 
       await tester.pump(Duration.zero);
 
-      final signOutButtonFinder = find.byKey(FavoriteSongsPageState.signOutButtonKey);
+      final signOutButtonFinder =
+          find.byKey(FavoriteSongsPageState.signOutButtonKey);
 
       await tester.tap(signOutButtonFinder);
 
@@ -157,10 +183,57 @@ void main() {
 
       verify(mockAuthNotifier.signOut).called(1);
     });
+
+    testWidgets(
+        'getNextPage calls the getNextFavoriteSongsPage from the provider',
+        (tester) async {
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+        (invocation) =>
+            Future.value(left(const BackendFailure.api(400, 'message'))),
+      );
+
+      final mockFavoriteSongsNotifierProvider =
+          AutoDisposeStateNotifierProvider<FavoriteSongNotifier,
+              PaginatedSongsState>(
+        (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
+      );
+
+      final mockGetNextPage = MockGetNextPage();
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            favoriteSongsNotifierProvider
+                .overrideWithProvider(mockFavoriteSongsNotifierProvider)
+          ],
+          child: MaterialApp(
+            home: FavoriteSongsPage(
+              getNextPage: mockGetNextPage,
+            ),
+          ),
+        ),
+      );
+
+      final finder = find.byType(PaginatedSongsListView);
+
+      final paginatedSongsListView =
+          finder.evaluate().single.widget as PaginatedSongsListView;
+
+      final BuildContext context = tester.element(finder);
+
+      final WidgetRef ref = MockWidgetRef();
+
+      paginatedSongsListView.getNextPage(ref, context);
+
+      verify(() => mockGetNextPage(any(), any())).called(1);
+    });
   });
 
   group('DashboardPage Golden Test', () {
-    final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
+    final UserNotifier fakeUserNotifier =
+        FakeUserNotifier(MockUserRepository());
     final AuthNotifier mockAuthNotifier = MockAuthNotifier();
     final mockFavoriteSongRepository = MockFavoriteSongRepository();
     when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
@@ -169,21 +242,22 @@ void main() {
           Fresh.yes(
             [
               const Song(
-                  id: 1,
-                  title: 'title',
-                  songNumber: 1,
-                  lyrics: 'lyrics',
-                  category: 'category',
-                  artist: 'artist',
-                  chords: 'chords',
-                  url: 'url',),
+                id: 1,
+                title: 'title',
+                songNumber: 1,
+                lyrics: 'lyrics',
+                category: 'category',
+                artist: 'artist',
+                chords: 'chords',
+                url: 'url',
+              ),
             ],
           ),
         ),
       ),
     );
-    final mockFavoriteSongsNotifierProvider =
-        AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
+    final mockFavoriteSongsNotifierProvider = AutoDisposeStateNotifierProvider<
+        FavoriteSongNotifier, PaginatedSongsState>(
       (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
     );
 
@@ -197,7 +271,8 @@ void main() {
             authNotifierProvider.overrideWithValue(
               mockAuthNotifier,
             ),
-            favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)
+            favoriteSongsNotifierProvider
+                .overrideWithProvider(mockFavoriteSongsNotifierProvider)
           ],
           child: const MaterialApp(
             home: FavoriteSongsPage(),
@@ -232,3 +307,11 @@ void main() {
     );
   });
 }
+
+abstract class GetNextPage {
+  void call(WidgetRef ref, BuildContext context);
+}
+
+class MockGetNextPage extends Mock implements GetNextPage {}
+
+class MockWidgetRef extends Mock implements WidgetRef {}
