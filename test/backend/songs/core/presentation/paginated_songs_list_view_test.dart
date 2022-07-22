@@ -61,9 +61,9 @@ void main() {
 
       await tester.pump();
 
-      final flastFinder = find.byType(Flash);
+      final flashFinder = find.byType(Flash);
 
-      expect(flastFinder, findsOneWidget);
+      expect(flashFinder, findsOneWidget);
 
       final noConnectionMessageFinder = find.text("You're not online. Some information may be outdated.");
 
@@ -379,6 +379,63 @@ void main() {
       expect(loadingSongTileFinder, findsNothing);
       expect(failureSongTileFinder, findsNothing);
       expect(songTileFinder, findsNothing);
+    });
+
+    testWidgets('ScrollNotification when screen is scrolled calls getNextPage', (tester) async {
+      final mockPaginatedSongsNotifier = PaginatedSongsNotifier();
+
+      final paginatedSongsNotifierProvider =
+          AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
+        (ref) => mockPaginatedSongsNotifier,
+      );
+
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+
+      final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      final mockFavoriteSongsNotifierProvider =
+          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
+        (ref) {
+          return favoriteSongNotifier;
+        },
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
+          child: MaterialApp(
+            home: Scaffold(
+              body: PaginatedSongsListView(
+                paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
+                getNextPage: (ref, context) {},
+                noResultsMessage: "That's everything we could find in your favorite songs right now.",
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final songs = [mockSong(1)];
+      for (var i = 2; i < 100; i++) {
+        songs.add(mockSong(i));
+      }
+      // ignore: invalid_use_of_protected_member
+      mockPaginatedSongsNotifier.state = PaginatedSongsState.loadSuccess(
+        Fresh.yes(songs, isNextPageAvailable: true),
+        isNextPageAvailable: true,
+      );
+
+      // ignore: invalid_use_of_protected_member
+      favoriteSongNotifier.state = PaginatedSongsState.loadSuccess(
+        Fresh.yes(songs, isNextPageAvailable: true),
+        isNextPageAvailable: true,
+      );
+
+      await tester.pump();
+      expect(PaginatedSongsListViewState.canLoadNextPage, true);
+      await tester.drag(find.byType(ListView), const Offset(0, -8000));
+      await tester.pump(const Duration(seconds: 1));
+      expect(PaginatedSongsListViewState.canLoadNextPage, false);
     });
   });
 }

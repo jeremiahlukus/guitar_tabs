@@ -5,7 +5,7 @@ import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
 Song mockSong(int id) {
   return Song(
     id: id,
-    title: 'title',
+    title: 'new $id',
     songNumber: id,
     lyrics: 'lyrics',
     category: 'category',
@@ -18,7 +18,7 @@ Song mockSong(int id) {
 SongDTO mockSongDTO(int id) {
   return SongDTO(
     id: id,
-    title: 'title',
+    title: 'new $id',
     songNumber: id,
     lyrics: 'lyrics',
     category: 'category',

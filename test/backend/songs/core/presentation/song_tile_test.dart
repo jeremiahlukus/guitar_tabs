@@ -29,7 +29,7 @@ void main() {
       final listTileFinder = find.byType(ListTile);
 
       expect(listTileFinder, findsOneWidget);
-      expect(find.text('title'), findsOneWidget);
+      expect(find.text('new 1'), findsOneWidget);
       expect(find.text('artist'), findsOneWidget);
     });
 
