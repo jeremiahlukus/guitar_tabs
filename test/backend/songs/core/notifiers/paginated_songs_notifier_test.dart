@@ -34,6 +34,24 @@ void main() {
 
         expect(actualStateResult, expectedStateResultMatcher);
       });
+
+      test('resets the page to 1 if set to any other page', () {
+        const initialPage = 10;
+        final paginatedSongNotifier = PaginatedSongsNotifier(page: initialPage);
+        final songs = [MockSong(), MockSong()];
+        paginatedSongNotifier
+          // ignore: invalid_use_of_protected_member
+          ..state =
+              // ignore: invalid_use_of_protected_member
+              paginatedSongNotifier.state.copyWith(songs: Fresh.yes(songs))
+          ..resetState();
+
+        final actualPageResult = paginatedSongNotifier.page;
+
+        const expectedPageResult = 1;
+
+        expect(actualPageResult, expectedPageResult);
+      });
     });
     group('.getNextPage', () {
       test(

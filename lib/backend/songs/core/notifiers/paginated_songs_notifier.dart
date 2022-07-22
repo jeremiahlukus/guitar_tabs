@@ -34,12 +34,13 @@ class PaginatedSongsState with _$PaginatedSongsState {
 }
 
 class PaginatedSongsNotifier extends StateNotifier<PaginatedSongsState> {
-  PaginatedSongsNotifier() : super(PaginatedSongsState.initial(Fresh.yes([])));
+  PaginatedSongsNotifier({this.page = 1}) : super(PaginatedSongsState.initial(Fresh.yes([])));
 
-  int _page = 1;
+    @visibleForTesting
+  int page;
 
   void resetState() {
-    _page = 1;
+    page = 1;
     state = PaginatedSongsState.initial(Fresh.yes([]));
   }
 
@@ -48,11 +49,11 @@ class PaginatedSongsNotifier extends StateNotifier<PaginatedSongsState> {
       state.songs,
       PaginationConfig.itemsPerPage,
     );
-    final failureOrSongs = await getter(_page);
+    final failureOrSongs = await getter(page);
     state = failureOrSongs.fold(
       (l) => PaginatedSongsState.loadFailure(state.songs, l),
       (r) {
-        _page++;
+        page++;
         return PaginatedSongsState.loadSuccess(
           r.copyWith(
             entity: [
