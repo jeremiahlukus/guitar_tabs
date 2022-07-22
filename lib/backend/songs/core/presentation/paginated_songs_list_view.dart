@@ -14,7 +14,8 @@ import 'package:joyful_noise/core/presentation/toasts.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
 
 class PaginatedSongsListView extends ConsumerStatefulWidget {
-  final AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState> paginatedSongsNotifierProvider;
+  final AutoDisposeStateNotifierProvider<PaginatedSongsNotifier,
+      PaginatedSongsState> paginatedSongsNotifierProvider;
   final void Function(WidgetRef ref, BuildContext context) getNextPage;
   final String noResultsMessage;
 
@@ -29,8 +30,11 @@ class PaginatedSongsListView extends ConsumerStatefulWidget {
   PaginatedSongsListViewState createState() => PaginatedSongsListViewState();
 }
 
-class PaginatedSongsListViewState extends ConsumerState<PaginatedSongsListView> {
-  bool canLoadNextPage = false;
+class PaginatedSongsListViewState
+    extends ConsumerState<PaginatedSongsListView> {
+  @visibleForTesting
+  static bool canLoadNextPage = false;
+
   bool hasAlreadyShownNoConnectionToast = false;
 
   @override

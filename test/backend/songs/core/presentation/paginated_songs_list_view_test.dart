@@ -1,10 +1,8 @@
 // Package imports:
-import 'package:dartz/dartz.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/core/presentation/no_results_display.dart';
 import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
@@ -15,13 +13,24 @@ import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../_mocks/song/mock_song.dart';
+
 class MockPaginatedSongsNotifier extends Mock
     implements PaginatedSongsNotifier {}
 
 class MockFavoriteSongRepository extends Mock
     implements FavoriteSongsRepository {}
 
+class MockWidgetRef extends Mock implements WidgetRef {}
+
+class MockBuildContext extends Mock implements BuildContext {}
+
 void main() {
+  setUpAll(() {
+    registerFallbackValue(MockWidgetRef());
+    registerFallbackValue(MockBuildContext());
+  });
+
   group('PaginatedSongsListView', () {
     final songList = [
       const Song(
@@ -139,5 +148,79 @@ void main() {
 
       expect(noResultsDisplayMessageFinder, findsOneWidget);
     });
+
+    testWidgets('ScrollNotification when screen is scrolled calls getNextPage',
+        (tester) async {
+      final mockPaginatedSongsNotifier = PaginatedSongsNotifier();
+
+      final paginatedSongsNotifierProvider = AutoDisposeStateNotifierProvider<
+          PaginatedSongsNotifier, PaginatedSongsState>(
+        (ref) => mockPaginatedSongsNotifier,
+      );
+
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+
+      final favoriteSongNotifier =
+          FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      final mockFavoriteSongsNotifierProvider =
+          AutoDisposeStateNotifierProvider<FavoriteSongNotifier,
+              PaginatedSongsState>(
+        (ref) {
+          return favoriteSongNotifier;
+        },
+      );
+
+      final mock = MyFunctionMock();
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            favoriteSongsNotifierProvider
+                .overrideWithProvider(mockFavoriteSongsNotifierProvider)
+          ],
+          child: MaterialApp(
+            home: Scaffold(
+              body: PaginatedSongsListView(
+                paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
+                getNextPage: mock,
+                noResultsMessage:
+                    "That's everything we could find in your favorite songs right now.",
+              ),
+            ),
+          ),
+        ),
+      );
+      final songs = [mockSong(1)];
+      for (var i = 2; i < 100; i++) {
+        songs.add(mockSong(i));
+      }
+      // ignore: invalid_use_of_protected_member
+      mockPaginatedSongsNotifier.state = PaginatedSongsState.loadSuccess(
+        Fresh.yes(songs, isNextPageAvailable: true),
+        isNextPageAvailable: true,
+      );
+
+      // ignore: invalid_use_of_protected_member
+      favoriteSongNotifier.state = PaginatedSongsState.loadSuccess(
+        Fresh.yes(songs, isNextPageAvailable: true),
+        isNextPageAvailable: true,
+      );
+
+      await tester.pump();
+      expect(PaginatedSongsListViewState.canLoadNextPage, true);
+      verifyNever(() => mock(any(), any()));
+      await tester.drag(find.byType(ListView), const Offset(0, -8000));
+      await tester.pump(const Duration(seconds: 1));
+      verify(() => mock(any(), any())).called(1);
+      expect(PaginatedSongsListViewState.canLoadNextPage, false);
+    });
   });
 }
+
+// ignore: one_member_abstracts
+abstract class MyFunction {
+  void call(WidgetRef ref, BuildContext context);
+}
+
+class MyFunctionMock extends Mock implements MyFunction {}
