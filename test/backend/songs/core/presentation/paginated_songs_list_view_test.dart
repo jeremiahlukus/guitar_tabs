@@ -25,7 +25,21 @@ class MockPaginatedSongsNotifier extends Mock implements PaginatedSongsNotifier 
 
 class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository {}
 
+class MockWidgetRef extends Mock implements WidgetRef {}
+
+class MockBuildContext extends Mock implements BuildContext {}
+
+abstract class MyFunction {
+  void call(WidgetRef ref, BuildContext context);
+}
+
+class MyFunctionMock extends Mock implements MyFunction {}
+
 void main() {
+  setUpAll(() {
+    registerFallbackValue(MockWidgetRef());
+    registerFallbackValue(MockBuildContext());
+  });
   group('PaginatedSongsListView', () {
     final songList = [
       mockSong(1),
@@ -400,6 +414,8 @@ void main() {
         },
       );
 
+      final mock = MyFunctionMock();
+
       await tester.pumpWidget(
         ProviderScope(
           overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
@@ -407,14 +423,13 @@ void main() {
             home: Scaffold(
               body: PaginatedSongsListView(
                 paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
-                getNextPage: (ref, context) {},
+                getNextPage: mock,
                 noResultsMessage: "That's everything we could find in your favorite songs right now.",
               ),
             ),
           ),
         ),
       );
-
       final songs = [mockSong(1)];
       for (var i = 2; i < 100; i++) {
         songs.add(mockSong(i));
@@ -433,8 +448,10 @@ void main() {
 
       await tester.pump();
       expect(PaginatedSongsListViewState.canLoadNextPage, true);
+      verifyNever(() => mock(any(), any()));
       await tester.drag(find.byType(ListView), const Offset(0, -8000));
       await tester.pump(const Duration(seconds: 1));
+      verify(() => mock(any(), any())).called(1);
       expect(PaginatedSongsListViewState.canLoadNextPage, false);
     });
   });
