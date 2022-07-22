@@ -41,6 +41,23 @@ void main() {
       });
 
       test(
+          'returns a BackendHeaders object with a non-null link if the response headers map contains a Link property that contains rel="last" and url is localhost',
+          () {
+        final response = Response<dynamic>(
+          requestOptions: RequestOptions(path: ''),
+          headers: Headers.fromMap({
+            'link': ['http://127.0.0.1:3000/api/v1/user_favorite_songs?page=10&rel="last"']
+          }),
+        );
+        final backendHeaders = BackendHeaders.parse(response);
+        final actualData = backendHeaders.link;
+        // ignore: prefer_void_to_null
+        const expectedData = isNotNull;
+
+        expect(actualData, expectedData);
+      });
+
+      test(
           'returns a BackendHeaders object with a non-null link if the response headers map contains a Link property that does not contains rel="last"  and response request options contain a url',
           () {
         final response = Response<dynamic>(

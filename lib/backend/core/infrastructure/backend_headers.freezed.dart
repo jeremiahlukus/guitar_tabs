@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'backend_headers.dart';
@@ -11,30 +12,11 @@ part of 'backend_headers.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 BackendHeaders _$BackendHeadersFromJson(Map<String, dynamic> json) {
   return _BackendHeaders.fromJson(json);
 }
-
-/// @nodoc
-class _$BackendHeadersTearOff {
-  const _$BackendHeadersTearOff();
-
-  _BackendHeaders call({String? etag, PaginationLink? link}) {
-    return _BackendHeaders(
-      etag: etag,
-      link: link,
-    );
-  }
-
-  BackendHeaders fromJson(Map<String, Object?> json) {
-    return BackendHeaders.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $BackendHeaders = _$BackendHeadersTearOff();
 
 /// @nodoc
 mixin _$BackendHeaders {
@@ -93,9 +75,9 @@ class _$BackendHeadersCopyWithImpl<$Res> implements $BackendHeadersCopyWith<$Res
 }
 
 /// @nodoc
-abstract class _$BackendHeadersCopyWith<$Res> implements $BackendHeadersCopyWith<$Res> {
-  factory _$BackendHeadersCopyWith(_BackendHeaders value, $Res Function(_BackendHeaders) then) =
-      __$BackendHeadersCopyWithImpl<$Res>;
+abstract class _$$_BackendHeadersCopyWith<$Res> implements $BackendHeadersCopyWith<$Res> {
+  factory _$$_BackendHeadersCopyWith(_$_BackendHeaders value, $Res Function(_$_BackendHeaders) then) =
+      __$$_BackendHeadersCopyWithImpl<$Res>;
   @override
   $Res call({String? etag, PaginationLink? link});
 
@@ -104,20 +86,20 @@ abstract class _$BackendHeadersCopyWith<$Res> implements $BackendHeadersCopyWith
 }
 
 /// @nodoc
-class __$BackendHeadersCopyWithImpl<$Res> extends _$BackendHeadersCopyWithImpl<$Res>
-    implements _$BackendHeadersCopyWith<$Res> {
-  __$BackendHeadersCopyWithImpl(_BackendHeaders _value, $Res Function(_BackendHeaders) _then)
-      : super(_value, (v) => _then(v as _BackendHeaders));
+class __$$_BackendHeadersCopyWithImpl<$Res> extends _$BackendHeadersCopyWithImpl<$Res>
+    implements _$$_BackendHeadersCopyWith<$Res> {
+  __$$_BackendHeadersCopyWithImpl(_$_BackendHeaders _value, $Res Function(_$_BackendHeaders) _then)
+      : super(_value, (v) => _then(v as _$_BackendHeaders));
 
   @override
-  _BackendHeaders get _value => super._value as _BackendHeaders;
+  _$_BackendHeaders get _value => super._value as _$_BackendHeaders;
 
   @override
   $Res call({
     Object? etag = freezed,
     Object? link = freezed,
   }) {
-    return _then(_BackendHeaders(
+    return _then(_$_BackendHeaders(
       etag: etag == freezed
           ? _value.etag
           : etag // ignore: cast_nullable_to_non_nullable
@@ -131,7 +113,8 @@ class __$BackendHeadersCopyWithImpl<$Res> extends _$BackendHeadersCopyWithImpl<$
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_BackendHeaders extends _BackendHeaders {
   const _$_BackendHeaders({this.etag, this.link}) : super._();
 
@@ -151,19 +134,20 @@ class _$_BackendHeaders extends _BackendHeaders {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _BackendHeaders &&
+            other is _$_BackendHeaders &&
             const DeepCollectionEquality().equals(other.etag, etag) &&
             const DeepCollectionEquality().equals(other.link, link));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(etag), const DeepCollectionEquality().hash(link));
 
   @JsonKey(ignore: true)
   @override
-  _$BackendHeadersCopyWith<_BackendHeaders> get copyWith =>
-      __$BackendHeadersCopyWithImpl<_BackendHeaders>(this, _$identity);
+  _$$_BackendHeadersCopyWith<_$_BackendHeaders> get copyWith =>
+      __$$_BackendHeadersCopyWithImpl<_$_BackendHeaders>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -172,41 +156,23 @@ class _$_BackendHeaders extends _BackendHeaders {
 }
 
 abstract class _BackendHeaders extends BackendHeaders {
-  const factory _BackendHeaders({String? etag, PaginationLink? link}) = _$_BackendHeaders;
+  const factory _BackendHeaders({final String? etag, final PaginationLink? link}) = _$_BackendHeaders;
   const _BackendHeaders._() : super._();
 
   factory _BackendHeaders.fromJson(Map<String, dynamic> json) = _$_BackendHeaders.fromJson;
 
   @override
-  String? get etag;
+  String? get etag => throw _privateConstructorUsedError;
   @override
-  PaginationLink? get link;
+  PaginationLink? get link => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$BackendHeadersCopyWith<_BackendHeaders> get copyWith => throw _privateConstructorUsedError;
+  _$$_BackendHeadersCopyWith<_$_BackendHeaders> get copyWith => throw _privateConstructorUsedError;
 }
 
 PaginationLink _$PaginationLinkFromJson(Map<String, dynamic> json) {
   return _PaginationLink.fromJson(json);
 }
-
-/// @nodoc
-class _$PaginationLinkTearOff {
-  const _$PaginationLinkTearOff();
-
-  _PaginationLink call({required int maxPage}) {
-    return _PaginationLink(
-      maxPage: maxPage,
-    );
-  }
-
-  PaginationLink fromJson(Map<String, Object?> json) {
-    return PaginationLink.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $PaginationLink = _$PaginationLinkTearOff();
 
 /// @nodoc
 mixin _$PaginationLink {
@@ -246,27 +212,27 @@ class _$PaginationLinkCopyWithImpl<$Res> implements $PaginationLinkCopyWith<$Res
 }
 
 /// @nodoc
-abstract class _$PaginationLinkCopyWith<$Res> implements $PaginationLinkCopyWith<$Res> {
-  factory _$PaginationLinkCopyWith(_PaginationLink value, $Res Function(_PaginationLink) then) =
-      __$PaginationLinkCopyWithImpl<$Res>;
+abstract class _$$_PaginationLinkCopyWith<$Res> implements $PaginationLinkCopyWith<$Res> {
+  factory _$$_PaginationLinkCopyWith(_$_PaginationLink value, $Res Function(_$_PaginationLink) then) =
+      __$$_PaginationLinkCopyWithImpl<$Res>;
   @override
   $Res call({int maxPage});
 }
 
 /// @nodoc
-class __$PaginationLinkCopyWithImpl<$Res> extends _$PaginationLinkCopyWithImpl<$Res>
-    implements _$PaginationLinkCopyWith<$Res> {
-  __$PaginationLinkCopyWithImpl(_PaginationLink _value, $Res Function(_PaginationLink) _then)
-      : super(_value, (v) => _then(v as _PaginationLink));
+class __$$_PaginationLinkCopyWithImpl<$Res> extends _$PaginationLinkCopyWithImpl<$Res>
+    implements _$$_PaginationLinkCopyWith<$Res> {
+  __$$_PaginationLinkCopyWithImpl(_$_PaginationLink _value, $Res Function(_$_PaginationLink) _then)
+      : super(_value, (v) => _then(v as _$_PaginationLink));
 
   @override
-  _PaginationLink get _value => super._value as _PaginationLink;
+  _$_PaginationLink get _value => super._value as _$_PaginationLink;
 
   @override
   $Res call({
     Object? maxPage = freezed,
   }) {
-    return _then(_PaginationLink(
+    return _then(_$_PaginationLink(
       maxPage: maxPage == freezed
           ? _value.maxPage
           : maxPage // ignore: cast_nullable_to_non_nullable
@@ -294,17 +260,18 @@ class _$_PaginationLink extends _PaginationLink {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PaginationLink &&
+            other is _$_PaginationLink &&
             const DeepCollectionEquality().equals(other.maxPage, maxPage));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(maxPage));
 
   @JsonKey(ignore: true)
   @override
-  _$PaginationLinkCopyWith<_PaginationLink> get copyWith =>
-      __$PaginationLinkCopyWithImpl<_PaginationLink>(this, _$identity);
+  _$$_PaginationLinkCopyWith<_$_PaginationLink> get copyWith =>
+      __$$_PaginationLinkCopyWithImpl<_$_PaginationLink>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -313,14 +280,14 @@ class _$_PaginationLink extends _PaginationLink {
 }
 
 abstract class _PaginationLink extends PaginationLink {
-  const factory _PaginationLink({required int maxPage}) = _$_PaginationLink;
+  const factory _PaginationLink({required final int maxPage}) = _$_PaginationLink;
   const _PaginationLink._() : super._();
 
   factory _PaginationLink.fromJson(Map<String, dynamic> json) = _$_PaginationLink.fromJson;
 
   @override
-  int get maxPage;
+  int get maxPage => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PaginationLinkCopyWith<_PaginationLink> get copyWith => throw _privateConstructorUsedError;
+  _$$_PaginationLinkCopyWith<_$_PaginationLink> get copyWith => throw _privateConstructorUsedError;
 }
