@@ -44,9 +44,12 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
       ),
       body: PaginatedSongsListView(
         paginatedSongsNotifierProvider: favoriteSongsNotifierProvider,
+        // coverage:ignore-start
         getNextPage: (ref, context) {
+          // unable to mock this so this line isn't tested.
           ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
         },
+        // coverage:ignore-end
         noResultsMessage: "That's everything we could find in your favorite songs right now.",
       ),
     );

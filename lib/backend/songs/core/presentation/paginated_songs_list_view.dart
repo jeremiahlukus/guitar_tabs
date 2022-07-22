@@ -34,6 +34,12 @@ class PaginatedSongsListViewState extends ConsumerState<PaginatedSongsListView> 
   bool hasAlreadyShownNoConnectionToast = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ref.listen<PaginatedSongsState>(
       widget.paginatedSongsNotifierProvider,
@@ -97,9 +103,13 @@ class _PaginatedListView extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return state.map(
+          // coverage:ignore-start
+          // this cannot be reached since the init item count is 0
+          // there is an expect to not have a SongTile
           initial: (_) => SongTile(
             song: _.songs.entity[index],
           ),
+          // coverage:ignore-end
           loadInProgress: (_) {
             if (index < _.songs.entity.length) {
               return SongTile(
