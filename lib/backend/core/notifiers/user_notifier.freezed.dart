@@ -247,7 +247,7 @@ abstract class _Initial extends UserState {
   const _Initial._() : super._();
 
   @override
-  User get user => throw _privateConstructorUsedError;
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith => throw _privateConstructorUsedError;
@@ -395,7 +395,7 @@ abstract class _LoadInProgress extends UserState {
   const _LoadInProgress._() : super._();
 
   @override
-  User get user => throw _privateConstructorUsedError;
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith => throw _privateConstructorUsedError;
@@ -543,7 +543,7 @@ abstract class _LoadSuccess extends UserState {
   const _LoadSuccess._() : super._();
 
   @override
-  User get user => throw _privateConstructorUsedError;
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith => throw _privateConstructorUsedError;
@@ -708,8 +708,8 @@ abstract class _LoadFailure extends UserState {
   const _LoadFailure._() : super._();
 
   @override
-  User get user => throw _privateConstructorUsedError;
-  BackendFailure get failure => throw _privateConstructorUsedError;
+  User get user;
+  BackendFailure get failure;
   @override
   @JsonKey(ignore: true)
   _$$_LoadFailureCopyWith<_$_LoadFailure> get copyWith => throw _privateConstructorUsedError;

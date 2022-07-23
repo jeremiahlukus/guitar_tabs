@@ -100,32 +100,14 @@ void main() {
         final FavoriteSongsLocalService mockFavoriteSongLocalService = MockFavoriteSongLocalService();
         const page = 1;
 
-        const songDTO = [
-          SongDTO(
-            id: 1,
-            title: 'title',
-            lyrics: 'lyrics',
-            category: 'category',
-            artist: 'artist',
-            chords: 'chords',
-            url: 'url',
-            songNumber: 1,
-          ),
-          SongDTO(
-            id: 2,
-            title: 'title 2',
-            lyrics: 'lyrics 2',
-            category: 'category 2',
-            artist: 'artist 2',
-            chords: 'chords 2',
-            url: 'url 2',
-            songNumber: 2,
-          )
+        final songDTO = [
+          mockSongDTO(1),
+          mockSongDTO(2),
         ];
 
         when(() => mockFavoriteSongRemoteService.getFavoriteSongsPage(page)).thenAnswer((_) {
           return Future.value(
-            const RemoteResponse<List<SongDTO>>.withNewData(songDTO),
+            RemoteResponse<List<SongDTO>>.withNewData(songDTO),
           );
         });
 
