@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
 import 'package:joyful_noise/backend/songs/searched_songs/infrastructure/searched_songs_repository.dart';
 

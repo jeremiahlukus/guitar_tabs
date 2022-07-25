@@ -1,7 +1,5 @@
 // Package imports:
 import 'package:dartz/dartz.dart';
-import 'package:joyful_noise/backend/songs/searched_songs/infrastructure/searched_songs_repository.dart';
-import 'package:joyful_noise/backend/songs/searched_songs/notifiers/searched_songs_notifier.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -9,6 +7,8 @@ import 'package:test/test.dart';
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
+import 'package:joyful_noise/backend/songs/searched_songs/infrastructure/searched_songs_repository.dart';
+import 'package:joyful_noise/backend/songs/searched_songs/notifiers/searched_songs_notifier.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 
 class MockSearchedSongRepository extends Mock implements SearchedSongsRepository {}
