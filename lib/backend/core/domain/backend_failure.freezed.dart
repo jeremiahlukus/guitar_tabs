@@ -214,9 +214,9 @@ abstract class _Api extends BackendFailure {
   const _Api._() : super._();
 
   @override
-  int? get errorCode => throw _privateConstructorUsedError;
+  int? get errorCode;
   @override
-  String? get message => throw _privateConstructorUsedError;
+  String? get message;
   @override
   @JsonKey(ignore: true)
   _$$_ApiCopyWith<_$_Api> get copyWith => throw _privateConstructorUsedError;

@@ -11,7 +11,6 @@ import 'package:joyful_noise/backend/songs/core/presentation/failure_song_tile.d
 import 'package:joyful_noise/backend/songs/core/presentation/loading_song_tile.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_tile.dart';
 import 'package:joyful_noise/core/presentation/toasts.dart';
-import 'package:joyful_noise/core/shared/providers.dart';
 
 class PaginatedSongsListView extends ConsumerStatefulWidget {
   final AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState> paginatedSongsNotifierProvider;
@@ -58,7 +57,7 @@ class PaginatedSongsListViewState extends ConsumerState<PaginatedSongsListView> 
         );
       },
     );
-    final state = ref.watch(favoriteSongsNotifierProvider);
+    final state = ref.watch(widget.paginatedSongsNotifierProvider);
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         final metrics = notification.metrics;
@@ -74,7 +73,7 @@ class PaginatedSongsListViewState extends ConsumerState<PaginatedSongsListView> 
         loadSuccess: (songs, _) => songs.entity.isEmpty,
         orElse: () => false,
       )
-          ? const NoResultsDisplay(message: 'There was nothing to be found :(')
+          ? NoResultsDisplay(message: widget.noResultsMessage)
           : _PaginatedListView(state: state),
     );
   }

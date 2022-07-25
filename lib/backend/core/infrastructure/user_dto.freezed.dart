@@ -133,7 +133,9 @@ class _$_UserDTO extends _UserDTO {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserDTOToJson(this);
+    return _$$_UserDTOToJson(
+      this,
+    );
   }
 }
 
@@ -145,10 +147,10 @@ abstract class _UserDTO extends UserDTO {
   factory _UserDTO.fromJson(Map<String, dynamic> json) = _$_UserDTO.fromJson;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override // ignore: invalid_annotation_target
   @JsonKey(name: 'avatar_url')
-  String get avatarUrl => throw _privateConstructorUsedError;
+  String get avatarUrl;
   @override
   @JsonKey(ignore: true)
   _$$_UserDTOCopyWith<_$_UserDTO> get copyWith => throw _privateConstructorUsedError;

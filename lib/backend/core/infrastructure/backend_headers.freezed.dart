@@ -151,7 +151,9 @@ class _$_BackendHeaders extends _BackendHeaders {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BackendHeadersToJson(this);
+    return _$$_BackendHeadersToJson(
+      this,
+    );
   }
 }
 
@@ -162,9 +164,9 @@ abstract class _BackendHeaders extends BackendHeaders {
   factory _BackendHeaders.fromJson(Map<String, dynamic> json) = _$_BackendHeaders.fromJson;
 
   @override
-  String? get etag => throw _privateConstructorUsedError;
+  String? get etag;
   @override
-  PaginationLink? get link => throw _privateConstructorUsedError;
+  PaginationLink? get link;
   @override
   @JsonKey(ignore: true)
   _$$_BackendHeadersCopyWith<_$_BackendHeaders> get copyWith => throw _privateConstructorUsedError;
@@ -275,7 +277,9 @@ class _$_PaginationLink extends _PaginationLink {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaginationLinkToJson(this);
+    return _$$_PaginationLinkToJson(
+      this,
+    );
   }
 }
 
@@ -286,7 +290,7 @@ abstract class _PaginationLink extends PaginationLink {
   factory _PaginationLink.fromJson(Map<String, dynamic> json) = _$_PaginationLink.fromJson;
 
   @override
-  int get maxPage => throw _privateConstructorUsedError;
+  int get maxPage;
   @override
   @JsonKey(ignore: true)
   _$$_PaginationLinkCopyWith<_$_PaginationLink> get copyWith => throw _privateConstructorUsedError;

@@ -565,7 +565,7 @@ abstract class _Failure extends AuthState {
   const factory _Failure(final AuthFailure failure) = _$_Failure;
   const _Failure._() : super._();
 
-  AuthFailure get failure => throw _privateConstructorUsedError;
+  AuthFailure get failure;
   @JsonKey(ignore: true)
   _$$_FailureCopyWith<_$_Failure> get copyWith => throw _privateConstructorUsedError;
 }

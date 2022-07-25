@@ -255,7 +255,9 @@ class _$_SongDTO extends _SongDTO {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SongDTOToJson(this);
+    return _$$_SongDTOToJson(
+      this,
+    );
   }
 }
 
@@ -274,25 +276,25 @@ abstract class _SongDTO extends SongDTO {
   factory _SongDTO.fromJson(Map<String, dynamic> json) = _$_SongDTO.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
-  String get lyrics => throw _privateConstructorUsedError;
+  String get lyrics;
   @override
-  String get category => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(fromJson: _nullFromJson)
-  String get artist => throw _privateConstructorUsedError;
+  String get category;
   @override
   @JsonKey(fromJson: _nullFromJson)
-  String get chords => throw _privateConstructorUsedError;
+  String get artist;
   @override
   @JsonKey(fromJson: _nullFromJson)
-  String get url => throw _privateConstructorUsedError;
+  String get chords;
+  @override
+  @JsonKey(fromJson: _nullFromJson)
+  String get url;
   @override
   @JsonKey(name: 'song_number')
-  int get songNumber => throw _privateConstructorUsedError;
+  int get songNumber;
   @override
   @JsonKey(ignore: true)
   _$$_SongDTOCopyWith<_$_SongDTO> get copyWith => throw _privateConstructorUsedError;

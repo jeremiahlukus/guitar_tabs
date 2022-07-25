@@ -249,7 +249,7 @@ abstract class _Initial extends PaginatedSongsState {
   const _Initial._() : super._();
 
   @override
-  Fresh<List<Song>> get songs => throw _privateConstructorUsedError;
+  Fresh<List<Song>> get songs;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith => throw _privateConstructorUsedError;
@@ -406,8 +406,8 @@ abstract class _LoadInProgress extends PaginatedSongsState {
   const _LoadInProgress._() : super._();
 
   @override
-  Fresh<List<Song>> get songs => throw _privateConstructorUsedError;
-  int get itemsPerPage => throw _privateConstructorUsedError;
+  Fresh<List<Song>> get songs;
+  int get itemsPerPage;
   @override
   @JsonKey(ignore: true)
   _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith => throw _privateConstructorUsedError;
@@ -564,8 +564,8 @@ abstract class _LoadSuccess extends PaginatedSongsState {
   const _LoadSuccess._() : super._();
 
   @override
-  Fresh<List<Song>> get songs => throw _privateConstructorUsedError;
-  bool get isNextPageAvailable => throw _privateConstructorUsedError;
+  Fresh<List<Song>> get songs;
+  bool get isNextPageAvailable;
   @override
   @JsonKey(ignore: true)
   _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith => throw _privateConstructorUsedError;
@@ -730,8 +730,8 @@ abstract class _LoadFailure extends PaginatedSongsState {
   const _LoadFailure._() : super._();
 
   @override
-  Fresh<List<Song>> get songs => throw _privateConstructorUsedError;
-  BackendFailure get failure => throw _privateConstructorUsedError;
+  Fresh<List<Song>> get songs;
+  BackendFailure get failure;
   @override
   @JsonKey(ignore: true)
   _$$_LoadFailureCopyWith<_$_LoadFailure> get copyWith => throw _privateConstructorUsedError;
