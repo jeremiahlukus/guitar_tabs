@@ -12,10 +12,7 @@ import 'package:joyful_noise/core/shared/providers.dart';
 
 class SearchedSongsPage extends ConsumerStatefulWidget {
   final String searchTerm;
-  const SearchedSongsPage({
-    Key? key,
-    required this.searchTerm,
-  }) : super(key: key);
+  const SearchedSongsPage({Key? key, required this.searchTerm}) : super(key: key);
 
   @override
   SearchedSongsPageState createState() => SearchedSongsPageState();

@@ -42,6 +42,8 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
               FontAwesomeIcons.arrowRightFromBracket,
             ),
           ),
+          // coverage:ignore-start
+          // TODO(jeremiah): This is temp until i implement searchbar
           IconButton(
             onPressed: () {
               AutoRouter.of(context).push(
@@ -52,6 +54,7 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
               FontAwesomeIcons.magnifyingGlass,
             ),
           )
+          // coverage:ignore-end
         ],
       ),
       body: PaginatedSongsListView(
