@@ -20,7 +20,8 @@ class SearchedSongsRemoteService extends SongsPageRemoteService {
     int page,
   ) async =>
       super.getPage(
-        requestUri: Uri.https(
+        // TODO(jeremiah): http for local https for real
+        requestUri: Uri.http(
           BackendConstants().backendBaseUrl(),
           '/api/v1/songs',
           <String, dynamic>{

@@ -59,10 +59,12 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           child: MaterialApp(
-            home: PaginatedSongsListView(
-              paginatedSongsNotifierProvider: paginatedSongsNotificerProvider,
-              getNextPage: (ref, context) {},
-              noResultsMessage: "That's everything we could find in your favorite songs right now.",
+            home: Scaffold(
+              body: PaginatedSongsListView(
+                paginatedSongsNotifierProvider: paginatedSongsNotificerProvider,
+                getNextPage: (ref, context) {},
+                noResultsMessage: "That's everything we could find in your favorite songs right now.",
+              ),
             ),
           ),
         ),
@@ -138,7 +140,8 @@ void main() {
 
       expect(noResultsDisplayFinder, findsOneWidget);
 
-      final noResultsDisplayMessageFinder = find.text('There was nothing to be found :(');
+      final noResultsDisplayMessageFinder =
+          find.text("That's everything we could find in your favorite songs right now.");
 
       expect(noResultsDisplayMessageFinder, findsOneWidget);
     });

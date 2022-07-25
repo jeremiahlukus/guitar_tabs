@@ -9,6 +9,9 @@ import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorit
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_remote_service.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_song_notifier.dart';
+import 'package:joyful_noise/backend/songs/searched_songs/infrastructure/searched_songs_remote_service.dart';
+import 'package:joyful_noise/backend/songs/searched_songs/infrastructure/searched_songs_repository.dart';
+import 'package:joyful_noise/backend/songs/searched_songs/notifiers/searched_songs_notifier.dart';
 import 'package:joyful_noise/core/infrastructure/sembast_database.dart';
 
 final sembastProvider = Provider((ref) => SembastDatabase());
@@ -42,4 +45,19 @@ final favoriteSongsNotifierProvider = StateNotifierProvider.autoDispose<Favorite
   (ref) => FavoriteSongNotifier(ref.watch(favoriteSongsRepositoryProvider)),
 );
 
-// searched songs
+final searchedSongsRemoteServiceProvider = Provider(
+  (ref) => SearchedSongsRemoteService(
+    ref.watch(dioProvider),
+    ref.watch(backendHeadersCacheProvider),
+  ),
+);
+
+final searchedSongsRepositoryProvider = Provider(
+  (ref) => SearchedSongsRepository(
+    ref.watch(searchedSongsRemoteServiceProvider),
+  ),
+);
+
+final searchedSongsNotifierProvider = StateNotifierProvider.autoDispose<SearchedSongsNotifier, PaginatedSongsState>(
+  (ref) => SearchedSongsNotifier(ref.watch(searchedSongsRepositoryProvider)),
+);
