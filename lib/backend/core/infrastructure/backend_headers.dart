@@ -18,8 +18,6 @@ class BackendHeaders with _$BackendHeaders {
 
   factory BackendHeaders.parse(Response response) {
     final link = response.headers.map['Link']?[0];
-    //final etag = response.requestOptions.uri.toString().contains('songs') ? '' : response.headers.map['ETag']?[0];
-    logger.e(response.headers.map['ETag']?[0]);
     return BackendHeaders(
       etag: response.headers.map['ETag']?[0],
       link: link == null
@@ -59,13 +57,13 @@ class PaginationLink with _$PaginationLink {
           RegExp(r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)')
               .stringMatch(value);
 
+      logger.e("YOOOO");
       return int.parse(Uri.parse(uriString!).queryParameters['page']!);
     } catch (e) {
       // This happens when the url is 127.0.0.1:3000, should never happen in real life
       // but in case it ever does...
       return int.parse(
-        value.replaceAll('<', '').replaceAll('>', '').split(';').first.split('page=').last.split('&').first,
-      );
+          value.replaceAll('<', '').replaceAll('>', '').split(';').first.split('page=').elementAt(1).split('&').first);
     }
   }
 }

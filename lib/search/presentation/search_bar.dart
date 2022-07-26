@@ -43,6 +43,16 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
     super.dispose();
   }
 
+  void rebuildAllChildren(BuildContext context) {
+    void rebuild(Element el) {
+      el
+        ..markNeedsBuild()
+        ..visitChildren(rebuild);
+    }
+
+    (context as Element).visitChildren(rebuild);
+  }
+
   @override
   Widget build(BuildContext context) {
     void pushPageAndPutFirstInHistory(String searchTerm) {
