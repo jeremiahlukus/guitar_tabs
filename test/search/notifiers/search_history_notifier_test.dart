@@ -76,14 +76,18 @@ void main() {
     });
 
     group('.watchSearchTerms', () {
-      test('returns normally data when success', () async {
+      test('returns a data when success', () async {
         final SearchHistoryRepository mockSearchHistoryRepository = MockSearchHistoryRepository();
-
         when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+        final searchHistoryNotifier = SearchHistoryNotifier(mockSearchHistoryRepository);
 
-        final favoriteSongNotifier = SearchHistoryNotifier(mockFavoriteSongRepository);
+        expect(searchHistoryNotifier.watchSearchTerms, returnsNormally);
 
-        expect(favoriteSongNotifier.watchSearchTerms, returnsNormally);
+        // ignore: invalid_use_of_protected_member
+        final actualStateResult = searchHistoryNotifier.state;
+        // final expectedStateResultMatcher = equals(const AsyncValue.data('data'));
+        // expect(actualStateResult, expectedStateResultMatcher);
+        expect(actualStateResult.asData, ['query1', 'query2']);
       });
     });
   });
