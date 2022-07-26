@@ -1,6 +1,7 @@
 // Package imports:
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 part 'backend_headers.freezed.dart';
 part 'backend_headers.g.dart';
@@ -17,6 +18,8 @@ class BackendHeaders with _$BackendHeaders {
 
   factory BackendHeaders.parse(Response response) {
     final link = response.headers.map['Link']?[0];
+    //final etag = response.requestOptions.uri.toString().contains('songs') ? '' : response.headers.map['ETag']?[0];
+    logger.e(response.headers.map['ETag']?[0]);
     return BackendHeaders(
       etag: response.headers.map['ETag']?[0],
       link: link == null
