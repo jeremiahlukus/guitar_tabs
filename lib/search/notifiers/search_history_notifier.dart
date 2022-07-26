@@ -10,9 +10,11 @@ class SearchHistoryNotifier extends StateNotifier<AsyncValue<List<String>>> {
   void watchSearchTerms({String? filter}) {
     _repository.watchSearchTerms(filter: filter).listen(
       (data) {
+        logger.e('Success');
         state = AsyncValue.data(data);
       },
       onError: (Object error) {
+        logger.e('Error');
         state = AsyncValue.error(error);
       },
     );

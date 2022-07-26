@@ -76,18 +76,32 @@ void main() {
     });
 
     group('.watchSearchTerms', () {
-      test('returns a data when success', () async {
+      test('returns AsyncValue.data when success', () async {
         final SearchHistoryRepository mockSearchHistoryRepository = MockSearchHistoryRepository();
         when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
         final searchHistoryNotifier = SearchHistoryNotifier(mockSearchHistoryRepository);
 
-        expect(searchHistoryNotifier.watchSearchTerms, returnsNormally);
+        // ignore: cascade_invocations
+        searchHistoryNotifier.watchSearchTerms();
 
         // ignore: invalid_use_of_protected_member
         final actualStateResult = searchHistoryNotifier.state;
-        // final expectedStateResultMatcher = equals(const AsyncValue.data('data'));
-        // expect(actualStateResult, expectedStateResultMatcher);
-        expect(actualStateResult.asData, ['query1', 'query2']);
+        final expectedStateResultMatcher = equals(const AsyncValue.data('data'));
+        expect(actualStateResult, expectedStateResultMatcher);
+        // expect(actualStateResult.asData, ['query1', 'query2']);
+      });
+      test('returns a AsyncValue.error when error', () async {
+        final SearchHistoryRepository mockSearchHistoryRepository = MockSearchHistoryRepository();
+        when(mockSearchHistoryRepository.watchSearchTerms).thenThrow(Error);
+        final searchHistoryNotifier = SearchHistoryNotifier(mockSearchHistoryRepository);
+        // ignore: cascade_invocations
+        searchHistoryNotifier.watchSearchTerms();
+
+        // ignore: invalid_use_of_protected_member
+        final actualStateResult = searchHistoryNotifier.state;
+        final expectedStateResultMatcher = equals(const AsyncValue<dynamic>.error(Error));
+        expect(actualStateResult, expectedStateResultMatcher);
+        // expect(actualStateResult.asData, ['query1', 'query2']);
       });
     });
   });
