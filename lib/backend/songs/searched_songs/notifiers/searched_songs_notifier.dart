@@ -14,7 +14,6 @@ class SearchedSongsNotifier extends PaginatedSongsNotifier {
   }
 
   Future<void> getNextSearchedSongsPage(String query) async {
-    logger.e('Im CALLED!!!!!!!!');
     await super.getNextPage((page) => _repository.getSearchedSongsPage(query, page));
   }
 }
