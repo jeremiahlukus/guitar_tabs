@@ -20,9 +20,7 @@ class SearchedSongsRepository {
     int page,
   ) async {
     try {
-      logger.e("message");
       final remotePageItems = await _remoteService.getSearchedSongsPage(query, page);
-      logger.e(remotePageItems);
       return right(
         remotePageItems.maybeWhen(
           withNewData: (data, maxPage) => Fresh.yes(

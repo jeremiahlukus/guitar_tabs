@@ -2,7 +2,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';
 
 class SearchHistoryNotifier extends StateNotifier<AsyncValue<List<String>>> {

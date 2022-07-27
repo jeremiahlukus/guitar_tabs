@@ -1,11 +1,17 @@
+// Dart imports:
 import 'dart:io';
 
-import 'package:auto_route/auto_route.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:joyful_noise/search/shared/providers.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+
+// Project imports:
+import 'package:joyful_noise/search/shared/providers.dart';
 
 class SearchBar extends ConsumerStatefulWidget {
   final Widget body;
