@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
@@ -25,8 +26,11 @@ class SearchedSongsPage extends ConsumerStatefulWidget {
 class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
   @override
   void initState() {
-    ref.read(searchedSongsNotifierProvider.notifier).getFirstSearchedSongsPage(widget.searchTerm);
     super.initState();
+    Future.microtask(() {
+      ref.refresh(searchedSongsNotifierProvider);
+      ref.read(searchedSongsNotifierProvider.notifier).getFirstSearchedSongsPage(widget.searchTerm);
+    });
   }
 
   static const signOutButtonKey = ValueKey('signOutButtonKey');

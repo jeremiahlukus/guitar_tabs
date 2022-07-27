@@ -57,7 +57,6 @@ class PaginationLink with _$PaginationLink {
           RegExp(r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)')
               .stringMatch(value);
 
-      logger.e("YOOOO");
       return int.parse(Uri.parse(uriString!).queryParameters['page']!);
     } catch (e) {
       // This happens when the url is 127.0.0.1:3000, should never happen in real life

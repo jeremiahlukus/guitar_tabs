@@ -35,7 +35,9 @@ class SongsPageRemoteService {
               )
             : Options(),
       );
-      logger.e(response.headers);
+      logger.e('===========================');
+      logger.e(response);
+      logger.e('===========================');
       if (response.statusCode == 304) {
         return RemoteResponse.notModified(maxPage: previousHeaders?.link?.maxPage ?? 0);
       } else if (response.statusCode == 200) {
