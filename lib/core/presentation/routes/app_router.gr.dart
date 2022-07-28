@@ -10,17 +10,22 @@
 //
 // ignore_for_file: type=lint
 
-import 'package:auto_route/auto_route.dart' as _i7;
+// Flutter imports:
 import 'package:flutter/material.dart' as _i8;
 
+// Package imports:
+import 'package:auto_route/auto_route.dart' as _i7;
+
+// Project imports:
 import '../../../auth/presentation/authorization_page.dart' as _i3;
 import '../../../auth/presentation/sign_in_page.dart' as _i2;
 import '../../../backend/dashboard/presentation/dashboard_page.dart' as _i4;
+import '../../../splash/presentation/splash_page.dart' as _i1;
+
 import '../../../backend/songs/favorite_songs/presentation/favorite_songs_page.dart'
     as _i5;
 import '../../../backend/songs/searched_songs/presentation/searched_songs_page.dart'
     as _i6;
-import '../../../splash/presentation/splash_page.dart' as _i1;
 
 class AppRouter extends _i7.RootStackRouter {
   AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])

@@ -1,6 +1,5 @@
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 // Project imports:
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';

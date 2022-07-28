@@ -21,14 +21,12 @@ mixin _$Fresh<T> {
   bool? get isNextPageAvailable => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $FreshCopyWith<T, Fresh<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  $FreshCopyWith<T, Fresh<T>> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $FreshCopyWith<T, $Res> {
-  factory $FreshCopyWith(Fresh<T> value, $Res Function(Fresh<T>) then) =
-      _$FreshCopyWithImpl<T, $Res>;
+  factory $FreshCopyWith(Fresh<T> value, $Res Function(Fresh<T>) then) = _$FreshCopyWithImpl<T, $Res>;
   $Res call({T entity, bool isFresh, bool? isNextPageAvailable});
 }
 
@@ -65,16 +63,13 @@ class _$FreshCopyWithImpl<T, $Res> implements $FreshCopyWith<T, $Res> {
 
 /// @nodoc
 abstract class _$$_FreshCopyWith<T, $Res> implements $FreshCopyWith<T, $Res> {
-  factory _$$_FreshCopyWith(
-          _$_Fresh<T> value, $Res Function(_$_Fresh<T>) then) =
-      __$$_FreshCopyWithImpl<T, $Res>;
+  factory _$$_FreshCopyWith(_$_Fresh<T> value, $Res Function(_$_Fresh<T>) then) = __$$_FreshCopyWithImpl<T, $Res>;
   @override
   $Res call({T entity, bool isFresh, bool? isNextPageAvailable});
 }
 
 /// @nodoc
-class __$$_FreshCopyWithImpl<T, $Res> extends _$FreshCopyWithImpl<T, $Res>
-    implements _$$_FreshCopyWith<T, $Res> {
+class __$$_FreshCopyWithImpl<T, $Res> extends _$FreshCopyWithImpl<T, $Res> implements _$$_FreshCopyWith<T, $Res> {
   __$$_FreshCopyWithImpl(_$_Fresh<T> _value, $Res Function(_$_Fresh<T>) _then)
       : super(_value, (v) => _then(v as _$_Fresh<T>));
 
@@ -107,9 +102,7 @@ class __$$_FreshCopyWithImpl<T, $Res> extends _$FreshCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$_Fresh<T> extends _Fresh<T> {
-  const _$_Fresh(
-      {required this.entity, required this.isFresh, this.isNextPageAvailable})
-      : super._();
+  const _$_Fresh({required this.entity, required this.isFresh, this.isNextPageAvailable}) : super._();
 
   @override
   final T entity;
@@ -130,28 +123,21 @@ class _$_Fresh<T> extends _Fresh<T> {
             other is _$_Fresh<T> &&
             const DeepCollectionEquality().equals(other.entity, entity) &&
             const DeepCollectionEquality().equals(other.isFresh, isFresh) &&
-            const DeepCollectionEquality()
-                .equals(other.isNextPageAvailable, isNextPageAvailable));
+            const DeepCollectionEquality().equals(other.isNextPageAvailable, isNextPageAvailable));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(entity),
-      const DeepCollectionEquality().hash(isFresh),
-      const DeepCollectionEquality().hash(isNextPageAvailable));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(entity),
+      const DeepCollectionEquality().hash(isFresh), const DeepCollectionEquality().hash(isNextPageAvailable));
 
   @JsonKey(ignore: true)
   @override
-  _$$_FreshCopyWith<T, _$_Fresh<T>> get copyWith =>
-      __$$_FreshCopyWithImpl<T, _$_Fresh<T>>(this, _$identity);
+  _$$_FreshCopyWith<T, _$_Fresh<T>> get copyWith => __$$_FreshCopyWithImpl<T, _$_Fresh<T>>(this, _$identity);
 }
 
 abstract class _Fresh<T> extends Fresh<T> {
-  const factory _Fresh(
-      {required final T entity,
-      required final bool isFresh,
-      final bool? isNextPageAvailable}) = _$_Fresh<T>;
+  const factory _Fresh({required final T entity, required final bool isFresh, final bool? isNextPageAvailable}) =
+      _$_Fresh<T>;
   const _Fresh._() : super._();
 
   @override
@@ -162,6 +148,5 @@ abstract class _Fresh<T> extends Fresh<T> {
   bool? get isNextPageAvailable;
   @override
   @JsonKey(ignore: true)
-  _$$_FreshCopyWith<T, _$_Fresh<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_FreshCopyWith<T, _$_Fresh<T>> get copyWith => throw _privateConstructorUsedError;
 }
