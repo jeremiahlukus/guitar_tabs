@@ -1,9 +1,14 @@
-import 'package:auto_route/auto_route.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:mocktail/mocktail.dart';
+
+// Project imports:
+import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
