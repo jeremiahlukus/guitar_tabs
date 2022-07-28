@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 // Project imports:
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';
@@ -9,7 +10,7 @@ class SearchHistoryNotifier extends StateNotifier<AsyncValue<List<String>>> {
 
   SearchHistoryNotifier(this._repository) : super(const AsyncValue.loading());
 
-  void watchSearchTerms({String? filter}) {
+  Future<void> watchSearchTerms({String? filter}) async {
     _repository.watchSearchTerms(filter: filter).listen(
       (data) {
         state = AsyncValue.data(data);
