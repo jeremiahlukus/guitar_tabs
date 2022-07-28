@@ -90,12 +90,12 @@ void main() {
 
         final searchHistoryNotifier = SearchHistoryNotifier(mockSearchHistoryRepository);
 
-        await searchHistoryNotifier.watchSearchTerms(filter: 'query').catchError((dynamic _) {
-          // ignore: invalid_use_of_protected_member
-          final actualStateResult = searchHistoryNotifier.state;
-          final expectedStateResultMatcher = equals(const AsyncLoading<List<String>>());
-          expect(actualStateResult, expectedStateResultMatcher);
-        });
+        await searchHistoryNotifier.watchSearchTerms(filter: 'query');
+
+        // ignore: invalid_use_of_protected_member
+        final actualStateResult = searchHistoryNotifier.state;
+        final expectedStateResultMatcher = equals(const AsyncValue<List<String>>.error('Error'));
+        expect(actualStateResult, expectedStateResultMatcher);
       });
     });
   });
