@@ -35,6 +35,7 @@ class SearchBar extends ConsumerStatefulWidget {
 
 class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*/ {
   late FloatingSearchBarController _controller;
+  static const signOutButtonKey = ValueKey('signOutButtonKey');
 
   @override
   void initState() {
@@ -114,6 +115,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
         ),
         FloatingSearchBarAction(
           child: IconButton(
+            key: signOutButtonKey,
             icon: const Icon(FontAwesomeIcons.arrowRightFromBracket),
             splashRadius: 18,
             onPressed: () {

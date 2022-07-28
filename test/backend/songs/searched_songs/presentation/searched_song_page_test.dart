@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
@@ -129,7 +131,52 @@ void main() {
 
       expect(finder, findsOneWidget);
     });
+    testWidgets('clicking on Sign Out button triggers provided AuthNotifiers signOut method', (tester) async {
+      final mockSearchedSongRepository = MockSearchedSongsRepository();
+      final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final AuthNotifier mockAuthNotifier = MockAuthNotifier();
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
 
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+      when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
+      when(() => mockSearchedSongRepository.getSearchedSongsPage('query', 1)).thenAnswer(
+        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+      );
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures, cascade_invocations
+      router.push(SearchedSongsRoute(searchTerm: 'query'));
+
+      await pumpRouterApp(
+        tester,
+        [
+          userNotifierProvider.overrideWithValue(
+            fakeUserNotifier,
+          ),
+          authNotifierProvider.overrideWithValue(
+            mockAuthNotifier,
+          ),
+          searchedSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
+      );
+
+      await tester.pump(Duration.zero);
+
+      final signOutButtonFinder = find.byKey(const ValueKey('signOutButtonKey'));
+
+      await tester.tap(signOutButtonFinder);
+
+      await tester.pump();
+
+      verify(mockAuthNotifier.signOut).called(1);
+    });
     testWidgets('contains the right noResultsMessage', (tester) async {
       final mockSearchedSongRepository = MockSearchedSongsRepository();
       final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);

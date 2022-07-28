@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
@@ -124,10 +126,12 @@ void main() {
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
       final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
 
-      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
-        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
-      );
+      when(() => mockFavoriteSongRepository.getFavoritePage(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
       when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
 
       // ignore: unawaited_futures
       router.push(const FavoriteSongsRoute());
@@ -148,6 +152,48 @@ void main() {
         paginatedSongsListView.noResultsMessage,
         "That's everything we could find in your favorite songs right now.",
       );
+    });
+
+    testWidgets('clicking on Sign Out button triggers provided AuthNotifiers signOut method', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+      final AuthNotifier mockAuthNotifier = MockAuthNotifier();
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
+      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+      );
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+      when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
+
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          userNotifierProvider.overrideWithValue(
+            fakeUserNotifier,
+          ),
+          authNotifierProvider.overrideWithValue(
+            mockAuthNotifier,
+          ),
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
+      );
+
+      await tester.pump(Duration.zero);
+
+      final signOutButtonFinder = find.byKey(const ValueKey('signOutButtonKey'));
+
+      await tester.tap(signOutButtonFinder);
+
+      await tester.pump();
+
+      verify(mockAuthNotifier.signOut).called(1);
     });
   });
 }
