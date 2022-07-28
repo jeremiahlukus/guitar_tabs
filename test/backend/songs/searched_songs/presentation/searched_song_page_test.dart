@@ -8,6 +8,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:joyful_noise/search/presentation/search_bar.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
@@ -27,6 +28,7 @@ import 'package:joyful_noise/search/infrastructure/search_history_repository.dar
 import 'package:joyful_noise/search/notifiers/search_history_notifier.dart';
 import 'package:joyful_noise/search/shared/providers.dart';
 import '../../../../_mocks/song/mock_song.dart';
+import '../../../../utils/router_test_utils.dart';
 
 class MockSearchedSongsRepository extends Mock implements SearchedSongsRepository {}
 
@@ -52,6 +54,13 @@ class MockAuthNotifier extends Mock implements AuthNotifier {}
 
 class MockSong extends Mock implements Song {}
 
+final mockSearchedSongRepository = MockSearchedSongsRepository();
+final mockSearchHistoryRepository = MockSearchHistoryRepository();
+final mockObserver = MockNavigatorObserver();
+final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);
+final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+final router = AppRouter();
+
 void main() {
   setUpAll(() {
     registerFallbackValue(
@@ -64,13 +73,6 @@ void main() {
   });
   group('SearchedSongsPage', () {
     testWidgets('contains the PaginatedSongsListView widget', (tester) async {
-      final mockSearchedSongRepository = MockSearchedSongsRepository();
-      final mockSearchHistoryRepository = MockSearchHistoryRepository();
-      final mockObserver = MockNavigatorObserver();
-      final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-      final router = AppRouter();
-
       when(() => mockSearchedSongRepository.getSearchedSongsPage('query', 1)).thenAnswer(
         (invocation) => Future.value(right(Fresh.yes([mockSong(1)]))),
       );
@@ -82,36 +84,50 @@ void main() {
       // ignore: invalid_use_of_protected_member
       mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            searchedSongsNotifierProvider.overrideWithValue(mockProvider),
-            searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
-          ],
-          child: MaterialApp.router(
-            routerDelegate: AutoRouterDelegate(
-              router,
-              navigatorObservers: () => [mockObserver],
-            ),
-            routeInformationParser: AppRouter().defaultRouteParser(),
-          ),
-        ),
+      await pumpRouterApp(
+        tester,
+        [
+          searchedSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
       );
+
       await tester.pump(Duration.zero);
       await tester.pumpAndSettle();
       final finder = find.byType(PaginatedSongsListView);
 
       expect(finder, findsOneWidget);
     });
+    testWidgets('contains the SearchBar widget', (tester) async {
+      when(() => mockSearchedSongRepository.getSearchedSongsPage('query', 1)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes([mockSong(1)]))),
+      );
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+
+      // ignore: unawaited_futures, cascade_invocations
+      router.push(SearchedSongsRoute(searchTerm: 'query'));
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      await pumpRouterApp(
+        tester,
+        [
+          searchedSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
+      );
+
+      await tester.pump(Duration.zero);
+      await tester.pumpAndSettle();
+      final finder = find.byType(SearchBar);
+
+      expect(finder, findsOneWidget);
+    });
 
     testWidgets('contains the right noResultsMessage', (tester) async {
-      final mockSearchedSongRepository = MockSearchedSongsRepository();
-      final mockSearchHistoryRepository = MockSearchHistoryRepository();
-      final mockObserver = MockNavigatorObserver();
-      final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-      final router = AppRouter();
-
       when(() => mockSearchedSongRepository.getSearchedSongsPage('query', 1)).thenAnswer(
         (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
       );
@@ -123,20 +139,13 @@ void main() {
       // ignore: invalid_use_of_protected_member
       mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            searchedSongsNotifierProvider.overrideWithValue(mockProvider),
-            searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
-          ],
-          child: MaterialApp.router(
-            routerDelegate: AutoRouterDelegate(
-              router,
-              navigatorObservers: () => [mockObserver],
-            ),
-            routeInformationParser: AppRouter().defaultRouteParser(),
-          ),
-        ),
+      await pumpRouterApp(
+        tester,
+        [
+          searchedSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
       );
 
       final finder = find.byType(PaginatedSongsListView);

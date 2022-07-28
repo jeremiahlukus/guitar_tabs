@@ -24,8 +24,6 @@ import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_son
 import 'package:joyful_noise/backend/songs/favorite_songs/presentation/favorite_songs_page.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
-import '../../../../utils/device.dart';
-import '../../../../utils/golden_test_device_scenario.dart';
 
 class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository {}
 
@@ -48,6 +46,16 @@ class MockAuthNotifier extends Mock implements AuthNotifier {}
 class MockSong extends Mock implements Song {}
 
 void main() {
+  setUpAll(() {
+    registerFallbackValue(
+      MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) {
+          return Container();
+        },
+      ),
+    );
+  });
+  
   group('FavoriteSongsPage', () {
     testWidgets('contains the PaginatedSongsListView widget', (tester) async {
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
