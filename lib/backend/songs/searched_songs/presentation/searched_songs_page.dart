@@ -30,7 +30,6 @@ class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
     });
   }
 
-  static const signOutButtonKey = ValueKey('signOutButtonKey');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

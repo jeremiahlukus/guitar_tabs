@@ -31,9 +31,17 @@ mixin _$Song {
 
 /// @nodoc
 abstract class $SongCopyWith<$Res> {
-  factory $SongCopyWith(Song value, $Res Function(Song) then) = _$SongCopyWithImpl<$Res>;
+  factory $SongCopyWith(Song value, $Res Function(Song) then) =
+      _$SongCopyWithImpl<$Res>;
   $Res call(
-      {int id, String title, int songNumber, String lyrics, String category, String artist, String chords, String url});
+      {int id,
+      String title,
+      int songNumber,
+      String lyrics,
+      String category,
+      String artist,
+      String chords,
+      String url});
 }
 
 /// @nodoc
@@ -94,15 +102,25 @@ class _$SongCopyWithImpl<$Res> implements $SongCopyWith<$Res> {
 
 /// @nodoc
 abstract class _$$_SongCopyWith<$Res> implements $SongCopyWith<$Res> {
-  factory _$$_SongCopyWith(_$_Song value, $Res Function(_$_Song) then) = __$$_SongCopyWithImpl<$Res>;
+  factory _$$_SongCopyWith(_$_Song value, $Res Function(_$_Song) then) =
+      __$$_SongCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id, String title, int songNumber, String lyrics, String category, String artist, String chords, String url});
+      {int id,
+      String title,
+      int songNumber,
+      String lyrics,
+      String category,
+      String artist,
+      String chords,
+      String url});
 }
 
 /// @nodoc
-class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res> implements _$$_SongCopyWith<$Res> {
-  __$$_SongCopyWithImpl(_$_Song _value, $Res Function(_$_Song) _then) : super(_value, (v) => _then(v as _$_Song));
+class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res>
+    implements _$$_SongCopyWith<$Res> {
+  __$$_SongCopyWithImpl(_$_Song _value, $Res Function(_$_Song) _then)
+      : super(_value, (v) => _then(v as _$_Song));
 
   @override
   _$_Song get _value => super._value as _$_Song;
@@ -198,7 +216,8 @@ class _$_Song extends _Song {
             other is _$_Song &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.songNumber, songNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.songNumber, songNumber) &&
             const DeepCollectionEquality().equals(other.lyrics, lyrics) &&
             const DeepCollectionEquality().equals(other.category, category) &&
             const DeepCollectionEquality().equals(other.artist, artist) &&
@@ -220,7 +239,8 @@ class _$_Song extends _Song {
 
   @JsonKey(ignore: true)
   @override
-  _$$_SongCopyWith<_$_Song> get copyWith => __$$_SongCopyWithImpl<_$_Song>(this, _$identity);
+  _$$_SongCopyWith<_$_Song> get copyWith =>
+      __$$_SongCopyWithImpl<_$_Song>(this, _$identity);
 }
 
 abstract class _Song extends Song {

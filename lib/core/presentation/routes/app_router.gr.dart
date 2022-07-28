@@ -10,30 +10,31 @@
 //
 // ignore_for_file: type=lint
 
-// Flutter imports:
+import 'package:auto_route/auto_route.dart' as _i7;
 import 'package:flutter/material.dart' as _i8;
 
-// Package imports:
-import 'package:auto_route/auto_route.dart' as _i7;
-
-// Project imports:
 import '../../../auth/presentation/authorization_page.dart' as _i3;
 import '../../../auth/presentation/sign_in_page.dart' as _i2;
 import '../../../backend/dashboard/presentation/dashboard_page.dart' as _i4;
-import '../../../backend/songs/favorite_songs/presentation/favorite_songs_page.dart' as _i5;
-import '../../../backend/songs/searched_songs/presentation/searched_songs_page.dart' as _i6;
+import '../../../backend/songs/favorite_songs/presentation/favorite_songs_page.dart'
+    as _i5;
+import '../../../backend/songs/searched_songs/presentation/searched_songs_page.dart'
+    as _i6;
 import '../../../splash/presentation/splash_page.dart' as _i1;
 
 class AppRouter extends _i7.RootStackRouter {
-  AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey]) : super(navigatorKey);
+  AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, _i7.PageFactory> pagesMap = {
     SplashRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(routeData: routeData, child: const _i1.SplashPage());
+      return _i7.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i1.SplashPage());
     },
     SignInRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(routeData: routeData, child: const _i2.SignInPage());
+      return _i7.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i2.SignInPage());
     },
     AuthorizationRoute.name: (routeData) {
       final args = routeData.argsAs<AuthorizationRouteArgs>();
@@ -42,18 +43,23 @@ class AppRouter extends _i7.RootStackRouter {
           child: _i3.AuthorizationPage(
               key: args.key,
               authorizationUrl: args.authorizationUrl,
-              onAuthorizationCodeRedirectAttempt: args.onAuthorizationCodeRedirectAttempt));
+              onAuthorizationCodeRedirectAttempt:
+                  args.onAuthorizationCodeRedirectAttempt));
     },
     DashboardRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(routeData: routeData, child: const _i4.DashboardPage());
+      return _i7.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i4.DashboardPage());
     },
     FavoriteSongsRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(routeData: routeData, child: const _i5.FavoriteSongsPage());
+      return _i7.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i5.FavoriteSongsPage());
     },
     SearchedSongsRoute.name: (routeData) {
       final args = routeData.argsAs<SearchedSongsRouteArgs>();
       return _i7.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i6.SearchedSongsPage(key: args.key, searchTerm: args.searchTerm));
+          routeData: routeData,
+          child: _i6.SearchedSongsPage(
+              key: args.key, searchTerm: args.searchTerm));
     }
   };
 
@@ -88,20 +94,25 @@ class SignInRoute extends _i7.PageRouteInfo<void> {
 /// [_i3.AuthorizationPage]
 class AuthorizationRoute extends _i7.PageRouteInfo<AuthorizationRouteArgs> {
   AuthorizationRoute(
-      {_i8.Key? key, required Uri authorizationUrl, required void Function(Uri) onAuthorizationCodeRedirectAttempt})
+      {_i8.Key? key,
+      required Uri authorizationUrl,
+      required void Function(Uri) onAuthorizationCodeRedirectAttempt})
       : super(AuthorizationRoute.name,
             path: '/auth',
             args: AuthorizationRouteArgs(
                 key: key,
                 authorizationUrl: authorizationUrl,
-                onAuthorizationCodeRedirectAttempt: onAuthorizationCodeRedirectAttempt));
+                onAuthorizationCodeRedirectAttempt:
+                    onAuthorizationCodeRedirectAttempt));
 
   static const String name = 'AuthorizationRoute';
 }
 
 class AuthorizationRouteArgs {
   const AuthorizationRouteArgs(
-      {this.key, required this.authorizationUrl, required this.onAuthorizationCodeRedirectAttempt});
+      {this.key,
+      required this.authorizationUrl,
+      required this.onAuthorizationCodeRedirectAttempt});
 
   final _i8.Key? key;
 
@@ -126,7 +137,8 @@ class DashboardRoute extends _i7.PageRouteInfo<void> {
 /// generated route for
 /// [_i5.FavoriteSongsPage]
 class FavoriteSongsRoute extends _i7.PageRouteInfo<void> {
-  const FavoriteSongsRoute() : super(FavoriteSongsRoute.name, path: '/favorite_songs');
+  const FavoriteSongsRoute()
+      : super(FavoriteSongsRoute.name, path: '/favorite_songs');
 
   static const String name = 'FavoriteSongsRoute';
 }
@@ -136,7 +148,8 @@ class FavoriteSongsRoute extends _i7.PageRouteInfo<void> {
 class SearchedSongsRoute extends _i7.PageRouteInfo<SearchedSongsRouteArgs> {
   SearchedSongsRoute({_i8.Key? key, required String searchTerm})
       : super(SearchedSongsRoute.name,
-            path: '/searched_songs', args: SearchedSongsRouteArgs(key: key, searchTerm: searchTerm));
+            path: '/searched_songs',
+            args: SearchedSongsRouteArgs(key: key, searchTerm: searchTerm));
 
   static const String name = 'SearchedSongsRoute';
 }

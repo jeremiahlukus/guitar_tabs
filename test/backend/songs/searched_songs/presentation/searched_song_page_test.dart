@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -74,25 +76,15 @@ void main() {
       final mockSearchedSongRepository = MockSearchedSongsRepository();
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
       final mockObserver = MockNavigatorObserver();
-
+      final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
       final router = AppRouter();
+      final navigator = MockNavigator();
+
       when(() => mockSearchedSongRepository.getSearchedSongsPage('query', 1)).thenAnswer(
         (invocation) => Future.value(right(Fresh.yes([mockSong(1)]))),
       );
-
-      final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);
-      final mockSearchedSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<SearchedSongsNotifier, PaginatedSongsState>(
-        (ref) => mockProvider,
-      );
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-
-      final mockSearchHistoryNotifierProvider = StateNotifierProvider<SearchHistoryNotifier, AsyncValue<List<String>>>(
-        (ref) => mockSearchHistoryProvider,
-      );
-
       when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
-      final navigator = MockNavigator();
       when(() => navigator.push(any())).thenAnswer((_) async {});
 
       // ignore: unawaited_futures, cascade_invocations
@@ -123,158 +115,146 @@ void main() {
       expect(finder, findsOneWidget);
     });
 
-    //   testWidgets('contains the right noResultsMessage', (tester) async {
-    //     final mockSearchedSongRepository = MockSearchedSongsRepository();
+    testWidgets('contains the right noResultsMessage', (tester) async {
+      final mockSearchedSongRepository = MockSearchedSongsRepository();
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockObserver = MockNavigatorObserver();
+      final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final navigator = MockNavigator();
 
-    // when(() => mockSearchedSongRepository.getSearchedSongsPage('query', 1)).thenAnswer(
-    //   (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
-    // );
+      when(() => mockSearchedSongRepository.getSearchedSongsPage('query', 1)).thenAnswer(
+        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+      );
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+      when(() => navigator.push(any())).thenAnswer((_) async {});
 
-    //     final mockSearchedSongsNotifierProvider =
-    //         AutoDisposeStateNotifierProvider<SearchedSongsNotifier, PaginatedSongsState>(
-    //       (ref) => SearchedSongsNotifier(mockSearchedSongRepository),
-    //     );
+      // ignore: unawaited_futures, cascade_invocations
+      router.push(SearchedSongsRoute(searchTerm: 'query'));
 
-    //     await tester.pumpWidget(
-    //       ProviderScope(
-    //         overrides: [searchedSongsNotifierProvider.overrideWithProvider(mockSearchedSongsNotifierProvider)],
-    //         child: const MaterialApp(
-    //           home: SearchedSongsPage(
-    //             searchTerm: 'query',
-    //           ),
-    //         ),
-    //       ),
-    //     );
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
 
-    //     final finder = find.byType(PaginatedSongsListView);
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            searchedSongsNotifierProvider.overrideWithValue(mockProvider),
+            searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          ],
+          child: MaterialApp.router(
+            routerDelegate: AutoRouterDelegate(
+              router,
+              navigatorObservers: () => [mockObserver],
+            ),
+            routeInformationParser: AppRouter().defaultRouteParser(),
+          ),
+        ),
+      );
 
-    //     final paginatedSongsListView = finder.evaluate().single.widget as PaginatedSongsListView;
+      final finder = find.byType(PaginatedSongsListView);
 
-    //     expect(
-    //       paginatedSongsListView.noResultsMessage,
-    //       'This is all we could find for your search term.',
-    //     );
-    //   });
-    //   testWidgets("clicking on Sign Out button triggers provided AuthNotifier's signOut method", (tester) async {
-    //     final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
-    //     final AuthNotifier mockAuthNotifier = MockAuthNotifier();
-    //     final mockSearchedSongRepository = MockSearchedSongsRepository();
+      final paginatedSongsListView = finder.evaluate().single.widget as PaginatedSongsListView;
 
-    //     when(() => mockSearchedSongRepository.getSearchedSongsPage('query', 1)).thenAnswer(
-    //       (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
-    //     );
+      expect(
+        paginatedSongsListView.noResultsMessage,
+        'This is all we could find for your search term.',
+      );
+    });
+  });
 
-    //     final mockSearchedSongsNotifierProvider =
-    //         AutoDisposeStateNotifierProvider<SearchedSongsNotifier, PaginatedSongsState>(
-    //       (ref) => SearchedSongsNotifier(mockSearchedSongRepository),
-    //     );
+  group('SearchedSongsPage Golden Test', () {
+    final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
+    final AuthNotifier mockAuthNotifier = MockAuthNotifier();
+    final mockSearchedSongRepository = MockSearchedSongsRepository();
+    final mockSearchHistoryRepository = MockSearchHistoryRepository();
+    final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);
+    final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+    final router = AppRouter();
+    final mockObserver = MockNavigatorObserver();
+    when(() => mockSearchedSongRepository.getSearchedSongsPage(any(), any())).thenAnswer((invocation) {
+      return Future.value(
+        right(
+          Fresh.yes(
+            [
+              const Song(
+                id: 1,
+                title: 'title',
+                songNumber: 1,
+                lyrics: 'lyrics',
+                category: 'category',
+                artist: 'artist',
+                chords: 'chords',
+                url: 'url',
+              ),
+            ],
+          ),
+        ),
+      );
+    });
+    when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+    // router.push(SearchedSongsRoute(searchTerm: 'query'));
+    when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
+    final mockSearchedSongsNotifierProvider =
+        AutoDisposeStateNotifierProvider<SearchedSongsNotifier, PaginatedSongsState>(
+      (ref) => SearchedSongsNotifier(mockSearchedSongRepository),
+    );
 
-    //     when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
+    Widget buildWidgetUnderTest() {
+      router.push(SearchedSongsRoute(
+        searchTerm: 'query',
+      ));
 
-    //     await tester.pumpWidget(
-    //       ProviderScope(
-    //         overrides: [
-    //           userNotifierProvider.overrideWithValue(
-    //             fakeUserNotifier,
-    //           ),
-    //           authNotifierProvider.overrideWithValue(
-    //             mockAuthNotifier,
-    //           ),
-    //           searchedSongsNotifierProvider.overrideWithProvider(mockSearchedSongsNotifierProvider)
-    //         ],
-    //         child: const MaterialApp(
-    //           home: SearchedSongsPage(
-    //             searchTerm: 'query',
-    //           ),
-    //         ),
-    //       ),
-    //     );
+      return ProviderScope(
+        overrides: [
+          userNotifierProvider.overrideWithValue(
+            fakeUserNotifier,
+          ),
+          authNotifierProvider.overrideWithValue(
+            mockAuthNotifier,
+          ),
+          searchedSongsNotifierProvider.overrideWithProvider(mockSearchedSongsNotifierProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        child: MaterialApp.router(
+          routerDelegate: AutoRouterDelegate(
+            router,
+            navigatorObservers: () => [mockObserver],
+            initialDeepLink: DashboardRoute.name,
+          ),
+          routeInformationParser: AppRouter().defaultRouteParser(),
+        ),
+      );
+    }
 
-    //     await tester.pump(Duration.zero);
-
-    //     final signOutButtonFinder = find.byKey(SearchedSongsPageState.signOutButtonKey);
-
-    //     await tester.tap(signOutButtonFinder);
-
-    //     await tester.pump();
-
-    //     verify(mockAuthNotifier.signOut).called(1);
-    //   });
-    // });
-
-    // group('SearchedSongsPage Golden Test', () {
-    //   final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
-    //   final AuthNotifier mockAuthNotifier = MockAuthNotifier();
-    //   final mockSearchedSongRepository = MockSearchedSongsRepository();
-    //   when(() => mockSearchedSongRepository.getSearchedSongsPage('query', 1)).thenAnswer(
-    //     (invocation) => Future.value(
-    //       right(
-    //         Fresh.yes(
-    //           [
-    //             const Song(
-    //               id: 1,
-    //               title: 'title',
-    //               songNumber: 1,
-    //               lyrics: 'lyrics',
-    //               category: 'category',
-    //               artist: 'artist',
-    //               chords: 'chords',
-    //               url: 'url',
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   );
-    //   final mockSearchedSongsNotifierProvider =
-    //       AutoDisposeStateNotifierProvider<SearchedSongsNotifier, PaginatedSongsState>(
-    //     (ref) => SearchedSongsNotifier(mockSearchedSongRepository),
-    //   );
-
-    //   when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-
-    //   Widget buildWidgetUnderTest() => ProviderScope(
-    //         overrides: [
-    //           userNotifierProvider.overrideWithValue(
-    //             fakeUserNotifier,
-    //           ),
-    //           authNotifierProvider.overrideWithValue(
-    //             mockAuthNotifier,
-    //           ),
-    //           searchedSongsNotifierProvider.overrideWithProvider(mockSearchedSongsNotifierProvider)
-    //         ],
-    //         child: const MaterialApp(
-    //           home: SearchedSongsPage(
-    //             searchTerm: 'query',
-    //           ),
-    //         ),
-    //       );
-    //   goldenTest(
-    //     'renders correctly on mobile',
-    //     fileName: 'SearchedSongsPage',
-    //     builder: () => GoldenTestGroup(
-    //       children: [
-    //         GoldenTestDeviceScenario(
-    //           device: Device.smallPhone,
-    //           name: 'golden test SearchedSongsPage on small phone',
-    //           builder: buildWidgetUnderTest,
-    //         ),
-    //         GoldenTestDeviceScenario(
-    //           device: Device.tabletLandscape,
-    //           name: 'golden test SearchedSongsPage on tablet landscape',
-    //           builder: buildWidgetUnderTest,
-    //         ),
-    //         GoldenTestDeviceScenario(
-    //           device: Device.tabletPortrait,
-    //           name: 'golden test SearchedSongsPage on tablet Portrait',
-    //           builder: buildWidgetUnderTest,
-    //         ),
-    //         GoldenTestDeviceScenario(
-    //           name: 'golden test SearchedSongsPage on iphone11',
-    //           builder: buildWidgetUnderTest,
-    //         ),
-    //       ],
-    //     ),
-    //   );
+    goldenTest(
+      'renders correctly on mobile',
+      fileName: 'SearchedSongsPage',
+      builder: () => GoldenTestGroup(
+        children: [
+          GoldenTestDeviceScenario(
+            key: GlobalKey(debugLabel: 'scaffoldKey'),
+            device: Device.smallPhone,
+            name: 'golden test SearchedSongsPage on small phone',
+            builder: buildWidgetUnderTest,
+          ),
+          GoldenTestDeviceScenario(
+            key: GlobalKey(debugLabel: 'scaffoldKeysss'),
+            device: Device.tabletLandscape,
+            name: 'golden test SearchedSongsPage on tablet landscape',
+            builder: buildWidgetUnderTest,
+          ),
+          // GoldenTestDeviceScenario(
+          //   device: Device.tabletPortrait,
+          //   name: 'golden test SearchedSongsPage on tablet Portrait',
+          //   builder: buildWidgetUnderTest,
+          // ),
+          // GoldenTestDeviceScenario(
+          //   name: 'golden test SearchedSongsPage on iphone11',
+          //   builder: buildWidgetUnderTest,
+          // ),
+        ],
+      ),
+    );
   });
 }
