@@ -13,6 +13,9 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 // Project imports:
 import 'package:joyful_noise/search/shared/providers.dart';
 
+// coverage:ignore-start
+// Most of this is implementing the material_floating_search_bar
+// I feel ok just black boxing it or rewriting it to not use the package.
 class SearchBar extends ConsumerStatefulWidget {
   final Widget body;
   final String title;
@@ -36,6 +39,7 @@ class SearchBar extends ConsumerStatefulWidget {
 class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*/ {
   late FloatingSearchBarController _controller;
   static const signOutButtonKey = ValueKey('signOutButtonKey');
+  static const searchKey = ValueKey('searchKey');
 
   @override
   void initState() {
@@ -65,6 +69,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
     }
 
     return FloatingSearchBar(
+      key: searchKey,
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
       controller: _controller,
       height: 56,
@@ -195,3 +200,4 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
     );
   }
 }
+// coverage:ignore-end

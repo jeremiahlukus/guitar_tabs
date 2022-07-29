@@ -33,9 +33,11 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
       body: SearchBar(
         title: 'Favorite Songs',
         hint: 'Search all songs...',
+        // coverage:ignore-start
         onShouldNavigateToResultPage: (searchTerm) {
           AutoRouter.of(context).push(SearchedSongsRoute(searchTerm: searchTerm));
         },
+        // coverage:ignore-end
         onSignOutButtonPressed: () {
           ref.read(authNotifierProvider.notifier).signOut();
         },

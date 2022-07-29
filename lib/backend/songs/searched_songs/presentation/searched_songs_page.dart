@@ -36,12 +36,14 @@ class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
       body: SearchBar(
         title: widget.searchTerm,
         hint: 'Search all songs...',
+        // coverage:ignore-start
         onShouldNavigateToResultPage: (searchTerm) {
           AutoRouter.of(context).pushAndPopUntil(
             SearchedSongsRoute(searchTerm: searchTerm),
             predicate: (route) => route.settings.name == SearchedSongsRoute.name,
           );
         },
+        // coverage:ignore-end
         onSignOutButtonPressed: () {
           ref.read(authNotifierProvider.notifier).signOut();
         },

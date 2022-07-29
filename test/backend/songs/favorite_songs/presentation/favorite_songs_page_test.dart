@@ -1,23 +1,25 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:joyful_noise/auth/shared/providers.dart';
-import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
+import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/core/domain/user.dart';
 import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
 import 'package:joyful_noise/backend/core/notifiers/user_notifier.dart';
+import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_song_notifier.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';
@@ -194,6 +196,53 @@ void main() {
       await tester.pump();
 
       verify(mockAuthNotifier.signOut).called(1);
+    });
+    testWidgets('clicking on Search button navigates to SearchedSongsRoute', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+      final AuthNotifier mockAuthNotifier = MockAuthNotifier();
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
+      final mockObserver = MockNavigatorObserver();
+      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+      );
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+      when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
+
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          userNotifierProvider.overrideWithValue(
+            fakeUserNotifier,
+          ),
+          authNotifierProvider.overrideWithValue(
+            mockAuthNotifier,
+          ),
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
+        mockObserverOverride: mockObserver,
+      );
+
+      await tester.pump(Duration.zero);
+
+      final finder = find.byType(SearchBar);
+      expect(finder, findsOneWidget);
+
+      final searchButtonFinder = find.byKey(const ValueKey('searchKey'));
+      await tester.tap(searchButtonFinder);
+      await tester.pump();
+      verify(() => mockObserver.didPush(any(), any()));
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
+
+      await tester.pumpAndSettle();
+      logger.e(router.current.path);
     });
   });
 }

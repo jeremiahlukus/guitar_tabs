@@ -17,6 +17,7 @@ Future<void> pumpRouterApp(
   List<Override> providers,
   RootStackRouter router, {
   String? initialLink,
+  NavigatorObserver? mockObserverOverride,
 }) {
   final mockObserver = MockNavigatorObserver();
   return tester
@@ -26,7 +27,7 @@ Future<void> pumpRouterApp(
           child: MaterialApp.router(
             routerDelegate: AutoRouterDelegate(
               router,
-              navigatorObservers: () => [mockObserver],
+              navigatorObservers: () => [mockObserverOverride ?? mockObserver],
             ),
             routeInformationParser: AppRouter().defaultRouteParser(),
           ),
