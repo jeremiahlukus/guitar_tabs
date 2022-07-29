@@ -15,7 +15,9 @@ import 'package:joyful_noise/search/shared/providers.dart';
 
 // coverage:ignore-start
 // Most of this is implementing the material_floating_search_bar
-// I feel ok just black boxing it or rewriting it to not use the package.
+// I feel ok just black boxing it
+// I am going to rewite this file without material_floating_search_bar
+// So i dont want to waste the time.
 class SearchBar extends ConsumerStatefulWidget {
   final Widget body;
   final String title;
