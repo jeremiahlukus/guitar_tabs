@@ -8,6 +8,7 @@ import 'package:joyful_noise/backend/songs/core/infrastructure/extensions.dart';
 import 'package:joyful_noise/backend/songs/searched_songs/infrastructure/searched_songs_remote_service.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class SearchedSongsRepository {
   final SearchedSongsRemoteService _remoteService;
@@ -30,6 +31,7 @@ class SearchedSongsRepository {
         ),
       );
     } on RestApiException catch (e) {
+      logger.e(e);
       return left(BackendFailure.api(e.errorCode, ''));
     }
   }

@@ -34,7 +34,7 @@ class SignInPage extends ConsumerWidget {
                   const Center(
                     // TODO(jeremiahlukus): replace with own logo
                     child: FaIcon(
-                      FontAwesomeIcons.gitkraken,
+                      FontAwesomeIcons.guitar,
                       size: 150,
                     ),
                   ),

@@ -2,6 +2,8 @@
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+// Project imports:
+
 part 'backend_headers.freezed.dart';
 part 'backend_headers.g.dart';
 
@@ -61,7 +63,7 @@ class PaginationLink with _$PaginationLink {
       // This happens when the url is 127.0.0.1:3000, should never happen in real life
       // but in case it ever does...
       return int.parse(
-        value.replaceAll('<', '').replaceAll('>', '').split(';').first.split('page=').last.split('&').first,
+        value.replaceAll('<', '').replaceAll('>', '').split(';').first.split('page=').elementAt(1).split('&').first,
       );
     }
   }

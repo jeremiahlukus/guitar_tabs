@@ -18,6 +18,7 @@ class FavoriteSongsRemoteService extends SongsPageRemoteService {
     int page,
   ) async =>
       super.getPage(
+        storeEtag: true,
         // TODO(jeremiah): http for local https for
         requestUri: Uri.http(
           BackendConstants().backendBaseUrl(),

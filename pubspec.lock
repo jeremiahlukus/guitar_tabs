@@ -556,6 +556,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.4"
+  material_floating_search_bar:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: e6956520547001f0554f27d27ea2d46e33575eb1
+      url: "https://github.com/jeremiahlukus/material_floating_search_bar"
+    source: git
+    version: "0.3.8"
   meta:
     dependency: transitive
     description:

@@ -2,13 +2,15 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
+import 'package:joyful_noise/search/presentation/search_bar.dart';
 
 class SearchedSongsPage extends ConsumerStatefulWidget {
   final String searchTerm;
@@ -21,37 +23,40 @@ class SearchedSongsPage extends ConsumerStatefulWidget {
 class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
   @override
   void initState() {
-    ref.read(searchedSongsNotifierProvider.notifier).getFirstSearchedSongsPage(widget.searchTerm);
     super.initState();
+    Future.microtask(() {
+      ref.refresh(searchedSongsNotifierProvider);
+      ref.read(searchedSongsNotifierProvider.notifier).getFirstSearchedSongsPage(widget.searchTerm);
+    });
   }
 
-  static const signOutButtonKey = ValueKey('signOutButtonKey');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.searchTerm),
-        actions: [
-          IconButton(
-            key: signOutButtonKey,
-            onPressed: () {
-              ref.read(authNotifierProvider.notifier).signOut();
-            },
-            icon: const FaIcon(
-              FontAwesomeIcons.arrowRightFromBracket,
-            ),
-          )
-        ],
-      ),
-      body: PaginatedSongsListView(
-        paginatedSongsNotifierProvider: searchedSongsNotifierProvider,
+      body: SearchBar(
+        title: widget.searchTerm,
+        hint: 'Search all songs...',
         // coverage:ignore-start
-        getNextPage: (ref, context) {
-          // unable to mock this so this line isn't tested.
-          ref.read(searchedSongsNotifierProvider.notifier).getNextSearchedSongsPage(widget.searchTerm);
+        onShouldNavigateToResultPage: (searchTerm) {
+          AutoRouter.of(context).pushAndPopUntil(
+            SearchedSongsRoute(searchTerm: searchTerm),
+            predicate: (route) => route.settings.name == SearchedSongsRoute.name,
+          );
         },
         // coverage:ignore-end
-        noResultsMessage: 'This is all we could find for your search term.',
+        onSignOutButtonPressed: () {
+          ref.read(authNotifierProvider.notifier).signOut();
+        },
+        body: PaginatedSongsListView(
+          paginatedSongsNotifierProvider: searchedSongsNotifierProvider,
+          // coverage:ignore-start
+          getNextPage: (ref, context) {
+            // unable to mock this so this line isn't tested.
+            ref.read(searchedSongsNotifierProvider.notifier).getNextSearchedSongsPage(widget.searchTerm);
+          },
+          // coverage:ignore-end
+          noResultsMessage: 'This is all we could find for your search term.',
+        ),
       ),
     );
   }

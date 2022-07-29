@@ -21,17 +21,19 @@ class SongsPageRemoteService {
   Future<RemoteResponse<List<SongDTO>>> getPage({
     required Uri requestUri,
     required List<dynamic> Function(dynamic json) jsonDataSelector,
+    required bool storeEtag,
   }) async {
     final previousHeaders = await _headersCache.getHeaders(requestUri);
 
     try {
       final response = await _dio.getUri<dynamic>(
         requestUri,
-        options: Options(
-          headers: <String, String>{'If-None-Match': previousHeaders?.etag ?? ''},
-        ),
+        options: storeEtag
+            ? Options(
+                headers: <String, String>{'If-None-Match': previousHeaders?.etag ?? ''},
+              )
+            : Options(),
       );
-
       if (response.statusCode == 304) {
         return RemoteResponse.notModified(maxPage: previousHeaders?.link?.maxPage ?? 0);
       } else if (response.statusCode == 200) {

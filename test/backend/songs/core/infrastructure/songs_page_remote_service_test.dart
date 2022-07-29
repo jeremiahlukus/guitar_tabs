@@ -49,6 +49,7 @@ void main() {
         final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
         final actualResult = await songsRemoteService.getPage(
+          storeEtag: true,
           requestUri: Uri.https(
             'example.com',
             '/api/v1/user_favorite_songs',
@@ -97,6 +98,7 @@ void main() {
         final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
         final actualResult = await songsRemoteService.getPage(
+          storeEtag: true,
           requestUri: Uri.https(
             'example.com',
             '/api/v1/user_favorite_songs',
@@ -135,6 +137,7 @@ void main() {
 
         try {
           await songsRemoteService.getPage(
+            storeEtag: true,
             requestUri: Uri.https(
               'example.com',
               '/api/v1/user_favorite_songs',
@@ -172,6 +175,7 @@ void main() {
         final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
         final actualResult = await songsRemoteService.getPage(
+          storeEtag: true,
           requestUri: Uri.https(
             'example.com',
             '/api/v1/user_favorite_songs',
@@ -209,6 +213,7 @@ void main() {
 
         try {
           await songsRemoteService.getPage(
+            storeEtag: true,
             requestUri: Uri.https(
               'example.com',
               '/api/v1/user_favorite_songs',

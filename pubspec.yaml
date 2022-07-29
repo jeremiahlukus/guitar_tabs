@@ -36,6 +36,9 @@ dependencies:
   sembast_web: ^2.0.1+1
   platform: ^3.1.0
   shimmer: ^2.0.0
+  material_floating_search_bar: 
+    git:
+      url: https://github.com/jeremiahlukus/material_floating_search_bar
   
 
 

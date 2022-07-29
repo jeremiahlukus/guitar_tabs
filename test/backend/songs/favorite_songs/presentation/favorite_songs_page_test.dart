@@ -1,10 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Package imports:
-import 'package:alchemist/alchemist.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -12,20 +11,23 @@ import 'package:mocktail/mocktail.dart';
 import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
-import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/core/domain/user.dart';
 import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
 import 'package:joyful_noise/backend/core/notifiers/user_notifier.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
-import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_song_notifier.dart';
-import 'package:joyful_noise/backend/songs/favorite_songs/presentation/favorite_songs_page.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
-import '../../../../utils/device.dart';
-import '../../../../utils/golden_test_device_scenario.dart';
+import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';
+import 'package:joyful_noise/search/notifiers/search_history_notifier.dart';
+import 'package:joyful_noise/search/presentation/search_bar.dart';
+import 'package:joyful_noise/search/shared/providers.dart';
+import '../../../../_mocks/song/mock_song.dart';
+import '../../../../utils/router_test_utils.dart';
 
 class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository {}
 
@@ -45,63 +47,103 @@ class FakeUserNotifier extends UserNotifier {
 
 class MockAuthNotifier extends Mock implements AuthNotifier {}
 
-class MockSong extends Mock implements Song {}
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+
+class MockSearchHistoryRepository extends Mock implements SearchHistoryRepository {}
 
 void main() {
+  setUpAll(() {
+    registerFallbackValue(
+      MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) {
+          return Container();
+        },
+      ),
+    );
+  });
   group('FavoriteSongsPage', () {
     testWidgets('contains the PaginatedSongsListView widget', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
-
-      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
-        (invocation) => Future.value(
-          right(
-            Fresh.yes(
-              [
-                MockSong(),
-              ],
-            ),
-          ),
-        ),
-      );
-
       final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
-      final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) => mockProvider,
-      );
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
-          child: const MaterialApp(
-            home: FavoriteSongsPage(),
-          ),
-        ),
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
       );
 
       final finder = find.byType(PaginatedSongsListView);
 
       expect(finder, findsOneWidget);
     });
+    testWidgets('contains the SearchBar widget', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
+      );
+
+      final finder = find.byType(SearchBar);
+
+      expect(finder, findsOneWidget);
+    });
 
     testWidgets('contains the right noResultsMessage', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
 
-      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
-        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
-      );
+      when(() => mockFavoriteSongRepository.getFavoritePage(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
 
-      final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
-      );
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
-          child: const MaterialApp(
-            home: FavoriteSongsPage(),
-          ),
-        ),
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
       );
 
       final finder = find.byType(PaginatedSongsListView);
@@ -113,42 +155,41 @@ void main() {
         "That's everything we could find in your favorite songs right now.",
       );
     });
-    testWidgets("clicking on Sign Out button triggers provided AuthNotifier's signOut method", (tester) async {
-      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
-      final AuthNotifier mockAuthNotifier = MockAuthNotifier();
-      final mockFavoriteSongRepository = MockFavoriteSongRepository();
 
+    testWidgets('clicking on Sign Out button triggers provided AuthNotifiers signOut method', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+      final AuthNotifier mockAuthNotifier = MockAuthNotifier();
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
       when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
         (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
       );
-
-      final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
-      );
-
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
       when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            userNotifierProvider.overrideWithValue(
-              fakeUserNotifier,
-            ),
-            authNotifierProvider.overrideWithValue(
-              mockAuthNotifier,
-            ),
-            favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)
-          ],
-          child: const MaterialApp(
-            home: FavoriteSongsPage(),
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          userNotifierProvider.overrideWithValue(
+            fakeUserNotifier,
           ),
-        ),
+          authNotifierProvider.overrideWithValue(
+            mockAuthNotifier,
+          ),
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
       );
 
       await tester.pump(Duration.zero);
 
-      final signOutButtonFinder = find.byKey(FavoriteSongsPageState.signOutButtonKey);
+      final signOutButtonFinder = find.byKey(const ValueKey('signOutButtonKey'));
 
       await tester.tap(signOutButtonFinder);
 
@@ -156,79 +197,52 @@ void main() {
 
       verify(mockAuthNotifier.signOut).called(1);
     });
-  });
+    testWidgets('clicking on Search button navigates to SearchedSongsRoute', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+      final AuthNotifier mockAuthNotifier = MockAuthNotifier();
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
+      final mockObserver = MockNavigatorObserver();
+      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+      );
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+      when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
 
-  group('DashboardPage Golden Test', () {
-    final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
-    final AuthNotifier mockAuthNotifier = MockAuthNotifier();
-    final mockFavoriteSongRepository = MockFavoriteSongRepository();
-    when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
-      (invocation) => Future.value(
-        right(
-          Fresh.yes(
-            [
-              const Song(
-                id: 1,
-                title: 'title',
-                songNumber: 1,
-                lyrics: 'lyrics',
-                category: 'category',
-                artist: 'artist',
-                chords: 'chords',
-                url: 'url',
-              ),
-            ],
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          userNotifierProvider.overrideWithValue(
+            fakeUserNotifier,
           ),
-        ),
-      ),
-    );
-    final mockFavoriteSongsNotifierProvider =
-        AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-      (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
-    );
-
-    when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-
-    Widget buildWidgetUnderTest() => ProviderScope(
-          overrides: [
-            userNotifierProvider.overrideWithValue(
-              fakeUserNotifier,
-            ),
-            authNotifierProvider.overrideWithValue(
-              mockAuthNotifier,
-            ),
-            favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)
-          ],
-          child: const MaterialApp(
-            home: FavoriteSongsPage(),
+          authNotifierProvider.overrideWithValue(
+            mockAuthNotifier,
           ),
-        );
-    goldenTest(
-      'renders correctly on mobile',
-      fileName: 'FavoriteSongsPage',
-      builder: () => GoldenTestGroup(
-        children: [
-          GoldenTestDeviceScenario(
-            device: Device.smallPhone,
-            name: 'golden test FavoriteSongsPage on small phone',
-            builder: buildWidgetUnderTest,
-          ),
-          GoldenTestDeviceScenario(
-            device: Device.tabletLandscape,
-            name: 'golden test FavoriteSongsPage on tablet landscape',
-            builder: buildWidgetUnderTest,
-          ),
-          GoldenTestDeviceScenario(
-            device: Device.tabletPortrait,
-            name: 'golden test FavoriteSongsPage on tablet Portrait',
-            builder: buildWidgetUnderTest,
-          ),
-          GoldenTestDeviceScenario(
-            name: 'golden test FavoriteSongsPage on iphone11',
-            builder: buildWidgetUnderTest,
-          ),
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
         ],
-      ),
-    );
+        router,
+        mockObserverOverride: mockObserver,
+      );
+
+      await tester.pump(Duration.zero);
+
+      final finder = find.byType(SearchBar);
+      expect(finder, findsOneWidget);
+
+      final searchButtonFinder = find.byKey(const ValueKey('searchKey'));
+      await tester.tap(searchButtonFinder);
+      await tester.pump();
+      verify(() => mockObserver.didPush(any(), any()));
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
+
+      await tester.pumpAndSettle();
+      logger.e(router.current.path);
+    });
   });
 }
