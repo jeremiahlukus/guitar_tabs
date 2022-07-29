@@ -79,7 +79,7 @@ void main() {
         expect(actualStateResult, const AsyncLoading<List<String>>());
         // ignore: cascade_invocations
         await searchHistoryNotifier.watchSearchTerms(filter: 'query');
-
+        // ignore: invalid_use_of_protected_member
         final actualStateResult2 = searchHistoryNotifier.state;
         expect(actualStateResult2, const TypeMatcher<AsyncData>());
       });
