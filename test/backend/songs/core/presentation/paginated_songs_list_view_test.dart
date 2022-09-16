@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
