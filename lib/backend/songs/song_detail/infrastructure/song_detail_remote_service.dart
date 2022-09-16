@@ -1,0 +1,82 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_base_url.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_headers.dart';
+import 'package:joyful_noise/backend/core/infrastructure/backend_headers_cache.dart';
+import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detail_dto.dart';
+import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
+import 'package:joyful_noise/core/infrastructure/remote_response.dart';
+import 'package:joyful_noise/core/infrastructure/dio_extensions.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
+
+class SongDetailRemoteService {
+  final Dio _dio;
+  final BackendHeadersCache _headersCache;
+
+  SongDetailRemoteService(
+    this._dio,
+    this._headersCache,
+  );
+
+  Future<RemoteResponse<SongDetailDTO>> getFavoriteStatus(int songId) async {
+    final requestUri = Uri.http(
+      BackendConstants().backendBaseUrl(),
+      '/api/v1/user_favorite_songs/${songId.toString()}',
+    );
+
+    final previousHeaders = await _headersCache.getHeaders(requestUri);
+
+    try {
+      final response = await _dio.getUri<dynamic>(requestUri);
+      logger.e(response.statusCode);
+      if (response.statusCode == 200) {
+        final headers = BackendHeaders.parse(response);
+
+        await _headersCache.saveHeaders(requestUri, headers);
+        final dto = SongDetailDTO.fromJson(response.data as Map<String, dynamic>);
+        logger.e(dto.isFavorite);
+        return RemoteResponse.withNewData(dto, maxPage: 0);
+      } else {
+        throw RestApiException(response.statusCode);
+      }
+    } on DioError catch (e) {
+      if (e.isNoConnectionError) {
+        return const RemoteResponse.noConnection();
+      } else if (e.response != null) {
+        throw RestApiException(e.response?.statusCode);
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  /// Returns `null` if there's no Internet connection.
+  Future<Unit?> switchFavoriteStatus(
+    String songId, {
+    required bool isCurrentlyStarred,
+  }) async {
+    final requestUri = Uri.https(
+      BackendConstants().backendBaseUrl(),
+      '/api/v1/songs/$songId',
+    );
+
+    try {
+      final response =
+          await (isCurrentlyStarred ? _dio.deleteUri<dynamic>(requestUri) : _dio.postUri<dynamic>(requestUri));
+
+      if (response.statusCode == 204) {
+        return unit;
+      } else {
+        throw RestApiException(response.statusCode);
+      }
+    } on DioError catch (e) {
+      if (e.isNoConnectionError) {
+        return null;
+      } else if (e.response != null) {
+        throw RestApiException(e.response?.statusCode);
+      } else {
+        rethrow;
+      }
+    }
+  }
+}
