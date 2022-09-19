@@ -13,7 +13,9 @@ part 'song_detail_dto.g.dart';
 class SongDetailDTO with _$SongDetailDTO {
   const SongDetailDTO._();
   const factory SongDetailDTO({
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'song_id') required String songId,
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'is_favorite') required bool isFavorite,
   }) = _SongDetailDTO;
 

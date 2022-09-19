@@ -27,8 +27,6 @@ class SongDetailRemoteService {
       '/api/v1/user_favorite_songs/${songId.toString()}',
     );
 
-    final previousHeaders = await _headersCache.getHeaders(requestUri);
-
     try {
       final response = await _dio.getUri<dynamic>(requestUri);
       logger.e(response.statusCode);
