@@ -106,7 +106,7 @@ Widget buildWidgetUnderTest() {
       routerDelegate: AutoRouterDelegate(
         router,
         navigatorObservers: () => [mockObserver],
-        initialDeepLink: DashboardRoute.name,
+        initialDeepLink: FavoriteSongsRoute.name,
       ),
       routeInformationParser: AppRouter().defaultRouteParser(),
     ),

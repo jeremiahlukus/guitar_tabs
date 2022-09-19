@@ -20,8 +20,9 @@ SongDetailDTO _$SongDetailDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SongDetailDTO {
+// ignore: invalid_annotation_target
   @JsonKey(name: 'song_id')
-  String get songId => throw _privateConstructorUsedError;
+  String get songId => throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'is_favorite')
   bool get isFavorite => throw _privateConstructorUsedError;
 
@@ -107,9 +108,11 @@ class _$_SongDetailDTO extends _SongDetailDTO {
 
   factory _$_SongDetailDTO.fromJson(Map<String, dynamic> json) => _$$_SongDetailDTOFromJson(json);
 
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'song_id')
   final String songId;
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'is_favorite')
   final bool isFavorite;
@@ -154,10 +157,10 @@ abstract class _SongDetailDTO extends SongDetailDTO {
 
   factory _SongDetailDTO.fromJson(Map<String, dynamic> json) = _$_SongDetailDTO.fromJson;
 
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'song_id')
   String get songId;
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'is_favorite')
   bool get isFavorite;
   @override
