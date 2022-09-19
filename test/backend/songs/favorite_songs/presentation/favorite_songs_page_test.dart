@@ -242,7 +242,6 @@ void main() {
       await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
 
       await tester.pumpAndSettle();
-      logger.e(router.current.path);
     });
   });
 }
