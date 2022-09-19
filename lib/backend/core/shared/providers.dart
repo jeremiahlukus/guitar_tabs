@@ -20,7 +20,6 @@ import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detai
 import 'package:joyful_noise/backend/songs/song_detail/notifiers/song_detail_notifier.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
 
-
 final backendHeadersCacheProvider = Provider(
   (ref) => BackendHeadersCache(ref.watch(sembastProvider)),
 );

@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
-import 'package:joyful_noise/core/shared/providers.dart';
 
 class FailureSongTile extends ConsumerWidget {
   final BackendFailure backendFailure;

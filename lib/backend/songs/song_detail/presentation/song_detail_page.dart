@@ -2,19 +2,12 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:auto_route/auto_route.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shimmer/shimmer.dart';
 
 // Project imports:
-import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
-import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
-import 'package:joyful_noise/core/shared/providers.dart';
-import 'package:joyful_noise/search/presentation/search_bar.dart';
-import 'package:shimmer/shimmer.dart';
 
 class SongDetailPage extends ConsumerStatefulWidget {
   final Song song;

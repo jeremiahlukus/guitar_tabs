@@ -21,34 +21,24 @@ mixin _$SongDetailState {
   TResult when<TResult extends Object?>({
     required TResult Function(bool hasFavoriteStatusChanged) initial,
     required TResult Function(bool hasFavoriteStatusChanged) loadInProgress,
-    required TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)
-        loadSuccess,
-    required TResult Function(
-            BackendFailure failure, bool hasFavoriteStatusChanged)
-        loadFailure,
+    required TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged) loadSuccess,
+    required TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool hasFavoriteStatusChanged)? initial,
     TResult Function(bool hasFavoriteStatusChanged)? loadInProgress,
-    TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)?
-        loadSuccess,
-    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)?
-        loadFailure,
+    TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)? loadSuccess,
+    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool hasFavoriteStatusChanged)? initial,
     TResult Function(bool hasFavoriteStatusChanged)? loadInProgress,
-    TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)?
-        loadSuccess,
-    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)?
-        loadFailure,
+    TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)? loadSuccess,
+    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)? loadFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,21 +69,18 @@ mixin _$SongDetailState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SongDetailStateCopyWith<SongDetailState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $SongDetailStateCopyWith<SongDetailState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SongDetailStateCopyWith<$Res> {
-  factory $SongDetailStateCopyWith(
-          SongDetailState value, $Res Function(SongDetailState) then) =
+  factory $SongDetailStateCopyWith(SongDetailState value, $Res Function(SongDetailState) then) =
       _$SongDetailStateCopyWithImpl<$Res>;
   $Res call({bool hasFavoriteStatusChanged});
 }
 
 /// @nodoc
-class _$SongDetailStateCopyWithImpl<$Res>
-    implements $SongDetailStateCopyWith<$Res> {
+class _$SongDetailStateCopyWithImpl<$Res> implements $SongDetailStateCopyWith<$Res> {
   _$SongDetailStateCopyWithImpl(this._value, this._then);
 
   final SongDetailState _value;
@@ -114,18 +101,14 @@ class _$SongDetailStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res>
-    implements $SongDetailStateCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$_InitialCopyWith<$Res> implements $SongDetailStateCopyWith<$Res> {
+  factory _$$_InitialCopyWith(_$_Initial value, $Res Function(_$_Initial) then) = __$$_InitialCopyWithImpl<$Res>;
   @override
   $Res call({bool hasFavoriteStatusChanged});
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res> extends _$SongDetailStateCopyWithImpl<$Res>
-    implements _$$_InitialCopyWith<$Res> {
+class __$$_InitialCopyWithImpl<$Res> extends _$SongDetailStateCopyWithImpl<$Res> implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, (v) => _then(v as _$_Initial));
 
@@ -164,30 +147,23 @@ class _$_Initial extends _Initial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initial &&
-            const DeepCollectionEquality().equals(
-                other.hasFavoriteStatusChanged, hasFavoriteStatusChanged));
+            const DeepCollectionEquality().equals(other.hasFavoriteStatusChanged, hasFavoriteStatusChanged));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(hasFavoriteStatusChanged));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(hasFavoriteStatusChanged));
 
   @JsonKey(ignore: true)
   @override
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
+  _$$_InitialCopyWith<_$_Initial> get copyWith => __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool hasFavoriteStatusChanged) initial,
     required TResult Function(bool hasFavoriteStatusChanged) loadInProgress,
-    required TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)
-        loadSuccess,
-    required TResult Function(
-            BackendFailure failure, bool hasFavoriteStatusChanged)
-        loadFailure,
+    required TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged) loadSuccess,
+    required TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged) loadFailure,
   }) {
     return initial(hasFavoriteStatusChanged);
   }
@@ -197,11 +173,8 @@ class _$_Initial extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool hasFavoriteStatusChanged)? initial,
     TResult Function(bool hasFavoriteStatusChanged)? loadInProgress,
-    TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)?
-        loadSuccess,
-    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)?
-        loadFailure,
+    TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)? loadSuccess,
+    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)? loadFailure,
   }) {
     return initial?.call(hasFavoriteStatusChanged);
   }
@@ -211,11 +184,8 @@ class _$_Initial extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool hasFavoriteStatusChanged)? initial,
     TResult Function(bool hasFavoriteStatusChanged)? loadInProgress,
-    TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)?
-        loadSuccess,
-    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)?
-        loadFailure,
+    TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)? loadSuccess,
+    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)? loadFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -270,26 +240,21 @@ abstract class _Initial extends SongDetailState {
   bool get hasFavoriteStatusChanged;
   @override
   @JsonKey(ignore: true)
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_InitialCopyWith<_$_Initial> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadInProgressCopyWith<$Res>
-    implements $SongDetailStateCopyWith<$Res> {
-  factory _$$_LoadInProgressCopyWith(
-          _$_LoadInProgress value, $Res Function(_$_LoadInProgress) then) =
+abstract class _$$_LoadInProgressCopyWith<$Res> implements $SongDetailStateCopyWith<$Res> {
+  factory _$$_LoadInProgressCopyWith(_$_LoadInProgress value, $Res Function(_$_LoadInProgress) then) =
       __$$_LoadInProgressCopyWithImpl<$Res>;
   @override
   $Res call({bool hasFavoriteStatusChanged});
 }
 
 /// @nodoc
-class __$$_LoadInProgressCopyWithImpl<$Res>
-    extends _$SongDetailStateCopyWithImpl<$Res>
+class __$$_LoadInProgressCopyWithImpl<$Res> extends _$SongDetailStateCopyWithImpl<$Res>
     implements _$$_LoadInProgressCopyWith<$Res> {
-  __$$_LoadInProgressCopyWithImpl(
-      _$_LoadInProgress _value, $Res Function(_$_LoadInProgress) _then)
+  __$$_LoadInProgressCopyWithImpl(_$_LoadInProgress _value, $Res Function(_$_LoadInProgress) _then)
       : super(_value, (v) => _then(v as _$_LoadInProgress));
 
   @override
@@ -327,13 +292,11 @@ class _$_LoadInProgress extends _LoadInProgress {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadInProgress &&
-            const DeepCollectionEquality().equals(
-                other.hasFavoriteStatusChanged, hasFavoriteStatusChanged));
+            const DeepCollectionEquality().equals(other.hasFavoriteStatusChanged, hasFavoriteStatusChanged));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(hasFavoriteStatusChanged));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(hasFavoriteStatusChanged));
 
   @JsonKey(ignore: true)
   @override
@@ -345,12 +308,8 @@ class _$_LoadInProgress extends _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function(bool hasFavoriteStatusChanged) initial,
     required TResult Function(bool hasFavoriteStatusChanged) loadInProgress,
-    required TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)
-        loadSuccess,
-    required TResult Function(
-            BackendFailure failure, bool hasFavoriteStatusChanged)
-        loadFailure,
+    required TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged) loadSuccess,
+    required TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged) loadFailure,
   }) {
     return loadInProgress(hasFavoriteStatusChanged);
   }
@@ -360,11 +319,8 @@ class _$_LoadInProgress extends _LoadInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool hasFavoriteStatusChanged)? initial,
     TResult Function(bool hasFavoriteStatusChanged)? loadInProgress,
-    TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)?
-        loadSuccess,
-    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)?
-        loadFailure,
+    TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)? loadSuccess,
+    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)? loadFailure,
   }) {
     return loadInProgress?.call(hasFavoriteStatusChanged);
   }
@@ -374,11 +330,8 @@ class _$_LoadInProgress extends _LoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool hasFavoriteStatusChanged)? initial,
     TResult Function(bool hasFavoriteStatusChanged)? loadInProgress,
-    TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)?
-        loadSuccess,
-    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)?
-        loadFailure,
+    TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)? loadSuccess,
+    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -426,23 +379,19 @@ class _$_LoadInProgress extends _LoadInProgress {
 }
 
 abstract class _LoadInProgress extends SongDetailState {
-  const factory _LoadInProgress({final bool hasFavoriteStatusChanged}) =
-      _$_LoadInProgress;
+  const factory _LoadInProgress({final bool hasFavoriteStatusChanged}) = _$_LoadInProgress;
   const _LoadInProgress._() : super._();
 
   @override
   bool get hasFavoriteStatusChanged;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadSuccessCopyWith<$Res>
-    implements $SongDetailStateCopyWith<$Res> {
-  factory _$$_LoadSuccessCopyWith(
-          _$_LoadSuccess value, $Res Function(_$_LoadSuccess) then) =
+abstract class _$$_LoadSuccessCopyWith<$Res> implements $SongDetailStateCopyWith<$Res> {
+  factory _$$_LoadSuccessCopyWith(_$_LoadSuccess value, $Res Function(_$_LoadSuccess) then) =
       __$$_LoadSuccessCopyWithImpl<$Res>;
   @override
   $Res call({Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged});
@@ -451,11 +400,9 @@ abstract class _$$_LoadSuccessCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoadSuccessCopyWithImpl<$Res>
-    extends _$SongDetailStateCopyWithImpl<$Res>
+class __$$_LoadSuccessCopyWithImpl<$Res> extends _$SongDetailStateCopyWithImpl<$Res>
     implements _$$_LoadSuccessCopyWith<$Res> {
-  __$$_LoadSuccessCopyWithImpl(
-      _$_LoadSuccess _value, $Res Function(_$_LoadSuccess) _then)
+  __$$_LoadSuccessCopyWithImpl(_$_LoadSuccess _value, $Res Function(_$_LoadSuccess) _then)
       : super(_value, (v) => _then(v as _$_LoadSuccess));
 
   @override
@@ -489,8 +436,7 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadSuccess extends _LoadSuccess {
-  const _$_LoadSuccess(this.songDetail, {this.hasFavoriteStatusChanged = false})
-      : super._();
+  const _$_LoadSuccess(this.songDetail, {this.hasFavoriteStatusChanged = false}) : super._();
 
   @override
   final Fresh<SongDetail?> songDetail;
@@ -508,16 +454,12 @@ class _$_LoadSuccess extends _LoadSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadSuccess &&
-            const DeepCollectionEquality()
-                .equals(other.songDetail, songDetail) &&
-            const DeepCollectionEquality().equals(
-                other.hasFavoriteStatusChanged, hasFavoriteStatusChanged));
+            const DeepCollectionEquality().equals(other.songDetail, songDetail) &&
+            const DeepCollectionEquality().equals(other.hasFavoriteStatusChanged, hasFavoriteStatusChanged));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(songDetail),
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(songDetail),
       const DeepCollectionEquality().hash(hasFavoriteStatusChanged));
 
   @JsonKey(ignore: true)
@@ -530,12 +472,8 @@ class _$_LoadSuccess extends _LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function(bool hasFavoriteStatusChanged) initial,
     required TResult Function(bool hasFavoriteStatusChanged) loadInProgress,
-    required TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)
-        loadSuccess,
-    required TResult Function(
-            BackendFailure failure, bool hasFavoriteStatusChanged)
-        loadFailure,
+    required TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged) loadSuccess,
+    required TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged) loadFailure,
   }) {
     return loadSuccess(songDetail, hasFavoriteStatusChanged);
   }
@@ -545,11 +483,8 @@ class _$_LoadSuccess extends _LoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool hasFavoriteStatusChanged)? initial,
     TResult Function(bool hasFavoriteStatusChanged)? loadInProgress,
-    TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)?
-        loadSuccess,
-    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)?
-        loadFailure,
+    TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)? loadSuccess,
+    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)? loadFailure,
   }) {
     return loadSuccess?.call(songDetail, hasFavoriteStatusChanged);
   }
@@ -559,11 +494,8 @@ class _$_LoadSuccess extends _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool hasFavoriteStatusChanged)? initial,
     TResult Function(bool hasFavoriteStatusChanged)? loadInProgress,
-    TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)?
-        loadSuccess,
-    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)?
-        loadFailure,
+    TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)? loadSuccess,
+    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -611,8 +543,8 @@ class _$_LoadSuccess extends _LoadSuccess {
 }
 
 abstract class _LoadSuccess extends SongDetailState {
-  const factory _LoadSuccess(final Fresh<SongDetail?> songDetail,
-      {final bool hasFavoriteStatusChanged}) = _$_LoadSuccess;
+  const factory _LoadSuccess(final Fresh<SongDetail?> songDetail, {final bool hasFavoriteStatusChanged}) =
+      _$_LoadSuccess;
   const _LoadSuccess._() : super._();
 
   Fresh<SongDetail?> get songDetail;
@@ -620,15 +552,12 @@ abstract class _LoadSuccess extends SongDetailState {
   bool get hasFavoriteStatusChanged;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadFailureCopyWith<$Res>
-    implements $SongDetailStateCopyWith<$Res> {
-  factory _$$_LoadFailureCopyWith(
-          _$_LoadFailure value, $Res Function(_$_LoadFailure) then) =
+abstract class _$$_LoadFailureCopyWith<$Res> implements $SongDetailStateCopyWith<$Res> {
+  factory _$$_LoadFailureCopyWith(_$_LoadFailure value, $Res Function(_$_LoadFailure) then) =
       __$$_LoadFailureCopyWithImpl<$Res>;
   @override
   $Res call({BackendFailure failure, bool hasFavoriteStatusChanged});
@@ -637,11 +566,9 @@ abstract class _$$_LoadFailureCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoadFailureCopyWithImpl<$Res>
-    extends _$SongDetailStateCopyWithImpl<$Res>
+class __$$_LoadFailureCopyWithImpl<$Res> extends _$SongDetailStateCopyWithImpl<$Res>
     implements _$$_LoadFailureCopyWith<$Res> {
-  __$$_LoadFailureCopyWithImpl(
-      _$_LoadFailure _value, $Res Function(_$_LoadFailure) _then)
+  __$$_LoadFailureCopyWithImpl(_$_LoadFailure _value, $Res Function(_$_LoadFailure) _then)
       : super(_value, (v) => _then(v as _$_LoadFailure));
 
   @override
@@ -675,8 +602,7 @@ class __$$_LoadFailureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadFailure extends _LoadFailure {
-  const _$_LoadFailure(this.failure, {this.hasFavoriteStatusChanged = false})
-      : super._();
+  const _$_LoadFailure(this.failure, {this.hasFavoriteStatusChanged = false}) : super._();
 
   @override
   final BackendFailure failure;
@@ -695,14 +621,11 @@ class _$_LoadFailure extends _LoadFailure {
         (other.runtimeType == runtimeType &&
             other is _$_LoadFailure &&
             const DeepCollectionEquality().equals(other.failure, failure) &&
-            const DeepCollectionEquality().equals(
-                other.hasFavoriteStatusChanged, hasFavoriteStatusChanged));
+            const DeepCollectionEquality().equals(other.hasFavoriteStatusChanged, hasFavoriteStatusChanged));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(failure),
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(failure),
       const DeepCollectionEquality().hash(hasFavoriteStatusChanged));
 
   @JsonKey(ignore: true)
@@ -715,12 +638,8 @@ class _$_LoadFailure extends _LoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function(bool hasFavoriteStatusChanged) initial,
     required TResult Function(bool hasFavoriteStatusChanged) loadInProgress,
-    required TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)
-        loadSuccess,
-    required TResult Function(
-            BackendFailure failure, bool hasFavoriteStatusChanged)
-        loadFailure,
+    required TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged) loadSuccess,
+    required TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged) loadFailure,
   }) {
     return loadFailure(failure, hasFavoriteStatusChanged);
   }
@@ -730,11 +649,8 @@ class _$_LoadFailure extends _LoadFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool hasFavoriteStatusChanged)? initial,
     TResult Function(bool hasFavoriteStatusChanged)? loadInProgress,
-    TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)?
-        loadSuccess,
-    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)?
-        loadFailure,
+    TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)? loadSuccess,
+    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)? loadFailure,
   }) {
     return loadFailure?.call(failure, hasFavoriteStatusChanged);
   }
@@ -744,11 +660,8 @@ class _$_LoadFailure extends _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool hasFavoriteStatusChanged)? initial,
     TResult Function(bool hasFavoriteStatusChanged)? loadInProgress,
-    TResult Function(
-            Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)?
-        loadSuccess,
-    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)?
-        loadFailure,
+    TResult Function(Fresh<SongDetail?> songDetail, bool hasFavoriteStatusChanged)? loadSuccess,
+    TResult Function(BackendFailure failure, bool hasFavoriteStatusChanged)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
@@ -796,8 +709,7 @@ class _$_LoadFailure extends _LoadFailure {
 }
 
 abstract class _LoadFailure extends SongDetailState {
-  const factory _LoadFailure(final BackendFailure failure,
-      {final bool hasFavoriteStatusChanged}) = _$_LoadFailure;
+  const factory _LoadFailure(final BackendFailure failure, {final bool hasFavoriteStatusChanged}) = _$_LoadFailure;
   const _LoadFailure._() : super._();
 
   BackendFailure get failure;
@@ -805,6 +717,5 @@ abstract class _LoadFailure extends SongDetailState {
   bool get hasFavoriteStatusChanged;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadFailureCopyWith<_$_LoadFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_LoadFailureCopyWith<_$_LoadFailure> get copyWith => throw _privateConstructorUsedError;
 }

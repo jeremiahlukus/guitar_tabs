@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:dartz/dartz.dart';
+
+// Project imports:
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/songs/song_detail/domain/song_detail.dart';
 import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detail_remote_service.dart';
@@ -17,7 +20,7 @@ class SongDetailRepository {
       final remoteResponse = await _remoteService.getFavoriteStatus(songId);
       return right(
         await remoteResponse.maybeWhen(
-          // nly care about new data throw everything else
+          // only care about new data throw everything else
           // ignore: only_throw_errors
           orElse: () => throw RestApiException,
           withNewData: (data, _) async {

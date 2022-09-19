@@ -1,7 +1,10 @@
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:joyful_noise/backend/songs/song_detail/domain/song_detail.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/timestamp.dart';
+
+// Project imports:
+import 'package:joyful_noise/backend/songs/song_detail/domain/song_detail.dart';
 
 part 'song_detail_dto.freezed.dart';
 part 'song_detail_dto.g.dart';

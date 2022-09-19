@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:alchemist/alchemist.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
-import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:mocktail/mocktail.dart';
 
 // Project imports:
-import 'package:dartz/dartz.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_tile.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
@@ -17,12 +16,10 @@ import 'package:joyful_noise/backend/songs/song_detail/domain/song_detail.dart';
 import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detail_repository.dart';
 import 'package:joyful_noise/backend/songs/song_detail/notifiers/song_detail_notifier.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';
 import 'package:joyful_noise/search/notifiers/search_history_notifier.dart';
 import 'package:joyful_noise/search/shared/providers.dart';
-import 'package:mocktail/mocktail.dart';
 import '../../../../_mocks/song/mock_song.dart';
 import '../../../../utils/device.dart';
 import '../../../../utils/golden_test_device_scenario.dart';

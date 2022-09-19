@@ -1,5 +1,8 @@
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/songs/song_detail/domain/song_detail.dart';
 import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detail_repository.dart';
