@@ -22,22 +22,4 @@ class SongDetailDTO with _$SongDetailDTO {
   factory SongDetailDTO.fromJson(Map<String, dynamic> json) => _$SongDetailDTOFromJson(json);
 
   SongDetail toDomain() => SongDetail(isFavorite: isFavorite, songId: songId);
-
-  static const lastUsedFieldName = 'lastUsed';
-
-  Map<String, dynamic> toSembast() {
-    final json = toJson();
-    // ignore: cascade_invocations
-    json.remove('songId');
-    json[lastUsedFieldName] = Timestamp.now();
-    return json;
-  }
-
-  factory SongDetailDTO.fromSembast(
-    RecordSnapshot<String, Map<String, dynamic>> snapshot,
-  ) {
-    final copiedMap = Map<String, dynamic>.from(snapshot.value);
-    copiedMap['songId'] = snapshot.key;
-    return SongDetailDTO.fromJson(copiedMap);
-  }
 }

@@ -40,7 +40,7 @@ class SongDetailRepository {
     try {
       final actionCompleted = await _remoteService.switchFavoriteStatus(
         songDetail.songId,
-        isCurrentlyStarred: songDetail.isFavorite,
+        isCurrentlyFavorite: songDetail.isFavorite,
       );
       return right(actionCompleted);
     } on RestApiException catch (e) {

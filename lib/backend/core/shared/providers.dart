@@ -89,7 +89,6 @@ final searchedSongsNotifierProvider = StateNotifierProvider.autoDispose<Searched
 final songDetailRemoteServiceProvider = Provider(
   (ref) => SongDetailRemoteService(
     ref.watch(dioProvider),
-    ref.watch(backendHeadersCacheProvider),
   ),
 );
 

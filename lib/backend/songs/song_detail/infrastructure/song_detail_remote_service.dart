@@ -14,11 +14,9 @@ import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class SongDetailRemoteService {
   final Dio _dio;
-  final BackendHeadersCache _headersCache;
 
   SongDetailRemoteService(
     this._dio,
-    this._headersCache,
   );
 
   Future<RemoteResponse<SongDetailDTO>> getFavoriteStatus(int songId) async {
@@ -29,13 +27,8 @@ class SongDetailRemoteService {
 
     try {
       final response = await _dio.getUri<dynamic>(requestUri);
-      logger.e(response.statusCode);
       if (response.statusCode == 200) {
-        final headers = BackendHeaders.parse(response);
-
-        await _headersCache.saveHeaders(requestUri, headers);
         final dto = SongDetailDTO.fromJson(response.data as Map<String, dynamic>);
-        logger.e(dto.isFavorite);
         return RemoteResponse.withNewData(dto, maxPage: 0);
       } else {
         throw RestApiException(response.statusCode);
@@ -54,7 +47,7 @@ class SongDetailRemoteService {
   /// Returns `null` if there's no Internet connection.
   Future<Unit?> switchFavoriteStatus(
     String songId, {
-    required bool isCurrentlyStarred,
+    required bool isCurrentlyFavorite,
   }) async {
     final requestUri = Uri.https(
       BackendConstants().backendBaseUrl(),
@@ -63,7 +56,7 @@ class SongDetailRemoteService {
 
     try {
       final response =
-          await (isCurrentlyStarred ? _dio.deleteUri<dynamic>(requestUri) : _dio.postUri<dynamic>(requestUri));
+          await (isCurrentlyFavorite ? _dio.deleteUri<dynamic>(requestUri) : _dio.postUri<dynamic>(requestUri));
 
       if (response.statusCode == 204) {
         return unit;
