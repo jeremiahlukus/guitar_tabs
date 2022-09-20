@@ -46,7 +46,11 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   state.songDetail.entity?.isFavorite == true ? Icons.star : Icons.star_outline,
                   color: state.songDetail.entity?.isFavorite == true ? Colors.red : Colors.grey,
                 ),
-                onPressed: () {},
+                onPressed: !state.songDetail.isFresh
+                    ? null
+                    : () {
+                        ref.read(songDetailNotifierProvider.notifier).switchStarredStatus(state.songDetail.entity!);
+                      },
               );
             },
           )

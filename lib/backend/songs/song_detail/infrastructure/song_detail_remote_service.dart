@@ -4,13 +4,10 @@ import 'package:dio/dio.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/infrastructure/backend_base_url.dart';
-import 'package:joyful_noise/backend/core/infrastructure/backend_headers.dart';
-import 'package:joyful_noise/backend/core/infrastructure/backend_headers_cache.dart';
 import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detail_dto.dart';
 import 'package:joyful_noise/core/infrastructure/dio_extensions.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class SongDetailRemoteService {
   final Dio _dio;
@@ -49,16 +46,16 @@ class SongDetailRemoteService {
     String songId, {
     required bool isCurrentlyFavorite,
   }) async {
-    final requestUri = Uri.https(
+    final requestUri = Uri.http(
       BackendConstants().backendBaseUrl(),
-      '/api/v1/songs/$songId',
+      '/api/v1/user_favorite_songs/$songId',
     );
 
     try {
-      final response =
-          await (isCurrentlyFavorite ? _dio.deleteUri<dynamic>(requestUri) : _dio.postUri<dynamic>(requestUri));
-
-      if (response.statusCode == 204) {
+      final response = await (isCurrentlyFavorite
+          ? _dio.deleteUri<dynamic>(requestUri)
+          : _dio.putUri<dynamic>(requestUri, data: {'song_id': songId}));
+      if (response.statusCode == 204 || response.statusCode == 200) {
         return unit;
       } else {
         throw RestApiException(response.statusCode);
