@@ -1,6 +1,9 @@
 // Dart imports:
 
 // Package imports:
+import 'dart:io';
+
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -105,6 +108,129 @@ void main() {
         final expectedResult = RemoteResponse<SongDetailDTO>.withNewData(convertedData, maxPage: 0);
 
         expect(actualResult, expectedResult);
+      });
+    });
+  });
+  group('.switchFavoriteStatus', () {
+    group('isCurrentlyFavorite is true', () {
+      test('returns Unit when response status code is 204 ', () async {
+        final Dio mockDio = MockDio();
+
+        when(
+          () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenAnswer(
+          (invocation) => Future.value(
+            Response<dynamic>(
+              requestOptions: RequestOptions(path: ''),
+              statusCode: 204,
+            ),
+          ),
+        );
+
+        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+        final actualResult = await favoriteSongRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true);
+
+        expect(actualResult, isA<Unit>());
+      });
+      test('returns RestApiException when response status code is not 204 ', () async {
+        final Dio mockDio = MockDio();
+
+        when(
+          () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenAnswer(
+          (invocation) => Future.value(
+            Response<dynamic>(
+              requestOptions: RequestOptions(path: ''),
+              statusCode: 200,
+            ),
+          ),
+        );
+
+        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+        await favoriteSongRemoteService
+            .switchFavoriteStatus('1', isCurrentlyFavorite: true)
+            .onError((error, stackTrace) {
+          expect(error, isA<RestApiException>());
+        });
+      });
+      test('returns null when no connection ', () async {
+        final Dio mockDio = MockDio();
+
+        when(
+          () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenThrow(
+          DioError(
+            requestOptions: RequestOptions(path: ''),
+            error: const SocketException(''),
+          ),
+        );
+
+        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+
+        final actualResult = await favoriteSongRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true);
+
+        expect(actualResult, null);
+      });
+    });
+    group('isCurrentlyFavorite is false', () {
+      test('returns Unit when response status code is 204 ', () async {
+        final Dio mockDio = MockDio();
+
+        when(
+          () => mockDio.postUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenAnswer(
+          (invocation) => Future.value(
+            Response<dynamic>(
+              requestOptions: RequestOptions(path: ''),
+              statusCode: 204,
+            ),
+          ),
+        );
+
+        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+        final actualResult = await favoriteSongRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: false);
+
+        expect(actualResult, isA<Unit>());
+      });
+      test('returns RestApiException when response status code is not 204 ', () async {
+        final Dio mockDio = MockDio();
+
+        when(
+          () => mockDio.postUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenAnswer(
+          (invocation) => Future.value(
+            Response<dynamic>(
+              requestOptions: RequestOptions(path: ''),
+              statusCode: 200,
+            ),
+          ),
+        );
+
+        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+
+        await favoriteSongRemoteService
+            .switchFavoriteStatus('1', isCurrentlyFavorite: false)
+            .onError((error, stackTrace) {
+          expect(error, isA<RestApiException>());
+        });
+      });
+      test('returns null when no connection ', () async {
+        final Dio mockDio = MockDio();
+
+        when(
+          () => mockDio.postUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenThrow(
+          DioError(
+            requestOptions: RequestOptions(path: ''),
+            error: const SocketException(''),
+          ),
+        );
+
+        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+
+        final actualResult = await favoriteSongRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: false);
+
+        expect(actualResult, null);
       });
     });
   });
