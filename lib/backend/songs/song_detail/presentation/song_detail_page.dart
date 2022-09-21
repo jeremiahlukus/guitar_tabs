@@ -57,7 +57,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                     ? null
                     : () {
                         ref.read(songDetailNotifierProvider.notifier).switchStarredStatus(state.songDetail.entity!);
-                        ref.read(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
+                        ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
                       },
                 icon: state.songDetail.entity?.isFavorite == true
                     ? const Icon(Icons.star)
