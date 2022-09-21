@@ -35,7 +35,7 @@ class MockSearchHistoryRepository extends Mock implements SearchHistoryRepositor
 
 void main() {
   group('SongTile', () {
-    testWidgets('contains the artist and title text in a ListTile', (tester) async {
+    testWidgets('contains title text in a ListTile', (tester) async {
       final song = mockSong(1);
 
       await tester.pumpWidget(
@@ -52,7 +52,6 @@ void main() {
 
       expect(listTileFinder, findsOneWidget);
       expect(find.text('new 1'), findsOneWidget);
-      expect(find.text('artist'), findsOneWidget);
     });
 
     testWidgets('contains the PaginatedSongsListView widget', (tester) async {
