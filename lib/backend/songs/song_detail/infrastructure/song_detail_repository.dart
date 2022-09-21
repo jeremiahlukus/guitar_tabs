@@ -33,6 +33,17 @@ class SongDetailRepository {
     }
   }
 
+  Future<List<String>?> getChordTabs(
+    String chord,
+  ) async {
+    try {
+      final remoteResponse = await _remoteService.getSongTabs(chord);
+      return remoteResponse;
+    } on RestApiException {
+      return null;
+    }
+  }
+
   /// Returns `right(null)` if there's no Internet connection.
   Future<Either<BackendFailure, Unit?>> switchFavoriteStatus(
     SongDetail songDetail,

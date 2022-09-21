@@ -41,6 +41,26 @@ class SongDetailRemoteService {
     }
   }
 
+  Future<List<String>> getSongTabs(String chord) async {
+    final requestUri = Uri.http(
+      BackendConstants().backendBaseUrl(),
+      '/api/v1/chord_tabs/$chord',
+    );
+
+    try {
+      final response = await _dio.getUri<dynamic>(requestUri);
+      if (response.statusCode == 200) {
+        // ignore: avoid_dynamic_calls
+        final dynamic dto = response.data['tabs'];
+        return [dto.toString()];
+      } else {
+        throw RestApiException(response.statusCode);
+      }
+    } catch (e) {
+      return [''];
+    }
+  }
+
   /// Returns `null` if there's no Internet connection.
   Future<Unit?> switchFavoriteStatus(
     String songId, {
