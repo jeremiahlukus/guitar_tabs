@@ -110,7 +110,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                             ? null
                             : () {
                                 setState(() {
-                                  scrollSpeed--;
+                                  scrollSpeed = scrollSpeed - 2;
                                 });
                               },
                         child: const Text('-'),
@@ -121,7 +121,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                       ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            scrollSpeed++;
+                            scrollSpeed = scrollSpeed + 2;
                           });
                         },
                         child: const Text('+'),
