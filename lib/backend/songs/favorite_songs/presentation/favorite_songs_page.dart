@@ -100,8 +100,9 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
         },
         body: RefreshIndicator(
           onRefresh: () {
-            setState(() {});
-            return ref.read(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
+            return Future.microtask(() {
+              ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
+            });
           },
           child: PaginatedSongsListView(
             paginatedSongsNotifierProvider: favoriteSongsNotifierProvider,
