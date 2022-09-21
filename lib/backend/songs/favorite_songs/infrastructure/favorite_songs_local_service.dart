@@ -33,10 +33,6 @@ class FavoriteSongsLocalService {
         );
   }
 
-  Future<void> cleanDB() async {
-    await store.delete(_sembastDatabase.instance);
-  }
-
   Future<List<SongDTO>> getPage(int page) async {
     final sembastPage = page - 1;
 
