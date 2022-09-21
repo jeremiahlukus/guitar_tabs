@@ -7,7 +7,6 @@ import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/songs/song_detail/domain/song_detail.dart';
 import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detail_repository.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 part 'song_detail_notifier.freezed.dart';
 
@@ -51,8 +50,6 @@ class SongDetailNotifier extends StateNotifier<SongDetailState> {
         final stateCopy = successState.copyWith();
         final songDetail = successState.songDetail.entity;
         if (songDetail != null) {
-          logger.e(!songDetail.isFavorite);
-
           state = successState.copyWith.songDetail(
             entity: songDetail.copyWith(isFavorite: !songDetail.isFavorite),
           );

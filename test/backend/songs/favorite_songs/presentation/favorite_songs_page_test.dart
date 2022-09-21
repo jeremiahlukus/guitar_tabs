@@ -89,6 +89,56 @@ void main() {
 
       expect(finder, findsOneWidget);
     });
+    testWidgets('pull down to refresh, refreshes the PaginatedSongsListView widget', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+        ],
+        router,
+      );
+
+      final finder = find.byType(PaginatedSongsListView);
+      expect(finder, findsOneWidget);
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(2), mockSong(3)]))));
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(2), mockSong(3)]));
+
+      expect(find.text('new 3'), findsNothing);
+
+      await tester.fling(find.text('new 1').first, const Offset(0, 300), 1000);
+      await tester.pump();
+
+      expect(
+        tester.getSemantics(find.byType(RefreshProgressIndicator)),
+        matchesSemantics(
+          label: 'Refresh',
+        ),
+      );
+
+      await tester.pump(const Duration(seconds: 1)); // finish the scroll animation
+      await tester.pump(const Duration(seconds: 1)); // finish the indicator settle animation
+      await tester.pump(const Duration(seconds: 1)); // finish the indicator hide animation
+      expect(find.text('new 3'), findsOneWidget);
+    });
     testWidgets('contains the SearchBar widget', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
       final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);

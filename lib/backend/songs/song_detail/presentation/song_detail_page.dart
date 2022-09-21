@@ -142,7 +142,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                 textStyle: Theme.of(context).textTheme.bodyMedium!,
                 chordStyle: Theme.of(context).textTheme.titleMedium!,
                 onTapChord: (String chord) async {
-                  final tabs = await SongDetailRemoteService(Dio()).getSongTabs(chord);
+                  final tabs = await SongDetailRemoteService(Dio()).getChordTabs(chord);
                   logger.e(tabs);
                   if (tabs.isNotEmpty) {
                     return showDialog<void>(

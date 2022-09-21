@@ -43,14 +43,13 @@ void main() {
           ),
         );
 
-        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
         try {
-          await favoriteSongRemoteService.getFavoriteStatus(1);
+          await songDetailRemoteService.getFavoriteStatus(1);
           // if it gets here fail test
           throw Error();
-        } on RestApiException {
-          // if we get RestApiException its pass
-          return;
+        } catch (e) {
+          expect(e, isA<RestApiException>());
         }
       });
       // double testing but just being safe for 304
@@ -68,14 +67,55 @@ void main() {
           ),
         );
 
-        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
         try {
-          await favoriteSongRemoteService.getFavoriteStatus(1);
+          await songDetailRemoteService.getFavoriteStatus(1);
           // if it gets here fail test
           throw Error();
-        } on RestApiException {
-          // if we get RestApiException its pass
-          return;
+        } catch (e) {
+          expect(e, isA<RestApiException>());
+        }
+      });
+      test('returns RemoteResponse.noConnection() when no connection ', () async {
+        final Dio mockDio = MockDio();
+        when(
+          () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenThrow(
+          DioError(
+            requestOptions: RequestOptions(path: ''),
+            error: const SocketException(''),
+          ),
+        );
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
+
+        final actualResult = await songDetailRemoteService.getFavoriteStatus(1);
+        const expectedResult = RemoteResponse<SongDetailDTO>.noConnection();
+
+        expect(actualResult, expectedResult);
+      });
+      test('returns RestApiException when DioError and response ', () async {
+        final Dio mockDio = MockDio();
+
+        final mockData = {'is_favorite': true, 'song_id': '1'};
+
+        when(
+          () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenThrow(
+          DioError(
+            response: Response<dynamic>(
+              requestOptions: RequestOptions(path: ''),
+              statusCode: 400,
+              data: mockData,
+            ),
+            requestOptions: RequestOptions(path: ''),
+            error: Exception('error'),
+          ),
+        );
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
+        try {
+          await songDetailRemoteService.getFavoriteStatus(1);
+        } catch (e) {
+          expect(e, isA<RestApiException>());
         }
       });
 
@@ -98,15 +138,103 @@ void main() {
           ),
         );
 
-        final favoriteSongsRemoteService = SongDetailRemoteService(mockDio);
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
 
-        final actualResult = await favoriteSongsRemoteService.getFavoriteStatus(1);
+        final actualResult = await songDetailRemoteService.getFavoriteStatus(1);
         final expectedResult = RemoteResponse<SongDetailDTO>.withNewData(convertedData, maxPage: 0);
 
         expect(actualResult, expectedResult);
       });
     });
   });
+
+  group('.getChordTabs', () {
+    test('returns RestApiException when response status code is 304 ', () async {
+      final Dio mockDio = MockDio();
+
+      when(
+        () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
+      ).thenAnswer(
+        (invocation) => Future.value(
+          Response<dynamic>(
+            requestOptions: RequestOptions(path: ''),
+            statusCode: 304,
+          ),
+        ),
+      );
+
+      final songDetailRemoteService = SongDetailRemoteService(mockDio);
+      final actualResult = await songDetailRemoteService.getChordTabs('C');
+      const expectedResult = [''];
+
+      expect(actualResult, expectedResult);
+    });
+    // double testing but just being safe for 304
+    test('returns RestApiException when response status code is anything other than 200 ', () async {
+      final Dio mockDio = MockDio();
+
+      when(
+        () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
+      ).thenAnswer(
+        (invocation) => Future.value(
+          Response<dynamic>(
+            requestOptions: RequestOptions(path: ''),
+            statusCode: 400,
+          ),
+        ),
+      );
+
+      final songDetailRemoteService = SongDetailRemoteService(mockDio);
+      final actualResult = await songDetailRemoteService.getChordTabs('C');
+      const expectedResult = [''];
+
+      expect(actualResult, expectedResult);
+    });
+    test('returns empty array when no connection ', () async {
+      final Dio mockDio = MockDio();
+
+      when(
+        () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
+      ).thenThrow(
+        DioError(
+          requestOptions: RequestOptions(path: ''),
+          error: const SocketException(''),
+        ),
+      );
+      final songDetailRemoteService = SongDetailRemoteService(mockDio);
+
+      final actualResult = await songDetailRemoteService.getChordTabs('C');
+      const expectedResult = [''];
+
+      expect(actualResult, expectedResult);
+    });
+
+    test('returns chord data when response status code is 200 ', () async {
+      final Dio mockDio = MockDio();
+
+      final mockData = {'tabs': 'x 1 2 3 4 5'};
+
+      when(
+        () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
+      ).thenAnswer(
+        (invocation) => Future.value(
+          Response<dynamic>(
+            requestOptions: RequestOptions(path: ''),
+            statusCode: 200,
+            data: mockData,
+          ),
+        ),
+      );
+
+      final songDetailRemoteService = SongDetailRemoteService(mockDio);
+
+      final actualResult = await songDetailRemoteService.getChordTabs('C');
+      final expectedResult = ['x 1 2 3 4 5'];
+
+      expect(actualResult, expectedResult);
+    });
+  });
+
   group('.switchFavoriteStatus', () {
     group('isCurrentlyFavorite is true', () {
       test('returns Unit when response status code is 204 ', () async {
@@ -123,8 +251,8 @@ void main() {
           ),
         );
 
-        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
-        final actualResult = await favoriteSongRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true);
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
+        final actualResult = await songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true);
 
         expect(actualResult, isA<Unit>());
       });
@@ -142,8 +270,8 @@ void main() {
           ),
         );
 
-        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
-        final actualResult = await favoriteSongRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true);
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
+        final actualResult = await songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true);
 
         expect(actualResult, isA<Unit>());
       });
@@ -161,10 +289,8 @@ void main() {
           ),
         );
 
-        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
-        await favoriteSongRemoteService
-            .switchFavoriteStatus('1', isCurrentlyFavorite: true)
-            .onError((error, stackTrace) {
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
+        await songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true).onError((error, stackTrace) {
           expect(error, isA<RestApiException>());
           return null;
         });
@@ -181,13 +307,56 @@ void main() {
           ),
         );
 
-        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
 
-        final actualResult = await favoriteSongRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true);
+        final actualResult = await songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true);
 
         expect(actualResult, null);
       });
+      test('returns RestApiException when DioError when status code', () async {
+        final Dio mockDio = MockDio();
+
+        when(
+          () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenThrow(
+          DioError(
+            response: Response<dynamic>(
+              requestOptions: RequestOptions(path: ''),
+              statusCode: 400,
+            ),
+            requestOptions: RequestOptions(path: ''),
+            error: Exception('error'),
+          ),
+        );
+
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
+
+        await songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true).onError((error, stackTrace) {
+          expect(error, isA<RestApiException>());
+          return null;
+        });
+      });
     });
+    test('returns DioError when DioError without status code', () async {
+      final Dio mockDio = MockDio();
+
+      when(
+        () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
+      ).thenThrow(
+        DioError(
+          requestOptions: RequestOptions(path: ''),
+          error: Exception('error'),
+        ),
+      );
+
+      final songDetailRemoteService = SongDetailRemoteService(mockDio);
+
+      await songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true).onError((error, stackTrace) {
+        expect(error, isA<DioError>());
+        return null;
+      });
+    });
+
     group('isCurrentlyFavorite is false', () {
       test('returns Unit when response status code is 204 ', () async {
         final Dio mockDio = MockDio();
@@ -203,8 +372,8 @@ void main() {
           ),
         );
 
-        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
-        final actualResult = await favoriteSongRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: false);
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
+        final actualResult = await songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: false);
 
         expect(actualResult, isA<Unit>());
       });
@@ -222,8 +391,8 @@ void main() {
           ),
         );
 
-        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
-        final actualResult = await favoriteSongRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: false);
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
+        final actualResult = await songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: false);
 
         expect(actualResult, isA<Unit>());
       });
@@ -241,9 +410,9 @@ void main() {
           ),
         );
 
-        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
 
-        await favoriteSongRemoteService
+        await songDetailRemoteService
             .switchFavoriteStatus('1', isCurrentlyFavorite: false)
             .onError((error, stackTrace) {
           expect(error, isA<RestApiException>());
@@ -262,9 +431,9 @@ void main() {
           ),
         );
 
-        final favoriteSongRemoteService = SongDetailRemoteService(mockDio);
+        final songDetailRemoteService = SongDetailRemoteService(mockDio);
 
-        final actualResult = await favoriteSongRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: false);
+        final actualResult = await songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: false);
 
         expect(actualResult, null);
       });

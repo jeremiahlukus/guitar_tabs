@@ -41,7 +41,7 @@ class SongDetailRemoteService {
     }
   }
 
-  Future<List<String>> getSongTabs(String chord) async {
+  Future<List<String>> getChordTabs(String chord) async {
     final requestUri = Uri.http(
       BackendConstants().backendBaseUrl(),
       '/api/v1/chord_tabs/$chord',
@@ -49,7 +49,8 @@ class SongDetailRemoteService {
 
     try {
       final response = await _dio.getUri<dynamic>(requestUri);
-      if (response.statusCode == 200) {
+
+      if (response.statusCode == 200 && response.data != null) {
         // ignore: avoid_dynamic_calls
         final dynamic dto = response.data['tabs'];
         return [dto.toString()];

@@ -22,7 +22,7 @@ class SongDetailRepository {
         await remoteResponse.maybeWhen(
           // only care about new data throw everything else
           // ignore: only_throw_errors
-          orElse: () => throw RestApiException,
+          orElse: () => throw RestApiException(400),
           withNewData: (data, _) async {
             return Fresh.yes(data.toDomain());
           },
@@ -37,7 +37,7 @@ class SongDetailRepository {
     String chord,
   ) async {
     try {
-      final remoteResponse = await _remoteService.getSongTabs(chord);
+      final remoteResponse = await _remoteService.getChordTabs(chord);
       return remoteResponse;
     } on RestApiException {
       return null;
