@@ -43,6 +43,10 @@ class SongDetailNotifier extends StateNotifier<SongDetailState> {
     );
   }
 
+  Future<List<String>?> getChordTabs(String chord) {
+    return _repository.getChordTabs(chord);
+  }
+
   Future<void> switchStarredStatus(SongDetail songDetail) async {
     await state.maybeMap(
       orElse: () {},

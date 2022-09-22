@@ -142,9 +142,9 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                 textStyle: Theme.of(context).textTheme.bodyMedium!,
                 chordStyle: Theme.of(context).textTheme.titleMedium!,
                 onTapChord: (String chord) async {
-                  final tabs = await SongDetailRemoteService(Dio()).getChordTabs(chord);
-                  logger.e(tabs);
-                  if (tabs.isNotEmpty) {
+                  final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
+                  if (tabs!.isNotEmpty && tabs.first != '') {
+                    logger.e(tabs);
                     return showDialog<void>(
                       context: context,
                       barrierDismissible: false, // user must tap button!

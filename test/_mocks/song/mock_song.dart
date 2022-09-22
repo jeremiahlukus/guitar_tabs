@@ -7,7 +7,8 @@ Song mockSong(int id) {
     id: id,
     title: 'new $id',
     songNumber: id,
-    lyrics: 'lyrics',
+    lyrics:
+        '#Eph 4:13, Rev. 19:7\n# Capo 3\n\nUn[D7]til we all arrive[C] \nAt the oneness of the [Em]faith\nAnd of the full kno[D]wledge\nOf the [G]Son of God[C],\nAt the oneness of the f[Em]aith \nAt a full-grown [D]man,\nAt the [C]measure of the [G]stature of the\n[Am]Fullness of [C]Christ,\nU[G]ntil we [D]all [G]arrive.\n \n  [G]Let us rejoice and\n  [C]let us give the glory to [Em]Him\n  For the marriage of the \n  [D]Lamb has come,\n  [G]Let us exult and \n  [C]let us give the glory to [Em]Him\n  For the marriage of the \n  [D]Lamb has [D7]come,\n  And His [C]wife has \n  [G]made herself [C]re[D]ad[Em]y,\n  For the [C]marriage of the \n  [D]Lamb has [G]come.\n\n',
     category: 'category',
     artist: 'artist',
     chords: 'chords',
