@@ -126,5 +126,37 @@ void main() {
         expect(actualData, expectedData);
       });
     });
+
+    group('.searchLocalSongs', () {
+      test('searches the current List<Song> object in the database', () async {
+        final factory = newDatabaseFactoryMemory();
+
+        final memoryDatabase = await factory.openDatabase('test.db');
+
+        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
+
+        final favoriteSongLocalService = FavoriteSongsLocalService(fakeSembastDatabase);
+        final mockData = [mockSongJson(1), mockSongJson(2), mockSongJson2(3)];
+
+        final convertedData = [
+          SongDTO.fromJson(mockData.first),
+          SongDTO.fromJson(mockData[1]),
+          SongDTO.fromJson(mockData.last)
+        ];
+        const page = 1;
+        const sembastPage = page - 1;
+        await FavoriteSongsLocalService.store
+            .records(
+              convertedData.mapIndexed(
+                (index, _) => index + PaginationConfig.itemsPerPage * sembastPage,
+              ),
+            )
+            .put(fakeSembastDatabase.instance, mockData);
+
+        final actualData = await favoriteSongLocalService.searchLocalSongs('test');
+
+        expect(actualData, [convertedData.last]);
+      });
+    });
   });
 }

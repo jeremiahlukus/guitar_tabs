@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:collection/collection.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:sembast/sembast.dart';
 
 // Project imports:
@@ -43,6 +44,12 @@ class FavoriteSongsLocalService {
         offset: PaginationConfig.itemsPerPage * sembastPage,
       ),
     );
+    return records.map((e) => SongDTO.fromJson(e.value)).toSet().toList();
+  }
+
+  Future<List<SongDTO>> searchLocalSongs(String query) async {
+    final finder = Finder(filter: Filter.matches('lyrics', query));
+    final records = await store.find(_sembastDatabase.instance, finder: finder);
     return records.map((e) => SongDTO.fromJson(e.value)).toSet().toList();
   }
 

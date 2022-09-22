@@ -46,6 +46,22 @@ Map<String, dynamic> mockSongJson(int id) {
   };
 }
 
+Map<String, dynamic> mockSongJson2(int id) {
+  return <String, dynamic>{
+    'id': id,
+    'title': 'new $id',
+    'song_number': 1,
+    'url': 'url',
+    'artist': 'New',
+    'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home test',
+    'chords': null,
+    'created_at': '2022-06-29T11:42:10.614-04:00',
+    'updated_at': '2022-06-29T11:42:10.614-04:00',
+    'category': 'general',
+    'sub_category': null
+  };
+}
+
 Map<String, dynamic> mockSongStrippedJson(int id) {
   return <String, dynamic>{
     'id': id,

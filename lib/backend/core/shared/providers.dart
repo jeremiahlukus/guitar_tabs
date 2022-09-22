@@ -79,6 +79,7 @@ final searchedSongsRemoteServiceProvider = Provider(
 final searchedSongsRepositoryProvider = Provider(
   (ref) => SearchedSongsRepository(
     ref.watch(searchedSongsRemoteServiceProvider),
+    ref.watch(favoriteSongsLocalServiceProvider),
   ),
 );
 
