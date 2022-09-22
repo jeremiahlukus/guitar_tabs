@@ -31,6 +31,7 @@ void main() {
           mockSongDTO(1),
           mockSongDTO(2),
         ];
+        final song = [mockSong(1), mockSong(2)];
         when(() => mockSearchedSongRemoteService.getSearchedSongsPage('query', page)).thenAnswer((_) {
           return Future.value(const RemoteResponse<List<SongDTO>>.noConnection());
         });
@@ -47,6 +48,7 @@ void main() {
         final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
 
         expect(actualResult, expectedResult);
+        expect(actualResult.getOrElse(() => Fresh.yes([])), Fresh.no(song, isNextPageAvailable: false));
       });
 
       test('returns Right<BackendFailure, Fresh<List<Song>>> on No connection and no local data', () async {
@@ -116,6 +118,37 @@ void main() {
         final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
 
         expect(actualResult, expectedResult);
+      });
+      test(
+          'returns Right<BackendFailure, Fresh<List<Song>>> when SearchedSongsRemoteService returns RemoteResponse.notModified',
+          () async {
+        final SearchedSongsRemoteService mockSearchedSongRemoteService = MockSearchedSongRemoteService();
+        final FavoriteSongsLocalService mockFavoriteSongLocalService = MockFavoriteSongLocalService();
+        const page = 1;
+
+        final songDTO = [
+          mockSongDTO(1),
+          mockSongDTO(2),
+        ];
+
+        when(() => mockSearchedSongRemoteService.getSearchedSongsPage('query', page)).thenAnswer((_) {
+          return Future.value(
+            const RemoteResponse<List<SongDTO>>.notModified(),
+          );
+        });
+
+        final searchedSongRepository =
+            SearchedSongsRepository(mockSearchedSongRemoteService, mockFavoriteSongLocalService);
+
+        final actualResult = await searchedSongRepository.getSearchedSongsPage('query', page);
+        final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
+
+        expect(actualResult, expectedResult);
+        // set else to fresh true to fail if it doesnt get value
+        expect(
+          actualResult.getOrElse(() => Fresh.yes([])),
+          const Fresh<List<Song>>(entity: [], isFresh: false, isNextPageAvailable: false),
+        );
       });
     });
   });

@@ -38,14 +38,10 @@ class SearchedSongsRepository {
       return right(
         remotePageItems.maybeWhen(
           noConnection: () {
-            if (localDTO == null) {
-              return Fresh.no([], isNextPageAvailable: false);
-            } else {
-              return Fresh.no(
-                localDTO,
-                isNextPageAvailable: localPage,
-              );
-            }
+            return Fresh.no(
+              localDTO!,
+              isNextPageAvailable: localPage ?? false,
+            );
           },
           withNewData: (data, maxPage) => Fresh.yes(
             data.toDomain(),
