@@ -7,9 +7,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
-import 'package:joyful_noise/core/shared/providers.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart';
 
 class FavoriteSongsPage extends ConsumerStatefulWidget {
@@ -30,6 +30,62 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // drawer: Drawer(
+      //   // Add a ListView to the drawer. This ensures the user can scroll
+      //   // through the options in the drawer if there isn't enough vertical
+      //   // space to fit everything.
+      //   child: ListView(
+      //     // Important: Remove any padding from the ListView.
+      //     padding: EdgeInsets.zero,
+      //     children: [
+      //       DrawerHeader(
+      //         child: WebsafeSvg.asset('assets/logo.svg'),
+      //       ),
+      //       ListTile(
+      //         title: const Text('Athens Song Book'),
+      //         onTap: () {
+      //           // Update the state of the app.
+      //           // ...
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('English Hymnal'),
+      //         onTap: () {
+      //           // Update the state of the app.
+      //           // ...
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('Blue Songbook'),
+      //         onTap: () {
+      //           // Update the state of the app.
+      //           // ...
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('Himnos'),
+      //         onTap: () {
+      //           // Update the state of the app.
+      //           // ...
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('Liederbuch'),
+      //         onTap: () {
+      //           // Update the state of the app.
+      //           // ...
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('Cantiques'),
+      //         onTap: () {
+      //           // Update the state of the app.
+      //           // ...
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: SearchBar(
         title: 'Favorite Songs',
         hint: 'Search all songs...',
@@ -41,15 +97,22 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
         onSignOutButtonPressed: () {
           ref.read(authNotifierProvider.notifier).signOut();
         },
-        body: PaginatedSongsListView(
-          paginatedSongsNotifierProvider: favoriteSongsNotifierProvider,
-          // coverage:ignore-start
-          getNextPage: (ref, context) {
-            // unable to mock this so this line isn't tested.
-            ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
+        body: RefreshIndicator(
+          onRefresh: () {
+            return Future.microtask(() {
+              ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
+            });
           },
-          // coverage:ignore-end
-          noResultsMessage: "That's everything we could find in your favorite songs right now.",
+          child: PaginatedSongsListView(
+            paginatedSongsNotifierProvider: favoriteSongsNotifierProvider,
+            // coverage:ignore-start
+            getNextPage: (ref, context) {
+              // unable to mock this so this line isn't tested.
+              ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
+            },
+            // coverage:ignore-end
+            noResultsMessage: "That's everything we could find in your favorite songs right now.",
+          ),
         ),
       ),
     );

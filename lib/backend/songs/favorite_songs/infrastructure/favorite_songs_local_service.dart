@@ -20,16 +20,16 @@ class FavoriteSongsLocalService {
 
   Future<void> upsertPage(List<SongDTO> dtos, int page) async {
     final sembastPage = page - 1;
-
+    final nonDuplicatedDto = dtos.toSet().toList();
     await store
         .records(
-          dtos.mapIndexed(
+          nonDuplicatedDto.mapIndexed(
             (index, _) => index + PaginationConfig.itemsPerPage * sembastPage,
           ),
         )
         .put(
           _sembastDatabase.instance,
-          dtos.map((e) => e.toJson()).toList(),
+          nonDuplicatedDto.map((e) => e.toJson()).toList(),
         );
   }
 
@@ -43,7 +43,7 @@ class FavoriteSongsLocalService {
         offset: PaginationConfig.itemsPerPage * sembastPage,
       ),
     );
-    return records.map((e) => SongDTO.fromJson(e.value)).toList();
+    return records.map((e) => SongDTO.fromJson(e.value)).toSet().toList();
   }
 
   Future<int> getLocalPageCount() async {

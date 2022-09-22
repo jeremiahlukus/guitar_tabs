@@ -92,8 +92,6 @@ void main() {
         const page = 1;
         final defaultSong = [MockSong()];
 
-        // TODO(jeremiah): need to start at page 2 then make sure the paage is reset to 1
-
         when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(
           (invocation) => Future.value(right(Fresh.yes(defaultSong))),
         );

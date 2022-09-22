@@ -12,7 +12,7 @@ import '../../../utils/golden_test_device_scenario.dart';
 
 void main() {
   group('NoResultsDisplay', () {
-    testWidgets('contains the artist and title text in a ListTile', (tester) async {
+    testWidgets('contains no results text', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(

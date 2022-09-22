@@ -10,6 +10,7 @@ import 'package:mocktail/mocktail.dart';
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/core/presentation/no_results_display.dart';
+import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/failure_song_tile.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/loading_song_tile.dart';
@@ -18,7 +19,6 @@ import 'package:joyful_noise/backend/songs/core/presentation/song_tile.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_song_notifier.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
-import 'package:joyful_noise/core/shared/providers.dart';
 import '../../../../_mocks/song/mock_song.dart';
 
 class MockPaginatedSongsNotifier extends Mock implements PaginatedSongsNotifier {}

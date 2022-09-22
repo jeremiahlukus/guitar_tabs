@@ -24,7 +24,6 @@ import 'package:joyful_noise/backend/songs/searched_songs/infrastructure/searche
 import 'package:joyful_noise/backend/songs/searched_songs/notifiers/searched_songs_notifier.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
-import 'package:joyful_noise/core/shared/providers.dart';
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';
 import 'package:joyful_noise/search/notifiers/search_history_notifier.dart';
 import 'package:joyful_noise/search/shared/providers.dart';
@@ -112,7 +111,7 @@ Widget buildWidgetUnderTest() {
       routerDelegate: AutoRouterDelegate(
         router,
         navigatorObservers: () => [mockObserver],
-        initialDeepLink: DashboardRoute.name,
+        initialDeepLink: FavoriteSongsRoute.name,
       ),
       routeInformationParser: AppRouter().defaultRouteParser(),
     ),

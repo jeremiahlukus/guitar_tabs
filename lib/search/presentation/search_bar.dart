@@ -11,6 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 // Project imports:
+import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/shared/providers.dart';
 
 // coverage:ignore-start
@@ -104,7 +105,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
             icon: const Icon(Icons.arrow_back_ios),
             splashRadius: 18,
             onPressed: () {
-              AutoRouter.of(context).pop();
+              AutoRouter.of(context).popUntilRouteWithName(FavoriteSongsRoute.name);
             },
           )
         else if (AutoRouter.of(context).canPopSelfOrChildren)
