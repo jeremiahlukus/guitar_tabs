@@ -126,11 +126,6 @@ void main() {
         final FavoriteSongsLocalService mockFavoriteSongLocalService = MockFavoriteSongLocalService();
         const page = 1;
 
-        final songDTO = [
-          mockSongDTO(1),
-          mockSongDTO(2),
-        ];
-
         when(() => mockSearchedSongRemoteService.getSearchedSongsPage('query', page)).thenAnswer((_) {
           return Future.value(
             const RemoteResponse<List<SongDTO>>.notModified(),
