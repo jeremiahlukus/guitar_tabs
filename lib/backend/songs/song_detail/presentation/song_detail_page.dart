@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:dio/dio.dart';
 import 'package:flutter_chord/flutter_chord.dart';
 import 'package:flutter_guitar_tabs/flutter_guitar_tabs.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,8 +10,6 @@ import 'package:shimmer/shimmer.dart';
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
-import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detail_remote_service.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class SongDetailPage extends ConsumerStatefulWidget {
   final Song song;
@@ -34,6 +31,20 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   int transposeIncrement = 0;
   int scrollSpeed = 0;
 
+  @visibleForTesting
+  static const transposeIncrementKey = ValueKey('transposeIncrement');
+  @visibleForTesting
+  static const transposeDecrementKey = ValueKey('transposeDecrement');
+
+  @visibleForTesting
+  static const scrollSpeedIncrementKey = ValueKey('scrollSpeedIncrement');
+
+  @visibleForTesting
+  static const scrollSpeedDecrementKey = ValueKey('scrollSpeedDecrement');
+
+  @visibleForTesting
+  static const favoriteKey = ValueKey('favorite');
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(songDetailNotifierProvider);
@@ -52,6 +63,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
             ),
             loadSuccess: (state) {
               return ElevatedButton.icon(
+                key: favoriteKey,
                 label: const Text('Favorite'),
                 onPressed: !state.songDetail.isFresh
                     ? null
@@ -78,6 +90,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   Row(
                     children: [
                       ElevatedButton(
+                        key: transposeDecrementKey,
                         onPressed: () {
                           setState(() {
                             transposeIncrement--;
@@ -89,6 +102,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                       Text('$transposeIncrement'),
                       const SizedBox(width: 5),
                       ElevatedButton(
+                        key: transposeIncrementKey,
                         onPressed: () {
                           setState(() {
                             transposeIncrement++;
@@ -106,6 +120,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   Row(
                     children: [
                       ElevatedButton(
+                        key: scrollSpeedDecrementKey,
                         onPressed: scrollSpeed <= 0
                             ? null
                             : () {
@@ -119,6 +134,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                       Text('$scrollSpeed'),
                       const SizedBox(width: 5),
                       ElevatedButton(
+                        key: scrollSpeedIncrementKey,
                         onPressed: () {
                           setState(() {
                             scrollSpeed = scrollSpeed + 2;
@@ -140,11 +156,10 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
               child: LyricsRenderer(
                 lyrics: widget.song.lyrics,
                 textStyle: Theme.of(context).textTheme.bodyMedium!,
-                chordStyle: Theme.of(context).textTheme.titleMedium!,
+                chordStyle: Theme.of(context).textTheme.titleSmall!,
                 onTapChord: (String chord) async {
                   final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
                   if (tabs!.isNotEmpty && tabs.first != '') {
-                    logger.e(tabs);
                     return showDialog<void>(
                       context: context,
                       barrierDismissible: false, // user must tap button!
@@ -190,15 +205,15 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                     style: chordStyle,
                   ),
                 ),
-                trailingWidget: widget.song.url.isNotEmpty
-                    ? TextButton(
-                        child: Text(
-                          'Listen now',
-                          style: chordStyle,
-                        ),
-                        onPressed: () {},
-                      )
-                    : Container(),
+                // trailingWidget: widget.song.url.isNotEmpty
+                //     ? TextButton(
+                //         child: Text(
+                //           'Listen now',
+                //           style: chordStyle,
+                //         ),
+                //         onPressed: () {},
+                //       )
+                //     : Container(),
               ),
             ),
           )
