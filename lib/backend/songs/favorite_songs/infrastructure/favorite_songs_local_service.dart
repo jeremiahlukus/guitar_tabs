@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:collection/collection.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:sembast/sembast.dart';
 
 // Project imports:
