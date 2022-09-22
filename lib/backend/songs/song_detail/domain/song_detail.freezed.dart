@@ -20,12 +20,15 @@ mixin _$SongDetail {
   String get songId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SongDetailCopyWith<SongDetail> get copyWith => throw _privateConstructorUsedError;
+  $SongDetailCopyWith<SongDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SongDetailCopyWith<$Res> {
-  factory $SongDetailCopyWith(SongDetail value, $Res Function(SongDetail) then) = _$SongDetailCopyWithImpl<$Res>;
+  factory $SongDetailCopyWith(
+          SongDetail value, $Res Function(SongDetail) then) =
+      _$SongDetailCopyWithImpl<$Res>;
   $Res call({bool isFavorite, String songId});
 }
 
@@ -56,16 +59,20 @@ class _$SongDetailCopyWithImpl<$Res> implements $SongDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_SongDetailCopyWith<$Res> implements $SongDetailCopyWith<$Res> {
-  factory _$$_SongDetailCopyWith(_$_SongDetail value, $Res Function(_$_SongDetail) then) =
+abstract class _$$_SongDetailCopyWith<$Res>
+    implements $SongDetailCopyWith<$Res> {
+  factory _$$_SongDetailCopyWith(
+          _$_SongDetail value, $Res Function(_$_SongDetail) then) =
       __$$_SongDetailCopyWithImpl<$Res>;
   @override
   $Res call({bool isFavorite, String songId});
 }
 
 /// @nodoc
-class __$$_SongDetailCopyWithImpl<$Res> extends _$SongDetailCopyWithImpl<$Res> implements _$$_SongDetailCopyWith<$Res> {
-  __$$_SongDetailCopyWithImpl(_$_SongDetail _value, $Res Function(_$_SongDetail) _then)
+class __$$_SongDetailCopyWithImpl<$Res> extends _$SongDetailCopyWithImpl<$Res>
+    implements _$$_SongDetailCopyWith<$Res> {
+  __$$_SongDetailCopyWithImpl(
+      _$_SongDetail _value, $Res Function(_$_SongDetail) _then)
       : super(_value, (v) => _then(v as _$_SongDetail));
 
   @override
@@ -92,7 +99,8 @@ class __$$_SongDetailCopyWithImpl<$Res> extends _$SongDetailCopyWithImpl<$Res> i
 /// @nodoc
 
 class _$_SongDetail extends _SongDetail {
-  const _$_SongDetail({required this.isFavorite, required this.songId}) : super._();
+  const _$_SongDetail({required this.isFavorite, required this.songId})
+      : super._();
 
   @override
   final bool isFavorite;
@@ -109,21 +117,27 @@ class _$_SongDetail extends _SongDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SongDetail &&
-            const DeepCollectionEquality().equals(other.isFavorite, isFavorite) &&
+            const DeepCollectionEquality()
+                .equals(other.isFavorite, isFavorite) &&
             const DeepCollectionEquality().equals(other.songId, songId));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(isFavorite), const DeepCollectionEquality().hash(songId));
+      runtimeType,
+      const DeepCollectionEquality().hash(isFavorite),
+      const DeepCollectionEquality().hash(songId));
 
   @JsonKey(ignore: true)
   @override
-  _$$_SongDetailCopyWith<_$_SongDetail> get copyWith => __$$_SongDetailCopyWithImpl<_$_SongDetail>(this, _$identity);
+  _$$_SongDetailCopyWith<_$_SongDetail> get copyWith =>
+      __$$_SongDetailCopyWithImpl<_$_SongDetail>(this, _$identity);
 }
 
 abstract class _SongDetail extends SongDetail {
-  const factory _SongDetail({required final bool isFavorite, required final String songId}) = _$_SongDetail;
+  const factory _SongDetail(
+      {required final bool isFavorite,
+      required final String songId}) = _$_SongDetail;
   const _SongDetail._() : super._();
 
   @override
@@ -132,5 +146,6 @@ abstract class _SongDetail extends SongDetail {
   String get songId;
   @override
   @JsonKey(ignore: true)
-  _$$_SongDetailCopyWith<_$_SongDetail> get copyWith => throw _privateConstructorUsedError;
+  _$$_SongDetailCopyWith<_$_SongDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -89,7 +89,7 @@ Widget buildWidgetUnderTest() {
   final mockFavoriteSongsNotifierProvider = AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
     (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
   );
-  router.push(const FavoriteSongsRoute());
+   router.push(const FavoriteSongsRoute());
 
   return ProviderScope(
     overrides: [

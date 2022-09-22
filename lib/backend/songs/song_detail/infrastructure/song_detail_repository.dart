@@ -20,9 +20,7 @@ class SongDetailRepository {
       final remoteResponse = await _remoteService.getFavoriteStatus(songId);
       return right(
         await remoteResponse.maybeWhen(
-          // only care about new data throw everything else
-          // ignore: only_throw_errors
-          orElse: () => throw RestApiException(400),
+          orElse: () => Fresh.no(null),
           withNewData: (data, _) async {
             return Fresh.yes(data.toDomain());
           },

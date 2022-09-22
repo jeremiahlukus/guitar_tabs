@@ -13,17 +13,18 @@ import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_lis
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart';
 
-class FavoriteSongsPage extends ConsumerStatefulWidget {
-  const FavoriteSongsPage({Key? key}) : super(key: key);
+class PlaylistSongsPage extends ConsumerStatefulWidget {
+  final String playlistName;
+  const PlaylistSongsPage({Key? key, required this.playlistName}) : super(key: key);
 
   @override
-  FavoriteSongsPageState createState() => FavoriteSongsPageState();
+  PlaylistSongsPageState createState() => PlaylistSongsPageState();
 }
 
-class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
+class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
   @override
   void initState() {
-    ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
+    ref.read(playlistSongsNotifierProvider.notifier).getFirstPlaylistSongsPage(widget.playlistName);
     super.initState();
   }
 
@@ -43,22 +44,15 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
         onSignOutButtonPressed: () {
           ref.read(authNotifierProvider.notifier).signOut();
         },
-        body: RefreshIndicator(
-          onRefresh: () {
-            return Future.microtask(() {
-              ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
-            });
+        body: PaginatedSongsListView(
+          paginatedSongsNotifierProvider: playlistSongsNotifierProvider,
+          // coverage:ignore-start
+          getNextPage: (ref, context) {
+            // unable to mock this so this line isn't tested.
+            ref.read(playlistSongsNotifierProvider.notifier).getNextPlaylistSongsPage(widget.playlistName);
           },
-          child: PaginatedSongsListView(
-            paginatedSongsNotifierProvider: favoriteSongsNotifierProvider,
-            // coverage:ignore-start
-            getNextPage: (ref, context) {
-              // unable to mock this so this line isn't tested.
-              ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
-            },
-            // coverage:ignore-end
-            noResultsMessage: "That's everything we could find in your favorite songs right now.",
-          ),
+          // coverage:ignore-end
+          noResultsMessage: "That's everything we could find in your favorite songs right now.",
         ),
       ),
     );

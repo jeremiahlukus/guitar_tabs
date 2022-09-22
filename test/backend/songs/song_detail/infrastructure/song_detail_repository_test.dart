@@ -32,7 +32,7 @@ void main() {
         expect(actualResult, expectedResult);
       });
 
-      test('returns Left<BackendFailure, Fresh<List<Song>>> when no connection', () async {
+      test('returns Right<BackendFailure, Fresh<List<Song>>> when not withNewData', () async {
         final SongDetailRemoteService mockFavoriteSongRemoteService = MockSongDetailRemoteService();
         const page = 1;
         when(() => mockFavoriteSongRemoteService.getFavoriteStatus(page)).thenAnswer((_) {
@@ -42,9 +42,13 @@ void main() {
         final favoriteSongRepository = SongDetailRepository(mockFavoriteSongRemoteService);
 
         final actualResult = await favoriteSongRepository.getSongDetail(page);
-        final expectedResult = isA<Left<BackendFailure, Fresh<SongDetail?>>>();
+        final expectedResult = isA<Right<BackendFailure, Fresh<SongDetail?>>>();
 
         expect(actualResult, expectedResult);
+        expect(
+          actualResult.getOrElse(() => Fresh.yes(const SongDetail(isFavorite: false, songId: '1'))),
+          Fresh<SongDetail?>.no(null),
+        );
       });
 
       test(
