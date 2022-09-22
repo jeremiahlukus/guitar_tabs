@@ -46,6 +46,12 @@ class FavoriteSongsLocalService {
     return records.map((e) => SongDTO.fromJson(e.value)).toSet().toList();
   }
 
+  Future<List<SongDTO>> searchLocalSongs(String query) async {
+    final finder = Finder(filter: Filter.matches('lyrics', query));
+    final records = await store.find(_sembastDatabase.instance, finder: finder);
+    return records.map((e) => SongDTO.fromJson(e.value)).toSet().toList();
+  }
+
   Future<int> getLocalPageCount() async {
     final songCount = await store.count(_sembastDatabase.instance);
     return (songCount / PaginationConfig.itemsPerPage).ceil();
