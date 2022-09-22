@@ -10,6 +10,7 @@ import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorit
 import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_remote_service.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class PlaylistSongsRepository {
   final PlaylistSongsRemoteService _remoteService;
@@ -22,6 +23,7 @@ class PlaylistSongsRepository {
   ) async {
     try {
       final remotePageItems = await _remoteService.getPlaylistSongsPage(page, playlistName);
+      logger.e(remotePageItems);
       return right(
         await remotePageItems.maybeWhen(
           orElse: () => Fresh.no([]),

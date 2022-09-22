@@ -1,4 +1,4 @@
-// Flutter imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 class SongDrawer extends ConsumerWidget {
@@ -33,38 +34,38 @@ class SongDrawer extends ConsumerWidget {
             },
           ),
           ListTile(
-            title: const Text('English Hymnal'),
+            title: const Text('Hymnal'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Hymnal'));
+              Navigator.of(context).pop();
             },
           ),
           ListTile(
             title: const Text('Blue Songbook'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Blue Songbook'));
+              Navigator.of(context).pop();
             },
           ),
           ListTile(
             title: const Text('Himnos'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Himnos'));
+              Navigator.of(context).pop();
             },
           ),
           ListTile(
             title: const Text('Liederbuch'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Liederbuch'));
+              Navigator.of(context).pop();
             },
           ),
           ListTile(
             title: const Text('Cantiques'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Cantiques'));
+              Navigator.of(context).pop();
             },
           ),
         ],

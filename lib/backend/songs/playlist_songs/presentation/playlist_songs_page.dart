@@ -32,7 +32,6 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const SongDrawer(),
       body: SearchBar(
         title: 'Favorite Songs',
         hint: 'Search all songs...',
