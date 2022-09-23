@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:dartz/dartz.dart';
+import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -11,6 +12,8 @@ import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorit
 import 'package:joyful_noise/core/domain/fresh.dart';
 
 class MockSongsRepository extends Mock implements FavoriteSongsRepository {}
+
+class MockPlaylistSongsRepository extends Mock implements PlaylistSongsRepository {}
 
 class MockSong extends Mock implements Song {}
 
@@ -98,6 +101,65 @@ void main() {
         );
 
         await paginatedSongNotifier.getNextPage(mockFavoriteSongRepository.getFavoritePage);
+
+        // ignore: invalid_use_of_protected_member
+        final actualStateResult = paginatedSongNotifier.state;
+
+        final expectedStateResultMatcher =
+            equals(PaginatedSongsState.loadSuccess(Fresh.yes(songs), isNextPageAvailable: false));
+
+        expect(actualStateResult, expectedStateResultMatcher);
+      });
+    });
+    group('.getNextPlaylistPage', () {
+      test(
+          'sets state to the state to PaginatedSongsState.loadFailure if PlaylistSongRepository.getNextPlaylistPage returns a BackendFailure',
+          () async {
+        final PlaylistSongsRepository mockFavoriteSongRepository = MockPlaylistSongsRepository();
+        const page = 1;
+        const playlistName = 'test';
+        when(() => mockFavoriteSongRepository.getPlaylistSong(page, playlistName)).thenAnswer(
+          (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+        );
+        final paginatedSongNotifier = PaginatedSongsNotifier();
+        final songs = [MockSong(), MockSong()];
+
+        // ignore: invalid_use_of_protected_member
+        paginatedSongNotifier.state = paginatedSongNotifier.state.copyWith(songs: Fresh.yes(songs));
+        await paginatedSongNotifier
+            .getNextPage((page) => mockFavoriteSongRepository.getPlaylistSong(page, playlistName));
+
+        // ignore: invalid_use_of_protected_member
+        final actualStateResult = paginatedSongNotifier.state;
+
+        final expectedStateResultMatcher = equals(
+          PaginatedSongsState.loadFailure(
+            Fresh.yes(songs),
+            const BackendFailure.api(400, 'message'),
+          ),
+        );
+
+        expect(actualStateResult, expectedStateResultMatcher);
+      });
+      test(
+          'sets state to PaginatedSongsState.loadSuccess if FavoriteSongRepository.getFavoritePage returns a List<Song>',
+          () async {
+        final PlaylistSongsRepository mockFavoriteSongRepository = MockPlaylistSongsRepository();
+        const page = 1;
+        const playlistName = 'test';
+        final paginatedSongNotifier = PaginatedSongsNotifier();
+        final songs = [MockSong(), MockSong()];
+        when(() => mockFavoriteSongRepository.getPlaylistSong(page, playlistName)).thenAnswer(
+          (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+        );
+        when(() => mockFavoriteSongRepository.getPlaylistSong(page, playlistName)).thenAnswer(
+          (invocation) => Future.value(
+            right(Fresh.yes(songs)),
+          ),
+        );
+
+        await paginatedSongNotifier
+            .getNextPage((page) => mockFavoriteSongRepository.getPlaylistSong(page, playlistName));
 
         // ignore: invalid_use_of_protected_member
         final actualStateResult = paginatedSongNotifier.state;

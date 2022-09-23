@@ -12,6 +12,7 @@ import 'package:joyful_noise/backend/songs/core/presentation/drawer.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart';
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 
 class PlaylistSongsPage extends ConsumerStatefulWidget {
   final String playlistName;
@@ -33,7 +34,7 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SearchBar(
-        title: 'Favorite Songs',
+        title: '${toBeginningOfSentenceCase(widget.playlistName)} Songs',
         hint: 'Search all songs...',
         // coverage:ignore-start
         onShouldNavigateToResultPage: (searchTerm) {
@@ -51,7 +52,7 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
             ref.read(playlistSongsNotifierProvider.notifier).getNextPlaylistSongsPage(widget.playlistName);
           },
           // coverage:ignore-end
-          noResultsMessage: "That's everything we could find in your favorite songs right now.",
+          noResultsMessage: "That's everything we could find right now.",
         ),
       ),
     );

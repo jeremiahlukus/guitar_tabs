@@ -23,7 +23,6 @@ class PlaylistSongsRepository {
   ) async {
     try {
       final remotePageItems = await _remoteService.getPlaylistSongsPage(page, playlistName);
-      logger.e(remotePageItems);
       return right(
         await remotePageItems.maybeWhen(
           orElse: () => Fresh.no([]),
