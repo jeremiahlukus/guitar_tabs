@@ -11,6 +11,7 @@ import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 
 class SongDrawer extends ConsumerWidget {
   const SongDrawer({Key? key}) : super(key: key);
+  static const drawerKey = ValueKey('drawerKey');
   static const athensSongBook = ValueKey('athensSongBook');
   static const hymnal = ValueKey('hymnal');
   static const blueSongbook = ValueKey('blueSongbook');
@@ -20,6 +21,7 @@ class SongDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
+      key: drawerKey,
       // Add a ListView to the drawer. This ensures the user can scroll
       // through the options in the drawer if there isn't enough vertical
       // space to fit everything.
@@ -34,8 +36,8 @@ class SongDrawer extends ConsumerWidget {
             key: athensSongBook,
             title: const Text('Athens Song Book'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Athens Song Book'));
+              Navigator.of(context).pop();
             },
           ),
           ListTile(

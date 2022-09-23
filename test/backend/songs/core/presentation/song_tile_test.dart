@@ -54,7 +54,7 @@ void main() {
       expect(find.text('new 1'), findsOneWidget);
     });
 
-    testWidgets('contains the PaginatedSongsListView widget', (tester) async {
+    testWidgets('taping on songDetailButton navigates to song detail page', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
       final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
       final router = AppRouter();
@@ -85,7 +85,7 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
-      final favoriteSongsButton = find.byKey(SongTile.favoriteSongButtonKey).first;
+      final favoriteSongsButton = find.byKey(SongTile.songDetailButtonKey).first;
 
       await tester.tap(favoriteSongsButton);
       await tester.pumpAndSettle();

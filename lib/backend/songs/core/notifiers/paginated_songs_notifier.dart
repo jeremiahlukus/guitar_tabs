@@ -66,27 +66,4 @@ class PaginatedSongsNotifier extends StateNotifier<PaginatedSongsState> {
       },
     );
   }
-
-  Future<void> getNextPlaylistPage(SongGetter getter) async {
-    state = PaginatedSongsState.loadInProgress(
-      state.songs,
-      PaginationConfig.itemsPerPage,
-    );
-    final failureOrSongs = await getter(page);
-    state = failureOrSongs.fold(
-      (l) => PaginatedSongsState.loadFailure(state.songs, l),
-      (r) {
-        page++;
-        return PaginatedSongsState.loadSuccess(
-          r.copyWith(
-            entity: [
-              ...state.songs.entity,
-              ...r.entity,
-            ],
-          ),
-          isNextPageAvailable: r.isNextPageAvailable ?? false,
-        );
-      },
-    );
-  }
 }

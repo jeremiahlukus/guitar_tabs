@@ -13,13 +13,13 @@ class SongTile extends StatelessWidget {
 
   const SongTile({Key? key, required this.song}) : super(key: key);
 
-  static const favoriteSongButtonKey = ValueKey('favoriteSongButtonKey');
+  static const songDetailButtonKey = ValueKey('songDetailButtonKey');
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListTile(
-          key: favoriteSongButtonKey,
+          key: songDetailButtonKey,
           onTap: () {
             AutoRouter.of(context).push(
               SongDetailRoute(song: song),

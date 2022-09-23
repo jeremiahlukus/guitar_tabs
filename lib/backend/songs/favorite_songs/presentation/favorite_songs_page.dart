@@ -28,9 +28,13 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   }
 
   static const signOutButtonKey = ValueKey('signOutButtonKey');
+
+  @visibleForTesting
+  static final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       drawer: const SongDrawer(),
       body: SearchBar(
         title: 'Favorite Songs',
