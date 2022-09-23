@@ -12,7 +12,12 @@ import 'package:websafe_svg/websafe_svg.dart';
 
 class SongDrawer extends ConsumerWidget {
   const SongDrawer({Key? key}) : super(key: key);
-
+  static const athensSongBook = ValueKey('athensSongBook');
+  static const hymnal = ValueKey('hymnal');
+  static const blueSongbook = ValueKey('blueSongbook');
+  static const himnos = ValueKey('himnos');
+  static const liederbuch = ValueKey('liederbuch');
+  static const cantiques = ValueKey('cantiques');
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
@@ -27,6 +32,7 @@ class SongDrawer extends ConsumerWidget {
             child: WebsafeSvg.asset('assets/logo.svg'),
           ),
           ListTile(
+            key: athensSongBook,
             title: const Text('Athens Song Book'),
             onTap: () {
               // Update the state of the app.
@@ -34,6 +40,7 @@ class SongDrawer extends ConsumerWidget {
             },
           ),
           ListTile(
+            key: hymnal,
             title: const Text('Hymnal'),
             onTap: () {
               AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Hymnal'));
@@ -41,6 +48,7 @@ class SongDrawer extends ConsumerWidget {
             },
           ),
           ListTile(
+            key: blueSongbook,
             title: const Text('Blue Songbook'),
             onTap: () {
               AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Blue Songbook'));
@@ -48,6 +56,7 @@ class SongDrawer extends ConsumerWidget {
             },
           ),
           ListTile(
+            key: himnos,
             title: const Text('Himnos'),
             onTap: () {
               AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Himnos'));
@@ -55,6 +64,7 @@ class SongDrawer extends ConsumerWidget {
             },
           ),
           ListTile(
+            key: liederbuch,
             title: const Text('Liederbuch'),
             onTap: () {
               AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Liederbuch'));
@@ -62,6 +72,7 @@ class SongDrawer extends ConsumerWidget {
             },
           ),
           ListTile(
+            key: cantiques,
             title: const Text('Cantiques'),
             onTap: () {
               AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Cantiques'));
