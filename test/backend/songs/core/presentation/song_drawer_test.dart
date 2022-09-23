@@ -3,15 +3,11 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:alchemist/alchemist.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
-import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
-import 'package:joyful_noise/backend/core/shared/providers.dart';
-import 'package:joyful_noise/backend/songs/core/presentation/failure_song_tile.dart';
+import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_song_notifier.dart';
 import '../../../../utils/device.dart';
 import '../../../../utils/golden_test_device_scenario.dart';

@@ -1,7 +1,5 @@
 // Package imports:
 import 'package:dartz/dartz.dart';
-import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_remote_service.dart';
-import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -9,9 +7,8 @@ import 'package:test/test.dart';
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
-import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_local_service.dart';
-import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_remote_service.dart';
-import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
+import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_remote_service.dart';
+import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_repository.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
@@ -46,11 +43,6 @@ void main() {
         const playlistName = 'test';
         const page = 1;
 
-        final songDTO = [
-          mockSongDTO(1),
-          mockSongDTO(2),
-        ];
-
         when(() => mockPlaylistSongRemoteService.getPlaylistSongsPage(page, playlistName)).thenAnswer((_) {
           return Future.value(const RemoteResponse<List<SongDTO>>.noConnection());
         });
@@ -70,11 +62,6 @@ void main() {
 
         const playlistName = 'test';
         const page = 1;
-
-        final songDTO = [
-          mockSongDTO(1),
-          mockSongDTO(2),
-        ];
 
         when(() => mockPlaylistSongRemoteService.getPlaylistSongsPage(page, playlistName)).thenAnswer((_) {
           return Future.value(const RemoteResponse<List<SongDTO>>.notModified());

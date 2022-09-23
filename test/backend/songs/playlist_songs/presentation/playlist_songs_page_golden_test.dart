@@ -9,8 +9,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_repository.dart';
-import 'package:joyful_noise/backend/songs/playlist_songs/notifiers/playlist_songs_notifier.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
@@ -22,8 +20,8 @@ import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
 import 'package:joyful_noise/backend/core/notifiers/user_notifier.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
-import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
-import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_song_notifier.dart';
+import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_repository.dart';
+import 'package:joyful_noise/backend/songs/playlist_songs/notifiers/playlist_songs_notifier.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';

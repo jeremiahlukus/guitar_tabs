@@ -2,7 +2,6 @@
 
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_remote_service.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -10,6 +9,7 @@ import 'package:test/test.dart';
 import 'package:joyful_noise/backend/core/infrastructure/backend_headers.dart';
 import 'package:joyful_noise/backend/core/infrastructure/backend_headers_cache.dart';
 import 'package:joyful_noise/backend/core/infrastructure/song_dto.dart';
+import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_remote_service.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
 import '../../../../_mocks/song/mock_song.dart';
 

@@ -1,14 +1,13 @@
-import 'package:auto_route/auto_route.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:websafe_svg/websafe_svg.dart';
 
 // Project imports:
-import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
-import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
-import 'package:websafe_svg/websafe_svg.dart';
 
 class SongDrawer extends ConsumerWidget {
   const SongDrawer({Key? key}) : super(key: key);
