@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
+import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart';
 
@@ -27,65 +28,14 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   }
 
   static const signOutButtonKey = ValueKey('signOutButtonKey');
+
+  @visibleForTesting
+  static final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: Drawer(
-      //   // Add a ListView to the drawer. This ensures the user can scroll
-      //   // through the options in the drawer if there isn't enough vertical
-      //   // space to fit everything.
-      //   child: ListView(
-      //     // Important: Remove any padding from the ListView.
-      //     padding: EdgeInsets.zero,
-      //     children: [
-      //       DrawerHeader(
-      //         child: WebsafeSvg.asset('assets/logo.svg'),
-      //       ),
-      //       ListTile(
-      //         title: const Text('Athens Song Book'),
-      //         onTap: () {
-      //           // Update the state of the app.
-      //           // ...
-      //         },
-      //       ),
-      //       ListTile(
-      //         title: const Text('English Hymnal'),
-      //         onTap: () {
-      //           // Update the state of the app.
-      //           // ...
-      //         },
-      //       ),
-      //       ListTile(
-      //         title: const Text('Blue Songbook'),
-      //         onTap: () {
-      //           // Update the state of the app.
-      //           // ...
-      //         },
-      //       ),
-      //       ListTile(
-      //         title: const Text('Himnos'),
-      //         onTap: () {
-      //           // Update the state of the app.
-      //           // ...
-      //         },
-      //       ),
-      //       ListTile(
-      //         title: const Text('Liederbuch'),
-      //         onTap: () {
-      //           // Update the state of the app.
-      //           // ...
-      //         },
-      //       ),
-      //       ListTile(
-      //         title: const Text('Cantiques'),
-      //         onTap: () {
-      //           // Update the state of the app.
-      //           // ...
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      key: scaffoldKey,
+      drawer: const SongDrawer(),
       body: SearchBar(
         title: 'Favorite Songs',
         hint: 'Search all songs...',

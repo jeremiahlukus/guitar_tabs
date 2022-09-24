@@ -8,9 +8,12 @@ import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
 import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
+import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_repository.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 
 class MockSongsRepository extends Mock implements FavoriteSongsRepository {}
+
+class MockPlaylistSongsRepository extends Mock implements PlaylistSongsRepository {}
 
 class MockSong extends Mock implements Song {}
 

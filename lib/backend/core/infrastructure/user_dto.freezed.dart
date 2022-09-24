@@ -133,9 +133,7 @@ class _$_UserDTO extends _UserDTO {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserDTOToJson(
-      this,
-    );
+    return _$$_UserDTOToJson(this);
   }
 }
 
