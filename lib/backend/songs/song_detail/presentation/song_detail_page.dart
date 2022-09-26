@@ -29,6 +29,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   @override
   void initState() {
     ref.read(songDetailNotifierProvider.notifier).getSongDetail(widget.song.id);
+    _init();
     super.initState();
   }
 
@@ -63,7 +64,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   Future<void> _init() async {
     // Listen to errors during playback.
     _player.playbackEventStream.listen((event) {}, onError: (Object e, StackTrace stackTrace) {
-      print('A stream error occurred: $e');
+      logger.e('A stream error occurred: $e');
     });
     // Try to load audio from a source and catch any errors.
     try {
@@ -80,6 +81,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
       _player.bufferedPositionStream,
       _player.durationStream,
       (position, bufferedPosition, duration) => PositionData(position, bufferedPosition, duration ?? Duration.zero));
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(songDetailNotifierProvider);
