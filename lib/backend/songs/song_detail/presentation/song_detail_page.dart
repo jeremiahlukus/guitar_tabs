@@ -1,10 +1,16 @@
 // Flutter imports:
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_chord/flutter_chord.dart';
 import 'package:flutter_guitar_tabs/flutter_guitar_tabs.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:joyful_noise/backend/songs/song_detail/presentation/audio_control_buttons.dart';
+import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:shimmer/shimmer.dart';
 
 // Project imports:
@@ -30,6 +36,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   final textStyle = const TextStyle(fontSize: 18);
   int transposeIncrement = 0;
   int scrollSpeed = 0;
+  final _player = AudioPlayer();
 
   @visibleForTesting
   static const transposeIncrementKey = ValueKey('transposeIncrement');
@@ -45,6 +52,34 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   @visibleForTesting
   static const favoriteKey = ValueKey('favorite');
 
+  @override
+  void dispose() {
+    // Release decoders and buffers back to the operating system making them
+    // available for other apps to use.
+    _player.dispose();
+    super.dispose();
+  }
+
+  Future<void> _init() async {
+    // Listen to errors during playback.
+    _player.playbackEventStream.listen((event) {}, onError: (Object e, StackTrace stackTrace) {
+      print('A stream error occurred: $e');
+    });
+    // Try to load audio from a source and catch any errors.
+    try {
+      if (widget.song.url.isNotEmpty) {
+        await _player.setAudioSource(AudioSource.uri(Uri.parse(widget.song.url)));
+      }
+    } catch (e) {
+      logger.e('Error loading audio source: $e');
+    }
+  }
+
+  Stream<PositionData> get _positionDataStream => Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
+      _player.positionStream,
+      _player.bufferedPositionStream,
+      _player.durationStream,
+      (position, bufferedPosition, duration) => PositionData(position, bufferedPosition, duration ?? Duration.zero));
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(songDetailNotifierProvider);
@@ -196,24 +231,39 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                 widgetPadding: 50,
                 lineHeight: 4,
                 horizontalAlignment: CrossAxisAlignment.start,
-                leadingWidget: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                  ),
-                  child: Text(
-                    'Title: ${widget.song.title}',
-                    style: chordStyle,
-                  ),
+                leadingWidget: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 16,
+                      ),
+                      child: AutoSizeText(
+                        widget.song.title,
+                        maxLines: 1,
+                        style: chordStyle,
+                      ),
+                    ),
+                    widget.song.url.isNotEmpty
+                        ? Column(
+                            children: [
+                              ControlButtons(_player, widget.song.url),
+                              StreamBuilder<PositionData>(
+                                stream: _positionDataStream,
+                                builder: (context, snapshot) {
+                                  final positionData = snapshot.data;
+                                  return SeekBar(
+                                    duration: positionData?.duration ?? Duration.zero,
+                                    position: positionData?.position ?? Duration.zero,
+                                    bufferedPosition: positionData?.bufferedPosition ?? Duration.zero,
+                                    onChangeEnd: _player.seek,
+                                  );
+                                },
+                              ),
+                            ],
+                          )
+                        : Container(),
+                  ],
                 ),
-                // trailingWidget: widget.song.url.isNotEmpty
-                //     ? TextButton(
-                //         child: Text(
-                //           'Listen now',
-                //           style: chordStyle,
-                //         ),
-                //         onPressed: () {},
-                //       )
-                //     : Container(),
               ),
             ),
           )
