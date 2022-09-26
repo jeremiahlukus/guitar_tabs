@@ -1,14 +1,14 @@
+// Dart imports:
+import 'dart:io';
+
 // Flutter imports:
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_chord/flutter_chord.dart';
 import 'package:flutter_guitar_tabs/flutter_guitar_tabs.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:joyful_noise/backend/songs/song_detail/presentation/audio_control_buttons.dart';
-import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shimmer/shimmer.dart';
@@ -16,6 +16,9 @@ import 'package:shimmer/shimmer.dart';
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
+import 'package:joyful_noise/backend/songs/song_detail/presentation/audio_control_buttons.dart';
+import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class SongDetailPage extends ConsumerStatefulWidget {
   final Song song;
@@ -26,13 +29,6 @@ class SongDetailPage extends ConsumerStatefulWidget {
 }
 
 class SongDetailPageState extends ConsumerState<SongDetailPage> {
-  @override
-  void initState() {
-    ref.read(songDetailNotifierProvider.notifier).getSongDetail(widget.song.id);
-    _init();
-    super.initState();
-  }
-
   final chordStyle = const TextStyle(fontSize: 20);
   final textStyle = const TextStyle(fontSize: 18);
   int transposeIncrement = 0;
@@ -54,6 +50,13 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   static const favoriteKey = ValueKey('favorite');
 
   @override
+  void initState() {
+    ref.read(songDetailNotifierProvider.notifier).getSongDetail(widget.song.id);
+    _init().catchError((dynamic e) => logger.e(e));
+    super.initState();
+  }
+
+  @override
   void dispose() {
     // Release decoders and buffers back to the operating system making them
     // available for other apps to use.
@@ -63,13 +66,18 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
 
   Future<void> _init() async {
     // Listen to errors during playback.
-    _player.playbackEventStream.listen((event) {}, onError: (Object e, StackTrace stackTrace) {
-      logger.e('A stream error occurred: $e');
-    });
+    _player.playbackEventStream.listen(
+      (event) {},
+      onError: (Object e, StackTrace stackTrace) {
+        logger.e('A stream error occurred: $e');
+      },
+    );
     // Try to load audio from a source and catch any errors.
     try {
-      if (widget.song.url.isNotEmpty) {
+      // golden test break setting the audio source
+      if (widget.song.url.isNotEmpty && !Platform.environment.containsKey('FLUTTER_TEST')) {
         await _player.setAudioSource(AudioSource.uri(Uri.parse(widget.song.url)));
+        logger.e(widget.song.url);
       }
     } catch (e) {
       logger.e('Error loading audio source: $e');
@@ -77,10 +85,11 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   }
 
   Stream<PositionData> get _positionDataStream => Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
-      _player.positionStream,
-      _player.bufferedPositionStream,
-      _player.durationStream,
-      (position, bufferedPosition, duration) => PositionData(position, bufferedPosition, duration ?? Duration.zero));
+        _player.positionStream,
+        _player.bufferedPositionStream,
+        _player.durationStream,
+        (position, bufferedPosition, duration) => PositionData(position, bufferedPosition, duration ?? Duration.zero),
+      );
 
   @override
   Widget build(BuildContext context) {

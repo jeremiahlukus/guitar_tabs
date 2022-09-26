@@ -5,6 +5,7 @@
    <application
        android:usesCleartextTraffic="true"
         android:name="${applicationName}"
+        android:usesCleartextTraffic="true"
         android:label="${appName}"
         android:icon="@mipmap/ic_launcher">
         <activity

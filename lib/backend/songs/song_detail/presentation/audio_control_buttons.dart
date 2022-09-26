@@ -1,6 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio.dart';
+
+// Package imports:
 import 'package:just_audio/just_audio.dart';
+
+// Project imports:
+import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio.dart';
 
 /// Displays the play/pause button and volume/speed sliders.
 class ControlButtons extends StatelessWidget {

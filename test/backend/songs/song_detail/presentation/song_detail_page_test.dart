@@ -98,7 +98,7 @@ void main() {
       );
 
       expect(find.byType(LyricsRenderer), findsOneWidget);
-      expect(find.text('Title: new 1'), findsOneWidget);
+      expect(find.text('new 1'), findsOneWidget);
       expect(
         find.textContaining(
           'Capo 3',

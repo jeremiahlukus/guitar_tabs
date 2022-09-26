@@ -1,5 +1,7 @@
+// Dart imports:
 import 'dart:math';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class SeekBar extends StatefulWidget {
@@ -47,7 +49,6 @@ class SeekBarState extends State<SeekBar> {
           ),
           child: ExcludeSemantics(
             child: Slider(
-              min: 0,
               max: widget.duration.inMilliseconds.toDouble(),
               value: min(widget.bufferedPosition.inMilliseconds.toDouble(), widget.duration.inMilliseconds.toDouble()),
               onChanged: (value) {
@@ -74,7 +75,6 @@ class SeekBarState extends State<SeekBar> {
             inactiveTrackColor: Colors.transparent,
           ),
           child: Slider(
-            min: 0,
             max: widget.duration.inMilliseconds.toDouble(),
             value:
                 min(_dragValue ?? widget.position.inMilliseconds.toDouble(), widget.duration.inMilliseconds.toDouble()),
@@ -100,8 +100,9 @@ class SeekBarState extends State<SeekBar> {
           right: 16,
           bottom: 0,
           child: Text(
-              RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$_remaining')?.group(1) ?? '$_remaining',
-              style: Theme.of(context).textTheme.caption),
+            RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$_remaining')?.group(1) ?? '$_remaining',
+            style: Theme.of(context).textTheme.caption,
+          ),
         ),
       ],
     );

@@ -101,7 +101,7 @@ Widget buildWidgetUnderTest() {
     );
   });
   when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
-  // router.push(SearchedSongsRoute(searchTerm: 'query'));
+
   when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
   final mockFavoriteSongsNotifierProvider = AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
     (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
