@@ -2,6 +2,7 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -75,7 +76,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
       key: searchKey,
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
       controller: _controller,
-      height: 56,
+      height: 65,
       body: FloatingSearchBarScrollNotifier(
         child: Padding(
           // padding for scroll bar is 56
@@ -87,11 +88,11 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          AutoSizeText(
             widget.title,
             style: Theme.of(context).textTheme.headline6,
           ),
-          Text(
+          AutoSizeText(
             'Tap to search 👆',
             style: Theme.of(context).textTheme.caption,
           ),

@@ -43,15 +43,18 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
         onSignOutButtonPressed: () {
           ref.read(authNotifierProvider.notifier).signOut();
         },
-        body: PaginatedSongsListView(
-          paginatedSongsNotifierProvider: playlistSongsNotifierProvider,
-          // coverage:ignore-start
-          getNextPage: (ref, context) {
-            // unable to mock this so this line isn't tested.
-            ref.read(playlistSongsNotifierProvider.notifier).getNextPlaylistSongsPage(widget.playlistName);
-          },
-          // coverage:ignore-end
-          noResultsMessage: "That's everything we could find right now.",
+        body: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: PaginatedSongsListView(
+            paginatedSongsNotifierProvider: playlistSongsNotifierProvider,
+            // coverage:ignore-start
+            getNextPage: (ref, context) {
+              // unable to mock this so this line isn't tested.
+              ref.read(playlistSongsNotifierProvider.notifier).getNextPlaylistSongsPage(widget.playlistName);
+            },
+            // coverage:ignore-end
+            noResultsMessage: "That's everything we could find right now.",
+          ),
         ),
       ),
     );
