@@ -17,18 +17,18 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_hooks: ^0.18.0
-  flutter_riverpod: ^1.0.3
+  flutter_riverpod: ^2.0.1
   flutter_secure_storage: ^6.0.0
   font_awesome_flutter: ^10.1.0
   freezed_annotation: ^2.0.3
-  hooks_riverpod: ^1.0.1
+  hooks_riverpod: ^2.0.1
   import_sorter: ^4.6.0
   intl: ^0.17.0
   oauth2: ^2.0.0
   json_annotation: ^4.4.0
   logger: ^1.1.0
   responsive_framework: ^0.2.0
-  riverpod: ^1.0.3
+  riverpod: ^2.0.1
   sentry_flutter: ^6.6.1
   webview_flutter: ^3.0.2
   sembast: ^3.2.0
