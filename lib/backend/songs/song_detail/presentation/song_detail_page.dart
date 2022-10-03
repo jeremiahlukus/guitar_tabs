@@ -128,74 +128,6 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
       body: Column(
         children: [
           const Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        key: transposeDecrementKey,
-                        onPressed: () {
-                          setState(() {
-                            transposeIncrement--;
-                          });
-                        },
-                        child: const Text('-'),
-                      ),
-                      const SizedBox(width: 5),
-                      Text('$transposeIncrement'),
-                      const SizedBox(width: 5),
-                      ElevatedButton(
-                        key: transposeIncrementKey,
-                        onPressed: () {
-                          setState(() {
-                            transposeIncrement++;
-                          });
-                        },
-                        child: const Text('+'),
-                      ),
-                    ],
-                  ),
-                  const Text('Transpose')
-                ],
-              ),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        key: scrollSpeedDecrementKey,
-                        onPressed: scrollSpeed <= 0
-                            ? null
-                            : () {
-                                setState(() {
-                                  scrollSpeed = scrollSpeed - 2;
-                                });
-                              },
-                        child: const Text('-'),
-                      ),
-                      const SizedBox(width: 5),
-                      Text('$scrollSpeed'),
-                      const SizedBox(width: 5),
-                      ElevatedButton(
-                        key: scrollSpeedIncrementKey,
-                        onPressed: () {
-                          setState(() {
-                            scrollSpeed = scrollSpeed + 2;
-                          });
-                        },
-                        child: const Text('+'),
-                      ),
-                    ],
-                  ),
-                  const Text('Auto Scroll')
-                ],
-              ),
-            ],
-          ),
-          const Divider(),
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(12),
@@ -244,6 +176,74 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                 horizontalAlignment: CrossAxisAlignment.start,
                 leadingWidget: Column(
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                ElevatedButton(
+                                  key: transposeDecrementKey,
+                                  onPressed: () {
+                                    setState(() {
+                                      transposeIncrement--;
+                                    });
+                                  },
+                                  child: const Text('-'),
+                                ),
+                                const SizedBox(width: 5),
+                                Text('$transposeIncrement'),
+                                const SizedBox(width: 5),
+                                ElevatedButton(
+                                  key: transposeIncrementKey,
+                                  onPressed: () {
+                                    setState(() {
+                                      transposeIncrement++;
+                                    });
+                                  },
+                                  child: const Text('+'),
+                                ),
+                              ],
+                            ),
+                            const Text('Transpose')
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                ElevatedButton(
+                                  key: scrollSpeedDecrementKey,
+                                  onPressed: scrollSpeed <= 0
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            scrollSpeed = scrollSpeed - 2;
+                                          });
+                                        },
+                                  child: const Text('-'),
+                                ),
+                                const SizedBox(width: 5),
+                                Text('$scrollSpeed'),
+                                const SizedBox(width: 5),
+                                ElevatedButton(
+                                  key: scrollSpeedIncrementKey,
+                                  onPressed: () {
+                                    setState(() {
+                                      scrollSpeed = scrollSpeed + 2;
+                                    });
+                                  },
+                                  child: const Text('+'),
+                                ),
+                              ],
+                            ),
+                            const Text('Auto Scroll')
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Divider(),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 16,
