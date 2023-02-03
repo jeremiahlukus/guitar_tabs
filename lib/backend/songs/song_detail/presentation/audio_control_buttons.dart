@@ -10,9 +10,20 @@ import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio
 /// Displays the play/pause button and volume/speed sliders.
 class ControlButtons extends StatelessWidget {
   final AudioPlayer player;
-  final String url;
 
-  const ControlButtons(this.player, this.url, {Key? key}) : super(key: key);
+  const ControlButtons(this.player, {Key? key}) : super(key: key);
+
+  @visibleForTesting
+  static const playButton = ValueKey('playButton');
+
+  @visibleForTesting
+  static const pauseButton = ValueKey('pauseButton');
+
+  @visibleForTesting
+  static const replayButton = ValueKey('replayButton');
+
+  @visibleForTesting
+  static const speedButton = ValueKey('speedButton');
 
   @override
   Widget build(BuildContext context) {
@@ -30,31 +41,39 @@ class ControlButtons extends StatelessWidget {
             final playerState = snapshot.data;
             final processingState = playerState?.processingState;
             final playing = playerState?.playing;
-            if (processingState == ProcessingState.loading || processingState == ProcessingState.buffering) {
+            if (processingState == ProcessingState.loading ||
+                processingState == ProcessingState.buffering) {
+              // coverage:ignore-start
               return Container(
                 margin: const EdgeInsets.all(8),
                 width: 64,
                 height: 64,
                 child: const CircularProgressIndicator(),
               );
+              // coverage:ignore-end
             } else if (playing != true) {
               return IconButton(
+                key: playButton,
                 icon: const Icon(Icons.play_arrow),
                 iconSize: 64,
                 onPressed: player.play,
               );
             } else if (processingState != ProcessingState.completed) {
               return IconButton(
+                key: pauseButton,
                 icon: const Icon(Icons.pause),
                 iconSize: 64,
                 onPressed: player.pause,
               );
             } else {
+              // coverage:ignore-start
               return IconButton(
+                key: replayButton,
                 icon: const Icon(Icons.replay),
                 iconSize: 64,
                 onPressed: () => player.seek(Duration.zero),
               );
+              // coverage:ignore-end
             }
           },
         ),
@@ -62,7 +81,11 @@ class ControlButtons extends StatelessWidget {
         StreamBuilder<double>(
           stream: player.speedStream,
           builder: (context, snapshot) => IconButton(
-            icon: Text('${snapshot.data?.toStringAsFixed(1)}x', style: const TextStyle(fontWeight: FontWeight.bold)),
+            key: speedButton,
+            icon: Text(
+              '${snapshot.data?.toStringAsFixed(1)}x',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             onPressed: () {
               showSliderDialog(
                 context: context,

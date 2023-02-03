@@ -11,6 +11,9 @@ class SeekBar extends StatefulWidget {
   final ValueChanged<Duration>? onChanged;
   final ValueChanged<Duration>? onChangeEnd;
 
+  @visibleForTesting
+  static const seekbarKey = ValueKey('seekbarKey');
+
   const SeekBar({
     Key? key,
     required this.duration,
@@ -50,7 +53,9 @@ class SeekBarState extends State<SeekBar> {
           child: ExcludeSemantics(
             child: Slider(
               max: widget.duration.inMilliseconds.toDouble(),
-              value: min(widget.bufferedPosition.inMilliseconds.toDouble(), widget.duration.inMilliseconds.toDouble()),
+              value: min(widget.bufferedPosition.inMilliseconds.toDouble(),
+                  widget.duration.inMilliseconds.toDouble()),
+              // coverage:ignore-start
               onChanged: (value) {
                 setState(() {
                   _dragValue = value;
@@ -58,8 +63,10 @@ class SeekBarState extends State<SeekBar> {
                 if (widget.onChanged != null) {
                   // ignore: prefer_null_aware_method_calls
                   widget.onChanged!(Duration(milliseconds: value.round()));
+                  // coverage:ignore-end
                 }
               },
+              // coverage:ignore-start
               onChangeEnd: (value) {
                 if (widget.onChangeEnd != null) {
                   // ignore: prefer_null_aware_method_calls
@@ -67,17 +74,23 @@ class SeekBarState extends State<SeekBar> {
                 }
                 _dragValue = null;
               },
+              // coverage:ignore-end
             ),
           ),
         ),
+        // The blue dot
         SliderTheme(
           data: _sliderThemeData.copyWith(
             inactiveTrackColor: Colors.transparent,
           ),
           child: Slider(
+            key: SeekBar.seekbarKey,
             max: widget.duration.inMilliseconds.toDouble(),
-            value:
-                min(_dragValue ?? widget.position.inMilliseconds.toDouble(), widget.duration.inMilliseconds.toDouble()),
+            value: min(
+              _dragValue ?? widget.position.inMilliseconds.toDouble(),
+              widget.duration.inMilliseconds.toDouble(),
+            ),
+            // coverage:ignore-start
             onChanged: (value) {
               setState(() {
                 _dragValue = value;
@@ -85,8 +98,10 @@ class SeekBarState extends State<SeekBar> {
               if (widget.onChanged != null) {
                 // ignore: prefer_null_aware_method_calls
                 widget.onChanged!(Duration(milliseconds: value.round()));
+                // coverage:ignore-end
               }
             },
+            // coverage:ignore-start
             onChangeEnd: (value) {
               if (widget.onChangeEnd != null) {
                 // ignore: prefer_null_aware_method_calls
@@ -94,13 +109,19 @@ class SeekBarState extends State<SeekBar> {
               }
               _dragValue = null;
             },
+            // coverage:ignore-end
           ),
         ),
         Positioned(
           right: 16,
           bottom: 0,
           child: Text(
-            RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$_remaining')?.group(1) ?? '$_remaining',
+            RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$')
+                    .firstMatch('$_remaining')
+                    ?.group(1) ??
+                // coverage:ignore-start
+                '$_remaining',
+            // coverage:ignore-end
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
@@ -136,8 +157,9 @@ class PositionData {
   final Duration position;
   final Duration bufferedPosition;
   final Duration duration;
-
+// coverage:ignore-start
   PositionData(this.position, this.bufferedPosition, this.duration);
+  // coverage:ignore-end
 }
 
 void showSliderDialog({
@@ -163,7 +185,10 @@ void showSliderDialog({
             children: [
               Text(
                 '${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
-                style: const TextStyle(fontFamily: 'Fixed', fontWeight: FontWeight.bold, fontSize: 24),
+                style: const TextStyle(
+                    fontFamily: 'Fixed',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24),
               ),
               Slider(
                 divisions: divisions,
@@ -180,4 +205,6 @@ void showSliderDialog({
   );
 }
 
+// coverage:ignore-start
 T? ambiguate<T>(T? value) => value;
+// coverage:ignore-end

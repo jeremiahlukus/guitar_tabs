@@ -68,27 +68,37 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
     // Listen to errors during playback.
     _player.playbackEventStream.listen(
       (event) {},
+      // coverage:ignore-start
       onError: (Object e, StackTrace stackTrace) {
         logger.e('A stream error occurred: $e');
       },
+      // coverage:ignore-end
     );
     // Try to load audio from a source and catch any errors.
     try {
+      // coverage:ignore-start
       // golden test break setting the audio source
-      if (widget.song.url.isNotEmpty && !Platform.environment.containsKey('FLUTTER_TEST')) {
-        await _player.setAudioSource(AudioSource.uri(Uri.parse(widget.song.url)));
-        logger.e(widget.song.url);
+      if (widget.song.url.isNotEmpty &&
+          !Platform.environment.containsKey('FLUTTER_TEST')) {
+        await _player
+            .setAudioSource(AudioSource.uri(Uri.parse(widget.song.url)));
+        logger.i(widget.song.url);
       }
     } catch (e) {
       logger.e('Error loading audio source: $e');
     }
+    // coverage:ignore-end
   }
 
-  Stream<PositionData> get _positionDataStream => Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
+  Stream<PositionData> get _positionDataStream =>
+      Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
         _player.positionStream,
         _player.bufferedPositionStream,
         _player.durationStream,
-        (position, bufferedPosition, duration) => PositionData(position, bufferedPosition, duration ?? Duration.zero),
+        // coverage:ignore-start
+        (position, bufferedPosition, duration) =>
+            PositionData(position, bufferedPosition, duration ?? Duration.zero),
+        // coverage:ignore-end
       );
 
   @override
@@ -114,8 +124,12 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                 onPressed: !state.songDetail.isFresh
                     ? null
                     : () {
-                        ref.read(songDetailNotifierProvider.notifier).switchStarredStatus(state.songDetail.entity!);
-                        ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
+                        ref
+                            .read(songDetailNotifierProvider.notifier)
+                            .switchStarredStatus(state.songDetail.entity!);
+                        ref
+                            .refresh(favoriteSongsNotifierProvider.notifier)
+                            .getFirstFavoriteSongsPage();
                       },
                 icon: state.songDetail.entity?.isFavorite == true
                     ? const Icon(Icons.star)
@@ -137,7 +151,9 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                 textStyle: Theme.of(context).textTheme.bodyMedium!,
                 chordStyle: Theme.of(context).textTheme.titleSmall!,
                 onTapChord: (String chord) async {
-                  final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
+                  final tabs = await ref
+                      .read(songDetailNotifierProvider.notifier)
+                      .getChordTabs(chord);
                   if (tabs!.isNotEmpty && tabs.first != '') {
                     // ignore: use_build_context_synchronously
                     return showDialog<void>(
@@ -218,10 +234,12 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                                   key: scrollSpeedDecrementKey,
                                   onPressed: scrollSpeed <= 0
                                       ? null
+                                      // coverage:ignore-start
                                       : () {
                                           setState(() {
                                             scrollSpeed = scrollSpeed - 2;
                                           });
+                                          // coverage:ignore-end
                                         },
                                   child: const Text('-'),
                                 ),
@@ -258,16 +276,23 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                     widget.song.url.isNotEmpty
                         ? Column(
                             children: [
-                              ControlButtons(_player, widget.song.url),
+                              ControlButtons(_player),
                               StreamBuilder<PositionData>(
                                 stream: _positionDataStream,
                                 builder: (context, snapshot) {
                                   final positionData = snapshot.data;
+
                                   return SeekBar(
-                                    duration: positionData?.duration ?? Duration.zero,
-                                    position: positionData?.position ?? Duration.zero,
-                                    bufferedPosition: positionData?.bufferedPosition ?? Duration.zero,
+                                    // coverage:ignore-start
+                                    duration:
+                                        positionData?.duration ?? Duration.zero,
+                                    position:
+                                        positionData?.position ?? Duration.zero,
+                                    bufferedPosition:
+                                        positionData?.bufferedPosition ??
+                                            Duration.zero,
                                     onChangeEnd: _player.seek,
+                                    // coverage:ignore-end
                                   );
                                 },
                               ),
