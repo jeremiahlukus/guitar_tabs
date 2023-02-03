@@ -132,12 +132,14 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
             child: Container(
               padding: const EdgeInsets.all(12),
               child: LyricsRenderer(
+                widgetPadding: 50,
                 lyrics: widget.song.lyrics,
                 textStyle: Theme.of(context).textTheme.bodyMedium!,
                 chordStyle: Theme.of(context).textTheme.titleSmall!,
                 onTapChord: (String chord) async {
                   final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
                   if (tabs!.isNotEmpty && tabs.first != '') {
+                    // ignore: use_build_context_synchronously
                     return showDialog<void>(
                       context: context,
                       barrierDismissible: false, // user must tap button!
@@ -171,7 +173,6 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                 },
                 transposeIncrement: transposeIncrement,
                 scrollSpeed: scrollSpeed,
-                widgetPadding: 50,
                 lineHeight: 4,
                 horizontalAlignment: CrossAxisAlignment.start,
                 leadingWidget: Column(
