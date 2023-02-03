@@ -17,7 +17,7 @@ class PlaylistSongsRemoteService extends SongsPageRemoteService {
   Future<RemoteResponse<List<SongDTO>>> getPlaylistSongsPage(int page, String playlistName) async => super.getPage(
         storeEtag: false,
         // TODO(jeremiah): http for local https for
-        requestUri: Uri.http(
+        requestUri: Uri.https(
           BackendConstants().backendBaseUrl(),
           '/api/v1/playlist_songs/$playlistName',
           <String, String>{

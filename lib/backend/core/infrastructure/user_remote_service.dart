@@ -16,7 +16,7 @@ class UserRemoteService {
   final BackendHeadersCache _backendHeadersCache;
 
   Future<RemoteResponse<UserDTO>> getUserDetails() async {
-    final requestUri = Uri.http(
+    final requestUri = Uri.https(
       BackendConstants().backendBaseUrl(),
       'api/v1/me',
     );

@@ -40,7 +40,7 @@ void main() {
       BackendConstants.isDebugMode = false;
 
       final actualAuthorizationUrl = BackendConstants().backendBaseUrl();
-      const expectedAuthorizationUrl = 'https://joyful-noise-staging.joyful-noise.link';
+      const expectedAuthorizationUrl = 'joyful-noise-staging.joyful-noise.link';
 
       expect(actualAuthorizationUrl, expectedAuthorizationUrl);
 

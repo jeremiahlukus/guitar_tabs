@@ -22,7 +22,7 @@ class SearchedSongsRemoteService extends SongsPageRemoteService {
       super.getPage(
         storeEtag: false,
         // TODO(jeremiah): http for local https for real
-        requestUri: Uri.http(
+        requestUri: Uri.https(
           BackendConstants().backendBaseUrl(),
           '/api/v1/songs',
           <String, dynamic>{

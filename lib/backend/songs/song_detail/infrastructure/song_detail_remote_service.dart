@@ -17,7 +17,7 @@ class SongDetailRemoteService {
   );
 
   Future<RemoteResponse<SongDetailDTO>> getFavoriteStatus(int songId) async {
-    final requestUri = Uri.http(
+    final requestUri = Uri.https(
       BackendConstants().backendBaseUrl(),
       '/api/v1/user_favorite_songs/$songId',
     );
@@ -42,7 +42,7 @@ class SongDetailRemoteService {
   }
 
   Future<List<String>> getChordTabs(String chord) async {
-    final requestUri = Uri.http(
+    final requestUri = Uri.https(
       BackendConstants().backendBaseUrl(),
       '/api/v1/chord_tabs/$chord',
     );
@@ -67,7 +67,7 @@ class SongDetailRemoteService {
     String songId, {
     required bool isCurrentlyFavorite,
   }) async {
-    final requestUri = Uri.http(
+    final requestUri = Uri.https(
       BackendConstants().backendBaseUrl(),
       '/api/v1/user_favorite_songs/$songId',
     );
