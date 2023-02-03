@@ -460,5 +460,45 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
       await tester.tap(find.byKey(ControlButtons.pauseButton));
     });
+
+    testWidgets('when song url is empty does not display audio control buttons',
+        (tester) async {
+      final router = AppRouter();
+      final mockSongDetailRepository = MockSongDetailRepository();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      final mockDetailProvider = SongDetailNotifier(mockSongDetailRepository);
+      const songDetail = SongDetail(isFavorite: true, songId: '1');
+      when(() => mockSongDetailRepository.getSongDetail(1)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes(songDetail))),
+      );
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes([mockEmptySong(1)]))),
+      );
+
+      // ignore: invalid_use_of_protected_member
+      mockDetailProvider.state =
+          mockDetailProvider.state.copyWith(hasFavoriteStatusChanged: true);
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state =
+          mockProvider.state.copyWith(songs: Fresh.yes([mockEmptySong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(SongDetailRoute(song: mockEmptySong(1)));
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+        ],
+        router,
+      );
+      expect(find.byIcon(Icons.play_arrow), findsNothing);
+      expect(find.byIcon(Icons.pause), findsNothing);
+      expect(find.byKey(SeekBar.seekbarKey), findsNothing);
+    });
   });
 }
