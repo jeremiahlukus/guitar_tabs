@@ -51,7 +51,7 @@ class WebAppAuthenticator {
           ? Uri.parse('http://10.0.2.2:3000/users/sign_in')
           : Uri.parse('http://127.0.0.1:3000/users/sign_in');
     } else {
-      return Uri.parse('http://someUrl/users/sign_in');
+      return Uri.parse('https://joyful-noise-staging.joyful-noise.link/users/sign_in');
     }
   }
 
@@ -60,7 +60,7 @@ class WebAppAuthenticator {
       final isAndroid = getPlatform().isAndroid;
       return isAndroid ? Uri.parse('http://10.0.2.2:3000/api/v1/auth') : Uri.parse('http://127.0.0.1:3000/api/v1/auth');
     } else {
-      return Uri.parse('http://someUrl/api/v1/auth');
+      return Uri.parse('https://joyful-noise-staging.joyful-noise.link/api/v1/auth');
     }
   }
 
@@ -69,7 +69,7 @@ class WebAppAuthenticator {
       final isAndroid = getPlatform().isAndroid;
       return isAndroid ? Uri.parse('http://10.0.2.2:3000/callback') : Uri.parse('http://127.0.0.1:3000/callback');
     } else {
-      return Uri.parse('http://someUrl/callback');
+      return Uri.parse('https://joyful-noise-staging.joyful-noise.link/callback');
     }
   }
 

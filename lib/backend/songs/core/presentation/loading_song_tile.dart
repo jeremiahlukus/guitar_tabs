@@ -36,7 +36,7 @@ class LoadingSongTile extends StatelessWidget {
             const Icon(Icons.star_border),
             Text(
               '',
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             )
           ],
         ),

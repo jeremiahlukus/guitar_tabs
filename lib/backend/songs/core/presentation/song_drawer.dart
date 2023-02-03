@@ -34,9 +34,9 @@ class SongDrawer extends ConsumerWidget {
           ),
           ListTile(
             key: athensSongBook,
-            title: const Text('Athens Song Book'),
+            title: const Text('Athens Songbook'),
             onTap: () {
-              AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Athens Song Book'));
+              AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Athens Songbook'));
               Navigator.of(context).pop();
             },
           ),

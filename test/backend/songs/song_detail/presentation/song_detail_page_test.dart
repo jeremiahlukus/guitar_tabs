@@ -19,6 +19,8 @@ import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_son
 import 'package:joyful_noise/backend/songs/song_detail/domain/song_detail.dart';
 import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detail_repository.dart';
 import 'package:joyful_noise/backend/songs/song_detail/notifiers/song_detail_notifier.dart';
+import 'package:joyful_noise/backend/songs/song_detail/presentation/audio_control_buttons.dart';
+import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio.dart';
 import 'package:joyful_noise/backend/songs/song_detail/presentation/song_detail_page.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
@@ -98,7 +100,7 @@ void main() {
       );
 
       expect(find.byType(LyricsRenderer), findsOneWidget);
-      expect(find.text('Title: new 1'), findsOneWidget);
+      expect(find.text('new 1'), findsOneWidget);
       expect(
         find.textContaining(
           'Capo 3',
@@ -241,18 +243,14 @@ void main() {
       );
 
       await tester.tap(find.byKey(SongDetailPageState.scrollSpeedIncrementKey));
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle();
       expect(find.text('2'), findsOneWidget);
-
-      await tester.tap(find.byKey(SongDetailPageState.scrollSpeedIncrementKey));
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.text('4'), findsOneWidget);
       await tester.tap(find.byKey(SongDetailPageState.scrollSpeedDecrementKey));
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.text('2'), findsOneWidget);
+      expect(find.text('0'), findsOneWidget);
     });
 
-    testWidgets('taping on scrollSpeed button increases scrollSpeed', (tester) async {
+    testWidgets('taping on favorite button favorites song', (tester) async {
       final router = AppRouter();
       final mockSongDetailRepository = MockSongDetailRepository();
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
@@ -294,6 +292,176 @@ void main() {
       verify(() => mockSongDetailRepository.switchFavoriteStatus(any())).called(1);
       expect(find.byIcon(Icons.star), findsNothing);
       expect(find.byIcon(Icons.star_outline), findsOneWidget);
+    });
+
+    testWidgets('taping on Play/Pause plays/pauses Audio', (tester) async {
+      final router = AppRouter();
+      final mockSongDetailRepository = MockSongDetailRepository();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      final mockDetailProvider = SongDetailNotifier(mockSongDetailRepository);
+      const songDetail = SongDetail(isFavorite: true, songId: '1');
+      when(() => mockSongDetailRepository.getSongDetail(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes(songDetail))));
+
+      when(() => mockSongDetailRepository.getChordTabs('D7')).thenAnswer((invocation) => Future.value(['x 1 2 3 4 4']));
+      when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail)).thenAnswer((_) {
+        return Future.value(right(unit));
+      });
+      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes([mockSong(1)]))),
+      );
+
+      // ignore: invalid_use_of_protected_member
+      mockDetailProvider.state = mockDetailProvider.state.copyWith(hasFavoriteStatusChanged: true);
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(SongDetailRoute(song: mockSong(1)));
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+        ],
+        router,
+      );
+      expect(find.byIcon(Icons.play_arrow), findsOneWidget);
+      expect(find.byIcon(Icons.pause), findsNothing);
+      await tester.tap(find.byKey(ControlButtons.playButton));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.byIcon(Icons.play_arrow), findsNothing);
+      expect(find.byIcon(Icons.pause), findsOneWidget);
+      await tester.tap(find.byKey(ControlButtons.pauseButton));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.byIcon(Icons.play_arrow), findsOneWidget);
+      expect(find.byIcon(Icons.pause), findsNothing);
+    });
+
+    testWidgets('taping on Speed Button open dialog', (tester) async {
+      final router = AppRouter();
+      final mockSongDetailRepository = MockSongDetailRepository();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      final mockDetailProvider = SongDetailNotifier(mockSongDetailRepository);
+      const songDetail = SongDetail(isFavorite: true, songId: '1');
+      when(() => mockSongDetailRepository.getSongDetail(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes(songDetail))));
+
+      when(() => mockSongDetailRepository.getChordTabs('D7')).thenAnswer((invocation) => Future.value(['x 1 2 3 4 4']));
+      when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail)).thenAnswer((_) {
+        return Future.value(right(unit));
+      });
+      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes([mockSong(1)]))),
+      );
+
+      // ignore: invalid_use_of_protected_member
+      mockDetailProvider.state = mockDetailProvider.state.copyWith(hasFavoriteStatusChanged: true);
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(SongDetailRoute(song: mockSong(1)));
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+        ],
+        router,
+      );
+      expect(find.byKey(ControlButtons.speedButton), findsOneWidget);
+      await tester.tap(find.byKey(ControlButtons.speedButton));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.byType(Dialog), findsOneWidget);
+    });
+
+    testWidgets('able to drag the seek slider', (tester) async {
+      final router = AppRouter();
+      final mockSongDetailRepository = MockSongDetailRepository();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      final mockDetailProvider = SongDetailNotifier(mockSongDetailRepository);
+      const songDetail = SongDetail(isFavorite: true, songId: '1');
+      when(() => mockSongDetailRepository.getSongDetail(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes(songDetail))));
+
+      when(() => mockSongDetailRepository.getChordTabs('D7')).thenAnswer((invocation) => Future.value(['x 1 2 3 4 4']));
+      when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail)).thenAnswer((_) {
+        return Future.value(right(unit));
+      });
+      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes([mockSong(1)]))),
+      );
+
+      // ignore: invalid_use_of_protected_member
+      mockDetailProvider.state = mockDetailProvider.state.copyWith(hasFavoriteStatusChanged: true);
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(SongDetailRoute(song: mockSong(1)));
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+        ],
+        router,
+      );
+      expect(find.byIcon(Icons.play_arrow), findsOneWidget);
+      expect(find.byIcon(Icons.pause), findsNothing);
+      await tester.tap(find.byKey(ControlButtons.playButton));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.byKey(SeekBar.seekbarKey), findsOneWidget);
+      await tester.drag(find.byKey(SeekBar.seekbarKey), const Offset(-800, 0));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.tap(find.byKey(ControlButtons.pauseButton));
+    });
+
+    testWidgets('when song url is empty does not display audio control buttons', (tester) async {
+      final router = AppRouter();
+      final mockSongDetailRepository = MockSongDetailRepository();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      final mockDetailProvider = SongDetailNotifier(mockSongDetailRepository);
+      const songDetail = SongDetail(isFavorite: true, songId: '1');
+      when(() => mockSongDetailRepository.getSongDetail(1)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes(songDetail))),
+      );
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes([mockEmptySong(1)]))),
+      );
+
+      // ignore: invalid_use_of_protected_member
+      mockDetailProvider.state = mockDetailProvider.state.copyWith(hasFavoriteStatusChanged: true);
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockEmptySong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(SongDetailRoute(song: mockEmptySong(1)));
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
+          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+        ],
+        router,
+      );
+      expect(find.byIcon(Icons.play_arrow), findsNothing);
+      expect(find.byIcon(Icons.pause), findsNothing);
+      expect(find.byKey(SeekBar.seekbarKey), findsNothing);
     });
   });
 }

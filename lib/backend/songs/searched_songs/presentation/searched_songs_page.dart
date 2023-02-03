@@ -47,15 +47,18 @@ class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
         onSignOutButtonPressed: () {
           ref.read(authNotifierProvider.notifier).signOut();
         },
-        body: PaginatedSongsListView(
-          paginatedSongsNotifierProvider: searchedSongsNotifierProvider,
-          // coverage:ignore-start
-          getNextPage: (ref, context) {
-            // unable to mock this so this line isn't tested.
-            ref.read(searchedSongsNotifierProvider.notifier).getNextSearchedSongsPage(widget.searchTerm);
-          },
-          // coverage:ignore-end
-          noResultsMessage: 'This is all we could find for your search term.',
+        body: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: PaginatedSongsListView(
+            paginatedSongsNotifierProvider: searchedSongsNotifierProvider,
+            // coverage:ignore-start
+            getNextPage: (ref, context) {
+              // unable to mock this so this line isn't tested.
+              ref.read(searchedSongsNotifierProvider.notifier).getNextSearchedSongsPage(widget.searchTerm);
+            },
+            // coverage:ignore-end
+            noResultsMessage: 'This is all we could find for your search term.',
+          ),
         ),
       ),
     );

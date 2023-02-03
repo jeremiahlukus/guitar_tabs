@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
@@ -75,7 +76,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
       key: searchKey,
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
       controller: _controller,
-      height: 56,
+      height: 65,
       body: FloatingSearchBarScrollNotifier(
         child: Padding(
           // padding for scroll bar is 56
@@ -87,13 +88,13 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          AutoSizeText(
             widget.title,
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
-          Text(
+          AutoSizeText(
             'Tap to search 👆',
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
       ),
@@ -153,7 +154,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
                       alignment: Alignment.center,
                       child: Text(
                         'Start searching',
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     );
                   } else if (history.value.isEmpty) {

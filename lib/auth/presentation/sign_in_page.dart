@@ -43,7 +43,7 @@ class SignInPage extends ConsumerWidget {
                   ),
                   AutoSizeText(
                     'Welcome to \nJoyful Noise',
-                    style: Theme.of(context).textTheme.headline3,
+                    style: Theme.of(context).textTheme.displaySmall,
                     textAlign: TextAlign.center,
                     maxLines: 2,
                   ),

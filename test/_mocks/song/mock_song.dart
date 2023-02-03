@@ -12,12 +12,12 @@ Song mockSong(int id) {
     category: 'category',
     artist: 'artist',
     chords: 'chords',
-    url: 'url',
+    url: 'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
   );
 }
 
-SongDTO mockSongDTO(int id) {
-  return SongDTO(
+Song mockEmptySong(int id) {
+  return Song(
     id: id,
     title: 'new $id',
     songNumber: id,
@@ -26,7 +26,21 @@ SongDTO mockSongDTO(int id) {
     category: 'category',
     artist: 'artist',
     chords: 'chords',
-    url: 'url',
+    url: '',
+  );
+}
+
+SongDTO mockSongDTO(int id) {
+  return SongDTO(
+    id: id,
+    title: 'new $id',
+    url: 'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
+    songNumber: id,
+    lyrics:
+        '#Eph 4:13, Rev. 19:7\n# Capo 3\n\nUn[D7]til we all arrive[C] \nAt the oneness of the [Em]faith\nAnd of the full kno[D]wledge\nOf the [G]Son of God[C],\nAt the oneness of the f[Em]aith \nAt a full-grown [D]man,\nAt the [C]measure of the [G]stature of the\n[Am]Fullness of [C]Christ,\nU[G]ntil we [D]all [G]arrive.\n \n  [G]Let us rejoice and\n  [C]let us give the glory to [Em]Him\n  For the marriage of the \n  [D]Lamb has come,\n  [G]Let us exult and \n  [C]let us give the glory to [Em]Him\n  For the marriage of the \n  [D]Lamb has [D7]come,\n  And His [C]wife has \n  [G]made herself [C]re[D]ad[Em]y,\n  For the [C]marriage of the \n  [D]Lamb has [G]come.\n\n',
+    category: 'category',
+    artist: 'artist',
+    chords: 'chords',
   );
 }
 
@@ -35,7 +49,7 @@ Map<String, dynamic> mockSongJson(int id) {
     'id': id,
     'title': 'new $id',
     'song_number': 1,
-    'url': 'url',
+    'url': 'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
     'artist': 'New',
     'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
     'chords': null,
@@ -51,7 +65,7 @@ Map<String, dynamic> mockSongJson2(int id) {
     'id': id,
     'title': 'new $id',
     'song_number': 1,
-    'url': 'url',
+    'url': 'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
     'artist': 'New',
     'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home test',
     'chords': null,
@@ -67,7 +81,7 @@ Map<String, dynamic> mockSongStrippedJson(int id) {
     'id': id,
     'title': 'new $id',
     'song_number': 1,
-    'url': 'url',
+    'url': 'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
     'artist': 'New',
     'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
     'chords': '',
