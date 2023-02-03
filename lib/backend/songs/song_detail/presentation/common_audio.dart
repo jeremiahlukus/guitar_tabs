@@ -53,8 +53,7 @@ class SeekBarState extends State<SeekBar> {
           child: ExcludeSemantics(
             child: Slider(
               max: widget.duration.inMilliseconds.toDouble(),
-              value: min(widget.bufferedPosition.inMilliseconds.toDouble(),
-                  widget.duration.inMilliseconds.toDouble()),
+              value: min(widget.bufferedPosition.inMilliseconds.toDouble(), widget.duration.inMilliseconds.toDouble()),
               // coverage:ignore-start
               onChanged: (value) {
                 setState(() {
@@ -116,9 +115,7 @@ class SeekBarState extends State<SeekBar> {
           right: 16,
           bottom: 0,
           child: Text(
-            RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$')
-                    .firstMatch('$_remaining')
-                    ?.group(1) ??
+            RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$_remaining')?.group(1) ??
                 // coverage:ignore-start
                 '$_remaining',
             // coverage:ignore-end
@@ -185,10 +182,7 @@ void showSliderDialog({
             children: [
               Text(
                 '${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
-                style: const TextStyle(
-                    fontFamily: 'Fixed',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24),
+                style: const TextStyle(fontFamily: 'Fixed', fontWeight: FontWeight.bold, fontSize: 24),
               ),
               Slider(
                 divisions: divisions,

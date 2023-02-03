@@ -41,8 +41,7 @@ class ControlButtons extends StatelessWidget {
             final playerState = snapshot.data;
             final processingState = playerState?.processingState;
             final playing = playerState?.playing;
-            if (processingState == ProcessingState.loading ||
-                processingState == ProcessingState.buffering) {
+            if (processingState == ProcessingState.loading || processingState == ProcessingState.buffering) {
               // coverage:ignore-start
               return Container(
                 margin: const EdgeInsets.all(8),

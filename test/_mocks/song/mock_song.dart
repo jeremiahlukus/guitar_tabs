@@ -49,11 +49,9 @@ Map<String, dynamic> mockSongJson(int id) {
     'id': id,
     'title': 'new $id',
     'song_number': 1,
-    'url':
-        'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
+    'url': 'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
     'artist': 'New',
-    'lyrics':
-        '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
+    'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
     'chords': null,
     'created_at': '2022-06-29T11:42:10.614-04:00',
     'updated_at': '2022-06-29T11:42:10.614-04:00',
@@ -67,11 +65,9 @@ Map<String, dynamic> mockSongJson2(int id) {
     'id': id,
     'title': 'new $id',
     'song_number': 1,
-    'url':
-        'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
+    'url': 'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
     'artist': 'New',
-    'lyrics':
-        '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home test',
+    'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home test',
     'chords': null,
     'created_at': '2022-06-29T11:42:10.614-04:00',
     'updated_at': '2022-06-29T11:42:10.614-04:00',
@@ -85,11 +81,9 @@ Map<String, dynamic> mockSongStrippedJson(int id) {
     'id': id,
     'title': 'new $id',
     'song_number': 1,
-    'url':
-        'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
+    'url': 'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
     'artist': 'New',
-    'lyrics':
-        '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
+    'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
     'chords': '',
     'category': 'general',
   };

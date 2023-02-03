@@ -23,6 +23,7 @@ class SearchHistoryRepository {
           finder: filter != null && filter.isNotEmpty
               ? Finder(
                   filter: Filter.custom(
+                    // ignore: cast_nullable_to_non_nullable
                     (record) => (record.value as String).startsWith(filter),
                   ),
                 )
