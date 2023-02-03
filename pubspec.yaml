@@ -1,6 +1,6 @@
 name: joyful_noise
 description: A Very Good Project created by Very Good CLI.
-version: 1.0.0+1
+version: 1.0.8
 publish_to: none
 
 environment:

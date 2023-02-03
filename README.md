@@ -85,6 +85,11 @@ _\*Flutter Template works on iOS, Android, and Web._
 
 ---
 
+# Release
+$ flutter build ipa --flavor production --target lib/main_production.dart
+
+$ flutter build ios --flavor production --target lib/main_production.dart
+
 ## Running in Docker
 
 ### Start local emulator
