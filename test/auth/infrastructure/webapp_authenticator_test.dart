@@ -237,7 +237,7 @@ void main() {
         WebAppAuthenticator.isDebugMode = false;
 
         final actualAuthorizationUrl = WebAppAuthenticator.revocationEndpoint();
-        final expectedAuthorizationUrl = Uri.parse('http://someUrl/api/v1/auth');
+        final expectedAuthorizationUrl = Uri.parse('https://joyful-noise-staging.joyful-noise.link/api/v1/auth');
 
         expect(actualAuthorizationUrl, expectedAuthorizationUrl);
 
@@ -272,7 +272,7 @@ void main() {
         WebAppAuthenticator.isDebugMode = false;
 
         final actualAuthorizationUrl = WebAppAuthenticator.redirectUrl();
-        final expectedAuthorizationUrl = Uri.parse('http://someUrl/callback');
+        final expectedAuthorizationUrl = Uri.parse('https://joyful-noise-staging.joyful-noise.link/callback');
 
         expect(actualAuthorizationUrl, expectedAuthorizationUrl);
 

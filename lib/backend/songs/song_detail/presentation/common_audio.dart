@@ -101,7 +101,7 @@ class SeekBarState extends State<SeekBar> {
           bottom: 0,
           child: Text(
             RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$_remaining')?.group(1) ?? '$_remaining',
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
       ],

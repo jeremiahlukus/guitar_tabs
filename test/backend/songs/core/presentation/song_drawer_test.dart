@@ -64,7 +64,7 @@ void main() {
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
       final mockFavoriteProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
 
-      const playlistName = 'Athens Song Book';
+      const playlistName = 'Athens Songbook';
       when(() => mockPlaylistSongRepository.getPlaylistSong(1, playlistName))
           .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
       when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
@@ -96,7 +96,7 @@ void main() {
       expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.athensSongBook));
       expect(router.currentUrl, '/playlist_songs');
-      expect(find.text('Athens Song Book'), findsOneWidget);
+      expect(find.text('Athens Songbook'), findsOneWidget);
     });
     testWidgets('taping on Hymnal navigates to playlist song page', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();

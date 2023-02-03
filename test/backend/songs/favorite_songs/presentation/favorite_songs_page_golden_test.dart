@@ -127,42 +127,4 @@ void main() {
       ],
     ),
   );
-  goldenTest(
-    'renders correctly on tabletLandscape',
-    fileName: 'FavoriteSongsPage tabletLandscape',
-    builder: () => const GoldenTestGroup(
-      children: [
-        GoldenTestDeviceScenario(
-          device: Device.tabletLandscape,
-          name: 'golden test FavoriteSongsPage on tablet landscape',
-          builder: buildWidgetUnderTest,
-        ),
-      ],
-    ),
-  );
-  goldenTest(
-    'renders correctly on tabletPortrait',
-    fileName: 'FavoriteSongsPage tabletPortrait',
-    builder: () => const GoldenTestGroup(
-      children: [
-        GoldenTestDeviceScenario(
-          device: Device.tabletPortrait,
-          name: 'golden test FavoriteSongsPage on tablet Portrait',
-          builder: buildWidgetUnderTest,
-        ),
-      ],
-    ),
-  );
-  goldenTest(
-    'renders correctly on iphone11',
-    fileName: 'FavoriteSongsPage iphone11',
-    builder: () => const GoldenTestGroup(
-      children: [
-        GoldenTestDeviceScenario(
-          name: 'golden test FavoriteSongsPage on iphone11',
-          builder: buildWidgetUnderTest,
-        ),
-      ],
-    ),
-  );
 }

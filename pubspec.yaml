@@ -18,19 +18,19 @@ dependencies:
     sdk: flutter
   flutter_hooks: ^0.18.0
   flutter_riverpod: ^1.0.3
-  flutter_secure_storage: ^6.0.0
+  flutter_secure_storage: ^7.0.1
   font_awesome_flutter: ^10.1.0
   freezed_annotation: ^2.0.3
   hooks_riverpod: ^1.0.1
   import_sorter: ^4.6.0
-  intl: ^0.17.0
+  intl: ^0.18.0
   oauth2: ^2.0.0
   json_annotation: ^4.4.0
   logger: ^1.1.0
   responsive_framework: ^0.2.0
   riverpod: ^1.0.3
   sentry_flutter: ^6.6.1
-  webview_flutter: ^3.0.2
+  webview_flutter: ^3.0.4
   sembast: ^3.2.0
   path_provider: ^2.0.9
   flash: ^2.0.3+2
@@ -52,7 +52,7 @@ dependencies:
 
 dev_dependencies:
   auto_route_generator: ^4.0.0
-  alchemist: ^0.5.0
+  alchemist: ^0.6.0
   build_runner: ^2.1.8
   derry: ^1.4.3
   flutter_test:

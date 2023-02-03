@@ -20,7 +20,7 @@ class FailureSongTile extends ConsumerWidget {
       textColor: Theme.of(context).colorScheme.onError,
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        color: Theme.of(context).errorColor,
+        color: Theme.of(context).colorScheme.error,
         child: ListTile(
           title: const Text('An error occurred please retry'),
           subtitle: Text(

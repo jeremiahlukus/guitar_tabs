@@ -31,7 +31,7 @@ class BackendConstants {
       final isAndroid = getPlatform().isAndroid;
       return isAndroid ? '10.0.2.2:3000' : '127.0.0.1:3000';
     } else {
-      return 'api.joyful-noise.link';
+      return 'https://joyful-noise-staging.joyful-noise.link';
     }
   }
 }

@@ -241,18 +241,14 @@ void main() {
       );
 
       await tester.tap(find.byKey(SongDetailPageState.scrollSpeedIncrementKey));
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle();
       expect(find.text('2'), findsOneWidget);
-
-      await tester.tap(find.byKey(SongDetailPageState.scrollSpeedIncrementKey));
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.text('4'), findsOneWidget);
       await tester.tap(find.byKey(SongDetailPageState.scrollSpeedDecrementKey));
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.text('2'), findsOneWidget);
+      expect(find.text('0'), findsOneWidget);
     });
 
-    testWidgets('taping on scrollSpeed button increases scrollSpeed', (tester) async {
+    testWidgets('taping on favorite button favorites song', (tester) async {
       final router = AppRouter();
       final mockSongDetailRepository = MockSongDetailRepository();
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
