@@ -240,7 +240,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                                   key: scrollSpeedIncrementKey,
                                   onPressed: () {
                                     setState(() {
-                                      scrollSpeed = scrollSpeed + 2;
+                                      scrollSpeed = scrollSpeed + 6;
                                     });
                                   },
                                   child: const Text('+'),

@@ -43,9 +43,9 @@ class WebAppAuthenticator {
 
   final CredentialsStorage _credentialsStorage;
   final Dio _dio;
-
   static Uri authorizationEndpoint() {
-    if (getIsDebugMode()) {
+    const useStaging = bool.fromEnvironment('USE_STAGING');
+    if (getIsDebugMode() && !useStaging) {
       final isAndroid = getPlatform().isAndroid;
       return isAndroid
           ? Uri.parse('http://10.0.2.2:3000/users/sign_in')
@@ -56,7 +56,8 @@ class WebAppAuthenticator {
   }
 
   static Uri revocationEndpoint() {
-    if (getIsDebugMode()) {
+    const useStaging = bool.fromEnvironment('USE_STAGING');
+    if (getIsDebugMode() && !useStaging) {
       final isAndroid = getPlatform().isAndroid;
       return isAndroid ? Uri.parse('http://10.0.2.2:3000/api/v1/auth') : Uri.parse('http://127.0.0.1:3000/api/v1/auth');
     } else {
@@ -65,7 +66,8 @@ class WebAppAuthenticator {
   }
 
   static Uri redirectUrl() {
-    if (getIsDebugMode()) {
+    const useStaging = bool.fromEnvironment('USE_STAGING');
+    if (getIsDebugMode() && !useStaging) {
       final isAndroid = getPlatform().isAndroid;
       return isAndroid ? Uri.parse('http://10.0.2.2:3000/callback') : Uri.parse('http://127.0.0.1:3000/callback');
     } else {

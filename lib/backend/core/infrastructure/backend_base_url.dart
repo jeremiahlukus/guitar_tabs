@@ -27,7 +27,8 @@ class BackendConstants {
   static set isDebugMode(bool? isDebugModeArgument) => _isDebugMode = isDebugModeArgument;
 
   String backendBaseUrl() {
-    if (getIsDebugMode()) {
+    const useStaging = bool.fromEnvironment('USE_STAGING');
+    if (getIsDebugMode() && !useStaging) {
       final isAndroid = getPlatform().isAndroid;
       return isAndroid ? '10.0.2.2:3000' : '127.0.0.1:3000';
     } else {
