@@ -34,15 +34,13 @@ import '../../../../_mocks/song/mock_song.dart';
 import '../../../../utils/device.dart';
 import '../../../../utils/golden_test_device_scenario.dart';
 
-class MockSearchHistoryRepository extends Mock
-    implements SearchHistoryRepository {}
+class MockSearchHistoryRepository extends Mock implements SearchHistoryRepository {}
 
 class MockUserRepository extends Mock implements UserRepository {}
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
-class MockFavoriteSongRepository extends Mock
-    implements FavoriteSongsRepository {}
+class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository {}
 
 class MockSongDetailRepository extends Mock implements SongDetailRepository {}
 
@@ -68,8 +66,7 @@ Widget buildWidgetUnderTest() {
   final AuthNotifier mockAuthNotifier = MockAuthNotifier();
 
   final mockSearchHistoryRepository = MockSearchHistoryRepository();
-  final mockSearchHistoryProvider =
-      SearchHistoryNotifier(mockSearchHistoryRepository);
+  final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
   final mockSongDetailRepository = MockSongDetailRepository();
   final mockSongDetailProvider = SongDetailNotifier(mockSongDetailRepository);
   final mockFavoriteSongRepository = MockFavoriteSongRepository();
@@ -79,14 +76,11 @@ Widget buildWidgetUnderTest() {
   when(() => mockSongDetailRepository.getSongDetail(1))
       .thenAnswer((invocation) => Future.value(right(Fresh.yes(songDetail))));
 
-  when(() => mockSongDetailRepository.getChordTabs('C'))
-      .thenAnswer((invocation) => Future.value(['x 1 2 3 4 4']));
-  when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail))
-      .thenAnswer((_) {
+  when(() => mockSongDetailRepository.getChordTabs('C')).thenAnswer((invocation) => Future.value(['x 1 2 3 4 4']));
+  when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail)).thenAnswer((_) {
     return Future.value(right(unit));
   });
-  when(() => mockFavoriteSongRepository.getFavoritePage(any()))
-      .thenAnswer((invocation) {
+  when(() => mockFavoriteSongRepository.getFavoritePage(any())).thenAnswer((invocation) {
     return Future.value(
       right(
         Fresh.yes(
@@ -106,12 +100,10 @@ Widget buildWidgetUnderTest() {
       ),
     );
   });
-  when(mockSearchHistoryRepository.watchSearchTerms)
-      .thenAnswer((_) => Stream.value(['query1', 'query2']));
+  when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
 
   when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-  final mockFavoriteSongsNotifierProvider = AutoDisposeStateNotifierProvider<
-      FavoriteSongNotifier, PaginatedSongsState>(
+  final mockFavoriteSongsNotifierProvider = AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
     (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
   );
 
@@ -124,10 +116,8 @@ Widget buildWidgetUnderTest() {
         mockAuthNotifier,
       ),
       songDetailNotifierProvider.overrideWithValue(mockSongDetailProvider),
-      favoriteSongsNotifierProvider
-          .overrideWithProvider(mockFavoriteSongsNotifierProvider),
-      searchHistoryNotifierProvider
-          .overrideWithValue(mockSearchHistoryProvider),
+      favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider),
+      searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
     ],
     child: MaterialApp.router(
       routerDelegate: AutoRouterDelegate(

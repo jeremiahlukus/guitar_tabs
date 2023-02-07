@@ -101,7 +101,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
       hint: widget.hint,
       automaticallyImplyBackButton: false,
       leadingActions: [
-        if (AutoRouter.of(context).canPopSelfOrChildren && (Platform.isIOS || Platform.isMacOS))
+        if (AutoRouter.of(context).canPop() && (Platform.isIOS || Platform.isMacOS))
           IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             splashRadius: 18,
@@ -109,7 +109,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
               AutoRouter.of(context).popUntilRouteWithName(FavoriteSongsRoute.name);
             },
           )
-        else if (AutoRouter.of(context).canPopSelfOrChildren)
+        else if (AutoRouter.of(context).canPop())
           IconButton(
             icon: const Icon(Icons.arrow_back),
             splashRadius: 18,
@@ -179,7 +179,11 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
                             trailing: IconButton(
                               icon: const Icon(Icons.clear),
                               onPressed: () {
-                                ref.read(searchHistoryNotifierProvider.notifier).deleteSearchTerm(term);
+                                ref
+                                    .read(
+                                      searchHistoryNotifierProvider.notifier,
+                                    )
+                                    .deleteSearchTerm(term);
                               },
                             ),
                             onTap: () {
