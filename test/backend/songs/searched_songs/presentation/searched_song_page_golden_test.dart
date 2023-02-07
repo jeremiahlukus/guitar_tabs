@@ -30,9 +30,11 @@ import 'package:joyful_noise/search/shared/providers.dart';
 import '../../../../utils/device.dart';
 import '../../../../utils/golden_test_device_scenario.dart';
 
-class MockSearchedSongsRepository extends Mock implements SearchedSongsRepository {}
+class MockSearchedSongsRepository extends Mock
+    implements SearchedSongsRepository {}
 
-class MockSearchHistoryRepository extends Mock implements SearchHistoryRepository {}
+class MockSearchHistoryRepository extends Mock
+    implements SearchHistoryRepository {}
 
 class MockUserRepository extends Mock implements UserRepository {}
 
@@ -54,15 +56,17 @@ class MockAuthNotifier extends Mock implements AuthNotifier {}
 
 class MockSong extends Mock implements Song {}
 
+final router = AppRouter();
 Widget buildWidgetUnderTest() {
   final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
   final AuthNotifier mockAuthNotifier = MockAuthNotifier();
   final mockSearchedSongRepository = MockSearchedSongsRepository();
   final mockSearchHistoryRepository = MockSearchHistoryRepository();
-  final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-  final router = AppRouter();
+  final mockSearchHistoryProvider =
+      SearchHistoryNotifier(mockSearchHistoryRepository);
   final mockObserver = MockNavigatorObserver();
-  when(() => mockSearchedSongRepository.getSearchedSongsPage(any(), any())).thenAnswer((invocation) {
+  when(() => mockSearchedSongRepository.getSearchedSongsPage(any(), any()))
+      .thenAnswer((invocation) {
     return Future.value(
       right(
         Fresh.yes(
@@ -82,18 +86,13 @@ Widget buildWidgetUnderTest() {
       ),
     );
   });
-  when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+  when(mockSearchHistoryRepository.watchSearchTerms)
+      .thenAnswer((_) => Stream.value(['query1', 'query2']));
   // router.push(SearchedSongsRoute(searchTerm: 'query'));
   when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-  final mockSearchedSongsNotifierProvider =
-      AutoDisposeStateNotifierProvider<SearchedSongsNotifier, PaginatedSongsState>(
+  final mockSearchedSongsNotifierProvider = AutoDisposeStateNotifierProvider<
+      SearchedSongsNotifier, PaginatedSongsState>(
     (ref) => SearchedSongsNotifier(mockSearchedSongRepository),
-  );
-
-  router.push(
-    SearchedSongsRoute(
-      searchTerm: 'query',
-    ),
   );
 
   return ProviderScope(
@@ -104,8 +103,10 @@ Widget buildWidgetUnderTest() {
       authNotifierProvider.overrideWithValue(
         mockAuthNotifier,
       ),
-      searchedSongsNotifierProvider.overrideWithProvider(mockSearchedSongsNotifierProvider),
-      searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+      searchedSongsNotifierProvider
+          .overrideWithProvider(mockSearchedSongsNotifierProvider),
+      searchHistoryNotifierProvider
+          .overrideWithValue(mockSearchHistoryProvider),
     ],
     child: MaterialApp.router(
       routerDelegate: AutoRouterDelegate(
@@ -119,6 +120,11 @@ Widget buildWidgetUnderTest() {
 }
 
 void main() {
+  router.push(
+    SearchedSongsRoute(
+      searchTerm: 'query',
+    ),
+  );
   goldenTest(
     'renders correctly on smallPhone',
     fileName: 'SearchedSongsPage smallPhone',

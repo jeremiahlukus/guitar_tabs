@@ -30,13 +30,15 @@ import 'package:joyful_noise/search/shared/providers.dart';
 import '../../../../utils/device.dart';
 import '../../../../utils/golden_test_device_scenario.dart';
 
-class MockSearchHistoryRepository extends Mock implements SearchHistoryRepository {}
+class MockSearchHistoryRepository extends Mock
+    implements SearchHistoryRepository {}
 
 class MockUserRepository extends Mock implements UserRepository {}
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
-class MockFavoriteSongRepository extends Mock implements PlaylistSongsRepository {}
+class MockFavoriteSongRepository extends Mock
+    implements PlaylistSongsRepository {}
 
 class FakeUserNotifier extends UserNotifier {
   FakeUserNotifier(UserRepository userRepository) : super(userRepository);
@@ -54,16 +56,19 @@ class MockAuthNotifier extends Mock implements AuthNotifier {}
 
 class MockSong extends Mock implements Song {}
 
+final router = AppRouter();
 Widget buildWidgetUnderTest() {
   final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
   final AuthNotifier mockAuthNotifier = MockAuthNotifier();
 
   final mockSearchHistoryRepository = MockSearchHistoryRepository();
-  final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+  final mockSearchHistoryProvider =
+      SearchHistoryNotifier(mockSearchHistoryRepository);
   final mockPlaylistSongRepository = MockFavoriteSongRepository();
-  final router = AppRouter();
+
   final mockObserver = MockNavigatorObserver();
-  when(() => mockPlaylistSongRepository.getPlaylistSong(any(), any())).thenAnswer((invocation) {
+  when(() => mockPlaylistSongRepository.getPlaylistSong(any(), any()))
+      .thenAnswer((invocation) {
     return Future.value(
       right(
         Fresh.yes(
@@ -83,14 +88,14 @@ Widget buildWidgetUnderTest() {
       ),
     );
   });
-  when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+  when(mockSearchHistoryRepository.watchSearchTerms)
+      .thenAnswer((_) => Stream.value(['query1', 'query2']));
   // router.push(SearchedSongsRoute(searchTerm: 'query'));
   when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-  final mockFavoriteSongsNotifierProvider =
-      AutoDisposeStateNotifierProvider<PlaylistSongsNotifier, PaginatedSongsState>(
+  final mockFavoriteSongsNotifierProvider = AutoDisposeStateNotifierProvider<
+      PlaylistSongsNotifier, PaginatedSongsState>(
     (ref) => PlaylistSongsNotifier(mockPlaylistSongRepository),
   );
-  router.push(PlaylistSongsRoute(playlistName: 'test'));
 
   return ProviderScope(
     overrides: [
@@ -100,8 +105,10 @@ Widget buildWidgetUnderTest() {
       authNotifierProvider.overrideWithValue(
         mockAuthNotifier,
       ),
-      playlistSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider),
-      searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+      playlistSongsNotifierProvider
+          .overrideWithProvider(mockFavoriteSongsNotifierProvider),
+      searchHistoryNotifierProvider
+          .overrideWithValue(mockSearchHistoryProvider),
     ],
     child: MaterialApp.router(
       routerDelegate: AutoRouterDelegate(
@@ -115,6 +122,7 @@ Widget buildWidgetUnderTest() {
 }
 
 void main() {
+  router.push(PlaylistSongsRoute(playlistName: 'test'));
   goldenTest(
     'renders correctly on smallPhone',
     fileName: 'PlaylistSongsPage smallPhone',

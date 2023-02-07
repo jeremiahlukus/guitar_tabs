@@ -34,13 +34,15 @@ import '../../../../_mocks/song/mock_song.dart';
 import '../../../../utils/device.dart';
 import '../../../../utils/golden_test_device_scenario.dart';
 
-class MockSearchHistoryRepository extends Mock implements SearchHistoryRepository {}
+class MockSearchHistoryRepository extends Mock
+    implements SearchHistoryRepository {}
 
 class MockUserRepository extends Mock implements UserRepository {}
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
-class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository {}
+class MockFavoriteSongRepository extends Mock
+    implements FavoriteSongsRepository {}
 
 class MockSongDetailRepository extends Mock implements SongDetailRepository {}
 
@@ -60,27 +62,31 @@ class MockAuthNotifier extends Mock implements AuthNotifier {}
 
 class MockSong extends Mock implements Song {}
 
+final router = AppRouter();
 Widget buildWidgetUnderTest() {
   final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
   final AuthNotifier mockAuthNotifier = MockAuthNotifier();
 
   final mockSearchHistoryRepository = MockSearchHistoryRepository();
-  final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+  final mockSearchHistoryProvider =
+      SearchHistoryNotifier(mockSearchHistoryRepository);
   final mockSongDetailRepository = MockSongDetailRepository();
   final mockSongDetailProvider = SongDetailNotifier(mockSongDetailRepository);
   final mockFavoriteSongRepository = MockFavoriteSongRepository();
 
-  final router = AppRouter();
   final mockObserver = MockNavigatorObserver();
   const songDetail = SongDetail(isFavorite: true, songId: '1');
   when(() => mockSongDetailRepository.getSongDetail(1))
       .thenAnswer((invocation) => Future.value(right(Fresh.yes(songDetail))));
 
-  when(() => mockSongDetailRepository.getChordTabs('C')).thenAnswer((invocation) => Future.value(['x 1 2 3 4 4']));
-  when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail)).thenAnswer((_) {
+  when(() => mockSongDetailRepository.getChordTabs('C'))
+      .thenAnswer((invocation) => Future.value(['x 1 2 3 4 4']));
+  when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail))
+      .thenAnswer((_) {
     return Future.value(right(unit));
   });
-  when(() => mockFavoriteSongRepository.getFavoritePage(any())).thenAnswer((invocation) {
+  when(() => mockFavoriteSongRepository.getFavoritePage(any()))
+      .thenAnswer((invocation) {
     return Future.value(
       right(
         Fresh.yes(
@@ -100,13 +106,14 @@ Widget buildWidgetUnderTest() {
       ),
     );
   });
-  when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+  when(mockSearchHistoryRepository.watchSearchTerms)
+      .thenAnswer((_) => Stream.value(['query1', 'query2']));
 
   when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-  final mockFavoriteSongsNotifierProvider = AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
+  final mockFavoriteSongsNotifierProvider = AutoDisposeStateNotifierProvider<
+      FavoriteSongNotifier, PaginatedSongsState>(
     (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
   );
-  router.push(SongDetailRoute(song: mockSong(1)));
 
   return ProviderScope(
     overrides: [
@@ -117,8 +124,10 @@ Widget buildWidgetUnderTest() {
         mockAuthNotifier,
       ),
       songDetailNotifierProvider.overrideWithValue(mockSongDetailProvider),
-      favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider),
-      searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+      favoriteSongsNotifierProvider
+          .overrideWithProvider(mockFavoriteSongsNotifierProvider),
+      searchHistoryNotifierProvider
+          .overrideWithValue(mockSearchHistoryProvider),
     ],
     child: MaterialApp.router(
       routerDelegate: AutoRouterDelegate(
@@ -132,6 +141,7 @@ Widget buildWidgetUnderTest() {
 }
 
 void main() {
+  router.push(SongDetailRoute(song: mockSong(1)));
   goldenTest(
     'renders correctly on smallPhone',
     fileName: 'SongDetailPage smallPhone',
