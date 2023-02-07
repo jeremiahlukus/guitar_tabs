@@ -229,10 +229,10 @@ packages:
     dependency: transitive
     description:
       name: convert
-      sha256: "196284f26f69444b7f5c50692b55ec25da86d9e500451dc09333bf2e3ad69259"
+      sha256: "0f08b14755d163f6e2134cb58222dd25ea2a2ee8a195e53983d57c075324d592"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.2"
+    version: "3.1.1"
   coverage:
     dependency: transitive
     description:
@@ -333,18 +333,18 @@ packages:
     dependency: "direct main"
     description:
       name: flex_color_scheme
-      sha256: "850ba9785ea70c5c5918b1608bfa40d689be5280282e8ee095cb8954a5f43f30"
+      sha256: "03a0ad67cc224b20aab9f9a775a6cef76c8f884887902a2d94635c187858b31b"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.1"
+    version: "6.1.2"
   flex_seed_scheme:
     dependency: transitive
     description:
       name: flex_seed_scheme
-      sha256: "7e0589a3dc9fdb6e29548e8d9c42e141390be8f55e0d50deb30331836010ad6b"
+      sha256: e61950ccadfb8d43ce5cdef382e8f689edc053ce6b837e277539410ecfb3b3e5
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.2.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -456,10 +456,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_svg
-      sha256: f2aa23d9d1721cd5c2c5097558368d2a1f85be35a85a6cf26a626e80c369a47c
+      sha256: "6ff9fa12892ae074092de2fa6a9938fb21dbabfdaa2ff57dc697ff912fc8d4b2"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.5"
+    version: "1.1.6"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -474,10 +474,10 @@ packages:
     dependency: "direct main"
     description:
       name: font_awesome_flutter
-      sha256: "8f0ce0204bd0cafa8631536a6f3b7d05d9c16cdc6e8bd807843f917027c5cefd"
+      sha256: "875dbb9ec1ad30d68102019ceb682760d06c72747c1c5b7885781b95f88569cc"
       url: "https://pub.dev"
     source: hosted
-    version: "10.2.1"
+    version: "10.3.0"
   freezed:
     dependency: "direct dev"
     description:
@@ -559,12 +559,12 @@ packages:
     dependency: transitive
     description:
       name: idb_shim
-      sha256: "6d3e3e55cc3aeacfa0dfecf41ac68a3c97f9abd52fc4ed10c9755977bd4a0f8b"
+      sha256: "4ad3345fb924d5b8ada5f784d687cfd94ff18d69505f8b09428aa2968cbe8efa"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1+1"
+    version: "2.2.0+8"
   import_sorter:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: import_sorter
       sha256: eb15738ccead84e62c31e0208ea4e3104415efcd4972b86906ca64a1187d0836
@@ -652,10 +652,10 @@ packages:
     dependency: transitive
     description:
       name: logging
-      sha256: "293ae2d49fd79d4c04944c3a26dfd313382d5f52e821ec57119230ae16031ad4"
+      sha256: "04094f2eb032cbb06c6f6e8d3607edcfcb0455e2bb6cbc010cb01171dcb64e6d"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.1.1"
   matcher:
     dependency: transitive
     description:
@@ -1274,10 +1274,10 @@ packages:
     dependency: "direct main"
     description:
       name: websafe_svg
-      sha256: "8fb7e6a4f3ce446a19d8eed3bc625b3594aea830cdf79829948b052ce1c6996a"
+      sha256: e38b2194f4c4feb8ae488764c52905d6c593768cdd40fe9331e2fd8c2fba6ff1
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.2+4"
+    version: "2.1.3+1"
   webview_flutter:
     dependency: "direct main"
     description:
@@ -1343,5 +1343,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.0 <3.0.0"
-  flutter: ">=3.4.0-34.1.pre"
+  dart: ">=2.19.0 <3.0.0"
+  flutter: ">=3.7.0"
