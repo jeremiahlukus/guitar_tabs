@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "LaunchImage@1x.png",
+      "filename" : "Screen Shot 2023-02-07 at 10.56.53 AM.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "LaunchImage@2x.png",
+      "filename" : "Screen Shot 2023-02-07 at 10.56.53 AM 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "LaunchImage@3x.png",
+      "filename" : "Screen Shot 2023-02-07 at 10.56.53 AM 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
