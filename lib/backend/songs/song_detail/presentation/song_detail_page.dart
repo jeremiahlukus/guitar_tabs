@@ -83,12 +83,9 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
     try {
       // coverage:ignore-start
       // golden test break setting the audio source
-      if (widget.song.url.isNotEmpty &&
-          !Platform.environment.containsKey('FLUTTER_TEST')) {
-        await _player
-            .setAudioSource(AudioSource.uri(Uri.parse(widget.song.url)));
-        await NewrelicMobile.instance
-            .recordCustomEvent('Playing Audio', eventName: 'Audio');
+      if (widget.song.url.isNotEmpty && !Platform.environment.containsKey('FLUTTER_TEST')) {
+        await _player.setAudioSource(AudioSource.uri(Uri.parse(widget.song.url)));
+        await NewrelicMobile.instance.recordCustomEvent('Playing Audio', eventName: 'Audio');
       }
     } catch (e) {
       NewrelicMobile.instance.recordError(e, StackTrace.current);
@@ -97,14 +94,12 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
     // coverage:ignore-end
   }
 
-  Stream<PositionData> get _positionDataStream =>
-      Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
+  Stream<PositionData> get _positionDataStream => Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
         _player.positionStream,
         _player.bufferedPositionStream,
         _player.durationStream,
         // coverage:ignore-start
-        (position, bufferedPosition, duration) =>
-            PositionData(position, bufferedPosition, duration ?? Duration.zero),
+        (position, bufferedPosition, duration) => PositionData(position, bufferedPosition, duration ?? Duration.zero),
         // coverage:ignore-end
       );
 
@@ -131,12 +126,8 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                 onPressed: !state.songDetail.isFresh
                     ? null
                     : () {
-                        ref
-                            .read(songDetailNotifierProvider.notifier)
-                            .switchStarredStatus(state.songDetail.entity!);
-                        ref
-                            .refresh(favoriteSongsNotifierProvider.notifier)
-                            .getFirstFavoriteSongsPage();
+                        ref.read(songDetailNotifierProvider.notifier).switchStarredStatus(state.songDetail.entity!);
+                        ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
                       },
                 icon: state.songDetail.entity?.isFavorite == true
                     ? const Icon(Icons.star)
@@ -163,9 +154,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   textStyle: Theme.of(context).textTheme.bodyMedium!,
                   chordStyle: Theme.of(context).textTheme.titleSmall!,
                   onTapChord: (String chord) async {
-                    final tabs = await ref
-                        .read(songDetailNotifierProvider.notifier)
-                        .getChordTabs(chord);
+                    final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
                     if (tabs!.isNotEmpty && tabs.first != '') {
                       // ignore: use_build_context_synchronously
                       return showDialog<void>(
@@ -296,13 +285,9 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
 
                                     return SeekBar(
                                       // coverage:ignore-start
-                                      duration: positionData?.duration ??
-                                          Duration.zero,
-                                      position: positionData?.position ??
-                                          Duration.zero,
-                                      bufferedPosition:
-                                          positionData?.bufferedPosition ??
-                                              Duration.zero,
+                                      duration: positionData?.duration ?? Duration.zero,
+                                      position: positionData?.position ?? Duration.zero,
+                                      bufferedPosition: positionData?.bufferedPosition ?? Duration.zero,
                                       onChangeEnd: _player.seek,
                                       // coverage:ignore-end
                                     );
