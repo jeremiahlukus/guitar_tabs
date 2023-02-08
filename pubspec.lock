@@ -375,6 +375,14 @@ packages:
       url: "https://github.com/paurakhsharma/flutter_chord"
     source: git
     version: "0.1.2"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: d9283d92059a22e9834bc0a31336658ffba77089fb6f3cc36751f1fc7c6661a3
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.2"
   flutter_driver:
     dependency: transitive
     description: flutter
@@ -705,6 +713,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.0"
+  newrelic_mobile:
+    dependency: "direct main"
+    description:
+      name: newrelic_mobile
+      sha256: e663c8d3c3c27ccae428347ec35d7ca0c7a364e783f041480dda311c6ffe688c
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1-dev.8"
   node_preamble:
     dependency: transitive
     description:

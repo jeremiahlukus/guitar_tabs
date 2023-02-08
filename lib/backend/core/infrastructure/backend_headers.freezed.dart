@@ -151,7 +151,9 @@ class _$_BackendHeaders extends _BackendHeaders {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BackendHeadersToJson(this);
+    return _$$_BackendHeadersToJson(
+      this,
+    );
   }
 }
 
@@ -275,7 +277,9 @@ class _$_PaginationLink extends _PaginationLink {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaginationLinkToJson(this);
+    return _$$_PaginationLinkToJson(
+      this,
+    );
   }
 }
 

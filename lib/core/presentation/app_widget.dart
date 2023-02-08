@@ -2,10 +2,12 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:newrelic_mobile/newrelic_navigation_observer.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 // Project imports:
@@ -35,7 +37,6 @@ final initializationProvider = FutureProvider<Unit>(
 class AppWidget extends ConsumerWidget {
   AppWidget({Key? key}) : super(key: key);
   final _appRouter = AppRouter();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref
@@ -94,7 +95,10 @@ class AppWidget extends ConsumerWidget {
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
       ),
       title: 'Joyful Noise',
-      routerDelegate: _appRouter.delegate(),
+      routerDelegate: AutoRouterDelegate(
+        _appRouter,
+        navigatorObservers: () => [NewRelicNavigationObserver()],
+      ),
       routeInformationParser: _appRouter.defaultRouteParser(),
     );
   }

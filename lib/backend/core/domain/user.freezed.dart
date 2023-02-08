@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String get avatarUrl => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -26,7 +27,7 @@ mixin _$User {
 /// @nodoc
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) = _$UserCopyWithImpl<$Res>;
-  $Res call({String name, String avatarUrl});
+  $Res call({String name, String avatarUrl, String email});
 }
 
 /// @nodoc
@@ -41,6 +42,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   $Res call({
     Object? name = freezed,
     Object? avatarUrl = freezed,
+    Object? email = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -51,6 +53,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -59,7 +65,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) = __$$_UserCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String avatarUrl});
+  $Res call({String name, String avatarUrl, String email});
 }
 
 /// @nodoc
@@ -73,6 +79,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res> implements _$
   $Res call({
     Object? name = freezed,
     Object? avatarUrl = freezed,
+    Object? email = freezed,
   }) {
     return _then(_$_User(
       name: name == freezed
@@ -83,6 +90,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res> implements _$
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -90,16 +101,18 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res> implements _$
 /// @nodoc
 
 class _$_User extends _User {
-  const _$_User({required this.name, required this.avatarUrl}) : super._();
+  const _$_User({required this.name, required this.avatarUrl, required this.email}) : super._();
 
   @override
   final String name;
   @override
   final String avatarUrl;
+  @override
+  final String email;
 
   @override
   String toString() {
-    return 'User(name: $name, avatarUrl: $avatarUrl)';
+    return 'User(name: $name, avatarUrl: $avatarUrl, email: $email)';
   }
 
   @override
@@ -108,12 +121,13 @@ class _$_User extends _User {
         (other.runtimeType == runtimeType &&
             other is _$_User &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.avatarUrl, avatarUrl));
+            const DeepCollectionEquality().equals(other.avatarUrl, avatarUrl) &&
+            const DeepCollectionEquality().equals(other.email, email));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(name), const DeepCollectionEquality().hash(avatarUrl));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(avatarUrl), const DeepCollectionEquality().hash(email));
 
   @JsonKey(ignore: true)
   @override
@@ -121,13 +135,16 @@ class _$_User extends _User {
 }
 
 abstract class _User extends User {
-  const factory _User({required final String name, required final String avatarUrl}) = _$_User;
+  const factory _User({required final String name, required final String avatarUrl, required final String email}) =
+      _$_User;
   const _User._() : super._();
 
   @override
   String get name;
   @override
   String get avatarUrl;
+  @override
+  String get email;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

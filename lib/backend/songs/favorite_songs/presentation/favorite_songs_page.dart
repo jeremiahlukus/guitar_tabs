@@ -1,3 +1,6 @@
+// Dart imports:
+import 'dart:io';
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -23,6 +26,12 @@ class FavoriteSongsPage extends ConsumerStatefulWidget {
 class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   @override
   void initState() {
+    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+      // Just for logging dont want to test this.
+      // coverage:ignore-start
+      ref.read(userNotifierProvider.notifier).getUserPage();
+      // coverage:ignore-end
+    }
     ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
     super.initState();
   }

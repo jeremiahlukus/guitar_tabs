@@ -57,7 +57,7 @@ void main() {
         final Dio mockDio = MockDio();
         final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
 
-        const mockData = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl'};
+        const mockData = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl', 'email': 'hey@hey.com'};
 
         final convertedData = UserDTO.fromJson(mockData);
 

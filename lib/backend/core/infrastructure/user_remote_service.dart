@@ -9,6 +9,7 @@ import 'package:joyful_noise/backend/core/infrastructure/user_dto.dart';
 import 'package:joyful_noise/core/infrastructure/dio_extensions.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class UserRemoteService {
   UserRemoteService(this._dio, this._backendHeadersCache);
@@ -29,6 +30,7 @@ class UserRemoteService {
           headers: <String, String>{'If-None-Match': previousHeaders?.etag ?? ''},
         ),
       );
+      logger.e(response.statusCode);
       if (response.statusCode == 304) {
         return const RemoteResponse.notModified();
       } else if (response.statusCode == 200) {

@@ -1,9 +1,14 @@
+// Dart imports:
+import 'dart:io';
+
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:newrelic_mobile/newrelic_mobile.dart';
 
 // Project imports:
+import 'package:joyful_noise/backend/core/infrastructure/user_dto.dart';
+import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/bootstrap.dart' as bootstrap;
 
 class ProviderLogger extends ProviderObserver {
@@ -24,27 +29,43 @@ class ProviderLogger extends ProviderObserver {
       'error': error.toString(),
       'stackTrace': stackTrace.toString(),
     };
-    Sentry.captureException(
-      error.toString(),
-      stackTrace: stackTrace.toString(),
-    );
+    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+      // coverage:ignore-start
+      NewrelicMobile.instance.recordError(error, stackTrace);
+      // coverage:ignore-end
+    }
+
     loggerInstance?.e(errorMap);
   }
 
   @override
-  void didUpdateProvider(
+  Future<void> didUpdateProvider(
     ProviderBase provider,
     Object? previousValue,
     Object? newValue,
     ProviderContainer container,
-  ) {
+  ) async {
+    UserDTO user;
+    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+      // coverage:ignore-start
+      user = await container.read(userLocalServiceProvider).getUser();
+      // coverage:ignore-end
+    } else {
+      user = const UserDTO(name: 'name', avatarUrl: 'avatarUrl', email: 'email');
+    }
     final loggerMessage = {
       'didUpdateProvider': {
+        'user': user.email,
         'type': provider.runtimeType,
         'new_value': newValue.toString(),
         'old_value': previousValue.toString()
       }
     };
+    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+      // coverage:ignore-start
+      NewrelicMobile.instance.redirectDebugPrint();
+      // coverage:ignore-end
+    }
     loggerInstance?.i(loggerMessage);
   }
 }

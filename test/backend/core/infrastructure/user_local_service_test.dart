@@ -29,7 +29,7 @@ void main() {
 
         final userLocalService = UserLocalService(fakeSembastDatabase);
 
-        final userJson = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl'};
+        final userJson = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl', 'email': 'hey@hey.com'};
 
         final userDTO = UserDTO.fromJson(userJson);
 
@@ -53,7 +53,7 @@ void main() {
 
         final userLocalService = UserLocalService(fakeSembastDatabase);
 
-        final userJson = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl'};
+        final userJson = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl', 'email': 'hey@hey.com'};
 
         final userDTO = UserDTO.fromJson(userJson);
 
@@ -77,7 +77,7 @@ void main() {
 
         final userLocalService = UserLocalService(fakeSembastDatabase);
 
-        final userJson = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl'};
+        final userJson = {'name': 'John Doe', 'avatar_url': 'https://example.com/avatarUrl', 'email': 'hey@hey.com'};
 
         await UserLocalService.store.record(UserLocalService.key).put(fakeSembastDatabase.instance, userJson);
 

@@ -1,5 +1,9 @@
+// Dart imports:
+import 'dart:io';
+
 // Package imports:
 import 'package:dartz/dartz.dart';
+import 'package:newrelic_mobile/newrelic_mobile.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
@@ -51,6 +55,11 @@ class SearchedSongsRepository {
         ),
       );
     } on RestApiException catch (e) {
+      if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+        // coverage:ignore-start
+        NewrelicMobile.instance.recordError(e, StackTrace.current);
+        // coverage:ignore-end
+      }
       logger.e(e);
       return left(BackendFailure.api(e.errorCode, ''));
     }

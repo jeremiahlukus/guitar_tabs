@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 // Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:newrelic_mobile/newrelic_mobile.dart';
 import 'package:oauth2/oauth2.dart';
 import 'package:platform/platform.dart';
 
@@ -137,6 +138,11 @@ class WebAppAuthenticator {
         if (e.isNoConnectionError) {
           logger.e('No internet connect, did not revoke token');
         } else {
+          if (!getIsDebugMode()) {
+            // coverage:ignore-start
+            NewrelicMobile.instance.recordError(e, StackTrace.current);
+            // coverage:ignore-end
+          }
           logger.e(e.error);
           rethrow;
         }
