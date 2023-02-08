@@ -2,6 +2,7 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -40,7 +41,8 @@ class SearchBar extends ConsumerStatefulWidget {
   SearchBarState createState() => SearchBarState();
 }
 
-class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*/ {
+class SearchBarState
+    extends ConsumerState<SearchBar> /*with ConsumerStateMixin*/ {
   late FloatingSearchBarController _controller;
   static const signOutButtonKey = ValueKey('signOutButtonKey');
   static const searchKey = ValueKey('searchKey');
@@ -62,13 +64,17 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
   Widget build(BuildContext context) {
     void pushPageAndPutFirstInHistory(String searchTerm) {
       widget.onShouldNavigateToResultPage(searchTerm);
-      ref.read(searchHistoryNotifierProvider.notifier).addSearchTerm(searchTerm);
+      ref
+          .read(searchHistoryNotifierProvider.notifier)
+          .addSearchTerm(searchTerm);
       _controller.close();
     }
 
     void pushPageAndAddToHistory(String searchTerm) {
       widget.onShouldNavigateToResultPage(searchTerm);
-      ref.read(searchHistoryNotifierProvider.notifier).addSearchTerm(searchTerm);
+      ref
+          .read(searchHistoryNotifierProvider.notifier)
+          .addSearchTerm(searchTerm);
       _controller.close();
     }
 
@@ -101,12 +107,13 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
       hint: widget.hint,
       automaticallyImplyBackButton: false,
       leadingActions: [
-        if (AutoRouter.of(context).canPop() && (Platform.isIOS || Platform.isMacOS))
+        if (AutoRouter.of(context).canPop() && (!kIsWeb))
           IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             splashRadius: 18,
             onPressed: () {
-              AutoRouter.of(context).popUntilRouteWithName(FavoriteSongsRoute.name);
+              AutoRouter.of(context)
+                  .popUntilRouteWithName(FavoriteSongsRoute.name);
             },
           )
         else if (AutoRouter.of(context).canPop())
@@ -134,7 +141,9 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
         ),
       ],
       onQueryChanged: (query) {
-        ref.read(searchHistoryNotifierProvider.notifier).watchSearchTerms(filter: query);
+        ref
+            .read(searchHistoryNotifierProvider.notifier)
+            .watchSearchTerms(filter: query);
       },
       onSubmitted: pushPageAndAddToHistory,
       builder: (context, transition) {
@@ -145,7 +154,8 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
           clipBehavior: Clip.hardEdge,
           child: Consumer(
             builder: (context, ref, child) {
-              final searchHistoryState = ref.watch(searchHistoryNotifierProvider);
+              final searchHistoryState =
+                  ref.watch(searchHistoryNotifierProvider);
               return searchHistoryState.map(
                 data: (history) {
                   if (_controller.query.isEmpty && history.value.isEmpty) {

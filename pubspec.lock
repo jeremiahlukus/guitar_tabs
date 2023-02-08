@@ -559,10 +559,10 @@ packages:
     dependency: transitive
     description:
       name: idb_shim
-      sha256: "4ad3345fb924d5b8ada5f784d687cfd94ff18d69505f8b09428aa2968cbe8efa"
+      sha256: "7e2ad3d36a4eb549813d1ef10694c0f1fd5b4713a2021f19569c752e74b54cef"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0+8"
+    version: "2.3.0+1"
   import_sorter:
     dependency: "direct dev"
     description:
@@ -677,7 +677,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: e6956520547001f0554f27d27ea2d46e33575eb1
+      resolved-ref: f95f4272a93a3dfc206c61d096d5ed3363afb045
       url: "https://github.com/jeremiahlukus/material_floating_search_bar"
     source: git
     version: "0.3.8"
@@ -957,18 +957,18 @@ packages:
     dependency: "direct main"
     description:
       name: sembast
-      sha256: "8c449e25d3a23a317b352735ded076861820f51dd128a21a4971b31984ae5f2b"
+      sha256: "4997717aa84f0622691815d7e2739988b7f7d3a463302fc878f7d5acfa748e96"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.0+6"
   sembast_web:
     dependency: "direct main"
     description:
       name: sembast_web
-      sha256: "6bb4d002bfe346c9d25824cabd386fa72f194432910f859bc0eeda3cadf8aa0f"
+      sha256: ceed2e7df09ed553878e482e56f1cc7d4b86905df0b6735bd577d2ff4620c2c3
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1+1"
+    version: "2.1.0+4"
   sentry:
     dependency: transitive
     description:
@@ -1206,6 +1206,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  universal_platform:
+    dependency: transitive
+    description:
+      name: universal_platform
+      sha256: d315be0f6641898b280ffa34e2ddb14f3d12b1a37882557869646e0cc363d0cc
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+1"
   uuid:
     dependency: transitive
     description:

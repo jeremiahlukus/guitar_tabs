@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -25,18 +26,34 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final WebAppAuthenticator _authenticator;
 
   Future<void> checkAndUpdateAuthStatus() async {
-    state = (await _authenticator.isSignedIn()) ? const AuthState.authenticated() : const AuthState.unauthenticated();
+    state = (await _authenticator.isSignedIn())
+        ? const AuthState.authenticated()
+        : const AuthState.unauthenticated();
   }
 
   Future<void> signIn(AuthUriCallback authorizationCallback) async {
-    final redirectUrl = await authorizationCallback(_authenticator.getAuthorizationUrl());
-    final failureOrSuccess = await _authenticator.handleAuthorizationResponse(
-      redirectUrl.queryParameters,
-    );
-    state = failureOrSuccess.fold(
-      AuthState.failure,
-      (r) => const AuthState.authenticated(),
-    );
+    if (kIsWeb) {
+      final redirectUrl = Uri.parse(
+        'https://joyful-noise-staging.joyful-noise.link/callback?state=uUn8Tiku7wihCDAaHBtyKi9z',
+      );
+      final failureOrSuccess = await _authenticator.handleAuthorizationResponse(
+        redirectUrl.queryParameters,
+      );
+      state = failureOrSuccess.fold(
+        AuthState.failure,
+        (r) => const AuthState.authenticated(),
+      );
+    } else {
+      final redirectUrl =
+          await authorizationCallback(_authenticator.getAuthorizationUrl());
+      final failureOrSuccess = await _authenticator.handleAuthorizationResponse(
+        redirectUrl.queryParameters,
+      );
+      state = failureOrSuccess.fold(
+        AuthState.failure,
+        (r) => const AuthState.authenticated(),
+      );
+    }
   }
 
   Future<void> signOut() async {

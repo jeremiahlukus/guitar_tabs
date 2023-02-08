@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:oauth2/oauth2.dart';
-import 'package:platform/platform.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/domain/auth_failure.dart';
@@ -24,12 +23,13 @@ class WebAppAuthenticator {
   /// Swap it during tests with [FakePlatform] and ensure to set it to null in
   /// the tear down
   @visibleForTesting
-  static Platform getPlatform() => _platform ?? const LocalPlatform();
+  //static Platform getPlatform() => _platform ?? const LocalPlatform();
 
-  static Platform? _platform;
+  //static Platform? _platform;
 
   // ignore: avoid_setters_without_getters
-  static set platform(Platform? platformArgument) => _platform = platformArgument;
+  // static set platform(Platform? platformArgument) =>
+  //     _platform = platformArgument;
 
   /// Returns [kDebugMode]] by default
   /// Swap it during tests with a [bool] or and ensure to set it to null in
@@ -39,40 +39,47 @@ class WebAppAuthenticator {
   static bool? _isDebugMode;
 
   // ignore: avoid_setters_without_getters
-  static set isDebugMode(bool? isDebugModeArgument) => _isDebugMode = isDebugModeArgument;
+  static set isDebugMode(bool? isDebugModeArgument) =>
+      _isDebugMode = isDebugModeArgument;
 
   final CredentialsStorage _credentialsStorage;
   final Dio _dio;
   static Uri authorizationEndpoint() {
-    const useStaging = bool.fromEnvironment('USE_STAGING');
-    if (getIsDebugMode() && !useStaging) {
-      final isAndroid = getPlatform().isAndroid;
-      return isAndroid
-          ? Uri.parse('http://10.0.2.2:3000/users/sign_in')
-          : Uri.parse('http://127.0.0.1:3000/users/sign_in');
-    } else {
-      return Uri.parse('https://joyful-noise-staging.joyful-noise.link/users/sign_in');
-    }
+    // const useStaging = bool.fromEnvironment('USE_STAGING');
+    // if (getIsDebugMode() && !useStaging) {
+    //   final isAndroid = getPlatform().isAndroid;
+    //   return isAndroid
+    //       ? Uri.parse('http://10.0.2.2:3000/users/sign_in')
+    //       : Uri.parse('http://127.0.0.1:3000/users/sign_in');
+    // } else {
+    return Uri.parse(
+        'https://joyful-noise-staging.joyful-noise.link/users/sign_in');
+    //}
   }
 
   static Uri revocationEndpoint() {
     const useStaging = bool.fromEnvironment('USE_STAGING');
-    if (getIsDebugMode() && !useStaging) {
-      final isAndroid = getPlatform().isAndroid;
-      return isAndroid ? Uri.parse('http://10.0.2.2:3000/api/v1/auth') : Uri.parse('http://127.0.0.1:3000/api/v1/auth');
-    } else {
-      return Uri.parse('https://joyful-noise-staging.joyful-noise.link/api/v1/auth');
-    }
+    // if (getIsDebugMode() && !useStaging) {
+    //   final isAndroid = getPlatform().isAndroid;
+    //   return isAndroid
+    //       ? Uri.parse('http://10.0.2.2:3000/api/v1/auth')
+    //       : Uri.parse('http://127.0.0.1:3000/api/v1/auth');
+    // } else {
+    return Uri.parse(
+        'https://joyful-noise-staging.joyful-noise.link/api/v1/auth');
+    //}
   }
 
   static Uri redirectUrl() {
     const useStaging = bool.fromEnvironment('USE_STAGING');
-    if (getIsDebugMode() && !useStaging) {
-      final isAndroid = getPlatform().isAndroid;
-      return isAndroid ? Uri.parse('http://10.0.2.2:3000/callback') : Uri.parse('http://127.0.0.1:3000/callback');
-    } else {
-      return Uri.parse('https://joyful-noise-staging.joyful-noise.link/callback');
-    }
+    // if (getIsDebugMode() && !useStaging) {
+    //   final isAndroid = getPlatform().isAndroid;
+    //   return isAndroid
+    //       ? Uri.parse('http://10.0.2.2:3000/callback')
+    //       : Uri.parse('http://127.0.0.1:3000/callback');
+    // } else {
+    return Uri.parse('https://joyful-noise-staging.joyful-noise.link/callback');
+    //}
   }
 
   Future<Credentials?> getSignedInCredentials() async {
@@ -91,7 +98,8 @@ class WebAppAuthenticator {
     }
   }
 
-  Future<bool> isSignedIn() => getSignedInCredentials().then((creds) => creds != null);
+  Future<bool> isSignedIn() =>
+      getSignedInCredentials().then((creds) => creds != null);
 
   // unit == void
   Future<Either<AuthFailure, Unit>> handleAuthorizationResponse(
