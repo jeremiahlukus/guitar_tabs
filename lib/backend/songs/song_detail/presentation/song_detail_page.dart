@@ -10,6 +10,7 @@ import 'package:flutter_chord/flutter_chord.dart';
 import 'package:flutter_guitar_tabs/flutter_guitar_tabs.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:newrelic_mobile/newrelic_mobile.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -52,7 +53,11 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   @override
   void initState() {
     ref.read(songDetailNotifierProvider.notifier).getSongDetail(widget.song.id);
-    _init().catchError((dynamic e) => logger.e(e));
+    _init().catchError(
+      // coverage:ignore-start
+      (Object e) => NewrelicMobile.instance.recordError(e, StackTrace.current),
+      // coverage:ignore-end
+    );
     super.initState();
   }
 
@@ -80,9 +85,10 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
       // golden test break setting the audio source
       if (widget.song.url.isNotEmpty && !Platform.environment.containsKey('FLUTTER_TEST')) {
         await _player.setAudioSource(AudioSource.uri(Uri.parse(widget.song.url)));
-        logger.i(widget.song.url);
+        await NewrelicMobile.instance.recordCustomEvent('Playing Audio', eventName: 'Audio');
       }
     } catch (e) {
+      NewrelicMobile.instance.recordError(e, StackTrace.current);
       logger.e('Error loading audio source: $e');
     }
     // coverage:ignore-end

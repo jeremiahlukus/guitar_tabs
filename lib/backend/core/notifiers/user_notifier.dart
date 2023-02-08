@@ -34,6 +34,7 @@ class UserNotifier extends StateNotifier<UserState> {
             User(
               name: '',
               avatarUrl: '',
+              email: '',
             ),
           ),
         );

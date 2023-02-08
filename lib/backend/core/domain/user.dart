@@ -9,6 +9,7 @@ class User with _$User {
   const factory User({
     required String name,
     required String avatarUrl,
+    required String email,
   }) = _User;
 
   String avatarUrlOverride(String size) {

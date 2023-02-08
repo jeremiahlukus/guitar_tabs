@@ -1,3 +1,5 @@
+// Dart imports:
+
 // Package imports:
 import 'package:test/test.dart';
 
@@ -9,7 +11,8 @@ void main() {
     test("avatarUrlOverride returns the avatarUrl with '&size=48' replaced with the size argument", () {
       const name = 'name';
       const avatarUrl = 'www.example.com/avatar?color=blue&size=48';
-      const user = User(name: name, avatarUrl: avatarUrl);
+      const email = 'hey@hey.com';
+      const user = User(name: name, avatarUrl: avatarUrl, email: email);
 
       const size = '24';
 

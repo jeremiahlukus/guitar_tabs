@@ -255,7 +255,9 @@ class _$_SongDTO extends _SongDTO {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SongDTOToJson(this);
+    return _$$_SongDTOToJson(
+      this,
+    );
   }
 }
 

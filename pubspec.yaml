@@ -28,7 +28,6 @@ dependencies:
   logger: ^1.1.0
   responsive_framework: ^0.2.0
   riverpod: ^1.0.3
-  sentry_flutter: ^6.6.1
   webview_flutter: ^3.0.4
   sembast: ^3.2.0
   path_provider: ^2.0.9
@@ -46,6 +45,8 @@ dependencies:
       url: https://github.com/jeremiahlukus/material_floating_search_bar
   just_audio: ^0.9.29
   rxdart: ^0.27.5
+  newrelic_mobile: 0.0.1-dev.8
+  flutter_dotenv: ^5.0.2
   
 
 
@@ -72,3 +73,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo.svg
+    - .env.staging
+    - .env.dev
+    - .env.production

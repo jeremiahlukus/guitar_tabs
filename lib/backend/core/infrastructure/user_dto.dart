@@ -12,6 +12,7 @@ class UserDTO with _$UserDTO {
   const UserDTO._();
   const factory UserDTO({
     required String name,
+    required String email,
     // ignore: invalid_annotation_target
     @JsonKey(name: 'avatar_url') required String avatarUrl,
   }) = _UserDTO;
@@ -21,12 +22,14 @@ class UserDTO with _$UserDTO {
   factory UserDTO.fromDomain(User _) {
     return UserDTO(
       name: _.name,
+      email: _.email,
       avatarUrl: _.avatarUrl,
     );
   }
   User toDomain() {
     return User(
       name: name,
+      email: email,
       avatarUrl: avatarUrl,
     );
   }

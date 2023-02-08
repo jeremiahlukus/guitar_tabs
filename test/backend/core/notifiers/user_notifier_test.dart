@@ -21,7 +21,7 @@ void main() {
           (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
         final userNotifier = UserNotifier(mockUserRepository);
-        const defaultUser = User(name: 'name', avatarUrl: 'avatarUrl');
+        const defaultUser = User(name: 'name', avatarUrl: 'avatarUrl', email: 'hey@hey.com');
         // ignore: invalid_use_of_protected_member
         userNotifier.state = userNotifier.state.copyWith(user: defaultUser);
 
@@ -44,7 +44,7 @@ void main() {
         final UserRepository mockUserRepository = MockUserRepository();
         when(mockUserRepository.getUserPage).thenAnswer(
           (invocation) => Future.value(
-            right(const User(name: 'name', avatarUrl: 'avatarUrl')),
+            right(const User(name: 'name', avatarUrl: 'avatarUrl', email: 'hey@hey.com')),
           ),
         );
 
@@ -57,7 +57,7 @@ void main() {
 
         final expectedStateResultMatcher = equals(
           const UserState.loadSuccess(
-            User(name: 'name', avatarUrl: 'avatarUrl'),
+            User(name: 'name', avatarUrl: 'avatarUrl', email: 'hey@hey.com'),
           ),
         );
 

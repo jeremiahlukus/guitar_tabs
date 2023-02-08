@@ -20,7 +20,8 @@ UserDTO _$UserDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserDTO {
-  String get name => throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  String get name => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'avatar_url')
   String get avatarUrl => throw _privateConstructorUsedError;
 
@@ -32,7 +33,7 @@ mixin _$UserDTO {
 /// @nodoc
 abstract class $UserDTOCopyWith<$Res> {
   factory $UserDTOCopyWith(UserDTO value, $Res Function(UserDTO) then) = _$UserDTOCopyWithImpl<$Res>;
-  $Res call({String name, @JsonKey(name: 'avatar_url') String avatarUrl});
+  $Res call({String name, String email, @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
   @override
   $Res call({
     Object? name = freezed,
+    Object? email = freezed,
     Object? avatarUrl = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       avatarUrl: avatarUrl == freezed
           ? _value.avatarUrl
@@ -65,7 +71,7 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
 abstract class _$$_UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
   factory _$$_UserDTOCopyWith(_$_UserDTO value, $Res Function(_$_UserDTO) then) = __$$_UserDTOCopyWithImpl<$Res>;
   @override
-  $Res call({String name, @JsonKey(name: 'avatar_url') String avatarUrl});
+  $Res call({String name, String email, @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$_UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res> impleme
   @override
   $Res call({
     Object? name = freezed,
+    Object? email = freezed,
     Object? avatarUrl = freezed,
   }) {
     return _then(_$_UserDTO(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       avatarUrl: avatarUrl == freezed
           ? _value.avatarUrl
@@ -97,12 +108,15 @@ class __$$_UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res> impleme
 /// @nodoc
 @JsonSerializable()
 class _$_UserDTO extends _UserDTO {
-  const _$_UserDTO({required this.name, @JsonKey(name: 'avatar_url') required this.avatarUrl}) : super._();
+  const _$_UserDTO({required this.name, required this.email, @JsonKey(name: 'avatar_url') required this.avatarUrl})
+      : super._();
 
   factory _$_UserDTO.fromJson(Map<String, dynamic> json) => _$$_UserDTOFromJson(json);
 
   @override
   final String name;
+  @override
+  final String email;
 // ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'avatar_url')
@@ -110,7 +124,7 @@ class _$_UserDTO extends _UserDTO {
 
   @override
   String toString() {
-    return 'UserDTO(name: $name, avatarUrl: $avatarUrl)';
+    return 'UserDTO(name: $name, email: $email, avatarUrl: $avatarUrl)';
   }
 
   @override
@@ -119,13 +133,14 @@ class _$_UserDTO extends _UserDTO {
         (other.runtimeType == runtimeType &&
             other is _$_UserDTO &&
             const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.avatarUrl, avatarUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(name), const DeepCollectionEquality().hash(avatarUrl));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(email), const DeepCollectionEquality().hash(avatarUrl));
 
   @JsonKey(ignore: true)
   @override
@@ -133,19 +148,25 @@ class _$_UserDTO extends _UserDTO {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserDTOToJson(this);
+    return _$$_UserDTOToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserDTO extends UserDTO {
-  const factory _UserDTO({required final String name, @JsonKey(name: 'avatar_url') required final String avatarUrl}) =
-      _$_UserDTO;
+  const factory _UserDTO(
+      {required final String name,
+      required final String email,
+      @JsonKey(name: 'avatar_url') required final String avatarUrl}) = _$_UserDTO;
   const _UserDTO._() : super._();
 
   factory _UserDTO.fromJson(Map<String, dynamic> json) = _$_UserDTO.fromJson;
 
   @override
   String get name;
+  @override
+  String get email;
   @override // ignore: invalid_annotation_target
   @JsonKey(name: 'avatar_url')
   String get avatarUrl;
