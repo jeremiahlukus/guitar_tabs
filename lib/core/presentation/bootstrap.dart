@@ -6,11 +6,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:newrelic_mobile/config.dart';
 import 'package:newrelic_mobile/newrelic_mobile.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 // Project imports:
 import 'package:joyful_noise/core/infrastructure/provider_logger.dart';
 
