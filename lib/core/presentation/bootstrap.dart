@@ -18,9 +18,9 @@ import 'package:joyful_noise/core/infrastructure/provider_logger.dart';
 // Flutter imports:
 
 Logger logger = Logger();
-Future<void> bootstrap(Widget Function() builder, {String? sentryUrl}) async {
+Future<void> bootstrap(Widget Function() builder, String envFile) async {
   // ignore: avoid_redundant_argument_values
-  await dotenv.load(fileName: '.env');
+  await dotenv.load(fileName: envFile);
   var appToken = '';
 
   if (Platform.isAndroid) {

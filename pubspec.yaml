@@ -73,4 +73,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo.svg
-    - .env
+    - .env.staging
+    - .env.dev
+    - .env.production
