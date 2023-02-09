@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 // Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:oauth2/oauth2.dart';
 import 'package:platform/platform.dart';
@@ -29,6 +30,7 @@ class MockResponse extends Mock implements Response<dynamic> {}
 class FakeCredentials extends Fake implements Credentials {}
 
 void main() {
+  dotenv.testLoad(fileInput: File('.env').readAsStringSync());
   setUpAll(() {
     registerFallbackValue(FakeCredentials());
   });
@@ -237,7 +239,7 @@ void main() {
         WebAppAuthenticator.isDebugMode = false;
 
         final actualAuthorizationUrl = WebAppAuthenticator.revocationEndpoint();
-        final expectedAuthorizationUrl = Uri.parse('https://joyful-noise-staging.joyful-noise.link/api/v1/auth');
+        final expectedAuthorizationUrl = Uri.parse('https://${dotenv.env['API_URL']}/api/v1/auth');
 
         expect(actualAuthorizationUrl, expectedAuthorizationUrl);
 
@@ -272,7 +274,7 @@ void main() {
         WebAppAuthenticator.isDebugMode = false;
 
         final actualAuthorizationUrl = WebAppAuthenticator.redirectUrl();
-        final expectedAuthorizationUrl = Uri.parse('https://joyful-noise-staging.joyful-noise.link/callback');
+        final expectedAuthorizationUrl = Uri.parse('https://${dotenv.env['API_URL']}/callback');
 
         expect(actualAuthorizationUrl, expectedAuthorizationUrl);
 

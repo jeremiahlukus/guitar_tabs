@@ -2,7 +2,11 @@
 
 // Flutter imports:
 
+// Dart imports:
+import 'dart:io';
+
 // Package imports:
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:platform/platform.dart';
 import 'package:test/test.dart';
 
@@ -10,6 +14,7 @@ import 'package:test/test.dart';
 import 'package:joyful_noise/backend/core/infrastructure/backend_base_url.dart';
 
 void main() {
+  dotenv.testLoad(fileInput: File('.env').readAsStringSync());
   group('.backendUrl', () {
     group('When in debug mode', () {
       tearDown(() {
@@ -40,7 +45,7 @@ void main() {
       BackendConstants.isDebugMode = false;
 
       final actualAuthorizationUrl = BackendConstants().backendBaseUrl();
-      const expectedAuthorizationUrl = 'joyful-noise-staging.joyful-noise.link';
+      final expectedAuthorizationUrl = dotenv.env['API_URL']!;
 
       expect(actualAuthorizationUrl, expectedAuthorizationUrl);
 

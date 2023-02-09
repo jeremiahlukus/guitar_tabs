@@ -2,6 +2,7 @@
 import 'package:flutter/foundation.dart';
 
 // Package imports:
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:platform/platform.dart';
 
 class BackendConstants {
@@ -32,7 +33,7 @@ class BackendConstants {
       final isAndroid = getPlatform().isAndroid;
       return isAndroid ? '10.0.2.2:3000' : '127.0.0.1:3000';
     } else {
-      return 'joyful-noise-staging.joyful-noise.link';
+      return dotenv.env['API_URL']!;
     }
   }
 }

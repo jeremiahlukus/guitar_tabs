@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 // Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:newrelic_mobile/newrelic_mobile.dart';
 import 'package:oauth2/oauth2.dart';
 import 'package:platform/platform.dart';
@@ -52,7 +53,7 @@ class WebAppAuthenticator {
           ? Uri.parse('http://10.0.2.2:3000/users/sign_in')
           : Uri.parse('http://127.0.0.1:3000/users/sign_in');
     } else {
-      return Uri.parse('https://joyful-noise-staging.joyful-noise.link/users/sign_in');
+      return Uri.parse('https://${dotenv.env['API_URL']}/users/sign_in');
     }
   }
 
@@ -62,7 +63,7 @@ class WebAppAuthenticator {
       final isAndroid = getPlatform().isAndroid;
       return isAndroid ? Uri.parse('http://10.0.2.2:3000/api/v1/auth') : Uri.parse('http://127.0.0.1:3000/api/v1/auth');
     } else {
-      return Uri.parse('https://joyful-noise-staging.joyful-noise.link/api/v1/auth');
+      return Uri.parse('https://${dotenv.env['API_URL']}/api/v1/auth');
     }
   }
 
@@ -72,7 +73,7 @@ class WebAppAuthenticator {
       final isAndroid = getPlatform().isAndroid;
       return isAndroid ? Uri.parse('http://10.0.2.2:3000/callback') : Uri.parse('http://127.0.0.1:3000/callback');
     } else {
-      return Uri.parse('https://joyful-noise-staging.joyful-noise.link/callback');
+      return Uri.parse('https://${dotenv.env['API_URL']}/callback');
     }
   }
 
