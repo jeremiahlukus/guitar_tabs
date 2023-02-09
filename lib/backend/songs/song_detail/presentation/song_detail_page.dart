@@ -137,166 +137,172 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          const Divider(),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              child: LyricsRenderer(
-                widgetPadding: 50,
-                lyrics: widget.song.lyrics,
-                textStyle: Theme.of(context).textTheme.bodyMedium!,
-                chordStyle: Theme.of(context).textTheme.titleSmall!,
-                onTapChord: (String chord) async {
-                  final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
-                  if (tabs!.isNotEmpty && tabs.first != '') {
-                    // ignore: use_build_context_synchronously
-                    return showDialog<void>(
-                      context: context,
-                      barrierDismissible: false, // user must tap button!
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          content: SingleChildScrollView(
-                            child: ListBody(
-                              children: <Widget>[
-                                Center(
-                                  child: TabWidget(
-                                    name: chord,
-                                    tabs: tabs,
-                                    size: 4,
-                                  ),
-                                )
-                              ],
+      body: InteractiveViewer(
+        panEnabled: false,
+        minScale: 0.5,
+        boundaryMargin: const EdgeInsets.all(80),
+        maxScale: 4,
+        child: Column(
+          children: [
+            const Divider(),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                child: LyricsRenderer(
+                  widgetPadding: 50,
+                  lyrics: widget.song.lyrics,
+                  textStyle: Theme.of(context).textTheme.bodyMedium!,
+                  chordStyle: Theme.of(context).textTheme.titleSmall!,
+                  onTapChord: (String chord) async {
+                    final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
+                    if (tabs!.isNotEmpty && tabs.first != '') {
+                      // ignore: use_build_context_synchronously
+                      return showDialog<void>(
+                        context: context,
+                        barrierDismissible: false, // user must tap button!
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: <Widget>[
+                                  Center(
+                                    child: TabWidget(
+                                      name: chord,
+                                      tabs: tabs,
+                                      size: 4,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text('Continue'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
-                },
-                transposeIncrement: transposeIncrement,
-                scrollSpeed: scrollSpeed,
-                lineHeight: 4,
-                horizontalAlignment: CrossAxisAlignment.start,
-                leadingWidget: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                ElevatedButton(
-                                  key: transposeDecrementKey,
-                                  onPressed: () {
-                                    setState(() {
-                                      transposeIncrement--;
-                                    });
-                                  },
-                                  child: const Text('-'),
-                                ),
-                                const SizedBox(width: 5),
-                                Text('$transposeIncrement'),
-                                const SizedBox(width: 5),
-                                ElevatedButton(
-                                  key: transposeIncrementKey,
-                                  onPressed: () {
-                                    setState(() {
-                                      transposeIncrement++;
-                                    });
-                                  },
-                                  child: const Text('+'),
-                                ),
-                              ],
-                            ),
-                            const Text('Transpose')
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                ElevatedButton(
-                                  key: scrollSpeedDecrementKey,
-                                  onPressed: scrollSpeed <= 0
-                                      ? null
-                                      // coverage:ignore-start
-                                      : () {
-                                          setState(() {
-                                            scrollSpeed = scrollSpeed - 2;
-                                          });
-                                          // coverage:ignore-end
-                                        },
-                                  child: const Text('-'),
-                                ),
-                                const SizedBox(width: 5),
-                                Text('$scrollSpeed'),
-                                const SizedBox(width: 5),
-                                ElevatedButton(
-                                  key: scrollSpeedIncrementKey,
-                                  onPressed: () {
-                                    setState(() {
-                                      scrollSpeed = scrollSpeed + 6;
-                                    });
-                                  },
-                                  child: const Text('+'),
-                                ),
-                              ],
-                            ),
-                            const Text('Auto Scroll')
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Divider(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 16,
-                      ),
-                      child: AutoSizeText(
-                        widget.song.title,
-                        maxLines: 1,
-                        style: chordStyle,
-                      ),
-                    ),
-                    widget.song.url.isNotEmpty
-                        ? Column(
-                            children: [
-                              ControlButtons(_player),
-                              StreamBuilder<PositionData>(
-                                stream: _positionDataStream,
-                                builder: (context, snapshot) {
-                                  final positionData = snapshot.data;
-
-                                  return SeekBar(
-                                    // coverage:ignore-start
-                                    duration: positionData?.duration ?? Duration.zero,
-                                    position: positionData?.position ?? Duration.zero,
-                                    bufferedPosition: positionData?.bufferedPosition ?? Duration.zero,
-                                    onChangeEnd: _player.seek,
-                                    // coverage:ignore-end
-                                  );
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text('Continue'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
                                 },
                               ),
                             ],
-                          )
-                        : Container(),
-                  ],
+                          );
+                        },
+                      );
+                    }
+                  },
+                  transposeIncrement: transposeIncrement,
+                  scrollSpeed: scrollSpeed,
+                  lineHeight: 4,
+                  horizontalAlignment: CrossAxisAlignment.start,
+                  leadingWidget: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  ElevatedButton(
+                                    key: transposeDecrementKey,
+                                    onPressed: () {
+                                      setState(() {
+                                        transposeIncrement--;
+                                      });
+                                    },
+                                    child: const Text('-'),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text('$transposeIncrement'),
+                                  const SizedBox(width: 5),
+                                  ElevatedButton(
+                                    key: transposeIncrementKey,
+                                    onPressed: () {
+                                      setState(() {
+                                        transposeIncrement++;
+                                      });
+                                    },
+                                    child: const Text('+'),
+                                  ),
+                                ],
+                              ),
+                              const Text('Transpose')
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  ElevatedButton(
+                                    key: scrollSpeedDecrementKey,
+                                    onPressed: scrollSpeed <= 0
+                                        ? null
+                                        // coverage:ignore-start
+                                        : () {
+                                            setState(() {
+                                              scrollSpeed = scrollSpeed - 2;
+                                            });
+                                            // coverage:ignore-end
+                                          },
+                                    child: const Text('-'),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text('$scrollSpeed'),
+                                  const SizedBox(width: 5),
+                                  ElevatedButton(
+                                    key: scrollSpeedIncrementKey,
+                                    onPressed: () {
+                                      setState(() {
+                                        scrollSpeed = scrollSpeed + 6;
+                                      });
+                                    },
+                                    child: const Text('+'),
+                                  ),
+                                ],
+                              ),
+                              const Text('Auto Scroll')
+                            ],
+                          ),
+                        ],
+                      ),
+                      const Divider(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                        ),
+                        child: AutoSizeText(
+                          widget.song.title,
+                          maxLines: 1,
+                          style: chordStyle,
+                        ),
+                      ),
+                      widget.song.url.isNotEmpty
+                          ? Column(
+                              children: [
+                                ControlButtons(_player),
+                                StreamBuilder<PositionData>(
+                                  stream: _positionDataStream,
+                                  builder: (context, snapshot) {
+                                    final positionData = snapshot.data;
+
+                                    return SeekBar(
+                                      // coverage:ignore-start
+                                      duration: positionData?.duration ?? Duration.zero,
+                                      position: positionData?.position ?? Duration.zero,
+                                      bufferedPosition: positionData?.bufferedPosition ?? Duration.zero,
+                                      onChangeEnd: _player.seek,
+                                      // coverage:ignore-end
+                                    );
+                                  },
+                                ),
+                              ],
+                            )
+                          : Container(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
