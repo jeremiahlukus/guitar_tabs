@@ -1,52 +1,20 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
-
-import 'package:joyful_noise/auth/presentation/authorization_page.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-
-import '../test/auth/presentation/authorization_page_test.dart';
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+import 'package:patrol/patrol.dart';
+import 'package:joyful_noise/main_staging.dart' as main_dart;
 
 void main() {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-
-  group('WebViewExample', () {
-    testWidgets('fill the email and password text fields',
-        (WidgetTester tester) async {
-      final mockObserver = MockNavigatorObserver();
-
-      final OnAuthorizationCodeRedirectAttemptCallback
-          mockOnAuthorizationCodeRedirectAttemptCallback =
-          MockOnAuthorizationCodeRedirectAttemptCallback();
-
-      when(mockOnAuthorizationCodeRedirectAttemptCallback.call)
-          .thenReturn((_) {});
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: AuthorizationPage(
-            authorizationUrl: Uri.parse(
-              'https://mdbootstrap.com/docs/standard/extended/login/#section-basic-example',
-            ),
-            onAuthorizationCodeRedirectAttempt:
-                mockOnAuthorizationCodeRedirectAttemptCallback(),
-            //   onWebViewCreatedJsString: """
-            // document.getElementById('form2Example1').value='example.com'
-            // document.getElementsByClassName("form-label")[0].innerHTML = "";
-            // document.getElementById('form2Example2').value='password'
-            // document.getElementsByClassName("form-label")[1].innerHTML = "";
-            // document.getElementsByClassName("btn btn-primary btn-block mb-4")[0].click();
-            // """,
-          ),
-          navigatorObservers: [mockObserver],
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      expect(find.byType(WebView), findsOneWidget);
-    });
-  });
+  dotenv.testLoad(fileInput: File('.env.staging').readAsStringSync());
+  patrolTest(
+    'counter state is the same after going to home and switching apps',
+    nativeAutomation: true,
+    ($) async {
+      main_dart.main();
+      await $.pumpAndSettle();
+      await $.pumpAndSettle();
+      expect($('app'), findsOneWidget);
+      await $.native.pressHome();
+    },
+  );
 }
