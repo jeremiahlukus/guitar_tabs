@@ -9,9 +9,9 @@ import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
 
 class AuthorizationPage extends StatefulWidget {
   const AuthorizationPage({
-    Key? key,
     required this.authorizationUrl,
     required this.onAuthorizationCodeRedirectAttempt,
+    Key? key,
   }) : super(key: key);
 
   static const backButtonKey = ValueKey('backButton');

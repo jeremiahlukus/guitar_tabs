@@ -2,10 +2,10 @@
 import 'dart:io';
 
 // Package imports:
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 
 extension DioErrorX on DioError {
   bool get isNoConnectionError {
-    return type == DioErrorType.other && error is SocketException;
+    return type == DioErrorType.unknown && error is SocketException;
   }
 }

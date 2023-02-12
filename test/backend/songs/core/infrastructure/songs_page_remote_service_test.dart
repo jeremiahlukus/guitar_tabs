@@ -2,7 +2,7 @@
 import 'dart:io';
 
 // Package imports:
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -36,7 +36,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 304,
             ),
           ),
@@ -80,7 +80,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 200,
               data: mockData,
             ),
@@ -123,7 +123,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 400,
             ),
           ),
@@ -163,7 +163,7 @@ void main() {
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
           DioError(
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             error: const SocketException(''),
           ),
         );
@@ -200,8 +200,8 @@ void main() {
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
           DioError(
-            requestOptions: RequestOptions(path: ''),
-            response: Response<dynamic>(requestOptions: RequestOptions(path: ''), statusCode: 400, data: 'error'),
+            requestOptions: RequestOptions(),
+            response: Response<dynamic>(requestOptions: RequestOptions(), statusCode: 400, data: 'error'),
           ),
         );
 

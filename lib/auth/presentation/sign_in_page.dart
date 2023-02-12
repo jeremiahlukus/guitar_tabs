@@ -32,7 +32,6 @@ class SignInPage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Center(
-                    // TODO(jeremiahlukus): replace with own logo
                     child: FaIcon(
                       FontAwesomeIcons.guitar,
                       size: 150,

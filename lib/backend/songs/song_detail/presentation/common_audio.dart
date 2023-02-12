@@ -15,12 +15,12 @@ class SeekBar extends StatefulWidget {
   static const seekbarKey = ValueKey('seekbarKey');
 
   const SeekBar({
-    Key? key,
     required this.duration,
     required this.position,
     required this.bufferedPosition,
     this.onChanged,
     this.onChangeEnd,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -165,10 +165,10 @@ void showSliderDialog({
   required int divisions,
   required double min,
   required double max,
-  String valueSuffix = '',
   required double value,
   required Stream<double> stream,
   required ValueChanged<double> onChanged,
+  String valueSuffix = '',
 }) {
   showDialog<void>(
     context: context,

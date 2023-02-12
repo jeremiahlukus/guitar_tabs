@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:newrelic_mobile/newrelic_navigation_observer.dart';

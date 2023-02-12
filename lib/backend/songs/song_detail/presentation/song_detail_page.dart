@@ -23,7 +23,10 @@ import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class SongDetailPage extends ConsumerStatefulWidget {
   final Song song;
-  const SongDetailPage({Key? key, required this.song}) : super(key: key);
+  const SongDetailPage({
+    required this.song,
+    Key? key,
+  }) : super(key: key);
 
   @override
   SongDetailPageState createState() => SongDetailPageState();
@@ -129,7 +132,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                         ref.read(songDetailNotifierProvider.notifier).switchStarredStatus(state.songDetail.entity!);
                         ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
                       },
-                icon: state.songDetail.entity?.isFavorite == true
+                icon: state.songDetail.entity?.isFavorite ?? true
                     ? const Icon(Icons.star)
                     : const Icon(Icons.star_outline),
               );

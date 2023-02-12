@@ -427,7 +427,7 @@ void main() {
             home: Scaffold(
               body: PaginatedSongsListView(
                 paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
-                getNextPage: mock,
+                getNextPage: mock.call,
                 noResultsMessage: "That's everything we could find in your favorite songs right now.",
               ),
             ),

@@ -1,5 +1,5 @@
 // Package imports:
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/infrastructure/backend_base_url.dart';
@@ -16,7 +16,6 @@ class PlaylistSongsRemoteService extends SongsPageRemoteService {
 
   Future<RemoteResponse<List<SongDTO>>> getPlaylistSongsPage(int page, String playlistName) async => super.getPage(
         storeEtag: false,
-        // TODO(jeremiah): http for local https for
         requestUri: Uri.https(
           BackendConstants().backendBaseUrl(),
           '/api/v1/playlist_songs/$playlistName',

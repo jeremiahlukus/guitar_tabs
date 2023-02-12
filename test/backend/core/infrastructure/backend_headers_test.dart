@@ -1,5 +1,5 @@
 // Package imports:
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 import 'package:test/test.dart';
 
 // Project imports:
@@ -12,7 +12,7 @@ void main() {
           'returns a BackendHeaders object with null link if the response headers map contains no Link property and response request options contain no url',
           () {
         final response = Response<dynamic>(
-          requestOptions: RequestOptions(path: ''),
+          requestOptions: RequestOptions(),
           headers: Headers.fromMap({}),
         );
         final backendHeaders = BackendHeaders.parse(response);
@@ -27,7 +27,7 @@ void main() {
           'returns a BackendHeaders object with a non-null link if the response headers map contains a Link property that contains rel="last"',
           () {
         final response = Response<dynamic>(
-          requestOptions: RequestOptions(path: ''),
+          requestOptions: RequestOptions(),
           headers: Headers.fromMap({
             'link': ['https://www.example.com?page=10&rel="last"']
           }),
@@ -44,7 +44,7 @@ void main() {
           'returns a BackendHeaders object with a non-null link if the response headers map contains a Link property that contains rel="last" and url is localhost',
           () {
         final response = Response<dynamic>(
-          requestOptions: RequestOptions(path: ''),
+          requestOptions: RequestOptions(),
           headers: Headers.fromMap({
             'link': ['http://127.0.0.1:3000/api/v1/user_favorite_songs?page=10&rel="last"']
           }),

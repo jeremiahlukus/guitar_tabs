@@ -1,5 +1,5 @@
 // Package imports:
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 // Project imports:
@@ -17,7 +17,7 @@ class BackendHeaders with _$BackendHeaders {
     PaginationLink? link,
   }) = _BackendHeaders;
 
-  factory BackendHeaders.parse(Response response) {
+  factory BackendHeaders.parse(Response<dynamic> response) {
     final link = response.headers.map['Link']?[0];
     return BackendHeaders(
       etag: response.headers.map['ETag']?[0],
