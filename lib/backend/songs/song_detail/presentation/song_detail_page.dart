@@ -142,7 +142,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
       ),
       body: InteractiveViewer(
         panEnabled: false,
-        minScale: 0.5,
+        minScale: 0.01,
         boundaryMargin: const EdgeInsets.all(80),
         maxScale: 4,
         child: Column(
