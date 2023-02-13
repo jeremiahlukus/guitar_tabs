@@ -15,7 +15,10 @@ import 'package:joyful_noise/search/presentation/search_bar.dart';
 
 class PlaylistSongsPage extends ConsumerStatefulWidget {
   final String playlistName;
-  const PlaylistSongsPage({Key? key, required this.playlistName}) : super(key: key);
+  const PlaylistSongsPage({
+    required this.playlistName,
+    Key? key,
+  }) : super(key: key);
 
   @override
   PlaylistSongsPageState createState() => PlaylistSongsPageState();

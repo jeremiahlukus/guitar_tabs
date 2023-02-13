@@ -1,5 +1,5 @@
 // Package imports:
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';

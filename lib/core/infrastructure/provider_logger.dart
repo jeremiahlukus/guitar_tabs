@@ -20,7 +20,7 @@ class ProviderLogger extends ProviderObserver {
 
   @override
   void providerDidFail(
-    ProviderBase provider,
+    ProviderBase<dynamic> provider,
     Object error,
     StackTrace stackTrace,
     ProviderContainer container,
@@ -40,7 +40,7 @@ class ProviderLogger extends ProviderObserver {
 
   @override
   Future<void> didUpdateProvider(
-    ProviderBase provider,
+    ProviderBase<dynamic> provider,
     Object? previousValue,
     Object? newValue,
     ProviderContainer container,

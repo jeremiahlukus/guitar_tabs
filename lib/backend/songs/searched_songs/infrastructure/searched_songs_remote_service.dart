@@ -1,5 +1,5 @@
 // Package imports:
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/infrastructure/backend_base_url.dart';
@@ -21,7 +21,6 @@ class SearchedSongsRemoteService extends SongsPageRemoteService {
   ) async =>
       super.getPage(
         storeEtag: false,
-        // TODO(jeremiah): http for local https for real
         requestUri: Uri.https(
           BackendConstants().backendBaseUrl(),
           '/api/v1/songs',

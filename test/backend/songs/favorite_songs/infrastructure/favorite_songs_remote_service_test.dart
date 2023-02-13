@@ -1,7 +1,7 @@
 // Dart imports:
 
 // Package imports:
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -34,7 +34,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 304,
             ),
           ),
@@ -68,7 +68,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 200,
               data: mockData,
             ),

@@ -5,7 +5,7 @@ import 'dart:io';
 
 // Package imports:
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -37,7 +37,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 304,
             ),
           ),
@@ -61,7 +61,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 400,
             ),
           ),
@@ -82,7 +82,7 @@ void main() {
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
           DioError(
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             error: const SocketException(''),
           ),
         );
@@ -103,11 +103,11 @@ void main() {
         ).thenThrow(
           DioError(
             response: Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 400,
               data: mockData,
             ),
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             error: Exception('error'),
           ),
         );
@@ -131,7 +131,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 200,
               data: mockData,
             ),
@@ -157,7 +157,7 @@ void main() {
       ).thenAnswer(
         (invocation) => Future.value(
           Response<dynamic>(
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             statusCode: 304,
           ),
         ),
@@ -178,7 +178,7 @@ void main() {
       ).thenAnswer(
         (invocation) => Future.value(
           Response<dynamic>(
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             statusCode: 400,
           ),
         ),
@@ -197,7 +197,7 @@ void main() {
         () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
       ).thenThrow(
         DioError(
-          requestOptions: RequestOptions(path: ''),
+          requestOptions: RequestOptions(),
           error: const SocketException(''),
         ),
       );
@@ -219,7 +219,7 @@ void main() {
       ).thenAnswer(
         (invocation) => Future.value(
           Response<dynamic>(
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             statusCode: 200,
             data: mockData,
           ),
@@ -245,7 +245,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 204,
             ),
           ),
@@ -264,7 +264,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 200,
             ),
           ),
@@ -283,7 +283,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 400,
             ),
           ),
@@ -302,7 +302,7 @@ void main() {
           () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
           DioError(
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             error: const SocketException(''),
           ),
         );
@@ -321,10 +321,10 @@ void main() {
         ).thenThrow(
           DioError(
             response: Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 400,
             ),
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             error: Exception('error'),
           ),
         );
@@ -344,7 +344,7 @@ void main() {
         () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
       ).thenThrow(
         DioError(
-          requestOptions: RequestOptions(path: ''),
+          requestOptions: RequestOptions(),
           error: Exception('error'),
         ),
       );
@@ -362,11 +362,11 @@ void main() {
         final Dio mockDio = MockDio();
 
         when(
-          () => mockDio.putUri<dynamic>(any(), data: {'song_id': '1'}, options: any(named: 'options')),
+          () => mockDio.putUri<dynamic>(any(), options: any(named: 'options')),
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 204,
             ),
           ),
@@ -381,11 +381,11 @@ void main() {
         final Dio mockDio = MockDio();
 
         when(
-          () => mockDio.putUri<dynamic>(any(), data: {'song_id': '1'}, options: any(named: 'options')),
+          () => mockDio.putUri<dynamic>(any(), options: any(named: 'options')),
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 200,
             ),
           ),
@@ -400,11 +400,11 @@ void main() {
         final Dio mockDio = MockDio();
 
         when(
-          () => mockDio.putUri<dynamic>(any(), data: {'song_id': '1'}, options: any(named: 'options')),
+          () => mockDio.putUri<dynamic>(any(), options: any(named: 'options')),
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 400,
             ),
           ),
@@ -423,10 +423,10 @@ void main() {
         final Dio mockDio = MockDio();
 
         when(
-          () => mockDio.putUri<dynamic>(any(), data: {'song_id': '1'}, options: any(named: 'options')),
+          () => mockDio.putUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
           DioError(
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
             error: const SocketException(''),
           ),
         );

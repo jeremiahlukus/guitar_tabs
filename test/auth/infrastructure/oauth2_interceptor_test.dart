@@ -5,7 +5,7 @@ import 'dart:io';
 
 // Package imports:
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:oauth2/oauth2.dart';
 import 'package:test/test.dart';
