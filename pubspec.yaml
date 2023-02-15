@@ -66,16 +66,16 @@ dev_dependencies:
   mocktail: ^0.3.0
   very_good_analysis: ^4.0.0+1
   test: ^1.19.5
-  patrol: ^0.10.12
+  patrol: ^1.0.0
 
 
 scripts: derry.yaml
 patrol:
   app_name: Joyful Noise
   android:
-    package_name: com.jparrack.joyful_noise
+    package_name: com.jparrack.joyful_noise.RunnerUITests
   ios:
-    bundle_id: com.jparrack.joyful-noise
+    bundle_id: com.jparrack.joyful-noise.RunnerUITests
 
 flutter:
   uses-material-design: true
@@ -84,3 +84,4 @@ flutter:
     - .env.staging
     - .env.dev
     - .env.production
+    - .env

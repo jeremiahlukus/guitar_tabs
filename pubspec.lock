@@ -861,10 +861,10 @@ packages:
     dependency: "direct dev"
     description:
       name: patrol
-      sha256: cff6fc84f1bd85a929a86d4189e0a3402365b85da64c59921118ad20c24052f9
+      sha256: "260dc7b21748fd24213109eb7e95e8cf35c7b8b55385dede89be89581889bf63"
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.12"
+    version: "1.0.0"
   pedantic:
     dependency: transitive
     description:
