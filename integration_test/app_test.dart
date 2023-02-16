@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
+import 'package:joyful_noise/core/infrastructure/provider_logger.dart';
+import 'package:joyful_noise/core/presentation/app_widget.dart';
 import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:joyful_noise/main_development.dart' as main_dart;
 import 'package:flutter_test/flutter_test.dart';
@@ -27,24 +30,30 @@ void main() {
     ($) async {
       await restoreFlutterError(() async {
         main_dart.main();
-        await $.pumpAndSettle();
       });
-      await $.pumpAndSettle();
-      await $(#signInButtonKey).tap();
-      await $.pumpAndSettle();
+      for (var i = 0; i < 300; i++) {
+        await $.pump();
+      }
 
-      logger.e("-------------------------------");
-      await $.native.enterTextByIndex('test@gmail.com', index: 0, appId: 'com.jparrack.joyful-noise.RunnerUITests');
-      await $.native.enterTextByIndex('NyanCar', index: 1, appId: 'com.jparrack.joyful-noise.RunnerUITests');
-      logger.e('++++++++++++++++++++++++++++++++++++++++++++');
-      await $.pump(Duration(seconds: 2));
-      await $.native.enterTextByIndex('heyheyhey', index: 1);
-      logger.e('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-      await $.pumpAndSettle();
-      await $.pump(Duration(seconds: 2));
+      await $(#signInButtonKey).tap();
+
+      print('AAAAAA');
+
+      for (var i = 0; i < 300; i++) {
+        await $.pump();
+      }
+      print('BBBBBB');
+
+      await $.native.enterTextByIndex(
+        'barpac02@gmail.com',
+        index: 0,
+      );
+      await $.native.enterTextByIndex(
+        'ny4ncat',
+        index: 1,
+      );
       await $.native.tap(Selector(text: 'Log in'));
-      await $.pumpAndSettle();
-      await $.pump(Duration(seconds: 2));
+
       final finder = find.byType(SearchBar);
       expect(finder, findsOneWidget);
       final findera = find.byType(PaginatedSongsListView);
