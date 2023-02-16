@@ -45,15 +45,28 @@ void main() {
       print('BBBBBB');
 
       await $.native.enterTextByIndex(
-        'barpac02@gmail.com',
+        'hey@hey.com',
         index: 0,
       );
       await $.native.enterTextByIndex(
-        'ny4ncat',
+        'heyheyhey',
         index: 1,
       );
+      logger.e('---------------------------------');
+      await $.native.tap(Selector(text: 'Done'));
+      for (var i = 0; i < 300; i++) {
+        await $.pump();
+      }
+      await $.native.tap(
+        Selector(
+          text: 'Sign in',
+        ),
+      );
+      logger.e('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+      for (var i = 0; i < 300; i++) {
+        await $.pump();
+      }
       await $.native.tap(Selector(text: 'Log in'));
-
       final finder = find.byType(SearchBar);
       expect(finder, findsOneWidget);
       final findera = find.byType(PaginatedSongsListView);
