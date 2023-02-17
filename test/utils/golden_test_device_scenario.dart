@@ -17,8 +17,8 @@ class GoldenTestDeviceScenario extends StatelessWidget {
     required this.name,
     required this.builder,
     this.device = Device.iphone11,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ import 'package:joyful_noise/constants/spacing.dart';
 ///  - ResponsiveContraints for max width.
 ///  - A Center to allow constraints to work in a List.
 class BlockWrapper extends StatelessWidget {
-  const BlockWrapper(this.widget, {Key? key}) : super(key: key);
+  const BlockWrapper(this.widget, {super.key});
   final Widget widget;
   @override
   Widget build(BuildContext context) {

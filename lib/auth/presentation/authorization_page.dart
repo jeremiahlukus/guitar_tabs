@@ -11,8 +11,8 @@ class AuthorizationPage extends StatefulWidget {
   const AuthorizationPage({
     required this.authorizationUrl,
     required this.onAuthorizationCodeRedirectAttempt,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   static const backButtonKey = ValueKey('backButton');
 

@@ -11,7 +11,7 @@ import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio
 class ControlButtons extends StatelessWidget {
   final AudioPlayer player;
 
-  const ControlButtons(this.player, {Key? key}) : super(key: key);
+  const ControlButtons(this.player, {super.key});
 
   @visibleForTesting
   static const playButton = ValueKey('playButton');

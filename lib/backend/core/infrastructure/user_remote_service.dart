@@ -1,5 +1,5 @@
 // Package imports:
-import 'package:diox/diox.dart';
+import 'package:dio/dio.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/infrastructure/backend_base_url.dart';

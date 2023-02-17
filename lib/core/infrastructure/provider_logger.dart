@@ -7,8 +7,6 @@ import 'package:logger/logger.dart';
 import 'package:newrelic_mobile/newrelic_mobile.dart';
 
 // Project imports:
-import 'package:joyful_noise/backend/core/infrastructure/user_dto.dart';
-import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/bootstrap.dart' as bootstrap;
 
 class ProviderLogger extends ProviderObserver {
@@ -45,17 +43,8 @@ class ProviderLogger extends ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) async {
-    UserDTO user;
-    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
-      // coverage:ignore-start
-      user = await container.read(userLocalServiceProvider).getUser();
-      // coverage:ignore-end
-    } else {
-      user = const UserDTO(name: 'name', avatarUrl: 'avatarUrl', email: 'email');
-    }
     final loggerMessage = {
       'didUpdateProvider': {
-        'user': user.email,
         'type': provider.runtimeType,
         'new_value': newValue.toString(),
         'old_value': previousValue.toString()

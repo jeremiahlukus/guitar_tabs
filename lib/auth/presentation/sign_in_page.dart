@@ -15,7 +15,7 @@ import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 
 class SignInPage extends ConsumerWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   static const signInButtonKey = ValueKey('signInButtonKey');
 

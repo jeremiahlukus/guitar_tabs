@@ -12,8 +12,8 @@ class FailureSongTile extends ConsumerWidget {
   final BackendFailure backendFailure;
   const FailureSongTile({
     required this.backendFailure,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   static const getNextFavoriteSongsButtonKey = ValueKey('getNextFavoriteSongsButtonKey');
 

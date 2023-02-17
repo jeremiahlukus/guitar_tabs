@@ -17,8 +17,8 @@ class PlaylistSongsPage extends ConsumerStatefulWidget {
   final String playlistName;
   const PlaylistSongsPage({
     required this.playlistName,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   PlaylistSongsPageState createState() => PlaylistSongsPageState();

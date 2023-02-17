@@ -273,11 +273,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.3"
-  diox:
+  dio:
     dependency: "direct main"
     description:
-      name: diox
-      sha256: "6b971f9936f1de9a6d7b2070a1f626e4a3c490d0c044d432b72e96537db2ed22"
+      name: dio
+      sha256: "9fdbf71baeb250fc9da847f6cb2052196f62c19906a3657adfc18631a667d316"
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
@@ -404,6 +404,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.18.5+1"
+  flutter_phoenix:
+    dependency: "direct dev"
+    description:
+      name: flutter_phoenix
+      sha256: "56247b4580d465dc6406de618b6be9a5860bc45d1c478f0f6a488310f0f39e9a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -523,6 +531,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  googleapis_auth:
+    dependency: transitive
+    description:
+      name: googleapis_auth
+      sha256: "127b1bbd32170ab8312f503bd57f1d654d8e4039ddfbc63c027d3f7ade0eff74"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.1"
   graphs:
     dependency: transitive
     description:
@@ -531,6 +547,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  grpc:
+    dependency: transitive
+    description:
+      name: grpc
+      sha256: a73c16e4f6a4a819be892bb2c73cc1d0b00e36095f69b0738cc91a733e3d27ba
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   hooks_riverpod:
     dependency: "direct main"
     description:
@@ -547,6 +571,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.5"
+  http2:
+    dependency: transitive
+    description:
+      name: http2
+      sha256: "58805ebc6513eed3b98ee0a455a8357e61d187bf2e0fdc1e53120770f78de258"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   http_multi_server:
     dependency: transitive
     description:
@@ -833,6 +865,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
+  patrol:
+    dependency: "direct dev"
+    description:
+      name: patrol
+      sha256: "260dc7b21748fd24213109eb7e95e8cf35c7b8b55385dede89be89581889bf63"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   pedantic:
     dependency: transitive
     description:
@@ -881,6 +921,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+  protobuf:
+    dependency: transitive
+    description:
+      name: protobuf
+      sha256: "01dd9bd0fa02548bf2ceee13545d4a0ec6046459d847b6b061d8a27237108a08"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   pub_semver:
     dependency: transitive
     description:
