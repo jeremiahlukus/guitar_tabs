@@ -3,7 +3,7 @@ import 'dart:io';
 
 // Package imports:
 import 'package:dartz/dartz.dart';
-import 'package:diox/diox.dart';
+import 'package:dio/dio.dart';
 import 'package:newrelic_mobile/newrelic_mobile.dart';
 
 // Project imports:

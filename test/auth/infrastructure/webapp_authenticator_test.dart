@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:dartz/dartz.dart';
-import 'package:diox/diox.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:oauth2/oauth2.dart';

@@ -1,5 +1,5 @@
 // Package imports:
-import 'package:diox/diox.dart';
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 // Project imports:

@@ -2,7 +2,7 @@
 import 'dart:io';
 
 // Package imports:
-import 'package:diox/diox.dart';
+import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
