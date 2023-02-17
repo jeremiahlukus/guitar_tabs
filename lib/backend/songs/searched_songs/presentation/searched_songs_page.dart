@@ -16,8 +16,8 @@ class SearchedSongsPage extends ConsumerStatefulWidget {
   final String searchTerm;
   const SearchedSongsPage({
     required this.searchTerm,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   SearchedSongsPageState createState() => SearchedSongsPageState();

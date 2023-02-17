@@ -22,8 +22,8 @@ class PaginatedSongsListView extends ConsumerStatefulWidget {
     required this.paginatedSongsNotifierProvider,
     required this.getNextPage,
     required this.noResultsMessage,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   PaginatedSongsListViewState createState() => PaginatedSongsListViewState();
@@ -82,8 +82,7 @@ class PaginatedSongsListViewState extends ConsumerState<PaginatedSongsListView> 
 class _PaginatedListView extends StatelessWidget {
   const _PaginatedListView({
     required this.state,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final PaginatedSongsState state;
 

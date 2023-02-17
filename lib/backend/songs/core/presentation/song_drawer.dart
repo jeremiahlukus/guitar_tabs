@@ -10,7 +10,7 @@ import 'package:websafe_svg/websafe_svg.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 
 class SongDrawer extends ConsumerWidget {
-  const SongDrawer({Key? key}) : super(key: key);
+  const SongDrawer({super.key});
   static const drawerKey = ValueKey('drawerKey');
   static const athensSongBook = ValueKey('athensSongBook');
   static const hymnal = ValueKey('hymnal');

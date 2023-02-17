@@ -13,8 +13,8 @@ class SongTile extends StatelessWidget {
 
   const SongTile({
     required this.song,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   static const songDetailButtonKey = ValueKey('songDetailButtonKey');
   @override

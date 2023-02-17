@@ -1,5 +1,4 @@
 // Dart imports:
-import 'dart:io';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
@@ -13,12 +12,11 @@ import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart';
 
 class FavoriteSongsPage extends ConsumerStatefulWidget {
-  const FavoriteSongsPage({Key? key}) : super(key: key);
+  const FavoriteSongsPage({super.key});
 
   @override
   FavoriteSongsPageState createState() => FavoriteSongsPageState();

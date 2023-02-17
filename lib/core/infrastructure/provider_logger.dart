@@ -7,8 +7,6 @@ import 'package:logger/logger.dart';
 import 'package:newrelic_mobile/newrelic_mobile.dart';
 
 // Project imports:
-import 'package:joyful_noise/backend/core/infrastructure/user_dto.dart';
-import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/bootstrap.dart' as bootstrap;
 
 class ProviderLogger extends ProviderObserver {

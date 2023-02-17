@@ -33,8 +33,8 @@ class SearchBar extends ConsumerStatefulWidget {
     required this.hint,
     required this.onShouldNavigateToResultPage,
     required this.onSignOutButtonPressed,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   SearchBarState createState() => SearchBarState();

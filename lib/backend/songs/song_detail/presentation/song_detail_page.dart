@@ -25,8 +25,8 @@ class SongDetailPage extends ConsumerStatefulWidget {
   final Song song;
   const SongDetailPage({
     required this.song,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   SongDetailPageState createState() => SongDetailPageState();
