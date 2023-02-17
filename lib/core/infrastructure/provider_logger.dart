@@ -45,17 +45,8 @@ class ProviderLogger extends ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) async {
-    UserDTO user;
-    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
-      // coverage:ignore-start
-      user = await container.read(userLocalServiceProvider).getUser();
-      // coverage:ignore-end
-    } else {
-      user = const UserDTO(name: 'name', avatarUrl: 'avatarUrl', email: 'email');
-    }
     final loggerMessage = {
       'didUpdateProvider': {
-        'user': user.email,
         'type': provider.runtimeType,
         'new_value': newValue.toString(),
         'old_value': previousValue.toString()

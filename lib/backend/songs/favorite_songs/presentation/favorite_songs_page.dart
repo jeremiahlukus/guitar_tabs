@@ -13,6 +13,7 @@ import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart';
 
@@ -26,12 +27,6 @@ class FavoriteSongsPage extends ConsumerStatefulWidget {
 class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   @override
   void initState() {
-    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
-      // Just for logging dont want to test this.
-      // coverage:ignore-start
-      ref.read(userNotifierProvider.notifier).getUserPage();
-      // coverage:ignore-end
-    }
     ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
     super.initState();
   }

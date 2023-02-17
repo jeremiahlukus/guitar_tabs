@@ -1,11 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
-import 'package:joyful_noise/core/infrastructure/provider_logger.dart';
-import 'package:joyful_noise/core/presentation/app_widget.dart';
 import 'package:joyful_noise/core/presentation/bootstrap.dart';
 import 'package:joyful_noise/main_development.dart' as main_dart;
 import 'package:flutter_test/flutter_test.dart';
@@ -28,22 +24,18 @@ void main() {
   patrolTest(
     'counter state is the same after going to home and switching apps',
     ($) async {
-      await restoreFlutterError(() async {
-        main_dart.main();
-      });
+      // await restoreFlutterError(() async {
+      //   main_dart.main();
+      // });
+      main_dart.main();
       for (var i = 0; i < 300; i++) {
         await $.pump();
       }
 
       await $(#signInButtonKey).tap();
-
-      print('AAAAAA');
-
       for (var i = 0; i < 300; i++) {
         await $.pump();
       }
-      print('BBBBBB');
-
       await $.native.enterTextByIndex(
         'hey@hey.com',
         index: 0,
@@ -52,25 +44,22 @@ void main() {
         'heyheyhey',
         index: 1,
       );
-      logger.e('---------------------------------');
-      await $.native.tap(Selector(text: 'Done'));
+
+      await $.native.tap(Selector(text: 'Sign in'));
+
       for (var i = 0; i < 300; i++) {
         await $.pump();
       }
-      await $.native.tap(
-        Selector(
-          text: 'Sign in',
-        ),
-      );
-      logger.e('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+      //final finder = find.byType(SearchBar);
+      expect($(SearchBar), findsOneWidget);
+      expect($(SearchBar), findsNothing);
+      // expect(finder, findsOneWidget);
+      // final findera = find.byType(PaginatedSongsListView);
+      // expect(findera, findsNothing);
+      await $(#signOutButtonKey).tap();
       for (var i = 0; i < 300; i++) {
         await $.pump();
       }
-      await $.native.tap(Selector(text: 'Log in'));
-      final finder = find.byType(SearchBar);
-      expect(finder, findsOneWidget);
-      final findera = find.byType(PaginatedSongsListView);
-      expect(findera, findsOneWidget);
     },
     nativeAutomation: true,
   );
