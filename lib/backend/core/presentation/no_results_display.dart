@@ -6,7 +6,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NoResultsDisplay extends StatelessWidget {
   final String message;
-  const NoResultsDisplay({Key? key, required this.message}) : super(key: key);
+  const NoResultsDisplay({
+    required this.message,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

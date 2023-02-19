@@ -44,7 +44,7 @@ class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository
 class MockSongDetailRepository extends Mock implements SongDetailRepository {}
 
 class FakeUserNotifier extends UserNotifier {
-  FakeUserNotifier(UserRepository userRepository) : super(userRepository);
+  FakeUserNotifier(super.userRepository);
 
   @override
   Future<void> getUserPage() async {

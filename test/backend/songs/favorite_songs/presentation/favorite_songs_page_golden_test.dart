@@ -37,7 +37,7 @@ class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository {}
 
 class FakeUserNotifier extends UserNotifier {
-  FakeUserNotifier(UserRepository userRepository) : super(userRepository);
+  FakeUserNotifier(super.userRepository);
 
   @override
   Future<void> getUserPage() async {

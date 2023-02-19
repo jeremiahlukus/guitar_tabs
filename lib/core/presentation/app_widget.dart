@@ -35,7 +35,7 @@ final initializationProvider = FutureProvider<Unit>(
 );
 
 class AppWidget extends ConsumerWidget {
-  AppWidget({Key? key}) : super(key: key);
+  AppWidget({super.key});
   final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context, WidgetRef ref) {

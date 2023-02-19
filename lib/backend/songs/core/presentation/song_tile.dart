@@ -11,7 +11,10 @@ import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 class SongTile extends StatelessWidget {
   final Song song;
 
-  const SongTile({Key? key, required this.song}) : super(key: key);
+  const SongTile({
+    required this.song,
+    super.key,
+  });
 
   static const songDetailButtonKey = ValueKey('songDetailButtonKey');
   @override

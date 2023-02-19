@@ -81,7 +81,7 @@ void main() {
         await searchHistoryNotifier.watchSearchTerms(filter: 'query');
         // ignore: invalid_use_of_protected_member
         final actualStateResult2 = searchHistoryNotifier.state;
-        expect(actualStateResult2, const TypeMatcher<AsyncData>());
+        expect(actualStateResult2, const TypeMatcher<AsyncData<dynamic>>());
       });
       test('returns a AsyncValue.error when error', () async {
         final SearchHistoryRepository mockSearchHistoryRepository = MockSearchHistoryRepository();

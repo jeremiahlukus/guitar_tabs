@@ -34,7 +34,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 304,
             ),
           ),
@@ -68,7 +68,7 @@ void main() {
         ).thenAnswer(
           (invocation) => Future.value(
             Response<dynamic>(
-              requestOptions: RequestOptions(path: ''),
+              requestOptions: RequestOptions(),
               statusCode: 200,
               data: mockData,
             ),

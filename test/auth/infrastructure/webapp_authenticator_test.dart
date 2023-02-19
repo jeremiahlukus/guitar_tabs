@@ -375,7 +375,7 @@ void main() {
         ).thenThrow(
           DioError(
             error: const SocketException(''),
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
           ),
         );
 
@@ -415,9 +415,9 @@ void main() {
           ),
         ).thenThrow(
           DioError(
-            type: DioErrorType.connectTimeout,
+            type: DioErrorType.connectionTimeout,
             error: const SocketException(''),
-            requestOptions: RequestOptions(path: ''),
+            requestOptions: RequestOptions(),
           ),
         );
 

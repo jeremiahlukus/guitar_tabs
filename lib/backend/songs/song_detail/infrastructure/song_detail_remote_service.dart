@@ -1,6 +1,10 @@
+// Dart imports:
+import 'dart:io';
+
 // Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:newrelic_mobile/newrelic_mobile.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/infrastructure/backend_base_url.dart';
@@ -8,6 +12,7 @@ import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detai
 import 'package:joyful_noise/core/infrastructure/dio_extensions.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class SongDetailRemoteService {
   final Dio _dio;
@@ -71,11 +76,10 @@ class SongDetailRemoteService {
       BackendConstants().backendBaseUrl(),
       '/api/v1/user_favorite_songs/$songId',
     );
-
     try {
-      final response = await (isCurrentlyFavorite
-          ? _dio.deleteUri<dynamic>(requestUri)
-          : _dio.putUri<dynamic>(requestUri, data: {'song_id': songId}));
+      final response =
+          await (isCurrentlyFavorite ? _dio.deleteUri<dynamic>(requestUri) : _dio.putUri<dynamic>(requestUri));
+      logger.e(response.data);
       if (response.statusCode == 204 || response.statusCode == 200) {
         return unit;
       } else {
@@ -85,8 +89,14 @@ class SongDetailRemoteService {
       if (e.isNoConnectionError) {
         return null;
       } else if (e.response != null) {
+        if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+          // coverage:ignore-start
+          NewrelicMobile.instance.recordError(e, StackTrace.current);
+          // coverage:ignore-end
+        }
         throw RestApiException(e.response?.statusCode);
       } else {
+        logger.e(e);
         rethrow;
       }
     }
