@@ -79,8 +79,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
@@ -108,8 +108,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
@@ -134,9 +134,6 @@ void main() {
         ),
       );
 
-      await tester.pump(const Duration(seconds: 1)); // finish the scroll animation
-      await tester.pump(const Duration(seconds: 1)); // finish the indicator settle animation
-      await tester.pump(const Duration(seconds: 1)); // finish the indicator hide animation
       expect(find.text('new 3'), findsOneWidget);
     });
     testWidgets('contains the SearchBar widget', (tester) async {
@@ -158,8 +155,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
@@ -188,8 +185,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
@@ -223,14 +220,14 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          userNotifierProvider.overrideWithValue(
-            fakeUserNotifier,
+          userNotifierProvider.overrideWith(
+            (_) => fakeUserNotifier,
           ),
-          authNotifierProvider.overrideWithValue(
-            mockAuthNotifier,
+          authNotifierProvider.overrideWith(
+            (_) => mockAuthNotifier,
           ),
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
@@ -265,14 +262,14 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          userNotifierProvider.overrideWithValue(
-            fakeUserNotifier,
+          userNotifierProvider.overrideWith(
+            (_) => fakeUserNotifier,
           ),
-          authNotifierProvider.overrideWithValue(
-            mockAuthNotifier,
+          authNotifierProvider.overrideWith(
+            (_) => mockAuthNotifier,
           ),
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
         mockObserverOverride: mockObserver,

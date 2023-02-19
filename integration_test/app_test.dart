@@ -14,16 +14,13 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('WebViewExample', () {
-    testWidgets('fill the email and password text fields',
-        (WidgetTester tester) async {
+    testWidgets('fill the email and password text fields', (WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
 
-      final OnAuthorizationCodeRedirectAttemptCallback
-          mockOnAuthorizationCodeRedirectAttemptCallback =
+      final OnAuthorizationCodeRedirectAttemptCallback mockOnAuthorizationCodeRedirectAttemptCallback =
           MockOnAuthorizationCodeRedirectAttemptCallback();
 
-      when(mockOnAuthorizationCodeRedirectAttemptCallback.call)
-          .thenReturn((_) {});
+      when(mockOnAuthorizationCodeRedirectAttemptCallback.call).thenReturn((_) {});
 
       await tester.pumpWidget(
         MaterialApp(
@@ -31,8 +28,7 @@ void main() {
             authorizationUrl: Uri.parse(
               'https://mdbootstrap.com/docs/standard/extended/login/#section-basic-example',
             ),
-            onAuthorizationCodeRedirectAttempt:
-                mockOnAuthorizationCodeRedirectAttemptCallback(),
+            onAuthorizationCodeRedirectAttempt: mockOnAuthorizationCodeRedirectAttemptCallback(),
             //   onWebViewCreatedJsString: """
             // document.getElementById('form2Example1').value='example.com'
             // document.getElementsByClassName("form-label")[0].innerHTML = "";
@@ -46,7 +42,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.byType(WebView), findsOneWidget);
+      expect(find.byType(WebViewWidget), findsOneWidget);
     });
   });
 }

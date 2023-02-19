@@ -18,7 +18,6 @@ import 'package:joyful_noise/backend/core/domain/user.dart';
 import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
 import 'package:joyful_noise/backend/core/notifiers/user_notifier.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
-import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/notifiers/favorite_song_notifier.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
@@ -84,20 +83,18 @@ Widget buildWidgetUnderTest() {
   when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
   // router.push(SearchedSongsRoute(searchTerm: 'query'));
   when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-  final mockFavoriteSongsNotifierProvider = AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-    (ref) => FavoriteSongNotifier(mockFavoriteSongRepository),
-  );
+  final mockFavoriteSongsNotifierProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
 
   return ProviderScope(
     overrides: [
-      userNotifierProvider.overrideWithValue(
-        fakeUserNotifier,
+      userNotifierProvider.overrideWith(
+        (_) => fakeUserNotifier,
       ),
-      authNotifierProvider.overrideWithValue(
-        mockAuthNotifier,
+      authNotifierProvider.overrideWith(
+        (_) => mockAuthNotifier,
       ),
-      favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider),
-      searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+      favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider),
+      searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
     ],
     child: MaterialApp.router(
       routeInformationParser: router.defaultRouteParser(),

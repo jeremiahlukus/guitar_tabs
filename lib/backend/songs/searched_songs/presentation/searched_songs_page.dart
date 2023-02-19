@@ -25,7 +25,6 @@ class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      ref.refresh(searchedSongsNotifierProvider);
       ref.read(searchedSongsNotifierProvider.notifier).getFirstSearchedSongsPage(widget.searchTerm);
     });
   }

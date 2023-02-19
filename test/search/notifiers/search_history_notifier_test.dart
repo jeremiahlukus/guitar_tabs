@@ -94,7 +94,10 @@ void main() {
 
         // ignore: invalid_use_of_protected_member
         final actualStateResult = searchHistoryNotifier.state;
-        final expectedStateResultMatcher = equals(const AsyncValue<List<String>>.error('Error'));
+
+        final expectedStateResultMatcher = const TypeMatcher<AsyncError<List<String>>>()
+            .having((e) => e.error, 'error', 'Error')
+            .having((e) => e.stackTrace, 'stackTrace', isNotNull);
         expect(actualStateResult, expectedStateResultMatcher);
       });
     });

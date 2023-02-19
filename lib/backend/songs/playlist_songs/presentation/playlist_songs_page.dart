@@ -24,7 +24,10 @@ class PlaylistSongsPage extends ConsumerStatefulWidget {
 class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
   @override
   void initState() {
-    ref.read(playlistSongsNotifierProvider.notifier).getFirstPlaylistSongsPage(widget.playlistName);
+    Future.microtask(() {
+      ref.read(playlistSongsNotifierProvider.notifier).getFirstPlaylistSongsPage(widget.playlistName);
+    });
+
     super.initState();
   }
 

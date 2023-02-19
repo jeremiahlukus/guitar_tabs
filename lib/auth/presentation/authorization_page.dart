@@ -24,29 +24,46 @@ class AuthorizationPage extends StatefulWidget {
 }
 
 class _AuthorizationPageState extends State<AuthorizationPage> {
+  final WebViewController _webViewController = WebViewController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _webViewController
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(widget.authorizationUrl)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {},
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest navReq) {
+            if (navReq.url.startsWith(WebAppAuthenticator.redirectUrl().toString())) {
+              widget.onAuthorizationCodeRedirectAttempt(
+                Uri.parse(navReq.url),
+              );
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..clearCache();
+
+    WebViewCookieManager().clearCookies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
-            WebView(
-              javascriptMode: JavascriptMode.unrestricted,
-              initialUrl: widget.authorizationUrl.toString(),
-              onWebViewCreated: (controller) {
-                controller.clearCache();
-                CookieManager().clearCookies();
-              },
-              navigationDelegate: (navReq) async {
-                if (navReq.url.startsWith(WebAppAuthenticator.redirectUrl().toString())) {
-                  widget.onAuthorizationCodeRedirectAttempt(
-                    Uri.parse(navReq.url),
-                  );
-                  return NavigationDecision.prevent;
-                }
-                return NavigationDecision.navigate;
-              },
-            ),
+            WebViewWidget(controller: _webViewController),
             // Positioned(
             //   top: 0,
             //   left: 0,

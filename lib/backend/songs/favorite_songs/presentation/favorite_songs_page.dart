@@ -32,7 +32,11 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
       ref.read(userNotifierProvider.notifier).getUserPage();
       // coverage:ignore-end
     }
-    ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
+
+    Future.microtask(() {
+      ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
+    });
+
     super.initState();
   }
 

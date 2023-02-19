@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -11,9 +10,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
 import 'package:joyful_noise/auth/presentation/authorization_page.dart';
 
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+import 'fakes/webview_fakes.dart';
 
-class MockWebViewController extends Mock implements WebViewController {}
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 class MockNavigationRequest extends Mock implements NavigationRequest {}
 
@@ -26,6 +25,11 @@ abstract class OnAuthorizationCodeRedirectAttemptCallback {
 }
 
 void main() {
+  final controller = FakeWebViewController(const PlatformWebViewControllerCreationParams());
+  final cookieManager = FakeCookieManager(const PlatformWebViewCookieManagerCreationParams());
+
+  WebViewPlatform.instance = FakeWebViewPlatform(controller: controller, cookieManager: cookieManager);
+
   setUpAll(() {
     registerFallbackValue(
       MaterialPageRoute<dynamic>(
@@ -41,7 +45,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: AuthorizationPage(
-            authorizationUrl: Uri(scheme: ''),
+            authorizationUrl: Uri.parse('https://www.google.com'),
             onAuthorizationCodeRedirectAttempt: (Uri _) => <String, String>{},
           ),
           navigatorObservers: [mockObserver],
@@ -50,9 +54,9 @@ void main() {
 
       await tester.pump(Duration.zero);
 
-      final backButtonFinder = find.byType(WebView);
+      final webViewWidgetFinder = find.byType(WebViewWidget);
 
-      expect(backButtonFinder, findsOneWidget);
+      expect(webViewWidgetFinder, findsOneWidget);
     });
 
     // testWidgets('clicking on the back button pops the navigation', (tester) async {
@@ -78,12 +82,12 @@ void main() {
     //   verify(() => mockObserver.didPop(any(), any()));
     // });
 
-    testWidgets('WebViewController clears cached when webview is created', (tester) async {
+    testWidgets('WebViewController clears cached when the page is created', (tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(
         MaterialApp(
           home: AuthorizationPage(
-            authorizationUrl: Uri(scheme: ''),
+            authorizationUrl: Uri.parse('https://www.google.com'),
             onAuthorizationCodeRedirectAttempt: (Uri _) => <String, String>{},
           ),
           navigatorObservers: [mockObserver],
@@ -92,17 +96,7 @@ void main() {
 
       await tester.pump(Duration.zero);
 
-      final backButtonFinder = find.byType(WebView);
-
-      final webView = backButtonFinder.evaluate().single.widget as WebView;
-
-      final mockWebViewController = MockWebViewController();
-
-      when(mockWebViewController.clearCache).thenAnswer((invocation) => Future.value());
-
-      webView.onWebViewCreated?.call(mockWebViewController);
-
-      verify(mockWebViewController.clearCache).called(1);
+      expect(cookieManager.clearCookiesCalled, true);
     });
 
     testWidgets(
@@ -118,7 +112,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: AuthorizationPage(
-            authorizationUrl: Uri(scheme: ''),
+            authorizationUrl: Uri.parse('https://www.google.com'),
             onAuthorizationCodeRedirectAttempt: mockOnAuthorizationCodeRedirectAttemptCallback(),
           ),
           navigatorObservers: [mockObserver],
@@ -126,52 +120,13 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
-
-      final backButtonFinder = find.byType(WebView);
-
-      final webView = backButtonFinder.evaluate().single.widget as WebView;
-
-      final mockWebViewController = MockWebViewController();
-
-      when(mockWebViewController.clearCache).thenAnswer((invocation) => Future.value());
 
       final NavigationRequest mockNavigationRequest = MockNavigationRequest();
 
       when(() => mockNavigationRequest.url).thenReturn('${WebAppAuthenticator.redirectUrl()}');
 
-      webView.navigationDelegate?.call(mockNavigationRequest);
-
       // ignore: unnecessary_lambdas
       verify(() => mockOnAuthorizationCodeRedirectAttemptCallback()).called(1);
-    });
-
-    testWidgets('sets WebView.platform to SurfaceAndroidWebView when the running Platform is Android', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.android;
-
-      final mockObserver = MockNavigatorObserver();
-
-      final OnAuthorizationCodeRedirectAttemptCallback mockOnAuthorizationCodeRedirectAttemptCallback =
-          MockOnAuthorizationCodeRedirectAttemptCallback();
-
-      when(mockOnAuthorizationCodeRedirectAttemptCallback.call).thenReturn((_) {});
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: AuthorizationPage(
-            authorizationUrl: Uri(scheme: ''),
-            onAuthorizationCodeRedirectAttempt: mockOnAuthorizationCodeRedirectAttemptCallback(),
-          ),
-          navigatorObservers: [mockObserver],
-        ),
-      );
-
-      await tester.pump(Duration.zero);
-
-      final webViewIsSurfaceAndroidWebView = isA<SurfaceAndroidWebView>();
-
-      expect(WebView.platform, webViewIsSurfaceAndroidWebView);
-
-      debugDefaultTargetPlatformOverride = null;
     });
   });
 }

@@ -82,9 +82,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockFavoriteProvider),
-          playlistSongsNotifierProvider.overrideWithValue(mockPlaylistProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
+          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
@@ -125,9 +125,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockFavoriteProvider),
-          playlistSongsNotifierProvider.overrideWithValue(mockPlaylistProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
+          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
@@ -168,9 +168,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockFavoriteProvider),
-          playlistSongsNotifierProvider.overrideWithValue(mockPlaylistProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
+          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
@@ -211,9 +211,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockFavoriteProvider),
-          playlistSongsNotifierProvider.overrideWithValue(mockPlaylistProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
+          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
@@ -254,9 +254,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockFavoriteProvider),
-          playlistSongsNotifierProvider.overrideWithValue(mockPlaylistProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
+          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
@@ -297,9 +297,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockFavoriteProvider),
-          playlistSongsNotifierProvider.overrideWithValue(mockPlaylistProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
+          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );

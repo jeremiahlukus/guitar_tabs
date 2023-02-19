@@ -19,7 +19,6 @@ import 'package:joyful_noise/backend/core/domain/user.dart';
 import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
 import 'package:joyful_noise/backend/core/notifiers/user_notifier.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
-import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
 import 'package:joyful_noise/backend/songs/searched_songs/infrastructure/searched_songs_repository.dart';
 import 'package:joyful_noise/backend/songs/searched_songs/notifiers/searched_songs_notifier.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
@@ -85,21 +84,18 @@ Widget buildWidgetUnderTest() {
   when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
   // router.push(SearchedSongsRoute(searchTerm: 'query'));
   when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-  final mockSearchedSongsNotifierProvider =
-      AutoDisposeStateNotifierProvider<SearchedSongsNotifier, PaginatedSongsState>(
-    (ref) => SearchedSongsNotifier(mockSearchedSongRepository),
-  );
+  final mockSearchedSongsNotifierProvider = SearchedSongsNotifier(mockSearchedSongRepository);
 
   return ProviderScope(
     overrides: [
-      userNotifierProvider.overrideWithValue(
-        fakeUserNotifier,
+      userNotifierProvider.overrideWith(
+        (_) => fakeUserNotifier,
       ),
-      authNotifierProvider.overrideWithValue(
-        mockAuthNotifier,
+      authNotifierProvider.overrideWith(
+        (_) => mockAuthNotifier,
       ),
-      searchedSongsNotifierProvider.overrideWithProvider(mockSearchedSongsNotifierProvider),
-      searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+      searchedSongsNotifierProvider.overrideWith((_) => mockSearchedSongsNotifierProvider),
+      searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
     ],
     child: MaterialApp.router(
       routerDelegate: AutoRouterDelegate(

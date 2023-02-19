@@ -77,9 +77,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
-          searchHistoryNotifierProvider.overrideWithValue(mockSearchHistoryProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,
       );
