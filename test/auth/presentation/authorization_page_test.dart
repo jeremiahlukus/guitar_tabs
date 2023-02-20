@@ -9,7 +9,6 @@ import 'package:webview_flutter/webview_flutter.dart';
 // Project imports:
 import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
 import 'package:joyful_noise/auth/presentation/authorization_page.dart';
-
 import 'fakes/webview_fakes.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}

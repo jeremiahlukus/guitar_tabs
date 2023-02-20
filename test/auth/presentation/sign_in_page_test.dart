@@ -7,6 +7,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
@@ -14,11 +16,8 @@ import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
 import 'package:joyful_noise/auth/presentation/sign_in_page.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import '../../utils/device.dart';
 import '../../utils/golden_test_device_scenario.dart';
-import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
-
 import 'fakes/webview_fakes.dart';
 
 class MockAuthNotifier extends Mock implements AuthNotifier {}
