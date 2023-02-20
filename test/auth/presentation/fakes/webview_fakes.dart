@@ -1,11 +1,11 @@
 // Flutter imports:
+// ignore_for_file: depend_on_referenced_packages
+
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
-
-// Package imports:
-// ignore: depend_on_referenced_packages
 
 class FakeWebViewPlatform extends WebViewPlatform {
   FakeWebViewPlatform({this.controller, this.cookieManager});
