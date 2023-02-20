@@ -35,12 +35,6 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       ..loadRequest(widget.authorizationUrl)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
-            // Update loading bar.
-          },
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
-          onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest navReq) {
             if (navReq.url.startsWith(WebAppAuthenticator.redirectUrl().toString())) {
               widget.onAuthorizationCodeRedirectAttempt(
