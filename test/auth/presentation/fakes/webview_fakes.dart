@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
+// Package imports:
+// ignore: depend_on_referenced_packages
+
 class FakeWebViewPlatform extends WebViewPlatform {
   FakeWebViewPlatform({this.controller, this.cookieManager});
 
@@ -40,7 +43,7 @@ class FakeWebViewPlatform extends WebViewPlatform {
 }
 
 class FakeWebViewController extends PlatformWebViewController {
-  FakeWebViewController(PlatformWebViewControllerCreationParams params) : super.implementation(params);
+  FakeWebViewController(super.params) : super.implementation();
 
   @override
   Future<void> setJavaScriptMode(JavaScriptMode javaScriptMode) async {}
@@ -69,7 +72,7 @@ class FakeWebViewController extends PlatformWebViewController {
 }
 
 class FakeCookieManager extends PlatformWebViewCookieManager {
-  FakeCookieManager(PlatformWebViewCookieManagerCreationParams params) : super.implementation(params);
+  FakeCookieManager(super.params) : super.implementation();
 
   bool clearCookiesCalled = false;
 
@@ -81,7 +84,7 @@ class FakeCookieManager extends PlatformWebViewCookieManager {
 }
 
 class FakeWebViewWidget extends PlatformWebViewWidget {
-  FakeWebViewWidget(PlatformWebViewWidgetCreationParams params) : super.implementation(params);
+  FakeWebViewWidget(super.params) : super.implementation();
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +93,7 @@ class FakeWebViewWidget extends PlatformWebViewWidget {
 }
 
 class FakeNavigationDelegate extends PlatformNavigationDelegate {
-  FakeNavigationDelegate(PlatformNavigationDelegateCreationParams params) : super.implementation(params);
+  FakeNavigationDelegate(super.params) : super.implementation();
 
   @override
   Future<void> setOnNavigationRequest(
