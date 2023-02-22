@@ -35,6 +35,12 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       ..loadRequest(widget.authorizationUrl)
       ..setNavigationDelegate(
         NavigationDelegate(
+          // coverage:ignore-start
+
+          /// Ignoring this from coverage because it's not possible to widget-test
+          /// this block of code as the controller is not exposed to trigger this.
+          ///
+          /// Testing this is done in the integration tests.
           onNavigationRequest: (NavigationRequest navReq) {
             if (navReq.url.startsWith(WebAppAuthenticator.redirectUrl().toString())) {
               widget.onAuthorizationCodeRedirectAttempt(
@@ -44,6 +50,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
             }
             return NavigationDecision.navigate;
           },
+          // coverage:ignore-end
         ),
       )
       ..clearCache();
