@@ -55,7 +55,10 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
 
   @override
   void initState() {
-    ref.read(songDetailNotifierProvider.notifier).getSongDetail(widget.song.id);
+    Future.microtask(() {
+      ref.read(songDetailNotifierProvider.notifier).getSongDetail(widget.song.id);
+    });
+
     _init().catchError(
       // coverage:ignore-start
       (Object e) => NewrelicMobile.instance.recordError(e, StackTrace.current),

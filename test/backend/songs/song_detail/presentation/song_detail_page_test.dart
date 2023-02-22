@@ -97,8 +97,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
         ],
         router,
       );
@@ -158,8 +158,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
         ],
         router,
       );
@@ -241,8 +241,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
         ],
         router,
       );
@@ -284,8 +284,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
         ],
         router,
       );
@@ -329,8 +329,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
         ],
         router,
       );
@@ -376,8 +376,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
         ],
         router,
       );
@@ -417,8 +417,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
         ],
         router,
       );
@@ -459,8 +459,8 @@ void main() {
       await pumpRouterApp(
         tester,
         [
-          favoriteSongsNotifierProvider.overrideWithValue(mockProvider),
-          songDetailNotifierProvider.overrideWithValue(mockDetailProvider),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
         ],
         router,
       );

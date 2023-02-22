@@ -15,7 +15,7 @@ class SearchHistoryNotifier extends StateNotifier<AsyncValue<List<String>>> {
         state = AsyncValue.data(data);
       },
       onError: (Object error) {
-        state = AsyncValue.error(error);
+        state = AsyncValue.error(error, StackTrace.current);
       },
     );
   }

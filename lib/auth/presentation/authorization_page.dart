@@ -24,29 +24,47 @@ class AuthorizationPage extends StatefulWidget {
 }
 
 class _AuthorizationPageState extends State<AuthorizationPage> {
+  final WebViewController _webViewController = WebViewController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _webViewController
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(widget.authorizationUrl)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          // coverage:ignore-start
+
+          /// Ignoring this from coverage because it's not possible to widget-test
+          /// this block of code as the controller is not exposed to trigger this.
+          ///
+          /// Testing this is done in the integration tests.
+          onNavigationRequest: (NavigationRequest navReq) {
+            if (navReq.url.startsWith(WebAppAuthenticator.redirectUrl().toString())) {
+              widget.onAuthorizationCodeRedirectAttempt(
+                Uri.parse(navReq.url),
+              );
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+          // coverage:ignore-end
+        ),
+      )
+      ..clearCache();
+
+    WebViewCookieManager().clearCookies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
-            WebView(
-              javascriptMode: JavascriptMode.unrestricted,
-              initialUrl: widget.authorizationUrl.toString(),
-              onWebViewCreated: (controller) {
-                controller.clearCache();
-                CookieManager().clearCookies();
-              },
-              navigationDelegate: (navReq) async {
-                if (navReq.url.startsWith(WebAppAuthenticator.redirectUrl().toString())) {
-                  widget.onAuthorizationCodeRedirectAttempt(
-                    Uri.parse(navReq.url),
-                  );
-                  return NavigationDecision.prevent;
-                }
-                return NavigationDecision.navigate;
-              },
-            ),
+            WebViewWidget(controller: _webViewController),
             // Positioned(
             //   top: 0,
             //   left: 0,

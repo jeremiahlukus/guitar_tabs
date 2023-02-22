@@ -102,16 +102,11 @@ void main() {
 
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
 
-      final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) {
-          return favoriteSongNotifier;
-        },
-      );
+      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
+          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
           child: MaterialApp(
             home: PaginatedSongsListView(
               paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
@@ -158,16 +153,11 @@ void main() {
 
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
 
-      final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) {
-          return favoriteSongNotifier;
-        },
-      );
+      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
+          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
           child: MaterialApp(
             home: Scaffold(
               body: PaginatedSongsListView(
@@ -210,16 +200,11 @@ void main() {
 
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
 
-      final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) {
-          return favoriteSongNotifier;
-        },
-      );
+      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
+          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
           child: MaterialApp(
             home: Scaffold(
               body: PaginatedSongsListView(
@@ -258,16 +243,11 @@ void main() {
 
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
 
-      final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) {
-          return favoriteSongNotifier;
-        },
-      );
+      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
+          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
           child: MaterialApp(
             home: Scaffold(
               body: PaginatedSongsListView(
@@ -307,16 +287,11 @@ void main() {
 
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
 
-      final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) {
-          return favoriteSongNotifier;
-        },
-      );
+      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
+          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
           child: MaterialApp(
             home: Scaffold(
               body: PaginatedSongsListView(
@@ -361,16 +336,11 @@ void main() {
 
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
 
-      final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) {
-          return favoriteSongNotifier;
-        },
-      );
+      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
+          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
           child: MaterialApp(
             home: Scaffold(
               body: PaginatedSongsListView(
@@ -411,18 +381,13 @@ void main() {
 
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
 
-      final mockFavoriteSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<FavoriteSongNotifier, PaginatedSongsState>(
-        (ref) {
-          return favoriteSongNotifier;
-        },
-      );
+      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
 
       final mock = MyFunctionMock();
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWithProvider(mockFavoriteSongsNotifierProvider)],
+          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
           child: MaterialApp(
             home: Scaffold(
               body: PaginatedSongsListView(

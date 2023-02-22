@@ -41,8 +41,8 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            favoriteSongsNotifierProvider.overrideWithValue(
-              mockFavoriteSongNotifier,
+            favoriteSongsNotifierProvider.overrideWith(
+              (_) => mockFavoriteSongNotifier,
             ),
           ],
           child: const MaterialApp(
