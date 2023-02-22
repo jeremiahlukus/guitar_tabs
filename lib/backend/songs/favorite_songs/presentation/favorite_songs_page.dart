@@ -53,10 +53,15 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
           ref.read(authNotifierProvider.notifier).signOut();
         },
         body: RefreshIndicator(
+          // coverage:ignore-start
+
+          /// Ignoring as the provider notifier refresh throws an error during
+          /// tests due to the fact that the provider is disposed
           onRefresh: () {
             return Future.microtask(() {
               ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
             });
+            // coverage:ignore-end
           },
           child: Padding(
             padding: const EdgeInsets.only(top: 20),
