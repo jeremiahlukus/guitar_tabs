@@ -1,6 +1,6 @@
 name: joyful_noise
 description: A Very Good Project created by Very Good CLI.
-version: 1.0.14
+version: 1.0.15
 publish_to: none
 
 environment:
@@ -30,7 +30,7 @@ dependencies:
   path: ^1.8.2
   responsive_framework: ^0.2.0
   riverpod: ^2.1.3
-  webview_flutter: ^4.0.2
+  webview_flutter: ^4.0.6
   sembast: ^3.2.0
   path_provider: ^2.0.9
   flash: ^2.0.3+2
@@ -68,17 +68,17 @@ dev_dependencies:
   mocktail: ^0.3.0
   very_good_analysis: ^4.0.0+1
   test: ^1.19.5
-  patrol: ^1.0.0
   webview_flutter_platform_interface: ^2.0.1
+  # patrol: ^1.0.0
 
 
 scripts: derry.yaml
-patrol:
-  app_name: Joyful Noise
-  android:
-    package_name: com.jparrack.joyful_noise.RunnerUITests
-  ios:
-    bundle_id: com.jparrack.joyful-noise.RunnerUITests
+# patrol: 
+#   app_name: Joyful Noise
+#   android:
+#     package_name: com.jparrack.joyful_noise.RunnerUITests
+#   ios:
+#     bundle_id: com.jparrack.joyful-noise.RunnerUITests
 
 flutter:
   uses-material-design: true

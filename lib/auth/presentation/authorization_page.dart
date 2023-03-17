@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 // Package imports:
 import 'package:webview_flutter/webview_flutter.dart';
@@ -54,32 +55,17 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
         ),
       )
       ..clearCache();
-
     WebViewCookieManager().clearCookies();
   }
 
   @override
   Widget build(BuildContext context) {
+    logger.e(widget.authorizationUrl);
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
             WebViewWidget(controller: _webViewController),
-            // Positioned(
-            //   top: 0,
-            //   left: 0,
-            //   right: 0,
-            //   child: AppBar(
-            //     title: const Text(''), // You can add title here
-            //     leading: IconButton(
-            //       key: AuthorizationPage.backButtonKey,
-            //       icon: const Icon(Icons.arrow_back_ios, color: Colors.grey),
-            //       onPressed: () => Navigator.of(context).pop(),
-            //     ),
-            //     backgroundColor: Colors.white.withOpacity(0.1), //You can make this transparent
-            //     elevation: 0, //No shadow
-            //   ),
-            // ),
           ],
         ),
       ),
