@@ -45,7 +45,7 @@ dependencies:
   material_floating_search_bar:
     git:
       url: https://github.com/jeremiahlukus/material_floating_search_bar
-  just_audio: ^0.9.29
+  just_audio: ^0.9.32
   rxdart: ^0.27.5
   newrelic_mobile: ^0.0.1-dev.9
   flutter_dotenv: ^5.0.2
