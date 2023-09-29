@@ -53,7 +53,7 @@ void main() {
           () async {
         final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
 
-        final uri = Uri.http('example.org', '/path', <String, String>{'q': 'dart'});
+        final uri = Uri.https('example.org', '/path', <String, String>{'q': 'dart'});
 
         when(mockWebAppAuthenticator.getAuthorizationUrl).thenReturn(uri);
 

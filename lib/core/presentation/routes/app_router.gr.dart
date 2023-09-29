@@ -11,25 +11,25 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Flutter imports:
+import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:flutter/material.dart' as _i9;
 
-// Package imports:
-import 'package:auto_route/auto_route.dart' as _i8;
-
-// Project imports:
 import '../../../auth/presentation/authorization_page.dart' as _i3;
 import '../../../auth/presentation/sign_in_page.dart' as _i2;
 import '../../../backend/core/domain/song.dart' as _i10;
-import '../../../backend/songs/favorite_songs/presentation/favorite_songs_page.dart' as _i4;
-import '../../../backend/songs/playlist_songs/presentation/playlist_songs_page.dart' as _i5;
-import '../../../backend/songs/searched_songs/presentation/searched_songs_page.dart' as _i6;
-import '../../../backend/songs/song_detail/presentation/song_detail_page.dart' as _i7;
+import '../../../backend/songs/favorite_songs/presentation/favorite_songs_page.dart'
+    as _i4;
+import '../../../backend/songs/playlist_songs/presentation/playlist_songs_page.dart'
+    as _i5;
+import '../../../backend/songs/searched_songs/presentation/searched_songs_page.dart'
+    as _i6;
+import '../../../backend/songs/song_detail/presentation/song_detail_page.dart'
+    as _i7;
 import '../../../splash/presentation/splash_page.dart' as _i1;
 
 class AppRouter extends _i8.RootStackRouter {
-  AppRouter([_i9.GlobalKey<_i9.NavigatorState>? navigatorKey]) : super(navigatorKey);
+  AppRouter([_i9.GlobalKey<_i9.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, _i8.PageFactory> pagesMap = {
@@ -50,9 +50,10 @@ class AppRouter extends _i8.RootStackRouter {
       return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i3.AuthorizationPage(
-          key: args.key,
           authorizationUrl: args.authorizationUrl,
-          onAuthorizationCodeRedirectAttempt: args.onAuthorizationCodeRedirectAttempt,
+          onAuthorizationCodeRedirectAttempt:
+              args.onAuthorizationCodeRedirectAttempt,
+          key: args.key,
         ),
       );
     },
@@ -67,8 +68,8 @@ class AppRouter extends _i8.RootStackRouter {
       return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i5.PlaylistSongsPage(
-          key: args.key,
           playlistName: args.playlistName,
+          key: args.key,
         ),
       );
     },
@@ -77,8 +78,8 @@ class AppRouter extends _i8.RootStackRouter {
       return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i6.SearchedSongsPage(
-          key: args.key,
           searchTerm: args.searchTerm,
+          key: args.key,
         ),
       );
     },
@@ -87,8 +88,8 @@ class AppRouter extends _i8.RootStackRouter {
       return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i7.SongDetailPage(
-          key: args.key,
           song: args.song,
+          key: args.key,
         ),
       );
     },
@@ -155,16 +156,17 @@ class SignInRoute extends _i8.PageRouteInfo<void> {
 /// [_i3.AuthorizationPage]
 class AuthorizationRoute extends _i8.PageRouteInfo<AuthorizationRouteArgs> {
   AuthorizationRoute({
-    _i9.Key? key,
     required Uri authorizationUrl,
     required void Function(Uri) onAuthorizationCodeRedirectAttempt,
+    _i9.Key? key,
   }) : super(
           AuthorizationRoute.name,
           path: '/auth',
           args: AuthorizationRouteArgs(
-            key: key,
             authorizationUrl: authorizationUrl,
-            onAuthorizationCodeRedirectAttempt: onAuthorizationCodeRedirectAttempt,
+            onAuthorizationCodeRedirectAttempt:
+                onAuthorizationCodeRedirectAttempt,
+            key: key,
           ),
         );
 
@@ -173,20 +175,20 @@ class AuthorizationRoute extends _i8.PageRouteInfo<AuthorizationRouteArgs> {
 
 class AuthorizationRouteArgs {
   const AuthorizationRouteArgs({
-    this.key,
     required this.authorizationUrl,
     required this.onAuthorizationCodeRedirectAttempt,
+    this.key,
   });
-
-  final _i9.Key? key;
 
   final Uri authorizationUrl;
 
   final void Function(Uri) onAuthorizationCodeRedirectAttempt;
 
+  final _i9.Key? key;
+
   @override
   String toString() {
-    return 'AuthorizationRouteArgs{key: $key, authorizationUrl: $authorizationUrl, onAuthorizationCodeRedirectAttempt: $onAuthorizationCodeRedirectAttempt}';
+    return 'AuthorizationRouteArgs{authorizationUrl: $authorizationUrl, onAuthorizationCodeRedirectAttempt: $onAuthorizationCodeRedirectAttempt, key: $key}';
   }
 }
 
@@ -206,14 +208,14 @@ class FavoriteSongsRoute extends _i8.PageRouteInfo<void> {
 /// [_i5.PlaylistSongsPage]
 class PlaylistSongsRoute extends _i8.PageRouteInfo<PlaylistSongsRouteArgs> {
   PlaylistSongsRoute({
-    _i9.Key? key,
     required String playlistName,
+    _i9.Key? key,
   }) : super(
           PlaylistSongsRoute.name,
           path: '/playlist_songs',
           args: PlaylistSongsRouteArgs(
-            key: key,
             playlistName: playlistName,
+            key: key,
           ),
         );
 
@@ -222,17 +224,17 @@ class PlaylistSongsRoute extends _i8.PageRouteInfo<PlaylistSongsRouteArgs> {
 
 class PlaylistSongsRouteArgs {
   const PlaylistSongsRouteArgs({
-    this.key,
     required this.playlistName,
+    this.key,
   });
-
-  final _i9.Key? key;
 
   final String playlistName;
 
+  final _i9.Key? key;
+
   @override
   String toString() {
-    return 'PlaylistSongsRouteArgs{key: $key, playlistName: $playlistName}';
+    return 'PlaylistSongsRouteArgs{playlistName: $playlistName, key: $key}';
   }
 }
 
@@ -240,14 +242,14 @@ class PlaylistSongsRouteArgs {
 /// [_i6.SearchedSongsPage]
 class SearchedSongsRoute extends _i8.PageRouteInfo<SearchedSongsRouteArgs> {
   SearchedSongsRoute({
-    _i9.Key? key,
     required String searchTerm,
+    _i9.Key? key,
   }) : super(
           SearchedSongsRoute.name,
           path: '/searched_songs',
           args: SearchedSongsRouteArgs(
-            key: key,
             searchTerm: searchTerm,
+            key: key,
           ),
         );
 
@@ -256,17 +258,17 @@ class SearchedSongsRoute extends _i8.PageRouteInfo<SearchedSongsRouteArgs> {
 
 class SearchedSongsRouteArgs {
   const SearchedSongsRouteArgs({
-    this.key,
     required this.searchTerm,
+    this.key,
   });
-
-  final _i9.Key? key;
 
   final String searchTerm;
 
+  final _i9.Key? key;
+
   @override
   String toString() {
-    return 'SearchedSongsRouteArgs{key: $key, searchTerm: $searchTerm}';
+    return 'SearchedSongsRouteArgs{searchTerm: $searchTerm, key: $key}';
   }
 }
 
@@ -274,14 +276,14 @@ class SearchedSongsRouteArgs {
 /// [_i7.SongDetailPage]
 class SongDetailRoute extends _i8.PageRouteInfo<SongDetailRouteArgs> {
   SongDetailRoute({
-    _i9.Key? key,
     required _i10.Song song,
+    _i9.Key? key,
   }) : super(
           SongDetailRoute.name,
           path: '/song_detail',
           args: SongDetailRouteArgs(
-            key: key,
             song: song,
+            key: key,
           ),
         );
 
@@ -290,16 +292,16 @@ class SongDetailRoute extends _i8.PageRouteInfo<SongDetailRouteArgs> {
 
 class SongDetailRouteArgs {
   const SongDetailRouteArgs({
-    this.key,
     required this.song,
+    this.key,
   });
-
-  final _i9.Key? key;
 
   final _i10.Song song;
 
+  final _i9.Key? key;
+
   @override
   String toString() {
-    return 'SongDetailRouteArgs{key: $key, song: $song}';
+    return 'SongDetailRouteArgs{song: $song, key: $key}';
   }
 }

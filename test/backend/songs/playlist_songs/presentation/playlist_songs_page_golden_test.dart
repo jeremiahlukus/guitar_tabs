@@ -73,7 +73,7 @@ Widget buildWidgetUnderTest() {
               title: 'title',
               songNumber: 1,
               lyrics: 'lyrics',
-              category: 'category',
+              //: 'category',
               artist: 'artist',
               chords: 'chords',
               url: 'url',

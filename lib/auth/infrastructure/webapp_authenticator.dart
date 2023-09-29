@@ -49,11 +49,9 @@ class WebAppAuthenticator {
     const useStaging = bool.fromEnvironment('USE_STAGING');
     if (getIsDebugMode() && !useStaging) {
       final isAndroid = getPlatform().isAndroid;
-      return isAndroid
-          ? Uri.parse('http://10.0.2.2:3000/users/sign_in')
-          : Uri.parse('http://127.0.0.1:3000/users/sign_in');
+      return isAndroid ? Uri.parse('http://10.0.2.2:8888/login') : Uri.parse('http://127.0.0.1:8888/login');
     } else {
-      return Uri.parse('https://${dotenv.env['API_URL']}/users/sign_in');
+      return Uri.parse('https://${dotenv.env['API_URL']}/login');
     }
   }
 
@@ -61,7 +59,7 @@ class WebAppAuthenticator {
     const useStaging = bool.fromEnvironment('USE_STAGING');
     if (getIsDebugMode() && !useStaging) {
       final isAndroid = getPlatform().isAndroid;
-      return isAndroid ? Uri.parse('http://10.0.2.2:3000/api/v1/auth') : Uri.parse('http://127.0.0.1:3000/api/v1/auth');
+      return isAndroid ? Uri.parse('http://10.0.2.2:8888/api/v1/auth') : Uri.parse('http://127.0.0.1:8888/api/v1/auth');
     } else {
       return Uri.parse('https://${dotenv.env['API_URL']}/api/v1/auth');
     }
@@ -71,7 +69,7 @@ class WebAppAuthenticator {
     const useStaging = bool.fromEnvironment('USE_STAGING');
     if (getIsDebugMode() && !useStaging) {
       final isAndroid = getPlatform().isAndroid;
-      return isAndroid ? Uri.parse('http://10.0.2.2:3000/callback') : Uri.parse('http://127.0.0.1:3000/callback');
+      return isAndroid ? Uri.parse('http://10.0.2.2:8888/callback') : Uri.parse('http://127.0.0.1:8888/callback');
     } else {
       return Uri.parse('https://${dotenv.env['API_URL']}/callback');
     }

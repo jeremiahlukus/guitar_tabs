@@ -31,7 +31,7 @@ class BackendConstants {
     const useStaging = bool.fromEnvironment('USE_STAGING');
     if (getIsDebugMode() && !useStaging) {
       final isAndroid = getPlatform().isAndroid;
-      return isAndroid ? '10.0.2.2:3000' : '127.0.0.1:3000';
+      return isAndroid ? '10.0.2.2:8888' : '127.0.0.1:8888';
     } else {
       return dotenv.env['API_URL']!;
     }

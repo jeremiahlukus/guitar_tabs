@@ -13,7 +13,7 @@ import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
-import 'package:joyful_noise/search/presentation/search_bar.dart';
+import 'package:joyful_noise/search/presentation/search_bar.dart' as PubSearchBar;
 
 class FavoriteSongsPage extends ConsumerStatefulWidget {
   const FavoriteSongsPage({super.key});
@@ -41,7 +41,7 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
     return Scaffold(
       key: scaffoldKey,
       drawer: const SongDrawer(),
-      body: SearchBar(
+      body: PubSearchBar.SearchBar(
         title: 'Favorite Songs',
         hint: 'Search all songs...',
         // coverage:ignore-start

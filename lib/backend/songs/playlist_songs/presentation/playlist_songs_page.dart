@@ -11,7 +11,7 @@ import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
-import 'package:joyful_noise/search/presentation/search_bar.dart';
+import 'package:joyful_noise/search/presentation/search_bar.dart' as PubSearchBar;
 
 class PlaylistSongsPage extends ConsumerStatefulWidget {
   final String playlistName;
@@ -38,7 +38,7 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SearchBar(
+      body: PubSearchBar.SearchBar(
         title: '${toBeginningOfSentenceCase(widget.playlistName)} Songs',
         hint: 'Search all songs...',
         // coverage:ignore-start

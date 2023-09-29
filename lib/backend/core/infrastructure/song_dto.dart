@@ -5,11 +5,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 part 'song_dto.freezed.dart';
 part 'song_dto.g.dart';
 
 String _nullFromJson(Object? json) {
+  logger.e(json);
+  logger.e("++++++++++++++++");
   return (json as String?) ?? '';
 }
 
@@ -20,7 +23,7 @@ class SongDTO with _$SongDTO {
     required int id,
     required String title,
     required String lyrics,
-    required String category,
+    // @JsonKey(fromJson: _nullFromJson) required String category,
     @JsonKey(fromJson: _nullFromJson) required String artist,
     @JsonKey(fromJson: _nullFromJson) required String chords,
     @JsonKey(fromJson: _nullFromJson) required String url,
@@ -30,11 +33,12 @@ class SongDTO with _$SongDTO {
   factory SongDTO.fromJson(Map<String, dynamic> json) => _$SongDTOFromJson(json);
 
   factory SongDTO.fromDomain(Song _) {
+    logger.e(_.id);
     return SongDTO(
       id: _.id,
       title: _.title,
       lyrics: _.lyrics,
-      category: _.category,
+      //category: _.category,
       songNumber: _.songNumber,
       artist: _.artist,
       chords: _.chords,
@@ -42,11 +46,13 @@ class SongDTO with _$SongDTO {
     );
   }
   Song toDomain() {
+    logger.e("hey");
+    logger.e(id);
     return Song(
       id: id,
       title: title,
       lyrics: lyrics,
-      category: category,
+      //category: category,
       artist: artist,
       chords: chords,
       songNumber: songNumber,

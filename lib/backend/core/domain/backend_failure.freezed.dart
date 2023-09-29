@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'backend_failure.dart';
 
@@ -25,7 +25,7 @@ mixin _$BackendFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? errorCode, String? message)? api,
+    TResult? Function(int? errorCode, String? message)? api,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,7 +41,7 @@ mixin _$BackendFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Api value)? api,
+    TResult? Function(_Api value)? api,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,67 +52,76 @@ mixin _$BackendFailure {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $BackendFailureCopyWith<BackendFailure> get copyWith => throw _privateConstructorUsedError;
+  $BackendFailureCopyWith<BackendFailure> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $BackendFailureCopyWith<$Res> {
-  factory $BackendFailureCopyWith(BackendFailure value, $Res Function(BackendFailure) then) =
-      _$BackendFailureCopyWithImpl<$Res>;
+  factory $BackendFailureCopyWith(
+          BackendFailure value, $Res Function(BackendFailure) then) =
+      _$BackendFailureCopyWithImpl<$Res, BackendFailure>;
+  @useResult
   $Res call({int? errorCode, String? message});
 }
 
 /// @nodoc
-class _$BackendFailureCopyWithImpl<$Res> implements $BackendFailureCopyWith<$Res> {
+class _$BackendFailureCopyWithImpl<$Res, $Val extends BackendFailure>
+    implements $BackendFailureCopyWith<$Res> {
   _$BackendFailureCopyWithImpl(this._value, this._then);
 
-  final BackendFailure _value;
   // ignore: unused_field
-  final $Res Function(BackendFailure) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? errorCode = freezed,
     Object? message = freezed,
   }) {
     return _then(_value.copyWith(
-      errorCode: errorCode == freezed
+      errorCode: freezed == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
               as int?,
-      message: message == freezed
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$_ApiCopyWith<$Res> implements $BackendFailureCopyWith<$Res> {
-  factory _$$_ApiCopyWith(_$_Api value, $Res Function(_$_Api) then) = __$$_ApiCopyWithImpl<$Res>;
+  factory _$$_ApiCopyWith(_$_Api value, $Res Function(_$_Api) then) =
+      __$$_ApiCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int? errorCode, String? message});
 }
 
 /// @nodoc
-class __$$_ApiCopyWithImpl<$Res> extends _$BackendFailureCopyWithImpl<$Res> implements _$$_ApiCopyWith<$Res> {
-  __$$_ApiCopyWithImpl(_$_Api _value, $Res Function(_$_Api) _then) : super(_value, (v) => _then(v as _$_Api));
+class __$$_ApiCopyWithImpl<$Res>
+    extends _$BackendFailureCopyWithImpl<$Res, _$_Api>
+    implements _$$_ApiCopyWith<$Res> {
+  __$$_ApiCopyWithImpl(_$_Api _value, $Res Function(_$_Api) _then)
+      : super(_value, _then);
 
-  @override
-  _$_Api get _value => super._value as _$_Api;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? errorCode = freezed,
     Object? message = freezed,
   }) {
     return _then(_$_Api(
-      errorCode == freezed
+      freezed == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
               as int?,
-      message == freezed
+      freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -140,17 +149,19 @@ class _$_Api extends _Api {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Api &&
-            const DeepCollectionEquality().equals(other.errorCode, errorCode) &&
-            const DeepCollectionEquality().equals(other.message, message));
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(errorCode), const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(runtimeType, errorCode, message);
 
   @JsonKey(ignore: true)
   @override
-  _$$_ApiCopyWith<_$_Api> get copyWith => __$$_ApiCopyWithImpl<_$_Api>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_ApiCopyWith<_$_Api> get copyWith =>
+      __$$_ApiCopyWithImpl<_$_Api>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -163,7 +174,7 @@ class _$_Api extends _Api {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? errorCode, String? message)? api,
+    TResult? Function(int? errorCode, String? message)? api,
   }) {
     return api?.call(errorCode, message);
   }
@@ -191,7 +202,7 @@ class _$_Api extends _Api {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Api value)? api,
+    TResult? Function(_Api value)? api,
   }) {
     return api?.call(this);
   }

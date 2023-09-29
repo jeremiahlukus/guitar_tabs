@@ -11,7 +11,7 @@ class Song with _$Song {
     required String title,
     required int songNumber,
     required String lyrics,
-    required String category,
+    //required String category,
     required String artist,
     required String chords,
     required String url,

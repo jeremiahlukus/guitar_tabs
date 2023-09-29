@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_dto.dart';
 
@@ -21,7 +21,8 @@ UserDTO _$UserDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserDTO {
   String get name => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  String get email =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'avatar_url')
   String get avatarUrl => throw _privateConstructorUsedError;
 
@@ -32,72 +33,86 @@ mixin _$UserDTO {
 
 /// @nodoc
 abstract class $UserDTOCopyWith<$Res> {
-  factory $UserDTOCopyWith(UserDTO value, $Res Function(UserDTO) then) = _$UserDTOCopyWithImpl<$Res>;
-  $Res call({String name, String email, @JsonKey(name: 'avatar_url') String avatarUrl});
+  factory $UserDTOCopyWith(UserDTO value, $Res Function(UserDTO) then) =
+      _$UserDTOCopyWithImpl<$Res, UserDTO>;
+  @useResult
+  $Res call(
+      {String name,
+      String email,
+      @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
 /// @nodoc
-class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
+class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO>
+    implements $UserDTOCopyWith<$Res> {
   _$UserDTOCopyWithImpl(this._value, this._then);
 
-  final UserDTO _value;
   // ignore: unused_field
-  final $Res Function(UserDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? email = freezed,
-    Object? avatarUrl = freezed,
+    Object? name = null,
+    Object? email = null,
+    Object? avatarUrl = null,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      avatarUrl: avatarUrl == freezed
+      avatarUrl: null == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$_UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
-  factory _$$_UserDTOCopyWith(_$_UserDTO value, $Res Function(_$_UserDTO) then) = __$$_UserDTOCopyWithImpl<$Res>;
+  factory _$$_UserDTOCopyWith(
+          _$_UserDTO value, $Res Function(_$_UserDTO) then) =
+      __$$_UserDTOCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String email, @JsonKey(name: 'avatar_url') String avatarUrl});
+  @useResult
+  $Res call(
+      {String name,
+      String email,
+      @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
 /// @nodoc
-class __$$_UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res> implements _$$_UserDTOCopyWith<$Res> {
+class __$$_UserDTOCopyWithImpl<$Res>
+    extends _$UserDTOCopyWithImpl<$Res, _$_UserDTO>
+    implements _$$_UserDTOCopyWith<$Res> {
   __$$_UserDTOCopyWithImpl(_$_UserDTO _value, $Res Function(_$_UserDTO) _then)
-      : super(_value, (v) => _then(v as _$_UserDTO));
+      : super(_value, _then);
 
-  @override
-  _$_UserDTO get _value => super._value as _$_UserDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? email = freezed,
-    Object? avatarUrl = freezed,
+    Object? name = null,
+    Object? email = null,
+    Object? avatarUrl = null,
   }) {
     return _then(_$_UserDTO(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      avatarUrl: avatarUrl == freezed
+      avatarUrl: null == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String,
@@ -108,10 +123,14 @@ class __$$_UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res> impleme
 /// @nodoc
 @JsonSerializable()
 class _$_UserDTO extends _UserDTO {
-  const _$_UserDTO({required this.name, required this.email, @JsonKey(name: 'avatar_url') required this.avatarUrl})
+  const _$_UserDTO(
+      {required this.name,
+      required this.email,
+      @JsonKey(name: 'avatar_url') required this.avatarUrl})
       : super._();
 
-  factory _$_UserDTO.fromJson(Map<String, dynamic> json) => _$$_UserDTOFromJson(json);
+  factory _$_UserDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_UserDTOFromJson(json);
 
   @override
   final String name;
@@ -132,19 +151,21 @@ class _$_UserDTO extends _UserDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserDTO &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.avatarUrl, avatarUrl));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.avatarUrl, avatarUrl) ||
+                other.avatarUrl == avatarUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(email), const DeepCollectionEquality().hash(avatarUrl));
+  int get hashCode => Object.hash(runtimeType, name, email, avatarUrl);
 
   @JsonKey(ignore: true)
   @override
-  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith => __$$_UserDTOCopyWithImpl<_$_UserDTO>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith =>
+      __$$_UserDTOCopyWithImpl<_$_UserDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -156,9 +177,10 @@ class _$_UserDTO extends _UserDTO {
 
 abstract class _UserDTO extends UserDTO {
   const factory _UserDTO(
-      {required final String name,
-      required final String email,
-      @JsonKey(name: 'avatar_url') required final String avatarUrl}) = _$_UserDTO;
+          {required final String name,
+          required final String email,
+          @JsonKey(name: 'avatar_url') required final String avatarUrl}) =
+      _$_UserDTO;
   const _UserDTO._() : super._();
 
   factory _UserDTO.fromJson(Map<String, dynamic> json) = _$_UserDTO.fromJson;
@@ -172,5 +194,6 @@ abstract class _UserDTO extends UserDTO {
   String get avatarUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith => throw _privateConstructorUsedError;
+  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith =>
+      throw _privateConstructorUsedError;
 }

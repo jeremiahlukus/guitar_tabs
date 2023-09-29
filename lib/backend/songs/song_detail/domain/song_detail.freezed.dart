@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'song_detail.dart';
 
@@ -20,68 +20,79 @@ mixin _$SongDetail {
   String get songId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SongDetailCopyWith<SongDetail> get copyWith => throw _privateConstructorUsedError;
+  $SongDetailCopyWith<SongDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SongDetailCopyWith<$Res> {
-  factory $SongDetailCopyWith(SongDetail value, $Res Function(SongDetail) then) = _$SongDetailCopyWithImpl<$Res>;
+  factory $SongDetailCopyWith(
+          SongDetail value, $Res Function(SongDetail) then) =
+      _$SongDetailCopyWithImpl<$Res, SongDetail>;
+  @useResult
   $Res call({bool isFavorite, String songId});
 }
 
 /// @nodoc
-class _$SongDetailCopyWithImpl<$Res> implements $SongDetailCopyWith<$Res> {
+class _$SongDetailCopyWithImpl<$Res, $Val extends SongDetail>
+    implements $SongDetailCopyWith<$Res> {
   _$SongDetailCopyWithImpl(this._value, this._then);
 
-  final SongDetail _value;
   // ignore: unused_field
-  final $Res Function(SongDetail) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isFavorite = freezed,
-    Object? songId = freezed,
+    Object? isFavorite = null,
+    Object? songId = null,
   }) {
     return _then(_value.copyWith(
-      isFavorite: isFavorite == freezed
+      isFavorite: null == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool,
-      songId: songId == freezed
+      songId: null == songId
           ? _value.songId
           : songId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_SongDetailCopyWith<$Res> implements $SongDetailCopyWith<$Res> {
-  factory _$$_SongDetailCopyWith(_$_SongDetail value, $Res Function(_$_SongDetail) then) =
+abstract class _$$_SongDetailCopyWith<$Res>
+    implements $SongDetailCopyWith<$Res> {
+  factory _$$_SongDetailCopyWith(
+          _$_SongDetail value, $Res Function(_$_SongDetail) then) =
       __$$_SongDetailCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({bool isFavorite, String songId});
 }
 
 /// @nodoc
-class __$$_SongDetailCopyWithImpl<$Res> extends _$SongDetailCopyWithImpl<$Res> implements _$$_SongDetailCopyWith<$Res> {
-  __$$_SongDetailCopyWithImpl(_$_SongDetail _value, $Res Function(_$_SongDetail) _then)
-      : super(_value, (v) => _then(v as _$_SongDetail));
+class __$$_SongDetailCopyWithImpl<$Res>
+    extends _$SongDetailCopyWithImpl<$Res, _$_SongDetail>
+    implements _$$_SongDetailCopyWith<$Res> {
+  __$$_SongDetailCopyWithImpl(
+      _$_SongDetail _value, $Res Function(_$_SongDetail) _then)
+      : super(_value, _then);
 
-  @override
-  _$_SongDetail get _value => super._value as _$_SongDetail;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isFavorite = freezed,
-    Object? songId = freezed,
+    Object? isFavorite = null,
+    Object? songId = null,
   }) {
     return _then(_$_SongDetail(
-      isFavorite: isFavorite == freezed
+      isFavorite: null == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool,
-      songId: songId == freezed
+      songId: null == songId
           ? _value.songId
           : songId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -92,7 +103,8 @@ class __$$_SongDetailCopyWithImpl<$Res> extends _$SongDetailCopyWithImpl<$Res> i
 /// @nodoc
 
 class _$_SongDetail extends _SongDetail {
-  const _$_SongDetail({required this.isFavorite, required this.songId}) : super._();
+  const _$_SongDetail({required this.isFavorite, required this.songId})
+      : super._();
 
   @override
   final bool isFavorite;
@@ -109,21 +121,25 @@ class _$_SongDetail extends _SongDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SongDetail &&
-            const DeepCollectionEquality().equals(other.isFavorite, isFavorite) &&
-            const DeepCollectionEquality().equals(other.songId, songId));
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite) &&
+            (identical(other.songId, songId) || other.songId == songId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(isFavorite), const DeepCollectionEquality().hash(songId));
+  int get hashCode => Object.hash(runtimeType, isFavorite, songId);
 
   @JsonKey(ignore: true)
   @override
-  _$$_SongDetailCopyWith<_$_SongDetail> get copyWith => __$$_SongDetailCopyWithImpl<_$_SongDetail>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_SongDetailCopyWith<_$_SongDetail> get copyWith =>
+      __$$_SongDetailCopyWithImpl<_$_SongDetail>(this, _$identity);
 }
 
 abstract class _SongDetail extends SongDetail {
-  const factory _SongDetail({required final bool isFavorite, required final String songId}) = _$_SongDetail;
+  const factory _SongDetail(
+      {required final bool isFavorite,
+      required final String songId}) = _$_SongDetail;
   const _SongDetail._() : super._();
 
   @override
@@ -132,5 +148,6 @@ abstract class _SongDetail extends SongDetail {
   String get songId;
   @override
   @JsonKey(ignore: true)
-  _$$_SongDetailCopyWith<_$_SongDetail> get copyWith => throw _privateConstructorUsedError;
+  _$$_SongDetailCopyWith<_$_SongDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }

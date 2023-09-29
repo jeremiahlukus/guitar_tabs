@@ -13,12 +13,14 @@ Future<void> showNoConnectionToast(
     duration: const Duration(seconds: 2),
     context: context,
     builder: (context, controller) {
-      return Flash<dynamic>.dialog(
+      return Flash<dynamic>(
         controller: controller,
-        backgroundColor: Colors.black.withOpacity(0.7),
-        borderRadius: BorderRadius.circular(8),
-        margin: const EdgeInsets.all(8),
         child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.black.withOpacity(0.7),
+          ),
+          margin: const EdgeInsets.all(8),
           padding: const EdgeInsets.all(10),
           height: 200,
           child: Column(

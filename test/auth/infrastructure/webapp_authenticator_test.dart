@@ -296,7 +296,7 @@ void main() {
           final webAppAuthenticator = WebAppAuthenticator(mockCredentialsStorage, mockDio);
 
           final actualAuthorizationUrl = webAppAuthenticator.getAuthorizationUrl();
-          final expectedAuthorizationUrl = Uri.parse('http://127.0.0.1:3000/users/sign_in');
+          final expectedAuthorizationUrl = Uri.parse('http://127.0.0.1:3000/login');
 
           expect(actualAuthorizationUrl, expectedAuthorizationUrl);
         });
@@ -309,7 +309,7 @@ void main() {
           final webAppAuthenticator = WebAppAuthenticator(mockCredentialsStorage, mockDio);
 
           final actualAuthorizationUrl = webAppAuthenticator.getAuthorizationUrl();
-          final expectedAuthorizationUrl = Uri.parse('http://10.0.2.2:3000/users/sign_in');
+          final expectedAuthorizationUrl = Uri.parse('http://10.0.2.2:3000/login');
 
           expect(actualAuthorizationUrl, expectedAuthorizationUrl);
         });

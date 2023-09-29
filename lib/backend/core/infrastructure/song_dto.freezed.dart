@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'song_dto.dart';
 
@@ -22,8 +22,8 @@ SongDTO _$SongDTOFromJson(Map<String, dynamic> json) {
 mixin _$SongDTO {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get lyrics => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
+  String get lyrics =>
+      throw _privateConstructorUsedError; // @JsonKey(fromJson: _nullFromJson) required String category,
   @JsonKey(fromJson: _nullFromJson)
   String get artist => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _nullFromJson)
@@ -40,12 +40,13 @@ mixin _$SongDTO {
 
 /// @nodoc
 abstract class $SongDTOCopyWith<$Res> {
-  factory $SongDTOCopyWith(SongDTO value, $Res Function(SongDTO) then) = _$SongDTOCopyWithImpl<$Res>;
+  factory $SongDTOCopyWith(SongDTO value, $Res Function(SongDTO) then) =
+      _$SongDTOCopyWithImpl<$Res, SongDTO>;
+  @useResult
   $Res call(
       {int id,
       String title,
       String lyrics,
-      String category,
       @JsonKey(fromJson: _nullFromJson) String artist,
       @JsonKey(fromJson: _nullFromJson) String chords,
       @JsonKey(fromJson: _nullFromJson) String url,
@@ -53,70 +54,70 @@ abstract class $SongDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SongDTOCopyWithImpl<$Res> implements $SongDTOCopyWith<$Res> {
+class _$SongDTOCopyWithImpl<$Res, $Val extends SongDTO>
+    implements $SongDTOCopyWith<$Res> {
   _$SongDTOCopyWithImpl(this._value, this._then);
 
-  final SongDTO _value;
   // ignore: unused_field
-  final $Res Function(SongDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? lyrics = freezed,
-    Object? category = freezed,
-    Object? artist = freezed,
-    Object? chords = freezed,
-    Object? url = freezed,
-    Object? songNumber = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? lyrics = null,
+    Object? artist = null,
+    Object? chords = null,
+    Object? url = null,
+    Object? songNumber = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      lyrics: lyrics == freezed
+      lyrics: null == lyrics
           ? _value.lyrics
           : lyrics // ignore: cast_nullable_to_non_nullable
               as String,
-      category: category == freezed
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
-      artist: artist == freezed
+      artist: null == artist
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
               as String,
-      chords: chords == freezed
+      chords: null == chords
           ? _value.chords
           : chords // ignore: cast_nullable_to_non_nullable
               as String,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      songNumber: songNumber == freezed
+      songNumber: null == songNumber
           ? _value.songNumber
           : songNumber // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$_SongDTOCopyWith<$Res> implements $SongDTOCopyWith<$Res> {
-  factory _$$_SongDTOCopyWith(_$_SongDTO value, $Res Function(_$_SongDTO) then) = __$$_SongDTOCopyWithImpl<$Res>;
+  factory _$$_SongDTOCopyWith(
+          _$_SongDTO value, $Res Function(_$_SongDTO) then) =
+      __$$_SongDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       String title,
       String lyrics,
-      String category,
       @JsonKey(fromJson: _nullFromJson) String artist,
       @JsonKey(fromJson: _nullFromJson) String chords,
       @JsonKey(fromJson: _nullFromJson) String url,
@@ -124,54 +125,49 @@ abstract class _$$_SongDTOCopyWith<$Res> implements $SongDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SongDTOCopyWithImpl<$Res> extends _$SongDTOCopyWithImpl<$Res> implements _$$_SongDTOCopyWith<$Res> {
+class __$$_SongDTOCopyWithImpl<$Res>
+    extends _$SongDTOCopyWithImpl<$Res, _$_SongDTO>
+    implements _$$_SongDTOCopyWith<$Res> {
   __$$_SongDTOCopyWithImpl(_$_SongDTO _value, $Res Function(_$_SongDTO) _then)
-      : super(_value, (v) => _then(v as _$_SongDTO));
+      : super(_value, _then);
 
-  @override
-  _$_SongDTO get _value => super._value as _$_SongDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? lyrics = freezed,
-    Object? category = freezed,
-    Object? artist = freezed,
-    Object? chords = freezed,
-    Object? url = freezed,
-    Object? songNumber = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? lyrics = null,
+    Object? artist = null,
+    Object? chords = null,
+    Object? url = null,
+    Object? songNumber = null,
   }) {
     return _then(_$_SongDTO(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      lyrics: lyrics == freezed
+      lyrics: null == lyrics
           ? _value.lyrics
           : lyrics // ignore: cast_nullable_to_non_nullable
               as String,
-      category: category == freezed
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
-      artist: artist == freezed
+      artist: null == artist
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
               as String,
-      chords: chords == freezed
+      chords: null == chords
           ? _value.chords
           : chords // ignore: cast_nullable_to_non_nullable
               as String,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      songNumber: songNumber == freezed
+      songNumber: null == songNumber
           ? _value.songNumber
           : songNumber // ignore: cast_nullable_to_non_nullable
               as int,
@@ -186,14 +182,14 @@ class _$_SongDTO extends _SongDTO {
       {required this.id,
       required this.title,
       required this.lyrics,
-      required this.category,
       @JsonKey(fromJson: _nullFromJson) required this.artist,
       @JsonKey(fromJson: _nullFromJson) required this.chords,
       @JsonKey(fromJson: _nullFromJson) required this.url,
       @JsonKey(name: 'song_number') required this.songNumber})
       : super._();
 
-  factory _$_SongDTO.fromJson(Map<String, dynamic> json) => _$$_SongDTOFromJson(json);
+  factory _$_SongDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_SongDTOFromJson(json);
 
   @override
   final int id;
@@ -201,8 +197,7 @@ class _$_SongDTO extends _SongDTO {
   final String title;
   @override
   final String lyrics;
-  @override
-  final String category;
+// @JsonKey(fromJson: _nullFromJson) required String category,
   @override
   @JsonKey(fromJson: _nullFromJson)
   final String artist;
@@ -218,7 +213,7 @@ class _$_SongDTO extends _SongDTO {
 
   @override
   String toString() {
-    return 'SongDTO(id: $id, title: $title, lyrics: $lyrics, category: $category, artist: $artist, chords: $chords, url: $url, songNumber: $songNumber)';
+    return 'SongDTO(id: $id, title: $title, lyrics: $lyrics, artist: $artist, chords: $chords, url: $url, songNumber: $songNumber)';
   }
 
   @override
@@ -226,32 +221,26 @@ class _$_SongDTO extends _SongDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SongDTO &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.lyrics, lyrics) &&
-            const DeepCollectionEquality().equals(other.category, category) &&
-            const DeepCollectionEquality().equals(other.artist, artist) &&
-            const DeepCollectionEquality().equals(other.chords, chords) &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.songNumber, songNumber));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.lyrics, lyrics) || other.lyrics == lyrics) &&
+            (identical(other.artist, artist) || other.artist == artist) &&
+            (identical(other.chords, chords) || other.chords == chords) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.songNumber, songNumber) ||
+                other.songNumber == songNumber));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(lyrics),
-      const DeepCollectionEquality().hash(category),
-      const DeepCollectionEquality().hash(artist),
-      const DeepCollectionEquality().hash(chords),
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(songNumber));
+      runtimeType, id, title, lyrics, artist, chords, url, songNumber);
 
   @JsonKey(ignore: true)
   @override
-  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith => __$$_SongDTOCopyWithImpl<_$_SongDTO>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith =>
+      __$$_SongDTOCopyWithImpl<_$_SongDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -263,14 +252,14 @@ class _$_SongDTO extends _SongDTO {
 
 abstract class _SongDTO extends SongDTO {
   const factory _SongDTO(
-      {required final int id,
-      required final String title,
-      required final String lyrics,
-      required final String category,
-      @JsonKey(fromJson: _nullFromJson) required final String artist,
-      @JsonKey(fromJson: _nullFromJson) required final String chords,
-      @JsonKey(fromJson: _nullFromJson) required final String url,
-      @JsonKey(name: 'song_number') required final int songNumber}) = _$_SongDTO;
+          {required final int id,
+          required final String title,
+          required final String lyrics,
+          @JsonKey(fromJson: _nullFromJson) required final String artist,
+          @JsonKey(fromJson: _nullFromJson) required final String chords,
+          @JsonKey(fromJson: _nullFromJson) required final String url,
+          @JsonKey(name: 'song_number') required final int songNumber}) =
+      _$_SongDTO;
   const _SongDTO._() : super._();
 
   factory _SongDTO.fromJson(Map<String, dynamic> json) = _$_SongDTO.fromJson;
@@ -281,9 +270,7 @@ abstract class _SongDTO extends SongDTO {
   String get title;
   @override
   String get lyrics;
-  @override
-  String get category;
-  @override
+  @override // @JsonKey(fromJson: _nullFromJson) required String category,
   @JsonKey(fromJson: _nullFromJson)
   String get artist;
   @override
@@ -297,5 +284,6 @@ abstract class _SongDTO extends SongDTO {
   int get songNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith => throw _privateConstructorUsedError;
+  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith =>
+      throw _privateConstructorUsedError;
 }
