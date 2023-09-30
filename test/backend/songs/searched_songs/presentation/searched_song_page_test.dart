@@ -217,7 +217,7 @@ void main() {
 
       await tester.pump(Duration.zero);
 
-      final finder = find.byType(SearchBar);
+      final finder = find.byType(PubSearchBar.SearchBar);
       expect(finder, findsOneWidget);
 
       final searchButtonFinder = find.byKey(const ValueKey('searchKey'));

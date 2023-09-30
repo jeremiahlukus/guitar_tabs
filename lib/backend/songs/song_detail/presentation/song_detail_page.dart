@@ -261,7 +261,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                                     key: scrollSpeedIncrementKey,
                                     onPressed: () {
                                       setState(() {
-                                        scrollSpeed += 1;
+                                        scrollSpeedUI += 1;
                                         scrollSpeed = scrollSpeed + 6;
                                       });
                                     },

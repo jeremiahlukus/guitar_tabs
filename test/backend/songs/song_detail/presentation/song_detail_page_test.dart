@@ -249,7 +249,11 @@ void main() {
 
       await tester.tap(find.byKey(SongDetailPageState.scrollSpeedIncrementKey));
       await tester.pumpAndSettle();
-      expect(find.text('6'), findsOneWidget);
+      expect(find.text('1'), findsOneWidget);
+      await tester.tap(find.byKey(SongDetailPageState.scrollSpeedDecrementKey));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.text('0'), findsOneWidget);
+      // Doesnt go negitive
       await tester.tap(find.byKey(SongDetailPageState.scrollSpeedDecrementKey));
       await tester.pumpAndSettle(const Duration(seconds: 1));
       expect(find.text('0'), findsOneWidget);
