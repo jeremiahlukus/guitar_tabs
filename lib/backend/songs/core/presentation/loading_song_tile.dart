@@ -37,7 +37,7 @@ class LoadingSongTile extends StatelessWidget {
             Text(
               '',
               style: Theme.of(context).textTheme.bodySmall,
-            )
+            ),
           ],
         ),
       ),

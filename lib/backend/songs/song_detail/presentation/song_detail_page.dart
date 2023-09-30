@@ -115,33 +115,108 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
     final state = ref.watch(songDetailNotifierProvider);
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 70,
         actions: [
-          state.maybeMap(
-            orElse: () => Shimmer.fromColors(
-              baseColor: Colors.grey.shade400,
-              highlightColor: Colors.grey.shade300,
-              child: IconButton(
-                icon: const Icon(Icons.star),
-                onPressed: null,
-                disabledColor: Theme.of(context).iconTheme.color,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        key: transposeDecrementKey,
+                        onPressed: () {
+                          setState(() {
+                            transposeIncrement--;
+                          });
+                        },
+                        child: const Text('-'),
+                      ),
+                      // const SizedBox(width: 5),
+                      Text('$transposeIncrement'),
+                      // const SizedBox(width: 5),
+                      ElevatedButton(
+                        key: transposeIncrementKey,
+                        onPressed: () {
+                          setState(() {
+                            transposeIncrement++;
+                          });
+                        },
+                        child: const Text('+'),
+                      ),
+                    ],
+                  ),
+                  const Text('Transpose'),
+                ],
               ),
-            ),
-            loadSuccess: (state) {
-              return ElevatedButton.icon(
-                key: favoriteKey,
-                label: const Text('Favorite'),
-                onPressed: !state.songDetail.isFresh
-                    ? null
-                    : () {
-                        ref.read(songDetailNotifierProvider.notifier).switchStarredStatus(state.songDetail.entity!);
-                        ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
-                      },
-                icon: state.songDetail.entity?.isFavorite ?? true
-                    ? const Icon(Icons.star)
-                    : const Icon(Icons.star_outline),
-              );
-            },
-          )
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        key: scrollSpeedDecrementKey,
+                        onPressed: scrollSpeed <= 0
+                            ? null
+                            // coverage:ignore-start
+                            : () {
+                                setState(() {
+                                  if (scrollSpeed > 5) {
+                                    scrollSpeedUI -= 1;
+                                    scrollSpeed = scrollSpeed - 6;
+                                  }
+                                });
+                                // coverage:ignore-end
+                              },
+                        child: const Text('-'),
+                      ),
+                      // const SizedBox(width: 5),
+                      Text('$scrollSpeedUI'),
+                      // const SizedBox(width: 5),
+                      ElevatedButton(
+                        key: scrollSpeedIncrementKey,
+                        onPressed: () {
+                          setState(() {
+                            scrollSpeedUI += 1;
+                            scrollSpeed = scrollSpeed + 6;
+                          });
+                        },
+                        child: const Text('+'),
+                      ),
+                    ],
+                  ),
+                  const Text('Auto Scroll'),
+                ],
+              ),
+              const SizedBox(width: 20),
+              state.maybeMap(
+                orElse: () => Shimmer.fromColors(
+                  baseColor: Colors.grey.shade400,
+                  highlightColor: Colors.grey.shade300,
+                  child: IconButton(
+                    icon: const Icon(Icons.star),
+                    onPressed: null,
+                    disabledColor: Theme.of(context).iconTheme.color,
+                  ),
+                ),
+                loadSuccess: (state) {
+                  return ElevatedButton.icon(
+                    key: favoriteKey,
+                    label: const Text('Favorite'),
+                    onPressed: !state.songDetail.isFresh
+                        ? null
+                        : () {
+                            ref.read(songDetailNotifierProvider.notifier).switchStarredStatus(state.songDetail.entity!);
+                            ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
+                          },
+                    icon: state.songDetail.entity?.isFavorite ?? true
+                        ? const Icon(Icons.star)
+                        : const Icon(Icons.star_outline),
+                  );
+                },
+              ),
+            ],
+          ),
         ],
       ),
       body: InteractiveViewer(
@@ -151,7 +226,6 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
         maxScale: 4,
         child: Column(
           children: [
-            const Divider(),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(12),
@@ -178,7 +252,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                                       tabs: tabs,
                                       size: 4,
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -201,80 +275,6 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   horizontalAlignment: CrossAxisAlignment.start,
                   leadingWidget: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  ElevatedButton(
-                                    key: transposeDecrementKey,
-                                    onPressed: () {
-                                      setState(() {
-                                        transposeIncrement--;
-                                      });
-                                    },
-                                    child: const Text('-'),
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text('$transposeIncrement'),
-                                  const SizedBox(width: 5),
-                                  ElevatedButton(
-                                    key: transposeIncrementKey,
-                                    onPressed: () {
-                                      setState(() {
-                                        transposeIncrement++;
-                                      });
-                                    },
-                                    child: const Text('+'),
-                                  ),
-                                ],
-                              ),
-                              const Text('Transpose')
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  ElevatedButton(
-                                    key: scrollSpeedDecrementKey,
-                                    onPressed: scrollSpeed <= 0
-                                        ? null
-                                        // coverage:ignore-start
-                                        : () {
-                                            setState(() {
-                                              if (scrollSpeed > 5) {
-                                                scrollSpeedUI -= 1;
-                                                scrollSpeed = scrollSpeed - 6;
-                                              }
-                                            });
-                                            // coverage:ignore-end
-                                          },
-                                    child: const Text('-'),
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text('$scrollSpeedUI'),
-                                  const SizedBox(width: 5),
-                                  ElevatedButton(
-                                    key: scrollSpeedIncrementKey,
-                                    onPressed: () {
-                                      setState(() {
-                                        scrollSpeedUI += 1;
-                                        scrollSpeed = scrollSpeed + 6;
-                                      });
-                                    },
-                                    child: const Text('+'),
-                                  ),
-                                ],
-                              ),
-                              const Text('Auto Scroll')
-                            ],
-                          ),
-                        ],
-                      ),
-                      const Divider(),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           vertical: 16,
@@ -311,7 +311,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

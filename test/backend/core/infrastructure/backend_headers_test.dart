@@ -29,7 +29,7 @@ void main() {
         final response = Response<dynamic>(
           requestOptions: RequestOptions(),
           headers: Headers.fromMap({
-            'link': ['https://www.example.com?page=10&rel="last"']
+            'link': ['https://www.example.com?page=10&rel="last"'],
           }),
         );
         final backendHeaders = BackendHeaders.parse(response);
@@ -46,7 +46,7 @@ void main() {
         final response = Response<dynamic>(
           requestOptions: RequestOptions(),
           headers: Headers.fromMap({
-            'link': ['http://127.0.0.1:8888/api/v1/user_favorite_songs?page=10&rel="last"']
+            'link': ['http://127.0.0.1:8888/api/v1/user_favorite_songs?page=10&rel="last"'],
           }),
         );
         final backendHeaders = BackendHeaders.parse(response);
@@ -66,7 +66,7 @@ void main() {
             baseUrl: 'https://www.example.com',
           ),
           headers: Headers.fromMap({
-            'link': ['https://www.example.com']
+            'link': ['https://www.example.com'],
           }),
         );
         final backendHeaders = BackendHeaders.parse(response);

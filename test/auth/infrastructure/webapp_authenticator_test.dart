@@ -46,7 +46,7 @@ void main() {
 }''';
 
     final queryParams = <String, String>{
-      'state': jsonEncode(['', ''])
+      'state': jsonEncode(['', '']),
     };
     group('.getSignedInCredentials', () {
       test('returns the exact Credentials returned by CredentialStorage.read()', () async {

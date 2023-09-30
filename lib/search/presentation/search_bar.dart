@@ -116,7 +116,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
             onPressed: () {
               AutoRouter.of(context).pop();
             },
-          )
+          ),
       ],
       actions: [
         FloatingSearchBarAction.searchToClear(

@@ -25,7 +25,7 @@ import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';
 import 'package:joyful_noise/search/notifiers/search_history_notifier.dart';
-import 'package:joyful_noise/search/presentation/search_bar.dart' as PubSearchBar;
+import 'package:joyful_noise/search/presentation/search_bar.dart' as pub_search_bar;
 import 'package:joyful_noise/search/shared/providers.dart';
 import '../../../../_mocks/song/mock_song.dart';
 import '../../../../utils/router_test_utils.dart';
@@ -127,7 +127,7 @@ void main() {
 
       await tester.pump(Duration.zero);
       await tester.pumpAndSettle();
-      final finder = find.byType(PubSearchBar.SearchBar);
+      final finder = find.byType(pub_search_bar.SearchBar);
 
       expect(finder, findsOneWidget);
     });
@@ -217,7 +217,7 @@ void main() {
 
       await tester.pump(Duration.zero);
 
-      final finder = find.byType(PubSearchBar.SearchBar);
+      final finder = find.byType(pub_search_bar.SearchBar);
       expect(finder, findsOneWidget);
 
       final searchButtonFinder = find.byKey(const ValueKey('searchKey'));

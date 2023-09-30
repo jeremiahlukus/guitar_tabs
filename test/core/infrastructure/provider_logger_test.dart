@@ -15,7 +15,7 @@ final testProviderContainer = ProviderContainer();
 void main() {
   setUpAll(() {
     registerFallbackValue({
-      'didUpdateProvider': {'type': 'provider', 'new_value': 'new_value', 'old_value': 'old_value'}
+      'didUpdateProvider': {'type': 'provider', 'new_value': 'new_value', 'old_value': 'old_value'},
     });
   });
 

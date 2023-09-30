@@ -40,8 +40,7 @@ mixin _$SongDTO {
 
 /// @nodoc
 abstract class $SongDTOCopyWith<$Res> {
-  factory $SongDTOCopyWith(SongDTO value, $Res Function(SongDTO) then) =
-      _$SongDTOCopyWithImpl<$Res, SongDTO>;
+  factory $SongDTOCopyWith(SongDTO value, $Res Function(SongDTO) then) = _$SongDTOCopyWithImpl<$Res, SongDTO>;
   @useResult
   $Res call(
       {int id,
@@ -54,8 +53,7 @@ abstract class $SongDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SongDTOCopyWithImpl<$Res, $Val extends SongDTO>
-    implements $SongDTOCopyWith<$Res> {
+class _$SongDTOCopyWithImpl<$Res, $Val extends SongDTO> implements $SongDTOCopyWith<$Res> {
   _$SongDTOCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -109,9 +107,7 @@ class _$SongDTOCopyWithImpl<$Res, $Val extends SongDTO>
 
 /// @nodoc
 abstract class _$$_SongDTOCopyWith<$Res> implements $SongDTOCopyWith<$Res> {
-  factory _$$_SongDTOCopyWith(
-          _$_SongDTO value, $Res Function(_$_SongDTO) then) =
-      __$$_SongDTOCopyWithImpl<$Res>;
+  factory _$$_SongDTOCopyWith(_$_SongDTO value, $Res Function(_$_SongDTO) then) = __$$_SongDTOCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -125,11 +121,9 @@ abstract class _$$_SongDTOCopyWith<$Res> implements $SongDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SongDTOCopyWithImpl<$Res>
-    extends _$SongDTOCopyWithImpl<$Res, _$_SongDTO>
+class __$$_SongDTOCopyWithImpl<$Res> extends _$SongDTOCopyWithImpl<$Res, _$_SongDTO>
     implements _$$_SongDTOCopyWith<$Res> {
-  __$$_SongDTOCopyWithImpl(_$_SongDTO _value, $Res Function(_$_SongDTO) _then)
-      : super(_value, _then);
+  __$$_SongDTOCopyWithImpl(_$_SongDTO _value, $Res Function(_$_SongDTO) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -188,8 +182,7 @@ class _$_SongDTO extends _SongDTO {
       @JsonKey(name: 'song_number') required this.songNumber})
       : super._();
 
-  factory _$_SongDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_SongDTOFromJson(json);
+  factory _$_SongDTO.fromJson(Map<String, dynamic> json) => _$$_SongDTOFromJson(json);
 
   @override
   final int id;
@@ -227,20 +220,17 @@ class _$_SongDTO extends _SongDTO {
             (identical(other.artist, artist) || other.artist == artist) &&
             (identical(other.chords, chords) || other.chords == chords) &&
             (identical(other.url, url) || other.url == url) &&
-            (identical(other.songNumber, songNumber) ||
-                other.songNumber == songNumber));
+            (identical(other.songNumber, songNumber) || other.songNumber == songNumber));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, title, lyrics, artist, chords, url, songNumber);
+  int get hashCode => Object.hash(runtimeType, id, title, lyrics, artist, chords, url, songNumber);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith =>
-      __$$_SongDTOCopyWithImpl<_$_SongDTO>(this, _$identity);
+  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith => __$$_SongDTOCopyWithImpl<_$_SongDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -252,14 +242,13 @@ class _$_SongDTO extends _SongDTO {
 
 abstract class _SongDTO extends SongDTO {
   const factory _SongDTO(
-          {required final int id,
-          required final String title,
-          required final String lyrics,
-          @JsonKey(fromJson: _nullFromJson) required final String artist,
-          @JsonKey(fromJson: _nullFromJson) required final String chords,
-          @JsonKey(fromJson: _nullFromJson) required final String url,
-          @JsonKey(name: 'song_number') required final int songNumber}) =
-      _$_SongDTO;
+      {required final int id,
+      required final String title,
+      required final String lyrics,
+      @JsonKey(fromJson: _nullFromJson) required final String artist,
+      @JsonKey(fromJson: _nullFromJson) required final String chords,
+      @JsonKey(fromJson: _nullFromJson) required final String url,
+      @JsonKey(name: 'song_number') required final int songNumber}) = _$_SongDTO;
   const _SongDTO._() : super._();
 
   factory _SongDTO.fromJson(Map<String, dynamic> json) = _$_SongDTO.fromJson;
@@ -284,6 +273,5 @@ abstract class _SongDTO extends SongDTO {
   int get songNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith => throw _privateConstructorUsedError;
 }

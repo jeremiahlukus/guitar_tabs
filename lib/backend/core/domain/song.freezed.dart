@@ -19,8 +19,7 @@ mixin _$Song {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   int get songNumber => throw _privateConstructorUsedError;
-  String get lyrics =>
-      throw _privateConstructorUsedError; //required String category,
+  String get lyrics => throw _privateConstructorUsedError; //required String category,
   String get artist => throw _privateConstructorUsedError;
   String get chords => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
@@ -31,22 +30,13 @@ mixin _$Song {
 
 /// @nodoc
 abstract class $SongCopyWith<$Res> {
-  factory $SongCopyWith(Song value, $Res Function(Song) then) =
-      _$SongCopyWithImpl<$Res, Song>;
+  factory $SongCopyWith(Song value, $Res Function(Song) then) = _$SongCopyWithImpl<$Res, Song>;
   @useResult
-  $Res call(
-      {int id,
-      String title,
-      int songNumber,
-      String lyrics,
-      String artist,
-      String chords,
-      String url});
+  $Res call({int id, String title, int songNumber, String lyrics, String artist, String chords, String url});
 }
 
 /// @nodoc
-class _$SongCopyWithImpl<$Res, $Val extends Song>
-    implements $SongCopyWith<$Res> {
+class _$SongCopyWithImpl<$Res, $Val extends Song> implements $SongCopyWith<$Res> {
   _$SongCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -100,25 +90,15 @@ class _$SongCopyWithImpl<$Res, $Val extends Song>
 
 /// @nodoc
 abstract class _$$_SongCopyWith<$Res> implements $SongCopyWith<$Res> {
-  factory _$$_SongCopyWith(_$_Song value, $Res Function(_$_Song) then) =
-      __$$_SongCopyWithImpl<$Res>;
+  factory _$$_SongCopyWith(_$_Song value, $Res Function(_$_Song) then) = __$$_SongCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      String title,
-      int songNumber,
-      String lyrics,
-      String artist,
-      String chords,
-      String url});
+  $Res call({int id, String title, int songNumber, String lyrics, String artist, String chords, String url});
 }
 
 /// @nodoc
-class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song>
-    implements _$$_SongCopyWith<$Res> {
-  __$$_SongCopyWithImpl(_$_Song _value, $Res Function(_$_Song) _then)
-      : super(_value, _then);
+class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song> implements _$$_SongCopyWith<$Res> {
+  __$$_SongCopyWithImpl(_$_Song _value, $Res Function(_$_Song) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -205,8 +185,7 @@ class _$_Song extends _Song {
             other is _$_Song &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.songNumber, songNumber) ||
-                other.songNumber == songNumber) &&
+            (identical(other.songNumber, songNumber) || other.songNumber == songNumber) &&
             (identical(other.lyrics, lyrics) || other.lyrics == lyrics) &&
             (identical(other.artist, artist) || other.artist == artist) &&
             (identical(other.chords, chords) || other.chords == chords) &&
@@ -214,14 +193,12 @@ class _$_Song extends _Song {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, title, songNumber, lyrics, artist, chords, url);
+  int get hashCode => Object.hash(runtimeType, id, title, songNumber, lyrics, artist, chords, url);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SongCopyWith<_$_Song> get copyWith =>
-      __$$_SongCopyWithImpl<_$_Song>(this, _$identity);
+  _$$_SongCopyWith<_$_Song> get copyWith => __$$_SongCopyWithImpl<_$_Song>(this, _$identity);
 }
 
 abstract class _Song extends Song {

@@ -141,7 +141,7 @@ void main() {
         final convertedData = [
           SongDTO.fromJson(mockData.first),
           SongDTO.fromJson(mockData[1]),
-          SongDTO.fromJson(mockData.last)
+          SongDTO.fromJson(mockData.last),
         ];
         const page = 1;
         const sembastPage = page - 1;

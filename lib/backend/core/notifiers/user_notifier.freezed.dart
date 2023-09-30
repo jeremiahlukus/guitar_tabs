@@ -69,14 +69,12 @@ mixin _$UserState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UserStateCopyWith<UserState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $UserStateCopyWith<UserState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UserStateCopyWith<$Res> {
-  factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
-      _$UserStateCopyWithImpl<$Res, UserState>;
+  factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) = _$UserStateCopyWithImpl<$Res, UserState>;
   @useResult
   $Res call({User user});
 
@@ -84,8 +82,7 @@ abstract class $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
-    implements $UserStateCopyWith<$Res> {
+class _$UserStateCopyWithImpl<$Res, $Val extends UserState> implements $UserStateCopyWith<$Res> {
   _$UserStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -117,9 +114,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
 
 /// @nodoc
 abstract class _$$_InitialCopyWith<$Res> implements $UserStateCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+  factory _$$_InitialCopyWith(_$_Initial value, $Res Function(_$_Initial) then) = __$$_InitialCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({User user});
@@ -129,11 +124,9 @@ abstract class _$$_InitialCopyWith<$Res> implements $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$UserStateCopyWithImpl<$Res, _$_Initial>
+class __$$_InitialCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res, _$_Initial>
     implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
-      : super(_value, _then);
+  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -176,8 +169,7 @@ class _$_Initial extends _Initial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
+  _$$_InitialCopyWith<_$_Initial> get copyWith => __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -262,15 +254,12 @@ abstract class _Initial extends UserState {
   User get user;
   @override
   @JsonKey(ignore: true)
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_InitialCopyWith<_$_Initial> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadInProgressCopyWith<$Res>
-    implements $UserStateCopyWith<$Res> {
-  factory _$$_LoadInProgressCopyWith(
-          _$_LoadInProgress value, $Res Function(_$_LoadInProgress) then) =
+abstract class _$$_LoadInProgressCopyWith<$Res> implements $UserStateCopyWith<$Res> {
+  factory _$$_LoadInProgressCopyWith(_$_LoadInProgress value, $Res Function(_$_LoadInProgress) then) =
       __$$_LoadInProgressCopyWithImpl<$Res>;
   @override
   @useResult
@@ -281,11 +270,9 @@ abstract class _$$_LoadInProgressCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoadInProgressCopyWithImpl<$Res>
-    extends _$UserStateCopyWithImpl<$Res, _$_LoadInProgress>
+class __$$_LoadInProgressCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res, _$_LoadInProgress>
     implements _$$_LoadInProgressCopyWith<$Res> {
-  __$$_LoadInProgressCopyWithImpl(
-      _$_LoadInProgress _value, $Res Function(_$_LoadInProgress) _then)
+  __$$_LoadInProgressCopyWithImpl(_$_LoadInProgress _value, $Res Function(_$_LoadInProgress) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -415,15 +402,12 @@ abstract class _LoadInProgress extends UserState {
   User get user;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadSuccessCopyWith<$Res>
-    implements $UserStateCopyWith<$Res> {
-  factory _$$_LoadSuccessCopyWith(
-          _$_LoadSuccess value, $Res Function(_$_LoadSuccess) then) =
+abstract class _$$_LoadSuccessCopyWith<$Res> implements $UserStateCopyWith<$Res> {
+  factory _$$_LoadSuccessCopyWith(_$_LoadSuccess value, $Res Function(_$_LoadSuccess) then) =
       __$$_LoadSuccessCopyWithImpl<$Res>;
   @override
   @useResult
@@ -434,12 +418,9 @@ abstract class _$$_LoadSuccessCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoadSuccessCopyWithImpl<$Res>
-    extends _$UserStateCopyWithImpl<$Res, _$_LoadSuccess>
+class __$$_LoadSuccessCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res, _$_LoadSuccess>
     implements _$$_LoadSuccessCopyWith<$Res> {
-  __$$_LoadSuccessCopyWithImpl(
-      _$_LoadSuccess _value, $Res Function(_$_LoadSuccess) _then)
-      : super(_value, _then);
+  __$$_LoadSuccessCopyWithImpl(_$_LoadSuccess _value, $Res Function(_$_LoadSuccess) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -568,15 +549,12 @@ abstract class _LoadSuccess extends UserState {
   User get user;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadFailureCopyWith<$Res>
-    implements $UserStateCopyWith<$Res> {
-  factory _$$_LoadFailureCopyWith(
-          _$_LoadFailure value, $Res Function(_$_LoadFailure) then) =
+abstract class _$$_LoadFailureCopyWith<$Res> implements $UserStateCopyWith<$Res> {
+  factory _$$_LoadFailureCopyWith(_$_LoadFailure value, $Res Function(_$_LoadFailure) then) =
       __$$_LoadFailureCopyWithImpl<$Res>;
   @override
   @useResult
@@ -588,12 +566,9 @@ abstract class _$$_LoadFailureCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoadFailureCopyWithImpl<$Res>
-    extends _$UserStateCopyWithImpl<$Res, _$_LoadFailure>
+class __$$_LoadFailureCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res, _$_LoadFailure>
     implements _$$_LoadFailureCopyWith<$Res> {
-  __$$_LoadFailureCopyWithImpl(
-      _$_LoadFailure _value, $Res Function(_$_LoadFailure) _then)
-      : super(_value, _then);
+  __$$_LoadFailureCopyWithImpl(_$_LoadFailure _value, $Res Function(_$_LoadFailure) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -731,8 +706,7 @@ class _$_LoadFailure extends _LoadFailure {
 }
 
 abstract class _LoadFailure extends UserState {
-  const factory _LoadFailure(final User user, final BackendFailure failure) =
-      _$_LoadFailure;
+  const factory _LoadFailure(final User user, final BackendFailure failure) = _$_LoadFailure;
   const _LoadFailure._() : super._();
 
   @override
@@ -740,6 +714,5 @@ abstract class _LoadFailure extends UserState {
   BackendFailure get failure;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadFailureCopyWith<_$_LoadFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_LoadFailureCopyWith<_$_LoadFailure> get copyWith => throw _privateConstructorUsedError;
 }

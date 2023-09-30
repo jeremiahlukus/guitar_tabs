@@ -52,22 +52,19 @@ mixin _$BackendFailure {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $BackendFailureCopyWith<BackendFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  $BackendFailureCopyWith<BackendFailure> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $BackendFailureCopyWith<$Res> {
-  factory $BackendFailureCopyWith(
-          BackendFailure value, $Res Function(BackendFailure) then) =
+  factory $BackendFailureCopyWith(BackendFailure value, $Res Function(BackendFailure) then) =
       _$BackendFailureCopyWithImpl<$Res, BackendFailure>;
   @useResult
   $Res call({int? errorCode, String? message});
 }
 
 /// @nodoc
-class _$BackendFailureCopyWithImpl<$Res, $Val extends BackendFailure>
-    implements $BackendFailureCopyWith<$Res> {
+class _$BackendFailureCopyWithImpl<$Res, $Val extends BackendFailure> implements $BackendFailureCopyWith<$Res> {
   _$BackendFailureCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -96,19 +93,15 @@ class _$BackendFailureCopyWithImpl<$Res, $Val extends BackendFailure>
 
 /// @nodoc
 abstract class _$$_ApiCopyWith<$Res> implements $BackendFailureCopyWith<$Res> {
-  factory _$$_ApiCopyWith(_$_Api value, $Res Function(_$_Api) then) =
-      __$$_ApiCopyWithImpl<$Res>;
+  factory _$$_ApiCopyWith(_$_Api value, $Res Function(_$_Api) then) = __$$_ApiCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? errorCode, String? message});
 }
 
 /// @nodoc
-class __$$_ApiCopyWithImpl<$Res>
-    extends _$BackendFailureCopyWithImpl<$Res, _$_Api>
-    implements _$$_ApiCopyWith<$Res> {
-  __$$_ApiCopyWithImpl(_$_Api _value, $Res Function(_$_Api) _then)
-      : super(_value, _then);
+class __$$_ApiCopyWithImpl<$Res> extends _$BackendFailureCopyWithImpl<$Res, _$_Api> implements _$$_ApiCopyWith<$Res> {
+  __$$_ApiCopyWithImpl(_$_Api _value, $Res Function(_$_Api) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -149,8 +142,7 @@ class _$_Api extends _Api {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Api &&
-            (identical(other.errorCode, errorCode) ||
-                other.errorCode == errorCode) &&
+            (identical(other.errorCode, errorCode) || other.errorCode == errorCode) &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -160,8 +152,7 @@ class _$_Api extends _Api {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApiCopyWith<_$_Api> get copyWith =>
-      __$$_ApiCopyWithImpl<_$_Api>(this, _$identity);
+  _$$_ApiCopyWith<_$_Api> get copyWith => __$$_ApiCopyWithImpl<_$_Api>(this, _$identity);
 
   @override
   @optionalTypeArgs

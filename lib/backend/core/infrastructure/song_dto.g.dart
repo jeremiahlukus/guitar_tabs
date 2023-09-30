@@ -16,8 +16,7 @@ _$_SongDTO _$$_SongDTOFromJson(Map<String, dynamic> json) => _$_SongDTO(
       songNumber: json['song_number'] as int,
     );
 
-Map<String, dynamic> _$$_SongDTOToJson(_$_SongDTO instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_SongDTOToJson(_$_SongDTO instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'lyrics': instance.lyrics,

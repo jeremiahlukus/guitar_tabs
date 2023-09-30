@@ -58,14 +58,12 @@ mixin _$AuthFailure {
 
 /// @nodoc
 abstract class $AuthFailureCopyWith<$Res> {
-  factory $AuthFailureCopyWith(
-          AuthFailure value, $Res Function(AuthFailure) then) =
+  factory $AuthFailureCopyWith(AuthFailure value, $Res Function(AuthFailure) then) =
       _$AuthFailureCopyWithImpl<$Res, AuthFailure>;
 }
 
 /// @nodoc
-class _$AuthFailureCopyWithImpl<$Res, $Val extends AuthFailure>
-    implements $AuthFailureCopyWith<$Res> {
+class _$AuthFailureCopyWithImpl<$Res, $Val extends AuthFailure> implements $AuthFailureCopyWith<$Res> {
   _$AuthFailureCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -76,18 +74,15 @@ class _$AuthFailureCopyWithImpl<$Res, $Val extends AuthFailure>
 
 /// @nodoc
 abstract class _$$_ServerCopyWith<$Res> {
-  factory _$$_ServerCopyWith(_$_Server value, $Res Function(_$_Server) then) =
-      __$$_ServerCopyWithImpl<$Res>;
+  factory _$$_ServerCopyWith(_$_Server value, $Res Function(_$_Server) then) = __$$_ServerCopyWithImpl<$Res>;
   @useResult
   $Res call({String? message});
 }
 
 /// @nodoc
-class __$$_ServerCopyWithImpl<$Res>
-    extends _$AuthFailureCopyWithImpl<$Res, _$_Server>
+class __$$_ServerCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res, _$_Server>
     implements _$$_ServerCopyWith<$Res> {
-  __$$_ServerCopyWithImpl(_$_Server _value, $Res Function(_$_Server) _then)
-      : super(_value, _then);
+  __$$_ServerCopyWithImpl(_$_Server _value, $Res Function(_$_Server) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -130,8 +125,7 @@ class _$_Server extends _Server {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ServerCopyWith<_$_Server> get copyWith =>
-      __$$_ServerCopyWithImpl<_$_Server>(this, _$identity);
+  _$$_ServerCopyWith<_$_Server> get copyWith => __$$_ServerCopyWithImpl<_$_Server>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -202,23 +196,18 @@ abstract class _Server extends AuthFailure {
 
   String? get message;
   @JsonKey(ignore: true)
-  _$$_ServerCopyWith<_$_Server> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_ServerCopyWith<_$_Server> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$_StorageCopyWith<$Res> {
-  factory _$$_StorageCopyWith(
-          _$_Storage value, $Res Function(_$_Storage) then) =
-      __$$_StorageCopyWithImpl<$Res>;
+  factory _$$_StorageCopyWith(_$_Storage value, $Res Function(_$_Storage) then) = __$$_StorageCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_StorageCopyWithImpl<$Res>
-    extends _$AuthFailureCopyWithImpl<$Res, _$_Storage>
+class __$$_StorageCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res, _$_Storage>
     implements _$$_StorageCopyWith<$Res> {
-  __$$_StorageCopyWithImpl(_$_Storage _value, $Res Function(_$_Storage) _then)
-      : super(_value, _then);
+  __$$_StorageCopyWithImpl(_$_Storage _value, $Res Function(_$_Storage) _then) : super(_value, _then);
 }
 
 /// @nodoc
@@ -233,8 +222,7 @@ class _$_Storage extends _Storage {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Storage);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$_Storage);
   }
 
   @override

@@ -47,8 +47,8 @@ class ProviderLogger extends ProviderObserver {
       'didUpdateProvider': {
         'type': provider.runtimeType,
         'new_value': newValue.toString(),
-        'old_value': previousValue.toString()
-      }
+        'old_value': previousValue.toString(),
+      },
     };
     if (!Platform.environment.containsKey('FLUTTER_TEST')) {
       // coverage:ignore-start

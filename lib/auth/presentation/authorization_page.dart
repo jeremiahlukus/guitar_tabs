@@ -1,12 +1,12 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 // Package imports:
 import 'package:webview_flutter/webview_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class AuthorizationPage extends StatefulWidget {
   const AuthorizationPage({

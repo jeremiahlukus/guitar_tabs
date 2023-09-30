@@ -56,7 +56,7 @@ Map<String, dynamic> mockSongJson(int id) {
     'created_at': '2022-06-29T11:42:10.614-04:00',
     'updated_at': '2022-06-29T11:42:10.614-04:00',
     //'category': 'general',
-    'sub_category': null
+    'sub_category': null,
   };
 }
 
@@ -72,7 +72,7 @@ Map<String, dynamic> mockSongJson2(int id) {
     'created_at': '2022-06-29T11:42:10.614-04:00',
     'updated_at': '2022-06-29T11:42:10.614-04:00',
     // 'category': 'general',
-    'sub_category': null
+    'sub_category': null,
   };
 }
 

@@ -5,7 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 part 'song_dto.freezed.dart';
 part 'song_dto.g.dart';

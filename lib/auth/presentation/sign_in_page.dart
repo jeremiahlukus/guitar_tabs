@@ -66,7 +66,7 @@ class SignInPage extends ConsumerWidget {
                       );
                     },
                     child: const Text('Sign In'),
-                  )
+                  ),
                 ],
               ),
             ),

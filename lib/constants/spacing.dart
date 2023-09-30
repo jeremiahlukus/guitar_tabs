@@ -31,7 +31,7 @@ EdgeInsets blockPadding(BuildContext context) => ResponsiveValue(
         const Condition<EdgeInsets>.smallerThan(
           name: TABLET,
           value: EdgeInsets.symmetric(horizontal: 15, vertical: 45),
-        )
+        ),
       ],
     ).value!;
 

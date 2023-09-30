@@ -1,7 +1,8 @@
 // Package imports:
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
+
+// Project imports:
 
 // Project imports:
 
