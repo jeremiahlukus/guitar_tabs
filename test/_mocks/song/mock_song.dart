@@ -23,7 +23,7 @@ Song mockEmptySong(int id) {
     songNumber: id,
     lyrics:
         '#Eph 4:13, Rev. 19:7\n# Capo 3\n\nUn[D7]til we all arrive[C] \nAt the oneness of the [Em]faith\nAnd of the full kno[D]wledge\nOf the [G]Son of God[C],\nAt the oneness of the f[Em]aith \nAt a full-grown [D]man,\nAt the [C]measure of the [G]stature of the\n[Am]Fullness of [C]Christ,\nU[G]ntil we [D]all [G]arrive.\n \n  [G]Let us rejoice and\n  [C]let us give the glory to [Em]Him\n  For the marriage of the \n  [D]Lamb has come,\n  [G]Let us exult and \n  [C]let us give the glory to [Em]Him\n  For the marriage of the \n  [D]Lamb has [D7]come,\n  And His [C]wife has \n  [G]made herself [C]re[D]ad[Em]y,\n  For the [C]marriage of the \n  [D]Lamb has [G]come.\n\n',
-   // category: 'category',
+    // category: 'category',
     artist: 'artist',
     chords: 'chords',
     url: '',
@@ -55,7 +55,7 @@ Map<String, dynamic> mockSongJson(int id) {
     'chords': null,
     'created_at': '2022-06-29T11:42:10.614-04:00',
     'updated_at': '2022-06-29T11:42:10.614-04:00',
-    'category': 'general',
+    //'category': 'general',
     'sub_category': null
   };
 }
@@ -71,7 +71,7 @@ Map<String, dynamic> mockSongJson2(int id) {
     'chords': null,
     'created_at': '2022-06-29T11:42:10.614-04:00',
     'updated_at': '2022-06-29T11:42:10.614-04:00',
-    'category': 'general',
+    // 'category': 'general',
     'sub_category': null
   };
 }
@@ -85,6 +85,6 @@ Map<String, dynamic> mockSongStrippedJson(int id) {
     'artist': 'New',
     'lyrics': '[G]Down by bay, [D]Where the watermelon grows[D7] back to my home',
     'chords': '',
-    'category': 'general',
+    //'category': 'general',
   };
 }

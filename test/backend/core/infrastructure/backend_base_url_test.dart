@@ -26,7 +26,7 @@ void main() {
         BackendConstants.platform = FakePlatform(operatingSystem: Platform.iOS);
 
         final actualAuthorizationUrl = BackendConstants().backendBaseUrl();
-        const expectedAuthorizationUrl = '127.0.0.1:3000';
+        const expectedAuthorizationUrl = '127.0.0.1:8888';
 
         expect(actualAuthorizationUrl, expectedAuthorizationUrl);
       });
@@ -35,7 +35,7 @@ void main() {
         BackendConstants.platform = FakePlatform(operatingSystem: Platform.android);
 
         final actualAuthorizationUrl = BackendConstants().backendBaseUrl();
-        const expectedAuthorizationUrl = '10.0.2.2:3000';
+        const expectedAuthorizationUrl = '10.0.2.2:8888';
 
         expect(actualAuthorizationUrl, expectedAuthorizationUrl);
       });

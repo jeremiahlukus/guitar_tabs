@@ -13,10 +13,10 @@ packages:
     dependency: "direct dev"
     description:
       name: alchemist
-      sha256: "3b0b75fe77fcc022fe68c090571c2aff556c07779528653ffb9ecef450ad0c6e"
+      sha256: "2efa90870003e10bf01af52329f2ddf9ccc44cd519adb2c8aea1713db2e84760"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.1"
+    version: "0.7.0"
   analyzer:
     dependency: transitive
     description:
@@ -1351,4 +1351,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.1.0-185.0.dev <3.2.2"
-  flutter: ">=3.10.0"
+  flutter: ">=3.13.0"

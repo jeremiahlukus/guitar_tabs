@@ -221,7 +221,7 @@ void main() {
           WebAppAuthenticator.platform = FakePlatform(operatingSystem: Platform.iOS);
 
           final actualAuthorizationUrl = WebAppAuthenticator.revocationEndpoint();
-          final expectedAuthorizationUrl = Uri.parse('http://127.0.0.1:3000/api/v1/auth');
+          final expectedAuthorizationUrl = Uri.parse('http://127.0.0.1:8888/api/v1/auth');
 
           expect(actualAuthorizationUrl, expectedAuthorizationUrl);
         });
@@ -229,7 +229,7 @@ void main() {
           WebAppAuthenticator.platform = FakePlatform(operatingSystem: Platform.android);
 
           final actualAuthorizationUrl = WebAppAuthenticator.revocationEndpoint();
-          final expectedAuthorizationUrl = Uri.parse('http://10.0.2.2:3000/api/v1/auth');
+          final expectedAuthorizationUrl = Uri.parse('http://10.0.2.2:8888/api/v1/auth');
 
           expect(actualAuthorizationUrl, expectedAuthorizationUrl);
         });
@@ -257,7 +257,7 @@ void main() {
           WebAppAuthenticator.platform = FakePlatform(operatingSystem: Platform.iOS);
 
           final actualAuthorizationUrl = WebAppAuthenticator.redirectUrl();
-          final expectedAuthorizationUrl = Uri.parse('http://127.0.0.1:3000/callback');
+          final expectedAuthorizationUrl = Uri.parse('http://127.0.0.1:8888/callback');
 
           expect(actualAuthorizationUrl, expectedAuthorizationUrl);
         });
@@ -265,7 +265,7 @@ void main() {
           WebAppAuthenticator.platform = FakePlatform(operatingSystem: Platform.android);
 
           final actualAuthorizationUrl = WebAppAuthenticator.redirectUrl();
-          final expectedAuthorizationUrl = Uri.parse('http://10.0.2.2:3000/callback');
+          final expectedAuthorizationUrl = Uri.parse('http://10.0.2.2:8888/callback');
 
           expect(actualAuthorizationUrl, expectedAuthorizationUrl);
         });
@@ -296,7 +296,7 @@ void main() {
           final webAppAuthenticator = WebAppAuthenticator(mockCredentialsStorage, mockDio);
 
           final actualAuthorizationUrl = webAppAuthenticator.getAuthorizationUrl();
-          final expectedAuthorizationUrl = Uri.parse('http://127.0.0.1:3000/login');
+          final expectedAuthorizationUrl = Uri.parse('http://127.0.0.1:8888/login');
 
           expect(actualAuthorizationUrl, expectedAuthorizationUrl);
         });
@@ -309,7 +309,7 @@ void main() {
           final webAppAuthenticator = WebAppAuthenticator(mockCredentialsStorage, mockDio);
 
           final actualAuthorizationUrl = webAppAuthenticator.getAuthorizationUrl();
-          final expectedAuthorizationUrl = Uri.parse('http://10.0.2.2:3000/login');
+          final expectedAuthorizationUrl = Uri.parse('http://10.0.2.2:8888/login');
 
           expect(actualAuthorizationUrl, expectedAuthorizationUrl);
         });
