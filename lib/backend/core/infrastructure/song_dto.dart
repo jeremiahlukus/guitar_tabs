@@ -11,8 +11,6 @@ part 'song_dto.freezed.dart';
 part 'song_dto.g.dart';
 
 String _nullFromJson(Object? json) {
-  logger.e(json);
-  logger.e("++++++++++++++++");
   return (json as String?) ?? '';
 }
 
@@ -33,7 +31,6 @@ class SongDTO with _$SongDTO {
   factory SongDTO.fromJson(Map<String, dynamic> json) => _$SongDTOFromJson(json);
 
   factory SongDTO.fromDomain(Song _) {
-    logger.e(_.id);
     return SongDTO(
       id: _.id,
       title: _.title,
@@ -46,8 +43,6 @@ class SongDTO with _$SongDTO {
     );
   }
   Song toDomain() {
-    logger.e("hey");
-    logger.e(id);
     return Song(
       id: id,
       title: title,

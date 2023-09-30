@@ -61,8 +61,6 @@ class PaginationLink with _$PaginationLink {
 
       return int.parse(Uri.parse(uriString!).queryParameters['page']!);
     } catch (e) {
-      logger.e("yoooo");
-      logger.e(e);
       // This happens when the url is 127.0.0.1:3000, should never happen in real life
       // but in case it ever does...
       return int.parse(

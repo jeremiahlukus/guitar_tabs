@@ -30,7 +30,6 @@ class UserRemoteService {
           headers: <String, String>{'If-None-Match': previousHeaders?.etag ?? ''},
         ),
       );
-      logger.e(response.statusCode);
       if (response.statusCode == 304) {
         return const RemoteResponse.notModified();
       } else if (response.statusCode == 200) {
@@ -42,7 +41,7 @@ class UserRemoteService {
       } else {
         throw RestApiException(response.statusCode);
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.isNoConnectionError) {
         return const RemoteResponse.noConnection();
       } else if (e.response != null) {

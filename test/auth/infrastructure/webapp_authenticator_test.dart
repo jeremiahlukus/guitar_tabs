@@ -358,7 +358,7 @@ void main() {
         expect(actualSignOutReturnValue, expectedSignOutReturnValue);
       });
 
-      test('returns Right<AuthFailure, Unit> on DioError that is NoConnectionError', () async {
+      test('returns Right<AuthFailure, Unit> on DioException that is NoConnectionError', () async {
         final CredentialsStorage mockCredentialsStorage = MockCredentialStorage();
         final Dio mockDio = MockDio();
         final credential = Credentials.fromJson(mockCredentialJson);
@@ -373,7 +373,7 @@ void main() {
             options: any(named: 'options'),
           ),
         ).thenThrow(
-          DioError(
+          DioException(
             error: const SocketException(''),
             requestOptions: RequestOptions(),
           ),
@@ -403,7 +403,7 @@ void main() {
         expect(actualSignOutReturnValue, expectedSignOutReturnValue);
       });
 
-      test("returns Left<AuthFailure, Unit> on DioError that isn't NoConnectionError ", () async {
+      test("returns Left<AuthFailure, Unit> on DioException that isn't NoConnectionError ", () async {
         final CredentialsStorage mockCredentialsStorage = MockCredentialStorage();
         final Dio mockDio = MockDio();
         final credential = Credentials.fromJson(mockCredentialJson);
@@ -414,8 +414,8 @@ void main() {
             options: any(named: 'options'),
           ),
         ).thenThrow(
-          DioError(
-            type: DioErrorType.connectionTimeout,
+          DioException(
+            type: DioExceptionType.connectionTimeout,
             error: const SocketException(''),
             requestOptions: RequestOptions(),
           ),

@@ -26,7 +26,7 @@ class MockRequestOptions extends Mock implements RequestOptions {}
 
 class MockRequestInterceptorHandler extends Mock implements RequestInterceptorHandler {}
 
-class MockDioError extends Mock implements DioError {}
+class MockDioError extends Mock implements DioException {}
 
 class MockErrorInterceptorHandler extends Mock implements ErrorInterceptorHandler {}
 
@@ -109,7 +109,7 @@ void main() {
     });
 
     group('.onError', () {
-      test("calls the handler's next method with the passed DioError object if error response is null", () async {
+      test("calls the handler's next method with the passed DioException object if error response is null", () async {
         final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
         final AuthNotifier mockAuthNotifier = MockAuthNotifier();
         final Dio mockDio = MockDio();
@@ -120,7 +120,7 @@ void main() {
           mockDio,
         );
 
-        final DioError mockDioError = MockDioError();
+        final DioException mockDioError = MockDioError();
         final ErrorInterceptorHandler mockErrorInterceptorHandler = MockErrorInterceptorHandler();
 
         when(() => mockDioError.response).thenReturn(null);
@@ -134,7 +134,7 @@ void main() {
       });
 
       test(
-          "calls the handler's next method with the passed DioError object if error response has a status code that is not 401 ",
+          "calls the handler's next method with the passed DioException object if error response has a status code that is not 401 ",
           () async {
         final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
         final AuthNotifier mockAuthNotifier = MockAuthNotifier();
@@ -146,7 +146,7 @@ void main() {
           mockDio,
         );
 
-        final DioError mockDioError = MockDioError();
+        final DioException mockDioError = MockDioError();
         final ErrorInterceptorHandler mockErrorInterceptorHandler = MockErrorInterceptorHandler();
         final requestOptions = RequestOptions(path: '');
 
@@ -220,7 +220,7 @@ void main() {
       });
 
       test(
-          "calls the handler's resolve method with the result of Dio fetch DioError object if error response is not null with 401 status code",
+          "calls the handler's resolve method with the result of Dio fetch DioException object if error response is not null with 401 status code",
           () async {
         final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
         final AuthNotifier mockAuthNotifier = MockAuthNotifier();
@@ -253,7 +253,7 @@ void main() {
           mockDio,
         );
 
-        final DioError mockDioError = MockDioError();
+        final DioException mockDioError = MockDioError();
         final ErrorInterceptorHandler mockErrorInterceptorHandler = MockErrorInterceptorHandler();
 
         when(() => mockDioError.response).thenReturn(

@@ -133,7 +133,7 @@ class WebAppAuthenticator {
             },
           ),
         );
-      } on DioError catch (e) {
+      } on DioException catch (e) {
         if (e.isNoConnectionError) {
           logger.e('No internet connect, did not revoke token');
         } else {

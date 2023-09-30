@@ -35,7 +35,7 @@ class SongDetailRemoteService {
       } else {
         throw RestApiException(response.statusCode);
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.isNoConnectionError) {
         return const RemoteResponse.noConnection();
       } else if (e.response != null) {
@@ -79,13 +79,12 @@ class SongDetailRemoteService {
     try {
       final response =
           await (isCurrentlyFavorite ? _dio.deleteUri<dynamic>(requestUri) : _dio.putUri<dynamic>(requestUri));
-      logger.e(response.data);
       if (response.statusCode == 204 || response.statusCode == 200) {
         return unit;
       } else {
         throw RestApiException(response.statusCode);
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.isNoConnectionError) {
         return null;
       } else if (e.response != null) {

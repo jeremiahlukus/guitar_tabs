@@ -37,6 +37,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   final textStyle = const TextStyle(fontSize: 18);
   int transposeIncrement = 0;
   int scrollSpeed = 0;
+  int scrollSpeedUI = 0;
   final _player = AudioPlayer();
 
   @visibleForTesting
@@ -244,19 +245,23 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                                         // coverage:ignore-start
                                         : () {
                                             setState(() {
-                                              scrollSpeed = scrollSpeed - 2;
+                                              if (scrollSpeed > 5) {
+                                                scrollSpeedUI -= 1;
+                                                scrollSpeed = scrollSpeed - 6;
+                                              }
                                             });
                                             // coverage:ignore-end
                                           },
                                     child: const Text('-'),
                                   ),
                                   const SizedBox(width: 5),
-                                  Text('$scrollSpeed'),
+                                  Text('$scrollSpeedUI'),
                                   const SizedBox(width: 5),
                                   ElevatedButton(
                                     key: scrollSpeedIncrementKey,
                                     onPressed: () {
                                       setState(() {
+                                        scrollSpeed += 1;
                                         scrollSpeed = scrollSpeed + 6;
                                       });
                                     },

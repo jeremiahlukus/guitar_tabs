@@ -50,8 +50,7 @@ class SongsPageRemoteService {
       } else {
         throw RestApiException(response.statusCode);
       }
-    } on DioError catch (e) {
-      logger.e("message");
+    } on DioException catch (e) {
       if (e.isNoConnectionError) {
         return const RemoteResponse.noConnection();
       } else if (e.response != null) {

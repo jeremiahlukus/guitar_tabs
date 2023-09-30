@@ -155,14 +155,14 @@ void main() {
         throw Exception('Test Failed');
       });
 
-      test('returns RemoteResponse.noConnection on No Connection DioError ', () async {
+      test('returns RemoteResponse.noConnection on No Connection DioException ', () async {
         final Dio mockDio = MockDio();
         final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
 
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
-          DioError(
+          DioException(
             requestOptions: RequestOptions(),
             error: const SocketException(''),
           ),
@@ -192,14 +192,14 @@ void main() {
         expect(actualResult, expectedResult);
       });
 
-      test('throws RestApiException on a non No Connection DioError with non-null error response ', () async {
+      test('throws RestApiException on a non No Connection DioException with non-null error response ', () async {
         final Dio mockDio = MockDio();
         final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
 
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
-          DioError(
+          DioException(
             requestOptions: RequestOptions(),
             response: Response<dynamic>(requestOptions: RequestOptions(), statusCode: 400, data: 'error'),
           ),

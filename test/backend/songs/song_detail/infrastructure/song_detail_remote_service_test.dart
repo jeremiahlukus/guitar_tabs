@@ -81,7 +81,7 @@ void main() {
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
-          DioError(
+          DioException(
             requestOptions: RequestOptions(),
             error: const SocketException(''),
           ),
@@ -93,7 +93,7 @@ void main() {
 
         expect(actualResult, expectedResult);
       });
-      test('returns RestApiException when DioError and response ', () async {
+      test('returns RestApiException when DioException and response ', () async {
         final Dio mockDio = MockDio();
 
         final mockData = {'is_favorite': true, 'song_id': '1'};
@@ -101,7 +101,7 @@ void main() {
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
-          DioError(
+          DioException(
             response: Response<dynamic>(
               requestOptions: RequestOptions(),
               statusCode: 400,
@@ -196,7 +196,7 @@ void main() {
       when(
         () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
       ).thenThrow(
-        DioError(
+        DioException(
           requestOptions: RequestOptions(),
           error: const SocketException(''),
         ),
@@ -301,7 +301,7 @@ void main() {
         when(
           () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
-          DioError(
+          DioException(
             requestOptions: RequestOptions(),
             error: const SocketException(''),
           ),
@@ -313,13 +313,13 @@ void main() {
 
         expect(actualResult, null);
       });
-      test('returns RestApiException when DioError when status code', () async {
+      test('returns RestApiException when DioException when status code', () async {
         final Dio mockDio = MockDio();
 
         when(
           () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
-          DioError(
+          DioException(
             response: Response<dynamic>(
               requestOptions: RequestOptions(),
               statusCode: 400,
@@ -337,13 +337,13 @@ void main() {
         });
       });
     });
-    test('returns DioError when DioError without status code', () async {
+    test('returns DioException when DioException without status code', () async {
       final Dio mockDio = MockDio();
 
       when(
         () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
       ).thenThrow(
-        DioError(
+        DioException(
           requestOptions: RequestOptions(),
           error: Exception('error'),
         ),
@@ -352,7 +352,7 @@ void main() {
       final songDetailRemoteService = SongDetailRemoteService(mockDio);
 
       await songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true).onError((error, stackTrace) {
-        expect(error, isA<DioError>());
+        expect(error, isA<DioException>());
         return null;
       });
     });
@@ -425,7 +425,7 @@ void main() {
         when(
           () => mockDio.putUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
-          DioError(
+          DioException(
             requestOptions: RequestOptions(),
             error: const SocketException(''),
           ),
