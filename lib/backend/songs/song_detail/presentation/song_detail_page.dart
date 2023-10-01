@@ -202,7 +202,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                 loadSuccess: (state) {
                   return ElevatedButton.icon(
                     key: favoriteKey,
-                    label: const Text('Favorite'),
+                    label: const Text('Fav'),
                     onPressed: !state.songDetail.isFresh
                         ? null
                         : () {
