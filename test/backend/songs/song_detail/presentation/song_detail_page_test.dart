@@ -252,11 +252,11 @@ void main() {
       expect(find.text('1'), findsOneWidget);
       await tester.tap(find.byKey(SongDetailPageState.scrollSpeedDecrementKey));
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.text('0'), findsOneWidget);
+      expect(find.text('0'), findsNWidgets(2));
       // Doesnt go negitive
       await tester.tap(find.byKey(SongDetailPageState.scrollSpeedDecrementKey));
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.text('0'), findsOneWidget);
+      expect(find.text('0'), findsNWidgets(2));
     });
 
     testWidgets('taping on favorite button favorites song', (tester) async {

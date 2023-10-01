@@ -116,9 +116,9 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
+        centerTitle: true,
         actions: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 children: [

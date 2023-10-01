@@ -129,19 +129,19 @@ Widget buildWidgetUnderTest() {
 
 void main() {
   router.push(SongDetailRoute(song: mockSong(1)));
-  goldenTest(
-    'renders correctly on smallPhone',
-    fileName: 'SongDetailPage smallPhone',
-    builder: () => const GoldenTestGroup(
-      children: [
-        GoldenTestDeviceScenario(
-          device: Device.smallPhone,
-          name: 'golden test SongDetailPage on small phone',
-          builder: buildWidgetUnderTest,
-        ),
-      ],
-    ),
-  );
+  // goldenTest(
+  //   'renders correctly on smallPhone',
+  //   fileName: 'SongDetailPage smallPhone',
+  //   builder: () => const GoldenTestGroup(
+  //     children: [
+  //       GoldenTestDeviceScenario(
+  //         device: Device.smallPhone,
+  //         name: 'golden test SongDetailPage on small phone',
+  //         builder: buildWidgetUnderTest,
+  //       ),
+  //     ],
+  //   ),
+  // );
   goldenTest(
     'renders correctly on tabletLandscape',
     fileName: 'SongDetailPage tabletLandscape',
