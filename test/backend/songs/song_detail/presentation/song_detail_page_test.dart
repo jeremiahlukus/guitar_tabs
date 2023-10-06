@@ -471,6 +471,7 @@ void main() {
       expect(find.byIcon(Icons.play_arrow), findsNothing);
       expect(find.byIcon(Icons.pause), findsNothing);
       expect(find.byKey(SeekBar.seekbarKey), findsNothing);
+      expect(find.textContaining('Suggest Changes'), findsOneWidget);
     });
   });
 }

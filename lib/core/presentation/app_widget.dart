@@ -59,6 +59,7 @@ class AppWidget extends ConsumerWidget {
         );
       });
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       builder: (context, widget) => ResponsiveWrapper.builder(
         ClampingScrollWrapper.builder(context, widget!),
         defaultScale: true,

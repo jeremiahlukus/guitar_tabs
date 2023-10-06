@@ -1,12 +1,13 @@
 name: joyful_noise
 description: A Very Good Project created by Very Good CLI.
-version: 1.0.19
+version: 1.0.23
 publish_to: none
 
 environment:
   sdk: ">=2.19.0 <3.2.2"
 
 dependencies:
+  url_launcher: ^6.1.14
   auto_route: ^5.0.4
   auto_size_text: ^3.0.0
   collection: ^1.17.0
