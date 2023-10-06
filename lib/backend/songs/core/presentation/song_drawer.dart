@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_remote_service.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
+import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 // Project imports:
@@ -18,6 +22,7 @@ class SongDrawer extends ConsumerWidget {
   static const himnos = ValueKey('himnos');
   static const liederbuch = ValueKey('liederbuch');
   static const cantiques = ValueKey('cantiques');
+  static const deleteUser = ValueKey('deleteUser');
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
@@ -78,6 +83,39 @@ class SongDrawer extends ConsumerWidget {
             onTap: () {
               AutoRouter.of(context).push(PlaylistSongsRoute(playlistName: 'Cantiques'));
               Navigator.of(context).pop();
+            },
+          ),
+          ListTile(
+            key: deleteUser,
+            title: const Text('Delete Account'),
+            onTap: () {
+              // ignore: inference_failure_on_function_invocation
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return AlertDialog(
+                    title: const Center(child: Text('Delete Account')),
+                    content: const Text(
+                      '⚡️DANGER!!⚡️\n\nAre you sure you want to delete your account?\nThis cannot be undone.\n\n⚡️DANGER!!⚡️',
+                      textAlign: TextAlign.center,
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          ref.read(userRemoteServiceProvider).deleteUser();
+                          ref.read(authNotifierProvider.notifier).signOut();
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('YES'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('NO'),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
           ),
         ],

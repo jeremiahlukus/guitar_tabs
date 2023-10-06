@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 // Project imports:
@@ -43,6 +44,29 @@ class UserRemoteService {
     } on DioException catch (e) {
       if (e.isNoConnectionError) {
         return const RemoteResponse.noConnection();
+      } else if (e.response != null) {
+        throw RestApiException(e.response?.statusCode);
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  Future<Unit?> deleteUser() async {
+    final requestUri = Uri.https(
+      BackendConstants().backendBaseUrl(),
+      'api/v1/me',
+    );
+    try {
+      final response = await _dio.deleteUri<dynamic>(requestUri);
+      if (response.statusCode == 200) {
+        return unit;
+      } else {
+        throw RestApiException(response.statusCode);
+      }
+    } on DioException catch (e) {
+      if (e.isNoConnectionError) {
+        return null;
       } else if (e.response != null) {
         throw RestApiException(e.response?.statusCode);
       } else {
