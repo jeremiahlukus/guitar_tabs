@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:joyful_noise/auth/shared/providers.dart';
-import 'package:joyful_noise/backend/core/infrastructure/user_remote_service.dart';
-import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
-import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 // Project imports:
+import 'package:joyful_noise/auth/shared/providers.dart';
+import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 
 class SongDrawer extends ConsumerWidget {
