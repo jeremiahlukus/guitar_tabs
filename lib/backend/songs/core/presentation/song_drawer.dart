@@ -21,6 +21,8 @@ class SongDrawer extends ConsumerWidget {
   static const liederbuch = ValueKey('liederbuch');
   static const cantiques = ValueKey('cantiques');
   static const deleteUser = ValueKey('deleteUser');
+  static const noDeleteUser = ValueKey('noDeleteUser');
+  static const yesDeleteUser = ValueKey('yesDeleteUser');
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
@@ -99,6 +101,7 @@ class SongDrawer extends ConsumerWidget {
                     ),
                     actions: <Widget>[
                       TextButton(
+                        key: yesDeleteUser,
                         onPressed: () {
                           ref.read(userRemoteServiceProvider).deleteUser();
                           ref.read(authNotifierProvider.notifier).signOut();
@@ -107,6 +110,7 @@ class SongDrawer extends ConsumerWidget {
                         child: const Text('YES'),
                       ),
                       TextButton(
+                        key: noDeleteUser,
                         onPressed: () => Navigator.pop(context),
                         child: const Text('NO'),
                       ),

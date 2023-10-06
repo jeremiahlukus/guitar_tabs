@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:alchemist/alchemist.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
+import 'package:joyful_noise/backend/core/infrastructure/backend_headers_cache.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_remote_service.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
@@ -29,12 +32,23 @@ class MockPlaylistSongRepository extends Mock implements PlaylistSongsRepository
 
 class MockFavoriteSongRepository extends Mock implements FavoriteSongsRepository {}
 
+class MockUserRepository extends Mock implements UserRemoteService {}
+
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 class MockSearchHistoryRepository extends Mock implements SearchHistoryRepository {}
 
+class MockDio extends Mock implements Dio {}
+
+class MockBackendHeadersCache extends Mock implements BackendHeadersCache {}
+
+class MyTypeFake extends Mock implements Uri {}
+
 void main() {
   group('SongDrawer', () {
+    setUpAll(() {
+      registerFallbackValue(MyTypeFake());
+    });
     testWidgets('contains DrawerHeader', (tester) async {
       final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -312,6 +326,109 @@ void main() {
       await tester.tap(find.byKey(SongDrawer.cantiques));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Cantiques'), findsOneWidget);
+    });
+
+    testWidgets('taping on Delete Account opens AlertDialog', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final mockPlaylistSongRepository = MockPlaylistSongRepository();
+      final mockPlaylistProvider = PlaylistSongsNotifier(mockPlaylistSongRepository);
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockFavoriteProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      const playlistName = 'Cantiques';
+      when(() => mockPlaylistSongRepository.getPlaylistSong(1, playlistName))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      // ignore: invalid_use_of_protected_member
+      mockPlaylistProvider.state = mockPlaylistProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: invalid_use_of_protected_member
+      mockFavoriteProvider.state = mockFavoriteProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
+          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
+        ],
+        router,
+      );
+
+      await tester.pump(Duration.zero);
+      FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
+
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.byType(DrawerHeader), findsOneWidget);
+      await tester.tap(find.byKey(SongDrawer.deleteUser));
+      await tester.pumpAndSettle();
+      expect(router.currentUrl, '/favorite_songs');
+      expect(find.byType(AlertDialog), findsOneWidget);
+      await tester.tap(find.byKey(SongDrawer.noDeleteUser));
+      await tester.pumpAndSettle();
+      expect(find.byType(AlertDialog), findsNothing);
+    });
+
+    testWidgets('taping on Delete Account opens AlertDialog and deletes account', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final mockPlaylistSongRepository = MockPlaylistSongRepository();
+      final mockPlaylistProvider = PlaylistSongsNotifier(mockPlaylistSongRepository);
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockUserRepository = MockUserRepository();
+
+      final mockFavoriteProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      const playlistName = 'Cantiques';
+
+      when(mockUserRepository.deleteUser).thenAnswer((invocation) => Future.value(unit));
+
+      when(() => mockPlaylistSongRepository.getPlaylistSong(1, playlistName))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      // ignore: invalid_use_of_protected_member
+      mockPlaylistProvider.state = mockPlaylistProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: invalid_use_of_protected_member
+      mockFavoriteProvider.state = mockFavoriteProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          userRemoteServiceProvider.overrideWith((ref) => mockUserRepository),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
+          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
+        ],
+        router,
+      );
+
+      await tester.pump(Duration.zero);
+      FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
+
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.byType(DrawerHeader), findsOneWidget);
+      await tester.tap(find.byKey(SongDrawer.deleteUser));
+      await tester.pumpAndSettle();
+      expect(router.currentUrl, '/favorite_songs');
+      expect(find.byType(AlertDialog), findsOneWidget);
+      await tester.tap(find.byKey(SongDrawer.yesDeleteUser));
+      await tester.pumpAndSettle();
+      expect(find.byType(AlertDialog), findsNothing);
+      expect(router.currentUrl, '/favorite_songs');
     });
   });
 

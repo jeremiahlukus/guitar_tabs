@@ -2,6 +2,7 @@
 import 'dart:io';
 
 // Package imports:
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -25,6 +26,108 @@ void main() {
     registerFallbackValue(const BackendHeaders());
   });
   group('UserRemoteService', () {
+    group('deleteUser', () {
+      test('returns Unit when response status code is 200 ', () async {
+        final Dio mockDio = MockDio();
+        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
+
+        when(
+          () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenAnswer(
+          (invocation) => Future.value(
+            Response<dynamic>(
+              requestOptions: RequestOptions(),
+              statusCode: 200,
+            ),
+          ),
+        );
+
+        final userRemoteService = UserRemoteService(mockDio, mockBackendHeadersCache);
+
+        final actualResult = await userRemoteService.deleteUser();
+
+        expect(actualResult, isA<Unit>());
+      });
+      test('returns RestApiException when response status code is not 200 ', () async {
+        final Dio mockDio = MockDio();
+        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
+
+        when(
+          () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenAnswer(
+          (invocation) => Future.value(
+            Response<dynamic>(
+              requestOptions: RequestOptions(),
+              statusCode: 401,
+            ),
+          ),
+        );
+
+        final userRemoteService = UserRemoteService(mockDio, mockBackendHeadersCache);
+        try {
+          await userRemoteService.deleteUser();
+          // if it gets here fail test
+          throw Error();
+        } catch (e) {
+          expect(e, isA<RestApiException>());
+        }
+      });
+
+      test('returns RestApiException when response is not null ', () async {
+        final Dio mockDio = MockDio();
+        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
+
+        when(
+          () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenThrow(
+          DioException(
+            response: Response<dynamic>(
+              data: {'error': 'error'},
+              requestOptions: RequestOptions(),
+              statusCode: 401,
+            ),
+            requestOptions: RequestOptions(),
+            error: DioException.badResponse(
+              statusCode: 401,
+              requestOptions: RequestOptions(),
+              response: Response<dynamic>(
+                data: {'error': 'error'},
+                requestOptions: RequestOptions(),
+                statusCode: 401,
+              ),
+            ),
+          ),
+        );
+
+        final userRemoteService = UserRemoteService(mockDio, mockBackendHeadersCache);
+        try {
+          await userRemoteService.deleteUser();
+          // if it gets here fail test
+          throw Error();
+        } catch (e) {
+          expect(e, isA<RestApiException>());
+        }
+      });
+
+      test('returns null when no connection', () async {
+        final Dio mockDio = MockDio();
+        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
+
+        when(
+          () => mockDio.deleteUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenThrow(
+          DioException(
+            requestOptions: RequestOptions(),
+            error: const SocketException(''),
+          ),
+        );
+
+        final userRemoteService = UserRemoteService(mockDio, mockBackendHeadersCache);
+
+        final actualResult = await userRemoteService.deleteUser();
+        expect(actualResult, null);
+      });
+    });
     group('.getUserDetails', () {
       test('returns RemoteResponse.notModified when response status code is 304 ', () async {
         final Dio mockDio = MockDio();
