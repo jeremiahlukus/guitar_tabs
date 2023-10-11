@@ -19,6 +19,37 @@ class MockUserLocalService extends Mock implements UserLocalService {}
 
 void main() {
   group('UserRepository', () {
+    group('.deleteUser', () {
+      test('returns Left<BackendFailure, Unit> on RestApiException', () async {
+        final UserRemoteService mockUserRemoteService = MockUserRemoteService();
+        final UserLocalService mockUserLocalService = MockUserLocalService();
+
+        when(mockUserRemoteService.deleteUser).thenThrow(RestApiException(400));
+
+        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
+
+        final actualResult = await userRepository.deleteUser();
+        final expectedResult = isA<Left<BackendFailure, Unit>>();
+
+        expect(actualResult, expectedResult);
+      });
+
+      test('returns Right<BackendFailure, Unit> when UserRemoteService returns Unit', () async {
+        final UserRemoteService mockUserRemoteService = MockUserRemoteService();
+        final UserLocalService mockUserLocalService = MockUserLocalService();
+
+        when(mockUserRemoteService.deleteUser).thenAnswer((_) {
+          return Future.value();
+        });
+
+        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
+
+        final actualResult = await userRepository.deleteUser();
+        final expectedResult = isA<Right<BackendFailure, Unit>>();
+
+        expect(actualResult, expectedResult);
+      });
+    });
     group('.getUserPage', () {
       test('returns Left<BackendFailure, User> on RestApiException', () async {
         final UserRemoteService mockUserRemoteService = MockUserRemoteService();

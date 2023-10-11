@@ -31,4 +31,13 @@ class UserRepository {
       return left(BackendFailure.api(e.errorCode, null));
     }
   }
+
+  Future<Either<BackendFailure, Unit>> deleteUser() async {
+    try {
+      await _userRemoteService.deleteUser();
+      return right(unit);
+    } on RestApiException catch (e) {
+      return left(BackendFailure.api(e.errorCode, null));
+    }
+  }
 }

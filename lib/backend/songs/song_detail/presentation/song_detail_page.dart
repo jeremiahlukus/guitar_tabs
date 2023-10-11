@@ -13,6 +13,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:newrelic_mobile/newrelic_mobile.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
@@ -20,6 +21,17 @@ import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/song_detail/presentation/audio_control_buttons.dart';
 import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio.dart';
 import 'package:joyful_noise/core/presentation/bootstrap.dart';
+
+/// Encode [params] so it produces a correct query string.
+/// Workaround for: https://github.com/dart-lang/sdk/issues/43838
+
+// coverage:ignore-start
+String? encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((MapEntry<String, String> e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
+}
+// coverage:ignore-end
 
 class SongDetailPage extends ConsumerStatefulWidget {
   final Song song;
@@ -38,6 +50,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   int transposeIncrement = 0;
   int scrollSpeed = 0;
   int scrollSpeedUI = 0;
+  bool hideChords = false;
   final _player = AudioPlayer();
 
   @visibleForTesting
@@ -53,6 +66,9 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
 
   @visibleForTesting
   static const favoriteKey = ValueKey('favorite');
+
+  @visibleForTesting
+  static const hideChordsKey = ValueKey('hideTextKey');
 
   @override
   void initState() {
@@ -113,6 +129,24 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(songDetailNotifierProvider);
+    // Not going to test url launcher
+    // coverage:ignore-start
+    void composeMail() {
+      final emailLaunchUri = Uri(
+        scheme: 'mailto',
+        path: 'jeremiahlukus1@gmail.com',
+        query: encodeQueryParameters(
+          <String, String>{
+            'subject': 'Joyful Noise | Song ID: ${widget.song.id}',
+            'body':
+                'Please X a box: \nIncorect Chords[]\n  Incorrect Song Url[]\n Incorrect Lyrics[]\n Other[] \n\n Song url: ${widget.song.url} \n\n Lyrics:  ${widget.song.lyrics}',
+          },
+        ),
+      );
+      launchUrl(emailLaunchUri);
+    }
+
+    // coverage:ignore-end
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
@@ -121,6 +155,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
           Row(
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
                     children: [
@@ -200,9 +235,8 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   ),
                 ),
                 loadSuccess: (state) {
-                  return ElevatedButton.icon(
+                  return IconButton(
                     key: favoriteKey,
-                    label: const Text('Fav'),
                     onPressed: !state.songDetail.isFresh
                         ? null
                         : () {
@@ -230,10 +264,17 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 child: LyricsRenderer(
+                  trailingWidget: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: ElevatedButton(
+                      onPressed: composeMail,
+                      child: const Text('Suggest Changes'),
+                    ),
+                  ),
                   widgetPadding: 50,
                   lyrics: widget.song.lyrics,
                   textStyle: Theme.of(context).textTheme.bodyMedium!,
-                  chordStyle: Theme.of(context).textTheme.titleSmall!,
+                  chordStyle: !hideChords ? Theme.of(context).textTheme.labelSmall! : const TextStyle(fontSize: 0),
                   onTapChord: (String chord) async {
                     final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
                     if (tabs!.isNotEmpty && tabs.first != '') {
@@ -275,6 +316,15 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   horizontalAlignment: CrossAxisAlignment.start,
                   leadingWidget: Column(
                     children: [
+                      ElevatedButton(
+                        key: hideChordsKey,
+                        onPressed: () {
+                          setState(() {
+                            hideChords = !hideChords;
+                          });
+                        },
+                        child: const Text('Hide Chords'),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           vertical: 16,
