@@ -301,10 +301,6 @@ void main() {
         ),
         findsWidgets,
       );
-
-      await tester.tap(find.byKey(SongDetailPageState.hideChordsKey));
-      await tester.pumpAndSettle();
-
       double effectiveFontSize(RichText text) => text.textScaleFactor * text.text.style!.fontSize!;
       final text = tester.widget<RichText>(
         find
@@ -314,7 +310,19 @@ void main() {
             )
             .first,
       );
-      expect(effectiveFontSize(text), 0);
+      expect(effectiveFontSize(text), isNot(0));
+      await tester.tap(find.byKey(SongDetailPageState.hideChordsKey));
+      await tester.pumpAndSettle();
+
+      final newText = tester.widget<RichText>(
+        find
+            .textContaining(
+              'D7',
+              findRichText: true,
+            )
+            .first,
+      );
+      expect(effectiveFontSize(newText), 0);
     });
 
     testWidgets('taping on favorite button favorites song', (tester) async {
