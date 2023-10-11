@@ -305,7 +305,7 @@ void main() {
       await tester.tap(find.byKey(SongDetailPageState.hideChordsKey));
       await tester.pumpAndSettle();
 
-      double effectiveFontSize(RichText text) => (text.textScaleFactor ?? 1) * text.text.style!.fontSize!;
+      double effectiveFontSize(RichText text) => text.textScaleFactor * text.text.style!.fontSize!;
       final text = tester.widget<RichText>(
         find
             .textContaining(
