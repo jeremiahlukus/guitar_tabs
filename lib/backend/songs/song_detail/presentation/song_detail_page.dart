@@ -134,14 +134,15 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
         query: encodeQueryParameters(
           <String, String>{
             'subject': 'Joyful Noise | Song ID: ${widget.song.id}',
-            'body': 'Lyrics:  ${widget.song.lyrics}',
+            'body':
+                'Please X a box: \nIncorect Chords[]\n  Incorrect Song Url[]\n Incorrect Lyrics[]\n Other[] \n\n Song url: ${widget.song.url} \n\n Lyrics:  ${widget.song.lyrics}',
           },
         ),
       );
       launchUrl(emailLaunchUri);
     }
-    // coverage:ignore-end
 
+    // coverage:ignore-end
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
