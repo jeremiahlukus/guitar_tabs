@@ -50,6 +50,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   int transposeIncrement = 0;
   int scrollSpeed = 0;
   int scrollSpeedUI = 0;
+  bool hideChords = false;
   final _player = AudioPlayer();
 
   @visibleForTesting
@@ -65,6 +66,9 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
 
   @visibleForTesting
   static const favoriteKey = ValueKey('favorite');
+
+  @visibleForTesting
+  static const hideChordsKey = ValueKey('hideTextKey');
 
   @override
   void initState() {
@@ -151,6 +155,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
           Row(
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
                     children: [
@@ -230,9 +235,8 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   ),
                 ),
                 loadSuccess: (state) {
-                  return ElevatedButton.icon(
+                  return IconButton(
                     key: favoriteKey,
-                    label: const Text('Fav'),
                     onPressed: !state.songDetail.isFresh
                         ? null
                         : () {
@@ -270,7 +274,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   widgetPadding: 50,
                   lyrics: widget.song.lyrics,
                   textStyle: Theme.of(context).textTheme.bodyMedium!,
-                  chordStyle: Theme.of(context).textTheme.titleSmall!,
+                  chordStyle: !hideChords ? Theme.of(context).textTheme.labelSmall! : const TextStyle(fontSize: 0),
                   onTapChord: (String chord) async {
                     final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
                     if (tabs!.isNotEmpty && tabs.first != '') {
@@ -312,6 +316,15 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   horizontalAlignment: CrossAxisAlignment.start,
                   leadingWidget: Column(
                     children: [
+                      ElevatedButton(
+                        key: hideChordsKey,
+                        onPressed: () {
+                          setState(() {
+                            hideChords = !hideChords;
+                          });
+                        },
+                        child: const Text('Hide Chords'),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           vertical: 16,
