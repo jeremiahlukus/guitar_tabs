@@ -13,6 +13,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:newrelic_mobile/newrelic_mobile.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
@@ -20,7 +21,6 @@ import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/song_detail/presentation/audio_control_buttons.dart';
 import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio.dart';
 import 'package:joyful_noise/core/presentation/bootstrap.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 /// Encode [params] so it produces a correct query string.
 /// Workaround for: https://github.com/dart-lang/sdk/issues/43838
