@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:alchemist/alchemist.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -99,7 +100,7 @@ Widget buildWidgetUnderTest() {
     child: MaterialApp.router(
       routeInformationParser: router.defaultRouteParser(),
       routerDelegate: router.delegate(
-        initialDeepLink: FavoriteSongsRoute.name,
+        deepLinkBuilder: (_) => const DeepLink.path(FavoriteSongsRoute.name),
       ),
     ),
   );
