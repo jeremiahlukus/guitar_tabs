@@ -3,6 +3,7 @@ import 'dart:io';
 
 // Package imports:
 import 'package:dartz/dartz.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
@@ -13,7 +14,6 @@ import 'package:joyful_noise/backend/songs/searched_songs/infrastructure/searche
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/presentation/bootstrap.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 class SearchedSongsRepository {
   final SearchedSongsRemoteService _remoteService;

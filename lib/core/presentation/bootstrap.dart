@@ -9,10 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/core/infrastructure/provider_logger.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Flutter imports:
 

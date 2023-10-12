@@ -43,7 +43,7 @@ class FakeUserNotifier extends UserNotifier {
   @override
   Future<void> getUserPage() async {
     state = const UserState.loadSuccess(
-      User(id: 0,email: 'hey@hey.com'),
+      User(id: 0, email: 'hey@hey.com'),
     );
     return;
   }

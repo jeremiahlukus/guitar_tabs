@@ -20,22 +20,19 @@ mixin _$SongDetail {
   String get songId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SongDetailCopyWith<SongDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  $SongDetailCopyWith<SongDetail> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SongDetailCopyWith<$Res> {
-  factory $SongDetailCopyWith(
-          SongDetail value, $Res Function(SongDetail) then) =
+  factory $SongDetailCopyWith(SongDetail value, $Res Function(SongDetail) then) =
       _$SongDetailCopyWithImpl<$Res, SongDetail>;
   @useResult
   $Res call({bool isFavorite, String songId});
 }
 
 /// @nodoc
-class _$SongDetailCopyWithImpl<$Res, $Val extends SongDetail>
-    implements $SongDetailCopyWith<$Res> {
+class _$SongDetailCopyWithImpl<$Res, $Val extends SongDetail> implements $SongDetailCopyWith<$Res> {
   _$SongDetailCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -63,10 +60,8 @@ class _$SongDetailCopyWithImpl<$Res, $Val extends SongDetail>
 }
 
 /// @nodoc
-abstract class _$$SongDetailImplCopyWith<$Res>
-    implements $SongDetailCopyWith<$Res> {
-  factory _$$SongDetailImplCopyWith(
-          _$SongDetailImpl value, $Res Function(_$SongDetailImpl) then) =
+abstract class _$$SongDetailImplCopyWith<$Res> implements $SongDetailCopyWith<$Res> {
+  factory _$$SongDetailImplCopyWith(_$SongDetailImpl value, $Res Function(_$SongDetailImpl) then) =
       __$$SongDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -74,12 +69,9 @@ abstract class _$$SongDetailImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SongDetailImplCopyWithImpl<$Res>
-    extends _$SongDetailCopyWithImpl<$Res, _$SongDetailImpl>
+class __$$SongDetailImplCopyWithImpl<$Res> extends _$SongDetailCopyWithImpl<$Res, _$SongDetailImpl>
     implements _$$SongDetailImplCopyWith<$Res> {
-  __$$SongDetailImplCopyWithImpl(
-      _$SongDetailImpl _value, $Res Function(_$SongDetailImpl) _then)
-      : super(_value, _then);
+  __$$SongDetailImplCopyWithImpl(_$SongDetailImpl _value, $Res Function(_$SongDetailImpl) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -103,8 +95,7 @@ class __$$SongDetailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SongDetailImpl extends _SongDetail {
-  const _$SongDetailImpl({required this.isFavorite, required this.songId})
-      : super._();
+  const _$SongDetailImpl({required this.isFavorite, required this.songId}) : super._();
 
   @override
   final bool isFavorite;
@@ -121,8 +112,7 @@ class _$SongDetailImpl extends _SongDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SongDetailImpl &&
-            (identical(other.isFavorite, isFavorite) ||
-                other.isFavorite == isFavorite) &&
+            (identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite) &&
             (identical(other.songId, songId) || other.songId == songId));
   }
 
@@ -137,9 +127,7 @@ class _$SongDetailImpl extends _SongDetail {
 }
 
 abstract class _SongDetail extends SongDetail {
-  const factory _SongDetail(
-      {required final bool isFavorite,
-      required final String songId}) = _$SongDetailImpl;
+  const factory _SongDetail({required final bool isFavorite, required final String songId}) = _$SongDetailImpl;
   const _SongDetail._() : super._();
 
   @override
@@ -148,6 +136,5 @@ abstract class _SongDetail extends SongDetail {
   String get songId;
   @override
   @JsonKey(ignore: true)
-  _$$SongDetailImplCopyWith<_$SongDetailImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SongDetailImplCopyWith<_$SongDetailImpl> get copyWith => throw _privateConstructorUsedError;
 }

@@ -8,13 +8,13 @@ import 'package:dio/dio.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 final initializationProvider = FutureProvider<Unit>(
   (ref) async {

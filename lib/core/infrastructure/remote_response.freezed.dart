@@ -64,8 +64,7 @@ mixin _$RemoteResponse<T> {
 
 /// @nodoc
 abstract class $RemoteResponseCopyWith<T, $Res> {
-  factory $RemoteResponseCopyWith(
-          RemoteResponse<T> value, $Res Function(RemoteResponse<T>) then) =
+  factory $RemoteResponseCopyWith(RemoteResponse<T> value, $Res Function(RemoteResponse<T>) then) =
       _$RemoteResponseCopyWithImpl<T, $Res, RemoteResponse<T>>;
 }
 
@@ -82,17 +81,14 @@ class _$RemoteResponseCopyWithImpl<T, $Res, $Val extends RemoteResponse<T>>
 
 /// @nodoc
 abstract class _$$NoConnectionImplCopyWith<T, $Res> {
-  factory _$$NoConnectionImplCopyWith(_$NoConnectionImpl<T> value,
-          $Res Function(_$NoConnectionImpl<T>) then) =
+  factory _$$NoConnectionImplCopyWith(_$NoConnectionImpl<T> value, $Res Function(_$NoConnectionImpl<T>) then) =
       __$$NoConnectionImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$NoConnectionImplCopyWithImpl<T, $Res>
-    extends _$RemoteResponseCopyWithImpl<T, $Res, _$NoConnectionImpl<T>>
+class __$$NoConnectionImplCopyWithImpl<T, $Res> extends _$RemoteResponseCopyWithImpl<T, $Res, _$NoConnectionImpl<T>>
     implements _$$NoConnectionImplCopyWith<T, $Res> {
-  __$$NoConnectionImplCopyWithImpl(
-      _$NoConnectionImpl<T> _value, $Res Function(_$NoConnectionImpl<T>) _then)
+  __$$NoConnectionImplCopyWithImpl(_$NoConnectionImpl<T> _value, $Res Function(_$NoConnectionImpl<T>) _then)
       : super(_value, _then);
 }
 
@@ -108,8 +104,7 @@ class _$NoConnectionImpl<T> extends _NoConnection<T> {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NoConnectionImpl<T>);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$NoConnectionImpl<T>);
   }
 
   @override
@@ -191,19 +186,16 @@ abstract class _NoConnection<T> extends RemoteResponse<T> {
 
 /// @nodoc
 abstract class _$$NotModifiedImplCopyWith<T, $Res> {
-  factory _$$NotModifiedImplCopyWith(_$NotModifiedImpl<T> value,
-          $Res Function(_$NotModifiedImpl<T>) then) =
+  factory _$$NotModifiedImplCopyWith(_$NotModifiedImpl<T> value, $Res Function(_$NotModifiedImpl<T>) then) =
       __$$NotModifiedImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({int? maxPage});
 }
 
 /// @nodoc
-class __$$NotModifiedImplCopyWithImpl<T, $Res>
-    extends _$RemoteResponseCopyWithImpl<T, $Res, _$NotModifiedImpl<T>>
+class __$$NotModifiedImplCopyWithImpl<T, $Res> extends _$RemoteResponseCopyWithImpl<T, $Res, _$NotModifiedImpl<T>>
     implements _$$NotModifiedImplCopyWith<T, $Res> {
-  __$$NotModifiedImplCopyWithImpl(
-      _$NotModifiedImpl<T> _value, $Res Function(_$NotModifiedImpl<T>) _then)
+  __$$NotModifiedImplCopyWithImpl(_$NotModifiedImpl<T> _value, $Res Function(_$NotModifiedImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -248,8 +240,7 @@ class _$NotModifiedImpl<T> extends _NotModified<T> {
   @override
   @pragma('vm:prefer-inline')
   _$$NotModifiedImplCopyWith<T, _$NotModifiedImpl<T>> get copyWith =>
-      __$$NotModifiedImplCopyWithImpl<T, _$NotModifiedImpl<T>>(
-          this, _$identity);
+      __$$NotModifiedImplCopyWithImpl<T, _$NotModifiedImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -326,25 +317,21 @@ abstract class _NotModified<T> extends RemoteResponse<T> {
 
   int? get maxPage;
   @JsonKey(ignore: true)
-  _$$NotModifiedImplCopyWith<T, _$NotModifiedImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$NotModifiedImplCopyWith<T, _$NotModifiedImpl<T>> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$WithNewDataImplCopyWith<T, $Res> {
-  factory _$$WithNewDataImplCopyWith(_$WithNewDataImpl<T> value,
-          $Res Function(_$WithNewDataImpl<T>) then) =
+  factory _$$WithNewDataImplCopyWith(_$WithNewDataImpl<T> value, $Res Function(_$WithNewDataImpl<T>) then) =
       __$$WithNewDataImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({T data, int? maxPage});
 }
 
 /// @nodoc
-class __$$WithNewDataImplCopyWithImpl<T, $Res>
-    extends _$RemoteResponseCopyWithImpl<T, $Res, _$WithNewDataImpl<T>>
+class __$$WithNewDataImplCopyWithImpl<T, $Res> extends _$RemoteResponseCopyWithImpl<T, $Res, _$WithNewDataImpl<T>>
     implements _$$WithNewDataImplCopyWith<T, $Res> {
-  __$$WithNewDataImplCopyWithImpl(
-      _$WithNewDataImpl<T> _value, $Res Function(_$WithNewDataImpl<T>) _then)
+  __$$WithNewDataImplCopyWithImpl(_$WithNewDataImpl<T> _value, $Res Function(_$WithNewDataImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -391,15 +378,13 @@ class _$WithNewDataImpl<T> extends _WithNewData<T> {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(data), maxPage);
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(data), maxPage);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$WithNewDataImplCopyWith<T, _$WithNewDataImpl<T>> get copyWith =>
-      __$$WithNewDataImplCopyWithImpl<T, _$WithNewDataImpl<T>>(
-          this, _$identity);
+      __$$WithNewDataImplCopyWithImpl<T, _$WithNewDataImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -471,13 +456,11 @@ class _$WithNewDataImpl<T> extends _WithNewData<T> {
 }
 
 abstract class _WithNewData<T> extends RemoteResponse<T> {
-  const factory _WithNewData(final T data, {final int? maxPage}) =
-      _$WithNewDataImpl<T>;
+  const factory _WithNewData(final T data, {final int? maxPage}) = _$WithNewDataImpl<T>;
   const _WithNewData._() : super._();
 
   T get data;
   int? get maxPage;
   @JsonKey(ignore: true)
-  _$$WithNewDataImplCopyWith<T, _$WithNewDataImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$WithNewDataImplCopyWith<T, _$WithNewDataImpl<T>> get copyWith => throw _privateConstructorUsedError;
 }

@@ -6,14 +6,14 @@ import 'package:alchemist/alchemist.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:joyful_noise/backend/core/domain/user.dart';
-import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
-import 'package:joyful_noise/backend/core/notifiers/user_notifier.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
+import 'package:joyful_noise/backend/core/domain/user.dart';
 import 'package:joyful_noise/backend/core/infrastructure/backend_headers_cache.dart';
 import 'package:joyful_noise/backend/core/infrastructure/user_remote_service.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
+import 'package:joyful_noise/backend/core/notifiers/user_notifier.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
 import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorite_songs_repository.dart';
