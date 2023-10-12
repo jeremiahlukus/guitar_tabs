@@ -25,12 +25,14 @@ mixin _$BackendHeaders {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $BackendHeadersCopyWith<BackendHeaders> get copyWith => throw _privateConstructorUsedError;
+  $BackendHeadersCopyWith<BackendHeaders> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $BackendHeadersCopyWith<$Res> {
-  factory $BackendHeadersCopyWith(BackendHeaders value, $Res Function(BackendHeaders) then) =
+  factory $BackendHeadersCopyWith(
+          BackendHeaders value, $Res Function(BackendHeaders) then) =
       _$BackendHeadersCopyWithImpl<$Res, BackendHeaders>;
   @useResult
   $Res call({String? etag, PaginationLink? link});
@@ -39,7 +41,8 @@ abstract class $BackendHeadersCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BackendHeadersCopyWithImpl<$Res, $Val extends BackendHeaders> implements $BackendHeadersCopyWith<$Res> {
+class _$BackendHeadersCopyWithImpl<$Res, $Val extends BackendHeaders>
+    implements $BackendHeadersCopyWith<$Res> {
   _$BackendHeadersCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -79,8 +82,10 @@ class _$BackendHeadersCopyWithImpl<$Res, $Val extends BackendHeaders> implements
 }
 
 /// @nodoc
-abstract class _$$BackendHeadersImplCopyWith<$Res> implements $BackendHeadersCopyWith<$Res> {
-  factory _$$BackendHeadersImplCopyWith(_$BackendHeadersImpl value, $Res Function(_$BackendHeadersImpl) then) =
+abstract class _$$BackendHeadersImplCopyWith<$Res>
+    implements $BackendHeadersCopyWith<$Res> {
+  factory _$$BackendHeadersImplCopyWith(_$BackendHeadersImpl value,
+          $Res Function(_$BackendHeadersImpl) then) =
       __$$BackendHeadersImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -91,9 +96,11 @@ abstract class _$$BackendHeadersImplCopyWith<$Res> implements $BackendHeadersCop
 }
 
 /// @nodoc
-class __$$BackendHeadersImplCopyWithImpl<$Res> extends _$BackendHeadersCopyWithImpl<$Res, _$BackendHeadersImpl>
+class __$$BackendHeadersImplCopyWithImpl<$Res>
+    extends _$BackendHeadersCopyWithImpl<$Res, _$BackendHeadersImpl>
     implements _$$BackendHeadersImplCopyWith<$Res> {
-  __$$BackendHeadersImplCopyWithImpl(_$BackendHeadersImpl _value, $Res Function(_$BackendHeadersImpl) _then)
+  __$$BackendHeadersImplCopyWithImpl(
+      _$BackendHeadersImpl _value, $Res Function(_$BackendHeadersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -121,7 +128,8 @@ class __$$BackendHeadersImplCopyWithImpl<$Res> extends _$BackendHeadersCopyWithI
 class _$BackendHeadersImpl extends _BackendHeaders {
   const _$BackendHeadersImpl({this.etag, this.link}) : super._();
 
-  factory _$BackendHeadersImpl.fromJson(Map<String, dynamic> json) => _$$BackendHeadersImplFromJson(json);
+  factory _$BackendHeadersImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BackendHeadersImplFromJson(json);
 
   @override
   final String? etag;
@@ -150,7 +158,8 @@ class _$BackendHeadersImpl extends _BackendHeaders {
   @override
   @pragma('vm:prefer-inline')
   _$$BackendHeadersImplCopyWith<_$BackendHeadersImpl> get copyWith =>
-      __$$BackendHeadersImplCopyWithImpl<_$BackendHeadersImpl>(this, _$identity);
+      __$$BackendHeadersImplCopyWithImpl<_$BackendHeadersImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -161,10 +170,12 @@ class _$BackendHeadersImpl extends _BackendHeaders {
 }
 
 abstract class _BackendHeaders extends BackendHeaders {
-  const factory _BackendHeaders({final String? etag, final PaginationLink? link}) = _$BackendHeadersImpl;
+  const factory _BackendHeaders(
+      {final String? etag, final PaginationLink? link}) = _$BackendHeadersImpl;
   const _BackendHeaders._() : super._();
 
-  factory _BackendHeaders.fromJson(Map<String, dynamic> json) = _$BackendHeadersImpl.fromJson;
+  factory _BackendHeaders.fromJson(Map<String, dynamic> json) =
+      _$BackendHeadersImpl.fromJson;
 
   @override
   String? get etag;
@@ -172,7 +183,8 @@ abstract class _BackendHeaders extends BackendHeaders {
   PaginationLink? get link;
   @override
   @JsonKey(ignore: true)
-  _$$BackendHeadersImplCopyWith<_$BackendHeadersImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$BackendHeadersImplCopyWith<_$BackendHeadersImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 PaginationLink _$PaginationLinkFromJson(Map<String, dynamic> json) {
@@ -185,19 +197,22 @@ mixin _$PaginationLink {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PaginationLinkCopyWith<PaginationLink> get copyWith => throw _privateConstructorUsedError;
+  $PaginationLinkCopyWith<PaginationLink> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PaginationLinkCopyWith<$Res> {
-  factory $PaginationLinkCopyWith(PaginationLink value, $Res Function(PaginationLink) then) =
+  factory $PaginationLinkCopyWith(
+          PaginationLink value, $Res Function(PaginationLink) then) =
       _$PaginationLinkCopyWithImpl<$Res, PaginationLink>;
   @useResult
   $Res call({int maxPage});
 }
 
 /// @nodoc
-class _$PaginationLinkCopyWithImpl<$Res, $Val extends PaginationLink> implements $PaginationLinkCopyWith<$Res> {
+class _$PaginationLinkCopyWithImpl<$Res, $Val extends PaginationLink>
+    implements $PaginationLinkCopyWith<$Res> {
   _$PaginationLinkCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -220,8 +235,10 @@ class _$PaginationLinkCopyWithImpl<$Res, $Val extends PaginationLink> implements
 }
 
 /// @nodoc
-abstract class _$$PaginationLinkImplCopyWith<$Res> implements $PaginationLinkCopyWith<$Res> {
-  factory _$$PaginationLinkImplCopyWith(_$PaginationLinkImpl value, $Res Function(_$PaginationLinkImpl) then) =
+abstract class _$$PaginationLinkImplCopyWith<$Res>
+    implements $PaginationLinkCopyWith<$Res> {
+  factory _$$PaginationLinkImplCopyWith(_$PaginationLinkImpl value,
+          $Res Function(_$PaginationLinkImpl) then) =
       __$$PaginationLinkImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -229,9 +246,11 @@ abstract class _$$PaginationLinkImplCopyWith<$Res> implements $PaginationLinkCop
 }
 
 /// @nodoc
-class __$$PaginationLinkImplCopyWithImpl<$Res> extends _$PaginationLinkCopyWithImpl<$Res, _$PaginationLinkImpl>
+class __$$PaginationLinkImplCopyWithImpl<$Res>
+    extends _$PaginationLinkCopyWithImpl<$Res, _$PaginationLinkImpl>
     implements _$$PaginationLinkImplCopyWith<$Res> {
-  __$$PaginationLinkImplCopyWithImpl(_$PaginationLinkImpl _value, $Res Function(_$PaginationLinkImpl) _then)
+  __$$PaginationLinkImplCopyWithImpl(
+      _$PaginationLinkImpl _value, $Res Function(_$PaginationLinkImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -253,7 +272,8 @@ class __$$PaginationLinkImplCopyWithImpl<$Res> extends _$PaginationLinkCopyWithI
 class _$PaginationLinkImpl extends _PaginationLink {
   const _$PaginationLinkImpl({required this.maxPage}) : super._();
 
-  factory _$PaginationLinkImpl.fromJson(Map<String, dynamic> json) => _$$PaginationLinkImplFromJson(json);
+  factory _$PaginationLinkImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaginationLinkImplFromJson(json);
 
   @override
   final int maxPage;
@@ -279,7 +299,8 @@ class _$PaginationLinkImpl extends _PaginationLink {
   @override
   @pragma('vm:prefer-inline')
   _$$PaginationLinkImplCopyWith<_$PaginationLinkImpl> get copyWith =>
-      __$$PaginationLinkImplCopyWithImpl<_$PaginationLinkImpl>(this, _$identity);
+      __$$PaginationLinkImplCopyWithImpl<_$PaginationLinkImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -290,14 +311,17 @@ class _$PaginationLinkImpl extends _PaginationLink {
 }
 
 abstract class _PaginationLink extends PaginationLink {
-  const factory _PaginationLink({required final int maxPage}) = _$PaginationLinkImpl;
+  const factory _PaginationLink({required final int maxPage}) =
+      _$PaginationLinkImpl;
   const _PaginationLink._() : super._();
 
-  factory _PaginationLink.fromJson(Map<String, dynamic> json) = _$PaginationLinkImpl.fromJson;
+  factory _PaginationLink.fromJson(Map<String, dynamic> json) =
+      _$PaginationLinkImpl.fromJson;
 
   @override
   int get maxPage;
   @override
   @JsonKey(ignore: true)
-  _$$PaginationLinkImplCopyWith<_$PaginationLinkImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$PaginationLinkImplCopyWith<_$PaginationLinkImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

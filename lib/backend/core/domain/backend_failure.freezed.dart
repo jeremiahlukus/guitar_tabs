@@ -52,19 +52,22 @@ mixin _$BackendFailure {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $BackendFailureCopyWith<BackendFailure> get copyWith => throw _privateConstructorUsedError;
+  $BackendFailureCopyWith<BackendFailure> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $BackendFailureCopyWith<$Res> {
-  factory $BackendFailureCopyWith(BackendFailure value, $Res Function(BackendFailure) then) =
+  factory $BackendFailureCopyWith(
+          BackendFailure value, $Res Function(BackendFailure) then) =
       _$BackendFailureCopyWithImpl<$Res, BackendFailure>;
   @useResult
   $Res call({int? errorCode, String? message});
 }
 
 /// @nodoc
-class _$BackendFailureCopyWithImpl<$Res, $Val extends BackendFailure> implements $BackendFailureCopyWith<$Res> {
+class _$BackendFailureCopyWithImpl<$Res, $Val extends BackendFailure>
+    implements $BackendFailureCopyWith<$Res> {
   _$BackendFailureCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -92,17 +95,21 @@ class _$BackendFailureCopyWithImpl<$Res, $Val extends BackendFailure> implements
 }
 
 /// @nodoc
-abstract class _$$ApiImplCopyWith<$Res> implements $BackendFailureCopyWith<$Res> {
-  factory _$$ApiImplCopyWith(_$ApiImpl value, $Res Function(_$ApiImpl) then) = __$$ApiImplCopyWithImpl<$Res>;
+abstract class _$$ApiImplCopyWith<$Res>
+    implements $BackendFailureCopyWith<$Res> {
+  factory _$$ApiImplCopyWith(_$ApiImpl value, $Res Function(_$ApiImpl) then) =
+      __$$ApiImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? errorCode, String? message});
 }
 
 /// @nodoc
-class __$$ApiImplCopyWithImpl<$Res> extends _$BackendFailureCopyWithImpl<$Res, _$ApiImpl>
+class __$$ApiImplCopyWithImpl<$Res>
+    extends _$BackendFailureCopyWithImpl<$Res, _$ApiImpl>
     implements _$$ApiImplCopyWith<$Res> {
-  __$$ApiImplCopyWithImpl(_$ApiImpl _value, $Res Function(_$ApiImpl) _then) : super(_value, _then);
+  __$$ApiImplCopyWithImpl(_$ApiImpl _value, $Res Function(_$ApiImpl) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -143,7 +150,8 @@ class _$ApiImpl extends _Api {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ApiImpl &&
-            (identical(other.errorCode, errorCode) || other.errorCode == errorCode) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -153,7 +161,8 @@ class _$ApiImpl extends _Api {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ApiImplCopyWith<_$ApiImpl> get copyWith => __$$ApiImplCopyWithImpl<_$ApiImpl>(this, _$identity);
+  _$$ApiImplCopyWith<_$ApiImpl> get copyWith =>
+      __$$ApiImplCopyWithImpl<_$ApiImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -222,5 +231,6 @@ abstract class _Api extends BackendFailure {
   String? get message;
   @override
   @JsonKey(ignore: true)
-  _$$ApiImplCopyWith<_$ApiImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$ApiImplCopyWith<_$ApiImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

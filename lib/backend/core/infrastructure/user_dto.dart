@@ -11,26 +11,22 @@ part 'user_dto.g.dart';
 class UserDTO with _$UserDTO {
   const UserDTO._();
   const factory UserDTO({
-    required String name,
+    required int id,
     required String email,
-    // ignore: invalid_annotation_target
-    @JsonKey(name: 'avatar_url') required String avatarUrl,
   }) = _UserDTO;
 
   factory UserDTO.fromJson(Map<String, dynamic> json) => _$UserDTOFromJson(json);
 
   factory UserDTO.fromDomain(User _) {
     return UserDTO(
-      name: _.name,
+      id: _.id,
       email: _.email,
-      avatarUrl: _.avatarUrl,
     );
   }
   User toDomain() {
     return User(
-      name: name,
+      id: id,
       email: email,
-      avatarUrl: avatarUrl,
     );
   }
 }

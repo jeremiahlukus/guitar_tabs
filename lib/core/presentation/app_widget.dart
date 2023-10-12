@@ -7,7 +7,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:newrelic_mobile/newrelic_navigation_observer.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 // Project imports:
@@ -15,6 +14,7 @@ import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 final initializationProvider = FutureProvider<Unit>(
   (ref) async {
@@ -82,8 +82,6 @@ class AppWidget extends ConsumerWidget {
           blendOnColors: false,
         ),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        // To use the playground font, add GoogleFonts package and uncomment
-        // fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
       darkTheme: FlexThemeData.dark(
         scheme: FlexScheme.flutterDash,
@@ -98,7 +96,7 @@ class AppWidget extends ConsumerWidget {
       title: 'Joyful Noise',
       routerDelegate: AutoRouterDelegate(
         _appRouter,
-        navigatorObservers: () => [NewRelicNavigationObserver()],
+        navigatorObservers: () => [SentryNavigatorObserver()],
       ),
       routeInformationParser: _appRouter.defaultRouteParser(),
     );

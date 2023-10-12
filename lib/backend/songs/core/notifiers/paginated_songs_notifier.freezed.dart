@@ -20,25 +20,33 @@ mixin _$PaginatedSongsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Fresh<List<Song>> songs) initial,
-    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage) loadInProgress,
-    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable) loadSuccess,
-    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure) loadFailure,
+    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage)
+        loadInProgress,
+    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)
+        loadSuccess,
+    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure)
+        loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Fresh<List<Song>> songs)? initial,
-    TResult? Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
-    TResult? Function(Fresh<List<Song>> songs, bool isNextPageAvailable)? loadSuccess,
-    TResult? Function(Fresh<List<Song>> songs, BackendFailure failure)? loadFailure,
+    TResult? Function(Fresh<List<Song>> songs, int itemsPerPage)?
+        loadInProgress,
+    TResult? Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult? Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Fresh<List<Song>> songs)? initial,
     TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
-    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)? loadSuccess,
-    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,12 +77,14 @@ mixin _$PaginatedSongsState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PaginatedSongsStateCopyWith<PaginatedSongsState> get copyWith => throw _privateConstructorUsedError;
+  $PaginatedSongsStateCopyWith<PaginatedSongsState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PaginatedSongsStateCopyWith<$Res> {
-  factory $PaginatedSongsStateCopyWith(PaginatedSongsState value, $Res Function(PaginatedSongsState) then) =
+  factory $PaginatedSongsStateCopyWith(
+          PaginatedSongsState value, $Res Function(PaginatedSongsState) then) =
       _$PaginatedSongsStateCopyWithImpl<$Res, PaginatedSongsState>;
   @useResult
   $Res call({Fresh<List<Song>> songs});
@@ -115,8 +125,10 @@ class _$PaginatedSongsStateCopyWithImpl<$Res, $Val extends PaginatedSongsState>
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> implements $PaginatedSongsStateCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(_$InitialImpl value, $Res Function(_$InitialImpl) then) =
+abstract class _$$InitialImplCopyWith<$Res>
+    implements $PaginatedSongsStateCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -127,9 +139,12 @@ abstract class _$$InitialImplCopyWith<$Res> implements $PaginatedSongsStateCopyW
 }
 
 /// @nodoc
-class __$$InitialImplCopyWithImpl<$Res> extends _$PaginatedSongsStateCopyWithImpl<$Res, _$InitialImpl>
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$PaginatedSongsStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(_$InitialImpl _value, $Res Function(_$InitialImpl) _then) : super(_value, _then);
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -172,15 +187,19 @@ class _$InitialImpl extends _Initial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith => __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Fresh<List<Song>> songs) initial,
-    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage) loadInProgress,
-    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable) loadSuccess,
-    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure) loadFailure,
+    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage)
+        loadInProgress,
+    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)
+        loadSuccess,
+    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure)
+        loadFailure,
   }) {
     return initial(songs);
   }
@@ -189,9 +208,12 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Fresh<List<Song>> songs)? initial,
-    TResult? Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
-    TResult? Function(Fresh<List<Song>> songs, bool isNextPageAvailable)? loadSuccess,
-    TResult? Function(Fresh<List<Song>> songs, BackendFailure failure)? loadFailure,
+    TResult? Function(Fresh<List<Song>> songs, int itemsPerPage)?
+        loadInProgress,
+    TResult? Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult? Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
   }) {
     return initial?.call(songs);
   }
@@ -201,8 +223,10 @@ class _$InitialImpl extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Fresh<List<Song>> songs)? initial,
     TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
-    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)? loadSuccess,
-    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -257,12 +281,15 @@ abstract class _Initial extends PaginatedSongsState {
   Fresh<List<Song>> get songs;
   @override
   @JsonKey(ignore: true)
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoadInProgressImplCopyWith<$Res> implements $PaginatedSongsStateCopyWith<$Res> {
-  factory _$$LoadInProgressImplCopyWith(_$LoadInProgressImpl value, $Res Function(_$LoadInProgressImpl) then) =
+abstract class _$$LoadInProgressImplCopyWith<$Res>
+    implements $PaginatedSongsStateCopyWith<$Res> {
+  factory _$$LoadInProgressImplCopyWith(_$LoadInProgressImpl value,
+          $Res Function(_$LoadInProgressImpl) then) =
       __$$LoadInProgressImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -273,9 +300,11 @@ abstract class _$$LoadInProgressImplCopyWith<$Res> implements $PaginatedSongsSta
 }
 
 /// @nodoc
-class __$$LoadInProgressImplCopyWithImpl<$Res> extends _$PaginatedSongsStateCopyWithImpl<$Res, _$LoadInProgressImpl>
+class __$$LoadInProgressImplCopyWithImpl<$Res>
+    extends _$PaginatedSongsStateCopyWithImpl<$Res, _$LoadInProgressImpl>
     implements _$$LoadInProgressImplCopyWith<$Res> {
-  __$$LoadInProgressImplCopyWithImpl(_$LoadInProgressImpl _value, $Res Function(_$LoadInProgressImpl) _then)
+  __$$LoadInProgressImplCopyWithImpl(
+      _$LoadInProgressImpl _value, $Res Function(_$LoadInProgressImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -318,7 +347,8 @@ class _$LoadInProgressImpl extends _LoadInProgress {
         (other.runtimeType == runtimeType &&
             other is _$LoadInProgressImpl &&
             (identical(other.songs, songs) || other.songs == songs) &&
-            (identical(other.itemsPerPage, itemsPerPage) || other.itemsPerPage == itemsPerPage));
+            (identical(other.itemsPerPage, itemsPerPage) ||
+                other.itemsPerPage == itemsPerPage));
   }
 
   @override
@@ -328,15 +358,19 @@ class _$LoadInProgressImpl extends _LoadInProgress {
   @override
   @pragma('vm:prefer-inline')
   _$$LoadInProgressImplCopyWith<_$LoadInProgressImpl> get copyWith =>
-      __$$LoadInProgressImplCopyWithImpl<_$LoadInProgressImpl>(this, _$identity);
+      __$$LoadInProgressImplCopyWithImpl<_$LoadInProgressImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Fresh<List<Song>> songs) initial,
-    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage) loadInProgress,
-    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable) loadSuccess,
-    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure) loadFailure,
+    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage)
+        loadInProgress,
+    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)
+        loadSuccess,
+    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure)
+        loadFailure,
   }) {
     return loadInProgress(songs, itemsPerPage);
   }
@@ -345,9 +379,12 @@ class _$LoadInProgressImpl extends _LoadInProgress {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Fresh<List<Song>> songs)? initial,
-    TResult? Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
-    TResult? Function(Fresh<List<Song>> songs, bool isNextPageAvailable)? loadSuccess,
-    TResult? Function(Fresh<List<Song>> songs, BackendFailure failure)? loadFailure,
+    TResult? Function(Fresh<List<Song>> songs, int itemsPerPage)?
+        loadInProgress,
+    TResult? Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult? Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
   }) {
     return loadInProgress?.call(songs, itemsPerPage);
   }
@@ -357,8 +394,10 @@ class _$LoadInProgressImpl extends _LoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Fresh<List<Song>> songs)? initial,
     TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
-    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)? loadSuccess,
-    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -406,7 +445,9 @@ class _$LoadInProgressImpl extends _LoadInProgress {
 }
 
 abstract class _LoadInProgress extends PaginatedSongsState {
-  const factory _LoadInProgress(final Fresh<List<Song>> songs, final int itemsPerPage) = _$LoadInProgressImpl;
+  const factory _LoadInProgress(
+          final Fresh<List<Song>> songs, final int itemsPerPage) =
+      _$LoadInProgressImpl;
   const _LoadInProgress._() : super._();
 
   @override
@@ -414,12 +455,15 @@ abstract class _LoadInProgress extends PaginatedSongsState {
   int get itemsPerPage;
   @override
   @JsonKey(ignore: true)
-  _$$LoadInProgressImplCopyWith<_$LoadInProgressImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$LoadInProgressImplCopyWith<_$LoadInProgressImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoadSuccessImplCopyWith<$Res> implements $PaginatedSongsStateCopyWith<$Res> {
-  factory _$$LoadSuccessImplCopyWith(_$LoadSuccessImpl value, $Res Function(_$LoadSuccessImpl) then) =
+abstract class _$$LoadSuccessImplCopyWith<$Res>
+    implements $PaginatedSongsStateCopyWith<$Res> {
+  factory _$$LoadSuccessImplCopyWith(
+          _$LoadSuccessImpl value, $Res Function(_$LoadSuccessImpl) then) =
       __$$LoadSuccessImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -430,9 +474,11 @@ abstract class _$$LoadSuccessImplCopyWith<$Res> implements $PaginatedSongsStateC
 }
 
 /// @nodoc
-class __$$LoadSuccessImplCopyWithImpl<$Res> extends _$PaginatedSongsStateCopyWithImpl<$Res, _$LoadSuccessImpl>
+class __$$LoadSuccessImplCopyWithImpl<$Res>
+    extends _$PaginatedSongsStateCopyWithImpl<$Res, _$LoadSuccessImpl>
     implements _$$LoadSuccessImplCopyWith<$Res> {
-  __$$LoadSuccessImplCopyWithImpl(_$LoadSuccessImpl _value, $Res Function(_$LoadSuccessImpl) _then)
+  __$$LoadSuccessImplCopyWithImpl(
+      _$LoadSuccessImpl _value, $Res Function(_$LoadSuccessImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -457,7 +503,8 @@ class __$$LoadSuccessImplCopyWithImpl<$Res> extends _$PaginatedSongsStateCopyWit
 /// @nodoc
 
 class _$LoadSuccessImpl extends _LoadSuccess {
-  const _$LoadSuccessImpl(this.songs, {required this.isNextPageAvailable}) : super._();
+  const _$LoadSuccessImpl(this.songs, {required this.isNextPageAvailable})
+      : super._();
 
   @override
   final Fresh<List<Song>> songs;
@@ -492,9 +539,12 @@ class _$LoadSuccessImpl extends _LoadSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Fresh<List<Song>> songs) initial,
-    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage) loadInProgress,
-    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable) loadSuccess,
-    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure) loadFailure,
+    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage)
+        loadInProgress,
+    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)
+        loadSuccess,
+    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure)
+        loadFailure,
   }) {
     return loadSuccess(songs, isNextPageAvailable);
   }
@@ -503,9 +553,12 @@ class _$LoadSuccessImpl extends _LoadSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Fresh<List<Song>> songs)? initial,
-    TResult? Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
-    TResult? Function(Fresh<List<Song>> songs, bool isNextPageAvailable)? loadSuccess,
-    TResult? Function(Fresh<List<Song>> songs, BackendFailure failure)? loadFailure,
+    TResult? Function(Fresh<List<Song>> songs, int itemsPerPage)?
+        loadInProgress,
+    TResult? Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult? Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
   }) {
     return loadSuccess?.call(songs, isNextPageAvailable);
   }
@@ -515,8 +568,10 @@ class _$LoadSuccessImpl extends _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Fresh<List<Song>> songs)? initial,
     TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
-    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)? loadSuccess,
-    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -564,8 +619,8 @@ class _$LoadSuccessImpl extends _LoadSuccess {
 }
 
 abstract class _LoadSuccess extends PaginatedSongsState {
-  const factory _LoadSuccess(final Fresh<List<Song>> songs, {required final bool isNextPageAvailable}) =
-      _$LoadSuccessImpl;
+  const factory _LoadSuccess(final Fresh<List<Song>> songs,
+      {required final bool isNextPageAvailable}) = _$LoadSuccessImpl;
   const _LoadSuccess._() : super._();
 
   @override
@@ -573,12 +628,15 @@ abstract class _LoadSuccess extends PaginatedSongsState {
   bool get isNextPageAvailable;
   @override
   @JsonKey(ignore: true)
-  _$$LoadSuccessImplCopyWith<_$LoadSuccessImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$LoadSuccessImplCopyWith<_$LoadSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoadFailureImplCopyWith<$Res> implements $PaginatedSongsStateCopyWith<$Res> {
-  factory _$$LoadFailureImplCopyWith(_$LoadFailureImpl value, $Res Function(_$LoadFailureImpl) then) =
+abstract class _$$LoadFailureImplCopyWith<$Res>
+    implements $PaginatedSongsStateCopyWith<$Res> {
+  factory _$$LoadFailureImplCopyWith(
+          _$LoadFailureImpl value, $Res Function(_$LoadFailureImpl) then) =
       __$$LoadFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -590,9 +648,11 @@ abstract class _$$LoadFailureImplCopyWith<$Res> implements $PaginatedSongsStateC
 }
 
 /// @nodoc
-class __$$LoadFailureImplCopyWithImpl<$Res> extends _$PaginatedSongsStateCopyWithImpl<$Res, _$LoadFailureImpl>
+class __$$LoadFailureImplCopyWithImpl<$Res>
+    extends _$PaginatedSongsStateCopyWithImpl<$Res, _$LoadFailureImpl>
     implements _$$LoadFailureImplCopyWith<$Res> {
-  __$$LoadFailureImplCopyWithImpl(_$LoadFailureImpl _value, $Res Function(_$LoadFailureImpl) _then)
+  __$$LoadFailureImplCopyWithImpl(
+      _$LoadFailureImpl _value, $Res Function(_$LoadFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -659,9 +719,12 @@ class _$LoadFailureImpl extends _LoadFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Fresh<List<Song>> songs) initial,
-    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage) loadInProgress,
-    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable) loadSuccess,
-    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure) loadFailure,
+    required TResult Function(Fresh<List<Song>> songs, int itemsPerPage)
+        loadInProgress,
+    required TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)
+        loadSuccess,
+    required TResult Function(Fresh<List<Song>> songs, BackendFailure failure)
+        loadFailure,
   }) {
     return loadFailure(songs, failure);
   }
@@ -670,9 +733,12 @@ class _$LoadFailureImpl extends _LoadFailure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Fresh<List<Song>> songs)? initial,
-    TResult? Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
-    TResult? Function(Fresh<List<Song>> songs, bool isNextPageAvailable)? loadSuccess,
-    TResult? Function(Fresh<List<Song>> songs, BackendFailure failure)? loadFailure,
+    TResult? Function(Fresh<List<Song>> songs, int itemsPerPage)?
+        loadInProgress,
+    TResult? Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult? Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
   }) {
     return loadFailure?.call(songs, failure);
   }
@@ -682,8 +748,10 @@ class _$LoadFailureImpl extends _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Fresh<List<Song>> songs)? initial,
     TResult Function(Fresh<List<Song>> songs, int itemsPerPage)? loadInProgress,
-    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)? loadSuccess,
-    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)? loadFailure,
+    TResult Function(Fresh<List<Song>> songs, bool isNextPageAvailable)?
+        loadSuccess,
+    TResult Function(Fresh<List<Song>> songs, BackendFailure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
@@ -731,7 +799,9 @@ class _$LoadFailureImpl extends _LoadFailure {
 }
 
 abstract class _LoadFailure extends PaginatedSongsState {
-  const factory _LoadFailure(final Fresh<List<Song>> songs, final BackendFailure failure) = _$LoadFailureImpl;
+  const factory _LoadFailure(
+          final Fresh<List<Song>> songs, final BackendFailure failure) =
+      _$LoadFailureImpl;
   const _LoadFailure._() : super._();
 
   @override
@@ -739,5 +809,6 @@ abstract class _LoadFailure extends PaginatedSongsState {
   BackendFailure get failure;
   @override
   @JsonKey(ignore: true)
-  _$$LoadFailureImplCopyWith<_$LoadFailureImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$LoadFailureImplCopyWith<_$LoadFailureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -12,8 +12,9 @@ import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
-import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart' as pub_search_bar;
+import 'package:joyful_noise/core/presentation/routes/app_router.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 @RoutePage()
 class FavoriteSongsPage extends ConsumerStatefulWidget {
@@ -28,6 +29,7 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   void initState() {
     Future.microtask(() {
       ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
+      ref.read(userNotifierProvider.notifier).getUserPage();
     });
 
     super.initState();
@@ -39,6 +41,8 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   static final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final userState = ref.watch(userNotifierProvider);
+    Sentry.captureMessage('User Logged in: ${userState.user.email}');
     return Scaffold(
       key: scaffoldKey,
       drawer: const SongDrawer(),

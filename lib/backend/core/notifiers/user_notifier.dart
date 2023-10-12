@@ -32,8 +32,7 @@ class UserNotifier extends StateNotifier<UserState> {
       : super(
           const UserState.initial(
             User(
-              name: '',
-              avatarUrl: '',
+              id: 0,
               email: '',
             ),
           ),

@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:alchemist/alchemist.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:joyful_noise/backend/core/domain/user.dart';
+import 'package:joyful_noise/backend/core/infrastructure/user_repository.dart';
+import 'package:joyful_noise/backend/core/notifiers/user_notifier.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
@@ -32,6 +35,20 @@ class MockSongDetailRepository extends Mock implements SongDetailRepository {}
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 class MockSearchHistoryRepository extends Mock implements SearchHistoryRepository {}
+
+class MockUserRepository extends Mock implements UserRepository {}
+
+class FakeUserNotifier extends UserNotifier {
+  FakeUserNotifier(super.userRepository);
+
+  @override
+  Future<void> getUserPage() async {
+    state = const UserState.loadSuccess(
+      User(id: 0, email: 'hey@hey.com'),
+    );
+    return;
+  }
+}
 
 void main() {
   group('SongTile', () {
@@ -62,6 +79,7 @@ void main() {
       final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
       final mockSongDetailRepository = MockSongDetailRepository();
       final mockDetailProvider = SongDetailNotifier(mockSongDetailRepository);
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
 
       when(() => mockFavoriteSongRepository.getFavoritePage(1))
           .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
@@ -77,6 +95,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
+          userNotifierProvider.overrideWith(
+            (_) => fakeUserNotifier,
+          ),
           favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
           songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
           searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),

@@ -7,12 +7,7 @@ part 'user.freezed.dart';
 class User with _$User {
   const User._();
   const factory User({
-    required String name,
-    required String avatarUrl,
+    required int id,
     required String email,
   }) = _User;
-
-  String avatarUrlOverride(String size) {
-    return avatarUrl.replaceAll('&size=48', '&size=$size');
-  }
 }

@@ -37,7 +37,7 @@ class FakeUserNotifier extends UserNotifier {
   @override
   Future<void> getUserPage() async {
     state = const UserState.loadSuccess(
-      User(name: 'Jon Doe', avatarUrl: 'www.example.com/avatarUrl', email: 'hey@hey.com'),
+      User(id: 0, email: 'hey@hey.com'),
     );
     return;
   }
@@ -66,7 +66,7 @@ void main() {
       final router = AppRouter();
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
       final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
-
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
       when(() => mockFavoriteSongRepository.getFavoritePage(1))
           .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
       when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
@@ -79,6 +79,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
+          userNotifierProvider.overrideWith(
+            (_) => fakeUserNotifier,
+          ),
           favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
           searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
@@ -95,7 +98,7 @@ void main() {
       final router = AppRouter();
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
       final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
-
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
       when(() => mockFavoriteSongRepository.getFavoritePage(1))
           .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
       when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
@@ -108,6 +111,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
+          userNotifierProvider.overrideWith(
+            (_) => fakeUserNotifier,
+          ),
           favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
           searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
@@ -142,7 +148,7 @@ void main() {
       final router = AppRouter();
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
       final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
-
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
       when(() => mockFavoriteSongRepository.getFavoritePage(1))
           .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
       when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
@@ -155,6 +161,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
+          userNotifierProvider.overrideWith(
+            (_) => fakeUserNotifier,
+          ),
           favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
           searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
@@ -172,6 +181,7 @@ void main() {
       final router = AppRouter();
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
       final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
 
       when(() => mockFavoriteSongRepository.getFavoritePage(1))
           .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
@@ -185,6 +195,9 @@ void main() {
       await pumpRouterApp(
         tester,
         [
+          userNotifierProvider.overrideWith(
+            (_) => fakeUserNotifier,
+          ),
           favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
           searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],

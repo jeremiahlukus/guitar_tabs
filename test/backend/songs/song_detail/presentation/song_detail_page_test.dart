@@ -41,8 +41,7 @@ class FakeUserNotifier extends UserNotifier {
   Future<void> getUserPage() async {
     state = const UserState.loadSuccess(
       User(
-        name: 'Jon Doe',
-        avatarUrl: 'www.example.com/avatarUrl',
+        id: 0,
         email: 'hey@hey.com',
       ),
     );
