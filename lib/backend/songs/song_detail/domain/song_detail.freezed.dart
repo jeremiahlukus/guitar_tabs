@@ -60,18 +60,18 @@ class _$SongDetailCopyWithImpl<$Res, $Val extends SongDetail> implements $SongDe
 }
 
 /// @nodoc
-abstract class _$$_SongDetailCopyWith<$Res> implements $SongDetailCopyWith<$Res> {
-  factory _$$_SongDetailCopyWith(_$_SongDetail value, $Res Function(_$_SongDetail) then) =
-      __$$_SongDetailCopyWithImpl<$Res>;
+abstract class _$$SongDetailImplCopyWith<$Res> implements $SongDetailCopyWith<$Res> {
+  factory _$$SongDetailImplCopyWith(_$SongDetailImpl value, $Res Function(_$SongDetailImpl) then) =
+      __$$SongDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isFavorite, String songId});
 }
 
 /// @nodoc
-class __$$_SongDetailCopyWithImpl<$Res> extends _$SongDetailCopyWithImpl<$Res, _$_SongDetail>
-    implements _$$_SongDetailCopyWith<$Res> {
-  __$$_SongDetailCopyWithImpl(_$_SongDetail _value, $Res Function(_$_SongDetail) _then) : super(_value, _then);
+class __$$SongDetailImplCopyWithImpl<$Res> extends _$SongDetailCopyWithImpl<$Res, _$SongDetailImpl>
+    implements _$$SongDetailImplCopyWith<$Res> {
+  __$$SongDetailImplCopyWithImpl(_$SongDetailImpl _value, $Res Function(_$SongDetailImpl) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -79,7 +79,7 @@ class __$$_SongDetailCopyWithImpl<$Res> extends _$SongDetailCopyWithImpl<$Res, _
     Object? isFavorite = null,
     Object? songId = null,
   }) {
-    return _then(_$_SongDetail(
+    return _then(_$SongDetailImpl(
       isFavorite: null == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
@@ -94,8 +94,8 @@ class __$$_SongDetailCopyWithImpl<$Res> extends _$SongDetailCopyWithImpl<$Res, _
 
 /// @nodoc
 
-class _$_SongDetail extends _SongDetail {
-  const _$_SongDetail({required this.isFavorite, required this.songId}) : super._();
+class _$SongDetailImpl extends _SongDetail {
+  const _$SongDetailImpl({required this.isFavorite, required this.songId}) : super._();
 
   @override
   final bool isFavorite;
@@ -111,7 +111,7 @@ class _$_SongDetail extends _SongDetail {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SongDetail &&
+            other is _$SongDetailImpl &&
             (identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite) &&
             (identical(other.songId, songId) || other.songId == songId));
   }
@@ -122,11 +122,12 @@ class _$_SongDetail extends _SongDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SongDetailCopyWith<_$_SongDetail> get copyWith => __$$_SongDetailCopyWithImpl<_$_SongDetail>(this, _$identity);
+  _$$SongDetailImplCopyWith<_$SongDetailImpl> get copyWith =>
+      __$$SongDetailImplCopyWithImpl<_$SongDetailImpl>(this, _$identity);
 }
 
 abstract class _SongDetail extends SongDetail {
-  const factory _SongDetail({required final bool isFavorite, required final String songId}) = _$_SongDetail;
+  const factory _SongDetail({required final bool isFavorite, required final String songId}) = _$SongDetailImpl;
   const _SongDetail._() : super._();
 
   @override
@@ -135,5 +136,5 @@ abstract class _SongDetail extends SongDetail {
   String get songId;
   @override
   @JsonKey(ignore: true)
-  _$$_SongDetailCopyWith<_$_SongDetail> get copyWith => throw _privateConstructorUsedError;
+  _$$SongDetailImplCopyWith<_$SongDetailImpl> get copyWith => throw _privateConstructorUsedError;
 }

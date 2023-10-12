@@ -68,18 +68,19 @@ class _$SongDetailDTOCopyWithImpl<$Res, $Val extends SongDetailDTO> implements $
 }
 
 /// @nodoc
-abstract class _$$_SongDetailDTOCopyWith<$Res> implements $SongDetailDTOCopyWith<$Res> {
-  factory _$$_SongDetailDTOCopyWith(_$_SongDetailDTO value, $Res Function(_$_SongDetailDTO) then) =
-      __$$_SongDetailDTOCopyWithImpl<$Res>;
+abstract class _$$SongDetailDTOImplCopyWith<$Res> implements $SongDetailDTOCopyWith<$Res> {
+  factory _$$SongDetailDTOImplCopyWith(_$SongDetailDTOImpl value, $Res Function(_$SongDetailDTOImpl) then) =
+      __$$SongDetailDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'song_id') String songId, @JsonKey(name: 'is_favorite') bool isFavorite});
 }
 
 /// @nodoc
-class __$$_SongDetailDTOCopyWithImpl<$Res> extends _$SongDetailDTOCopyWithImpl<$Res, _$_SongDetailDTO>
-    implements _$$_SongDetailDTOCopyWith<$Res> {
-  __$$_SongDetailDTOCopyWithImpl(_$_SongDetailDTO _value, $Res Function(_$_SongDetailDTO) _then) : super(_value, _then);
+class __$$SongDetailDTOImplCopyWithImpl<$Res> extends _$SongDetailDTOCopyWithImpl<$Res, _$SongDetailDTOImpl>
+    implements _$$SongDetailDTOImplCopyWith<$Res> {
+  __$$SongDetailDTOImplCopyWithImpl(_$SongDetailDTOImpl _value, $Res Function(_$SongDetailDTOImpl) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -87,7 +88,7 @@ class __$$_SongDetailDTOCopyWithImpl<$Res> extends _$SongDetailDTOCopyWithImpl<$
     Object? songId = null,
     Object? isFavorite = null,
   }) {
-    return _then(_$_SongDetailDTO(
+    return _then(_$SongDetailDTOImpl(
       songId: null == songId
           ? _value.songId
           : songId // ignore: cast_nullable_to_non_nullable
@@ -102,12 +103,12 @@ class __$$_SongDetailDTOCopyWithImpl<$Res> extends _$SongDetailDTOCopyWithImpl<$
 
 /// @nodoc
 @JsonSerializable()
-class _$_SongDetailDTO extends _SongDetailDTO {
-  const _$_SongDetailDTO(
+class _$SongDetailDTOImpl extends _SongDetailDTO {
+  const _$SongDetailDTOImpl(
       {@JsonKey(name: 'song_id') required this.songId, @JsonKey(name: 'is_favorite') required this.isFavorite})
       : super._();
 
-  factory _$_SongDetailDTO.fromJson(Map<String, dynamic> json) => _$$_SongDetailDTOFromJson(json);
+  factory _$SongDetailDTOImpl.fromJson(Map<String, dynamic> json) => _$$SongDetailDTOImplFromJson(json);
 
 // ignore: invalid_annotation_target
   @override
@@ -127,7 +128,7 @@ class _$_SongDetailDTO extends _SongDetailDTO {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SongDetailDTO &&
+            other is _$SongDetailDTOImpl &&
             (identical(other.songId, songId) || other.songId == songId) &&
             (identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite));
   }
@@ -139,12 +140,12 @@ class _$_SongDetailDTO extends _SongDetailDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SongDetailDTOCopyWith<_$_SongDetailDTO> get copyWith =>
-      __$$_SongDetailDTOCopyWithImpl<_$_SongDetailDTO>(this, _$identity);
+  _$$SongDetailDTOImplCopyWith<_$SongDetailDTOImpl> get copyWith =>
+      __$$SongDetailDTOImplCopyWithImpl<_$SongDetailDTOImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SongDetailDTOToJson(
+    return _$$SongDetailDTOImplToJson(
       this,
     );
   }
@@ -153,10 +154,10 @@ class _$_SongDetailDTO extends _SongDetailDTO {
 abstract class _SongDetailDTO extends SongDetailDTO {
   const factory _SongDetailDTO(
       {@JsonKey(name: 'song_id') required final String songId,
-      @JsonKey(name: 'is_favorite') required final bool isFavorite}) = _$_SongDetailDTO;
+      @JsonKey(name: 'is_favorite') required final bool isFavorite}) = _$SongDetailDTOImpl;
   const _SongDetailDTO._() : super._();
 
-  factory _SongDetailDTO.fromJson(Map<String, dynamic> json) = _$_SongDetailDTO.fromJson;
+  factory _SongDetailDTO.fromJson(Map<String, dynamic> json) = _$SongDetailDTOImpl.fromJson;
 
   @override // ignore: invalid_annotation_target
   @JsonKey(name: 'song_id')
@@ -166,5 +167,5 @@ abstract class _SongDetailDTO extends SongDetailDTO {
   bool get isFavorite;
   @override
   @JsonKey(ignore: true)
-  _$$_SongDetailDTOCopyWith<_$_SongDetailDTO> get copyWith => throw _privateConstructorUsedError;
+  _$$SongDetailDTOImplCopyWith<_$SongDetailDTOImpl> get copyWith => throw _privateConstructorUsedError;
 }

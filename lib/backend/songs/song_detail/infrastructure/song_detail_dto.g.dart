@@ -6,12 +6,12 @@ part of 'song_detail_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SongDetailDTO _$$_SongDetailDTOFromJson(Map<String, dynamic> json) => _$_SongDetailDTO(
+_$SongDetailDTOImpl _$$SongDetailDTOImplFromJson(Map<String, dynamic> json) => _$SongDetailDTOImpl(
       songId: json['song_id'] as String,
       isFavorite: json['is_favorite'] as bool,
     );
 
-Map<String, dynamic> _$$_SongDetailDTOToJson(_$_SongDetailDTO instance) => <String, dynamic>{
+Map<String, dynamic> _$$SongDetailDTOImplToJson(_$SongDetailDTOImpl instance) => <String, dynamic>{
       'song_id': instance.songId,
       'is_favorite': instance.isFavorite,
     };

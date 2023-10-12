@@ -71,17 +71,18 @@ class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO> implements $UserDTOCopyW
 }
 
 /// @nodoc
-abstract class _$$_UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
-  factory _$$_UserDTOCopyWith(_$_UserDTO value, $Res Function(_$_UserDTO) then) = __$$_UserDTOCopyWithImpl<$Res>;
+abstract class _$$UserDTOImplCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
+  factory _$$UserDTOImplCopyWith(_$UserDTOImpl value, $Res Function(_$UserDTOImpl) then) =
+      __$$UserDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, String email, @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
 /// @nodoc
-class __$$_UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res, _$_UserDTO>
-    implements _$$_UserDTOCopyWith<$Res> {
-  __$$_UserDTOCopyWithImpl(_$_UserDTO _value, $Res Function(_$_UserDTO) _then) : super(_value, _then);
+class __$$UserDTOImplCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res, _$UserDTOImpl>
+    implements _$$UserDTOImplCopyWith<$Res> {
+  __$$UserDTOImplCopyWithImpl(_$UserDTOImpl _value, $Res Function(_$UserDTOImpl) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -90,7 +91,7 @@ class __$$_UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res, _$_User
     Object? email = null,
     Object? avatarUrl = null,
   }) {
-    return _then(_$_UserDTO(
+    return _then(_$UserDTOImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -109,11 +110,11 @@ class __$$_UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res, _$_User
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserDTO extends _UserDTO {
-  const _$_UserDTO({required this.name, required this.email, @JsonKey(name: 'avatar_url') required this.avatarUrl})
+class _$UserDTOImpl extends _UserDTO {
+  const _$UserDTOImpl({required this.name, required this.email, @JsonKey(name: 'avatar_url') required this.avatarUrl})
       : super._();
 
-  factory _$_UserDTO.fromJson(Map<String, dynamic> json) => _$$_UserDTOFromJson(json);
+  factory _$UserDTOImpl.fromJson(Map<String, dynamic> json) => _$$UserDTOImplFromJson(json);
 
   @override
   final String name;
@@ -133,7 +134,7 @@ class _$_UserDTO extends _UserDTO {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserDTO &&
+            other is _$UserDTOImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
@@ -146,11 +147,11 @@ class _$_UserDTO extends _UserDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith => __$$_UserDTOCopyWithImpl<_$_UserDTO>(this, _$identity);
+  _$$UserDTOImplCopyWith<_$UserDTOImpl> get copyWith => __$$UserDTOImplCopyWithImpl<_$UserDTOImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserDTOToJson(
+    return _$$UserDTOImplToJson(
       this,
     );
   }
@@ -160,10 +161,10 @@ abstract class _UserDTO extends UserDTO {
   const factory _UserDTO(
       {required final String name,
       required final String email,
-      @JsonKey(name: 'avatar_url') required final String avatarUrl}) = _$_UserDTO;
+      @JsonKey(name: 'avatar_url') required final String avatarUrl}) = _$UserDTOImpl;
   const _UserDTO._() : super._();
 
-  factory _UserDTO.fromJson(Map<String, dynamic> json) = _$_UserDTO.fromJson;
+  factory _UserDTO.fromJson(Map<String, dynamic> json) = _$UserDTOImpl.fromJson;
 
   @override
   String get name;
@@ -174,5 +175,5 @@ abstract class _UserDTO extends UserDTO {
   String get avatarUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith => throw _privateConstructorUsedError;
+  _$$UserDTOImplCopyWith<_$UserDTOImpl> get copyWith => throw _privateConstructorUsedError;
 }

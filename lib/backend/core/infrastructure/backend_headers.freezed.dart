@@ -79,9 +79,9 @@ class _$BackendHeadersCopyWithImpl<$Res, $Val extends BackendHeaders> implements
 }
 
 /// @nodoc
-abstract class _$$_BackendHeadersCopyWith<$Res> implements $BackendHeadersCopyWith<$Res> {
-  factory _$$_BackendHeadersCopyWith(_$_BackendHeaders value, $Res Function(_$_BackendHeaders) then) =
-      __$$_BackendHeadersCopyWithImpl<$Res>;
+abstract class _$$BackendHeadersImplCopyWith<$Res> implements $BackendHeadersCopyWith<$Res> {
+  factory _$$BackendHeadersImplCopyWith(_$BackendHeadersImpl value, $Res Function(_$BackendHeadersImpl) then) =
+      __$$BackendHeadersImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? etag, PaginationLink? link});
@@ -91,9 +91,9 @@ abstract class _$$_BackendHeadersCopyWith<$Res> implements $BackendHeadersCopyWi
 }
 
 /// @nodoc
-class __$$_BackendHeadersCopyWithImpl<$Res> extends _$BackendHeadersCopyWithImpl<$Res, _$_BackendHeaders>
-    implements _$$_BackendHeadersCopyWith<$Res> {
-  __$$_BackendHeadersCopyWithImpl(_$_BackendHeaders _value, $Res Function(_$_BackendHeaders) _then)
+class __$$BackendHeadersImplCopyWithImpl<$Res> extends _$BackendHeadersCopyWithImpl<$Res, _$BackendHeadersImpl>
+    implements _$$BackendHeadersImplCopyWith<$Res> {
+  __$$BackendHeadersImplCopyWithImpl(_$BackendHeadersImpl _value, $Res Function(_$BackendHeadersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +102,7 @@ class __$$_BackendHeadersCopyWithImpl<$Res> extends _$BackendHeadersCopyWithImpl
     Object? etag = freezed,
     Object? link = freezed,
   }) {
-    return _then(_$_BackendHeaders(
+    return _then(_$BackendHeadersImpl(
       etag: freezed == etag
           ? _value.etag
           : etag // ignore: cast_nullable_to_non_nullable
@@ -118,10 +118,10 @@ class __$$_BackendHeadersCopyWithImpl<$Res> extends _$BackendHeadersCopyWithImpl
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_BackendHeaders extends _BackendHeaders {
-  const _$_BackendHeaders({this.etag, this.link}) : super._();
+class _$BackendHeadersImpl extends _BackendHeaders {
+  const _$BackendHeadersImpl({this.etag, this.link}) : super._();
 
-  factory _$_BackendHeaders.fromJson(Map<String, dynamic> json) => _$$_BackendHeadersFromJson(json);
+  factory _$BackendHeadersImpl.fromJson(Map<String, dynamic> json) => _$$BackendHeadersImplFromJson(json);
 
   @override
   final String? etag;
@@ -137,7 +137,7 @@ class _$_BackendHeaders extends _BackendHeaders {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BackendHeaders &&
+            other is _$BackendHeadersImpl &&
             (identical(other.etag, etag) || other.etag == etag) &&
             (identical(other.link, link) || other.link == link));
   }
@@ -149,22 +149,22 @@ class _$_BackendHeaders extends _BackendHeaders {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BackendHeadersCopyWith<_$_BackendHeaders> get copyWith =>
-      __$$_BackendHeadersCopyWithImpl<_$_BackendHeaders>(this, _$identity);
+  _$$BackendHeadersImplCopyWith<_$BackendHeadersImpl> get copyWith =>
+      __$$BackendHeadersImplCopyWithImpl<_$BackendHeadersImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BackendHeadersToJson(
+    return _$$BackendHeadersImplToJson(
       this,
     );
   }
 }
 
 abstract class _BackendHeaders extends BackendHeaders {
-  const factory _BackendHeaders({final String? etag, final PaginationLink? link}) = _$_BackendHeaders;
+  const factory _BackendHeaders({final String? etag, final PaginationLink? link}) = _$BackendHeadersImpl;
   const _BackendHeaders._() : super._();
 
-  factory _BackendHeaders.fromJson(Map<String, dynamic> json) = _$_BackendHeaders.fromJson;
+  factory _BackendHeaders.fromJson(Map<String, dynamic> json) = _$BackendHeadersImpl.fromJson;
 
   @override
   String? get etag;
@@ -172,7 +172,7 @@ abstract class _BackendHeaders extends BackendHeaders {
   PaginationLink? get link;
   @override
   @JsonKey(ignore: true)
-  _$$_BackendHeadersCopyWith<_$_BackendHeaders> get copyWith => throw _privateConstructorUsedError;
+  _$$BackendHeadersImplCopyWith<_$BackendHeadersImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 PaginationLink _$PaginationLinkFromJson(Map<String, dynamic> json) {
@@ -220,18 +220,18 @@ class _$PaginationLinkCopyWithImpl<$Res, $Val extends PaginationLink> implements
 }
 
 /// @nodoc
-abstract class _$$_PaginationLinkCopyWith<$Res> implements $PaginationLinkCopyWith<$Res> {
-  factory _$$_PaginationLinkCopyWith(_$_PaginationLink value, $Res Function(_$_PaginationLink) then) =
-      __$$_PaginationLinkCopyWithImpl<$Res>;
+abstract class _$$PaginationLinkImplCopyWith<$Res> implements $PaginationLinkCopyWith<$Res> {
+  factory _$$PaginationLinkImplCopyWith(_$PaginationLinkImpl value, $Res Function(_$PaginationLinkImpl) then) =
+      __$$PaginationLinkImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int maxPage});
 }
 
 /// @nodoc
-class __$$_PaginationLinkCopyWithImpl<$Res> extends _$PaginationLinkCopyWithImpl<$Res, _$_PaginationLink>
-    implements _$$_PaginationLinkCopyWith<$Res> {
-  __$$_PaginationLinkCopyWithImpl(_$_PaginationLink _value, $Res Function(_$_PaginationLink) _then)
+class __$$PaginationLinkImplCopyWithImpl<$Res> extends _$PaginationLinkCopyWithImpl<$Res, _$PaginationLinkImpl>
+    implements _$$PaginationLinkImplCopyWith<$Res> {
+  __$$PaginationLinkImplCopyWithImpl(_$PaginationLinkImpl _value, $Res Function(_$PaginationLinkImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -239,7 +239,7 @@ class __$$_PaginationLinkCopyWithImpl<$Res> extends _$PaginationLinkCopyWithImpl
   $Res call({
     Object? maxPage = null,
   }) {
-    return _then(_$_PaginationLink(
+    return _then(_$PaginationLinkImpl(
       maxPage: null == maxPage
           ? _value.maxPage
           : maxPage // ignore: cast_nullable_to_non_nullable
@@ -250,10 +250,10 @@ class __$$_PaginationLinkCopyWithImpl<$Res> extends _$PaginationLinkCopyWithImpl
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaginationLink extends _PaginationLink {
-  const _$_PaginationLink({required this.maxPage}) : super._();
+class _$PaginationLinkImpl extends _PaginationLink {
+  const _$PaginationLinkImpl({required this.maxPage}) : super._();
 
-  factory _$_PaginationLink.fromJson(Map<String, dynamic> json) => _$$_PaginationLinkFromJson(json);
+  factory _$PaginationLinkImpl.fromJson(Map<String, dynamic> json) => _$$PaginationLinkImplFromJson(json);
 
   @override
   final int maxPage;
@@ -267,7 +267,7 @@ class _$_PaginationLink extends _PaginationLink {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaginationLink &&
+            other is _$PaginationLinkImpl &&
             (identical(other.maxPage, maxPage) || other.maxPage == maxPage));
   }
 
@@ -278,26 +278,26 @@ class _$_PaginationLink extends _PaginationLink {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaginationLinkCopyWith<_$_PaginationLink> get copyWith =>
-      __$$_PaginationLinkCopyWithImpl<_$_PaginationLink>(this, _$identity);
+  _$$PaginationLinkImplCopyWith<_$PaginationLinkImpl> get copyWith =>
+      __$$PaginationLinkImplCopyWithImpl<_$PaginationLinkImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaginationLinkToJson(
+    return _$$PaginationLinkImplToJson(
       this,
     );
   }
 }
 
 abstract class _PaginationLink extends PaginationLink {
-  const factory _PaginationLink({required final int maxPage}) = _$_PaginationLink;
+  const factory _PaginationLink({required final int maxPage}) = _$PaginationLinkImpl;
   const _PaginationLink._() : super._();
 
-  factory _PaginationLink.fromJson(Map<String, dynamic> json) = _$_PaginationLink.fromJson;
+  factory _PaginationLink.fromJson(Map<String, dynamic> json) = _$PaginationLinkImpl.fromJson;
 
   @override
   int get maxPage;
   @override
   @JsonKey(ignore: true)
-  _$$_PaginationLinkCopyWith<_$_PaginationLink> get copyWith => throw _privateConstructorUsedError;
+  _$$PaginationLinkImplCopyWith<_$PaginationLinkImpl> get copyWith => throw _privateConstructorUsedError;
 }

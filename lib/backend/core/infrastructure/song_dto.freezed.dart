@@ -106,8 +106,9 @@ class _$SongDTOCopyWithImpl<$Res, $Val extends SongDTO> implements $SongDTOCopyW
 }
 
 /// @nodoc
-abstract class _$$_SongDTOCopyWith<$Res> implements $SongDTOCopyWith<$Res> {
-  factory _$$_SongDTOCopyWith(_$_SongDTO value, $Res Function(_$_SongDTO) then) = __$$_SongDTOCopyWithImpl<$Res>;
+abstract class _$$SongDTOImplCopyWith<$Res> implements $SongDTOCopyWith<$Res> {
+  factory _$$SongDTOImplCopyWith(_$SongDTOImpl value, $Res Function(_$SongDTOImpl) then) =
+      __$$SongDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -121,9 +122,9 @@ abstract class _$$_SongDTOCopyWith<$Res> implements $SongDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SongDTOCopyWithImpl<$Res> extends _$SongDTOCopyWithImpl<$Res, _$_SongDTO>
-    implements _$$_SongDTOCopyWith<$Res> {
-  __$$_SongDTOCopyWithImpl(_$_SongDTO _value, $Res Function(_$_SongDTO) _then) : super(_value, _then);
+class __$$SongDTOImplCopyWithImpl<$Res> extends _$SongDTOCopyWithImpl<$Res, _$SongDTOImpl>
+    implements _$$SongDTOImplCopyWith<$Res> {
+  __$$SongDTOImplCopyWithImpl(_$SongDTOImpl _value, $Res Function(_$SongDTOImpl) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -136,7 +137,7 @@ class __$$_SongDTOCopyWithImpl<$Res> extends _$SongDTOCopyWithImpl<$Res, _$_Song
     Object? url = null,
     Object? songNumber = null,
   }) {
-    return _then(_$_SongDTO(
+    return _then(_$SongDTOImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -171,8 +172,8 @@ class __$$_SongDTOCopyWithImpl<$Res> extends _$SongDTOCopyWithImpl<$Res, _$_Song
 
 /// @nodoc
 @JsonSerializable()
-class _$_SongDTO extends _SongDTO {
-  const _$_SongDTO(
+class _$SongDTOImpl extends _SongDTO {
+  const _$SongDTOImpl(
       {required this.id,
       required this.title,
       required this.lyrics,
@@ -182,7 +183,7 @@ class _$_SongDTO extends _SongDTO {
       @JsonKey(name: 'song_number') required this.songNumber})
       : super._();
 
-  factory _$_SongDTO.fromJson(Map<String, dynamic> json) => _$$_SongDTOFromJson(json);
+  factory _$SongDTOImpl.fromJson(Map<String, dynamic> json) => _$$SongDTOImplFromJson(json);
 
   @override
   final int id;
@@ -213,7 +214,7 @@ class _$_SongDTO extends _SongDTO {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SongDTO &&
+            other is _$SongDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.lyrics, lyrics) || other.lyrics == lyrics) &&
@@ -230,11 +231,11 @@ class _$_SongDTO extends _SongDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith => __$$_SongDTOCopyWithImpl<_$_SongDTO>(this, _$identity);
+  _$$SongDTOImplCopyWith<_$SongDTOImpl> get copyWith => __$$SongDTOImplCopyWithImpl<_$SongDTOImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SongDTOToJson(
+    return _$$SongDTOImplToJson(
       this,
     );
   }
@@ -248,10 +249,10 @@ abstract class _SongDTO extends SongDTO {
       @JsonKey(fromJson: _nullFromJson) required final String artist,
       @JsonKey(fromJson: _nullFromJson) required final String chords,
       @JsonKey(fromJson: _nullFromJson) required final String url,
-      @JsonKey(name: 'song_number') required final int songNumber}) = _$_SongDTO;
+      @JsonKey(name: 'song_number') required final int songNumber}) = _$SongDTOImpl;
   const _SongDTO._() : super._();
 
-  factory _SongDTO.fromJson(Map<String, dynamic> json) = _$_SongDTO.fromJson;
+  factory _SongDTO.fromJson(Map<String, dynamic> json) = _$SongDTOImpl.fromJson;
 
   @override
   int get id;
@@ -273,5 +274,5 @@ abstract class _SongDTO extends SongDTO {
   int get songNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_SongDTOCopyWith<_$_SongDTO> get copyWith => throw _privateConstructorUsedError;
+  _$$SongDTOImplCopyWith<_$SongDTOImpl> get copyWith => throw _privateConstructorUsedError;
 }

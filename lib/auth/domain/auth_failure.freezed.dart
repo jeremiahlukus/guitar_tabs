@@ -73,23 +73,24 @@ class _$AuthFailureCopyWithImpl<$Res, $Val extends AuthFailure> implements $Auth
 }
 
 /// @nodoc
-abstract class _$$_ServerCopyWith<$Res> {
-  factory _$$_ServerCopyWith(_$_Server value, $Res Function(_$_Server) then) = __$$_ServerCopyWithImpl<$Res>;
+abstract class _$$ServerImplCopyWith<$Res> {
+  factory _$$ServerImplCopyWith(_$ServerImpl value, $Res Function(_$ServerImpl) then) =
+      __$$ServerImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String? message});
 }
 
 /// @nodoc
-class __$$_ServerCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res, _$_Server>
-    implements _$$_ServerCopyWith<$Res> {
-  __$$_ServerCopyWithImpl(_$_Server _value, $Res Function(_$_Server) _then) : super(_value, _then);
+class __$$ServerImplCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res, _$ServerImpl>
+    implements _$$ServerImplCopyWith<$Res> {
+  __$$ServerImplCopyWithImpl(_$ServerImpl _value, $Res Function(_$ServerImpl) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = freezed,
   }) {
-    return _then(_$_Server(
+    return _then(_$ServerImpl(
       freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -100,8 +101,8 @@ class __$$_ServerCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res, _$_S
 
 /// @nodoc
 
-class _$_Server extends _Server {
-  const _$_Server([this.message]) : super._();
+class _$ServerImpl extends _Server {
+  const _$ServerImpl([this.message]) : super._();
 
   @override
   final String? message;
@@ -115,7 +116,7 @@ class _$_Server extends _Server {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Server &&
+            other is _$ServerImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -125,7 +126,7 @@ class _$_Server extends _Server {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ServerCopyWith<_$_Server> get copyWith => __$$_ServerCopyWithImpl<_$_Server>(this, _$identity);
+  _$$ServerImplCopyWith<_$ServerImpl> get copyWith => __$$ServerImplCopyWithImpl<_$ServerImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -191,29 +192,30 @@ class _$_Server extends _Server {
 }
 
 abstract class _Server extends AuthFailure {
-  const factory _Server([final String? message]) = _$_Server;
+  const factory _Server([final String? message]) = _$ServerImpl;
   const _Server._() : super._();
 
   String? get message;
   @JsonKey(ignore: true)
-  _$$_ServerCopyWith<_$_Server> get copyWith => throw _privateConstructorUsedError;
+  _$$ServerImplCopyWith<_$ServerImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_StorageCopyWith<$Res> {
-  factory _$$_StorageCopyWith(_$_Storage value, $Res Function(_$_Storage) then) = __$$_StorageCopyWithImpl<$Res>;
+abstract class _$$StorageImplCopyWith<$Res> {
+  factory _$$StorageImplCopyWith(_$StorageImpl value, $Res Function(_$StorageImpl) then) =
+      __$$StorageImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_StorageCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res, _$_Storage>
-    implements _$$_StorageCopyWith<$Res> {
-  __$$_StorageCopyWithImpl(_$_Storage _value, $Res Function(_$_Storage) _then) : super(_value, _then);
+class __$$StorageImplCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res, _$StorageImpl>
+    implements _$$StorageImplCopyWith<$Res> {
+  __$$StorageImplCopyWithImpl(_$StorageImpl _value, $Res Function(_$StorageImpl) _then) : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Storage extends _Storage {
-  const _$_Storage() : super._();
+class _$StorageImpl extends _Storage {
+  const _$StorageImpl() : super._();
 
   @override
   String toString() {
@@ -222,7 +224,7 @@ class _$_Storage extends _Storage {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$_Storage);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$StorageImpl);
   }
 
   @override
@@ -292,6 +294,6 @@ class _$_Storage extends _Storage {
 }
 
 abstract class _Storage extends AuthFailure {
-  const factory _Storage() = _$_Storage;
+  const factory _Storage() = _$StorageImpl;
   const _Storage._() : super._();
 }

@@ -89,16 +89,16 @@ class _$SongCopyWithImpl<$Res, $Val extends Song> implements $SongCopyWith<$Res>
 }
 
 /// @nodoc
-abstract class _$$_SongCopyWith<$Res> implements $SongCopyWith<$Res> {
-  factory _$$_SongCopyWith(_$_Song value, $Res Function(_$_Song) then) = __$$_SongCopyWithImpl<$Res>;
+abstract class _$$SongImplCopyWith<$Res> implements $SongCopyWith<$Res> {
+  factory _$$SongImplCopyWith(_$SongImpl value, $Res Function(_$SongImpl) then) = __$$SongImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, String title, int songNumber, String lyrics, String artist, String chords, String url});
 }
 
 /// @nodoc
-class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song> implements _$$_SongCopyWith<$Res> {
-  __$$_SongCopyWithImpl(_$_Song _value, $Res Function(_$_Song) _then) : super(_value, _then);
+class __$$SongImplCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$SongImpl> implements _$$SongImplCopyWith<$Res> {
+  __$$SongImplCopyWithImpl(_$SongImpl _value, $Res Function(_$SongImpl) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -111,7 +111,7 @@ class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song> impl
     Object? chords = null,
     Object? url = null,
   }) {
-    return _then(_$_Song(
+    return _then(_$SongImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -146,8 +146,8 @@ class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song> impl
 
 /// @nodoc
 
-class _$_Song extends _Song {
-  const _$_Song(
+class _$SongImpl extends _Song {
+  const _$SongImpl(
       {required this.id,
       required this.title,
       required this.songNumber,
@@ -182,7 +182,7 @@ class _$_Song extends _Song {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Song &&
+            other is _$SongImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.songNumber, songNumber) || other.songNumber == songNumber) &&
@@ -198,7 +198,7 @@ class _$_Song extends _Song {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SongCopyWith<_$_Song> get copyWith => __$$_SongCopyWithImpl<_$_Song>(this, _$identity);
+  _$$SongImplCopyWith<_$SongImpl> get copyWith => __$$SongImplCopyWithImpl<_$SongImpl>(this, _$identity);
 }
 
 abstract class _Song extends Song {
@@ -209,7 +209,7 @@ abstract class _Song extends Song {
       required final String lyrics,
       required final String artist,
       required final String chords,
-      required final String url}) = _$_Song;
+      required final String url}) = _$SongImpl;
   const _Song._() : super._();
 
   @override
@@ -228,5 +228,5 @@ abstract class _Song extends Song {
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$$_SongCopyWith<_$_Song> get copyWith => throw _privateConstructorUsedError;
+  _$$SongImplCopyWith<_$SongImpl> get copyWith => throw _privateConstructorUsedError;
 }

@@ -6,20 +6,20 @@ part of 'backend_headers.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BackendHeaders _$$_BackendHeadersFromJson(Map<String, dynamic> json) => _$_BackendHeaders(
+_$BackendHeadersImpl _$$BackendHeadersImplFromJson(Map<String, dynamic> json) => _$BackendHeadersImpl(
       etag: json['etag'] as String?,
       link: json['link'] == null ? null : PaginationLink.fromJson(json['link'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_BackendHeadersToJson(_$_BackendHeaders instance) => <String, dynamic>{
+Map<String, dynamic> _$$BackendHeadersImplToJson(_$BackendHeadersImpl instance) => <String, dynamic>{
       'etag': instance.etag,
       'link': instance.link?.toJson(),
     };
 
-_$_PaginationLink _$$_PaginationLinkFromJson(Map<String, dynamic> json) => _$_PaginationLink(
+_$PaginationLinkImpl _$$PaginationLinkImplFromJson(Map<String, dynamic> json) => _$PaginationLinkImpl(
       maxPage: json['maxPage'] as int,
     );
 
-Map<String, dynamic> _$$_PaginationLinkToJson(_$_PaginationLink instance) => <String, dynamic>{
+Map<String, dynamic> _$$PaginationLinkImplToJson(_$PaginationLinkImpl instance) => <String, dynamic>{
       'maxPage': instance.maxPage,
     };

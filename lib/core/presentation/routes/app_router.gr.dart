@@ -11,14 +11,9 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Flutter imports:
+import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:flutter/material.dart' as _i9;
 
-// Package imports:
-import 'package:auto_route/auto_route.dart' as _i8;
-
-// Project imports:
 import '../../../auth/presentation/authorization_page.dart' as _i3;
 import '../../../auth/presentation/sign_in_page.dart' as _i2;
 import '../../../backend/core/domain/song.dart' as _i10;
