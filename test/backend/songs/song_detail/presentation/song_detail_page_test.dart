@@ -301,6 +301,19 @@ void main() {
         ),
         findsWidgets,
       );
+
+      expect(
+        find.text(
+          'Hide Chords',
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.text(
+          'Show Chords',
+        ),
+        findsNothing,
+      );
       double effectiveFontSize(RichText text) => text.textScaleFactor * text.text.style!.fontSize!;
       final text = tester.widget<RichText>(
         find
@@ -314,6 +327,19 @@ void main() {
       await tester.tap(find.byKey(SongDetailPageState.hideChordsKey));
       await tester.pumpAndSettle();
 
+      expect(
+        find.text(
+          'Hide Chords',
+        ),
+        findsNothing,
+      );
+
+      expect(
+        find.text(
+          'Show Chords',
+        ),
+        findsOneWidget,
+      );
       final newText = tester.widget<RichText>(
         find
             .textContaining(

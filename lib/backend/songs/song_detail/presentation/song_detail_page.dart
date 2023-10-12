@@ -323,7 +323,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                             hideChords = !hideChords;
                           });
                         },
-                        child: const Text('Hide Chords'),
+                        child: !hideChords ? const Text('Hide Chords') : const Text('Show Chords'),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
