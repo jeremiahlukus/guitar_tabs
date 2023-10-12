@@ -23,7 +23,7 @@ import 'package:joyful_noise/backend/songs/song_detail/presentation/audio_contro
 import 'package:joyful_noise/backend/songs/song_detail/presentation/common_audio.dart';
 import 'package:joyful_noise/backend/songs/song_detail/presentation/song_detail_page.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';
 import '../../../../_mocks/song/mock_song.dart';
 import '../../../../utils/router_test_utils.dart';

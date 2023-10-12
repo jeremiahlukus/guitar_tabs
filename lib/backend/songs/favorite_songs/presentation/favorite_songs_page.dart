@@ -12,9 +12,10 @@ import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart' as pub_search_bar;
+import '../../../../core/presentation/routes/app_router.dart';
 
+@RoutePage()
 class FavoriteSongsPage extends ConsumerStatefulWidget {
   const FavoriteSongsPage({super.key});
 

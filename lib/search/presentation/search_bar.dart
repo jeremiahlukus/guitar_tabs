@@ -12,8 +12,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 
 // Project imports:
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
 import 'package:joyful_noise/search/shared/providers.dart';
+import '../../core/presentation/routes/app_router.dart';
 
 // coverage:ignore-start
 // Most of this is implementing the material_floating_search_bar

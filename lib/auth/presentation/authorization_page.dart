@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
 import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
+@RoutePage()
 class AuthorizationPage extends StatefulWidget {
   const AuthorizationPage({
     required this.authorizationUrl,

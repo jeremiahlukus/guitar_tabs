@@ -6,7 +6,7 @@ import 'package:auto_route/auto_route.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/song.dart';
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 
 class SongTile extends StatelessWidget {
   final Song song;

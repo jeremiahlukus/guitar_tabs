@@ -19,7 +19,7 @@ import 'package:joyful_noise/backend/songs/favorite_songs/presentation/favorite_
 import 'package:joyful_noise/backend/songs/playlist_songs/infrastructure/playlist_songs_repository.dart';
 import 'package:joyful_noise/backend/songs/playlist_songs/notifiers/playlist_songs_notifier.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';
 import 'package:joyful_noise/search/notifiers/search_history_notifier.dart';
 import 'package:joyful_noise/search/shared/providers.dart';

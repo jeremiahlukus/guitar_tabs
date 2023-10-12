@@ -12,8 +12,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/shared/providers.dart';
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
+import '../../core/presentation/routes/app_router.dart';
 
+@RoutePage()
 class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});
 

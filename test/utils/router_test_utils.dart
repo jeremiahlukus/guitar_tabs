@@ -8,7 +8,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.dart';
+
+// Project imports:
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 

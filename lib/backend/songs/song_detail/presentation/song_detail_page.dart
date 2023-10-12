@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_chord/flutter_chord.dart';
 import 'package:flutter_guitar_tabs/flutter_guitar_tabs.dart';
@@ -33,6 +34,7 @@ String? encodeQueryParameters(Map<String, String> params) {
 }
 // coverage:ignore-end
 
+@RoutePage()
 class SongDetailPage extends ConsumerStatefulWidget {
   final Song song;
   const SongDetailPage({

@@ -14,7 +14,7 @@ import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
 import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
 import 'package:joyful_noise/auth/presentation/sign_in_page.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 import '../../utils/device.dart';
 import '../../utils/golden_test_device_scenario.dart';
 import 'fakes/webview_fakes.dart';

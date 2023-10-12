@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+@RoutePage()
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 

@@ -9,7 +9,7 @@ import 'package:websafe_svg/websafe_svg.dart';
 // Project imports:
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
-import 'package:joyful_noise/core/presentation/routes/app_router.gr.dart';
+import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 
 class SongDrawer extends ConsumerWidget {
   const SongDrawer({super.key});
