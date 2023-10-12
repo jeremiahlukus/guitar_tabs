@@ -4,7 +4,7 @@ version: 1.0.27
 publish_to: none
 
 environment:
-  sdk: ">=2.19.0 <3.2.2"
+  sdk: ">=3.1.0 <3.2.2"
 
 dependencies:
   url_launcher: ^6.1.14
