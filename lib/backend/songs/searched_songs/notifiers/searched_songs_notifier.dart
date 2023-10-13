@@ -15,4 +15,13 @@ class SearchedSongsNotifier extends PaginatedSongsNotifier {
   Future<void> getNextSearchedSongsPage(String query) async {
     await super.getNextPage((page) => _repository.getSearchedSongsPage(query, page));
   }
+
+  Future<void> getFirstPlaylistSearchedSongsPage(String query, String playlistName) async {
+    super.resetState();
+    await getNextPlaylistSearchedSongsPage(query, playlistName);
+  }
+
+  Future<void> getNextPlaylistSearchedSongsPage(String query, String playlistName) async {
+    await super.getNextPage((page) => _repository.getPlaylistSearchedSongsPage(query, page, playlistName));
+  }
 }

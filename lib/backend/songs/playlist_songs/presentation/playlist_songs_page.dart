@@ -44,7 +44,7 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
         hint: 'Search all songs...',
         // coverage:ignore-start
         onShouldNavigateToResultPage: (searchTerm) {
-          AutoRouter.of(context).push(SearchedSongsRoute(searchTerm: searchTerm));
+          AutoRouter.of(context).push(SearchedSongsRoute(searchTerm: searchTerm, playlistName: widget.playlistName));
         },
         // coverage:ignore-end
         onSignOutButtonPressed: () {

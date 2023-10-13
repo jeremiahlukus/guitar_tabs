@@ -15,8 +15,11 @@ import 'package:joyful_noise/search/presentation/search_bar.dart' as pub_search_
 @RoutePage()
 class SearchedSongsPage extends ConsumerStatefulWidget {
   final String searchTerm;
+
+  final String playlistName;
   const SearchedSongsPage({
     required this.searchTerm,
+    this.playlistName = '',
     super.key,
   });
 
@@ -29,7 +32,13 @@ class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      ref.read(searchedSongsNotifierProvider.notifier).getFirstSearchedSongsPage(widget.searchTerm);
+      if (widget.playlistName.isNotEmpty) {
+        ref
+            .read(searchedSongsNotifierProvider.notifier)
+            .getFirstPlaylistSearchedSongsPage(widget.searchTerm, widget.playlistName);
+      } else {
+        ref.read(searchedSongsNotifierProvider.notifier).getFirstSearchedSongsPage(widget.searchTerm);
+      }
     });
   }
 
@@ -42,7 +51,7 @@ class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
         // coverage:ignore-start
         onShouldNavigateToResultPage: (searchTerm) {
           AutoRouter.of(context).pushAndPopUntil(
-            SearchedSongsRoute(searchTerm: searchTerm),
+            SearchedSongsRoute(searchTerm: searchTerm, playlistName: widget.playlistName),
             predicate: (route) => route.settings.name == SearchedSongsRoute.name,
           );
         },
@@ -57,7 +66,13 @@ class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
             // coverage:ignore-start
             getNextPage: (ref, context) {
               // unable to mock this so this line isn't tested.
-              ref.read(searchedSongsNotifierProvider.notifier).getNextSearchedSongsPage(widget.searchTerm);
+              if (widget.playlistName.isNotEmpty) {
+                ref
+                    .read(searchedSongsNotifierProvider.notifier)
+                    .getFirstPlaylistSearchedSongsPage(widget.searchTerm, widget.playlistName);
+              } else {
+                ref.read(searchedSongsNotifierProvider.notifier).getNextSearchedSongsPage(widget.searchTerm);
+              }
             },
             // coverage:ignore-end
             noResultsMessage: 'This is all we could find for your search term.',

@@ -29,17 +29,3 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: SongDetailRoute.page, path: '/song_detail'),
       ];
 }
-
-// @MaterialAutoRouter(
-//   replaceInRouteName: 'Page,Route',
-//   routes: <AutoRoute>[
-//     AutoRoute<dynamic>(page: SplashPage, initial: true),
-//     AutoRoute<dynamic>(page: SignInPage, path: '/sign_in'),
-//     AutoRoute<dynamic>(page: AuthorizationPage, path: '/auth'),
-//     AutoRoute<dynamic>(page: FavoriteSongsPage, path: '/favorite_songs'),
-//     AutoRoute<dynamic>(page: PlaylistSongsPage, path: '/playlist_songs'),
-//     AutoRoute<dynamic>(page: SearchedSongsPage, path: '/searched_songs'),
-//     AutoRoute<dynamic>(page: SongDetailPage, path: '/song_detail'),
-//   ],
-// )
-// class $AppRouter {}
