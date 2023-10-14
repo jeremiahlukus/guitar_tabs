@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:newrelic_mobile/newrelic_mobile.dart';
 import 'package:oauth2/oauth2.dart';
 import 'package:platform/platform.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/domain/auth_failure.dart';
@@ -139,7 +139,7 @@ class WebAppAuthenticator {
         } else {
           if (!getIsDebugMode()) {
             // coverage:ignore-start
-            NewrelicMobile.instance.recordError(e, StackTrace.current);
+            await Sentry.captureException(e, stackTrace: StackTrace.current);
             // coverage:ignore-end
           }
           logger.e(e.error);

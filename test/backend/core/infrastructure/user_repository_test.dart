@@ -69,7 +69,7 @@ void main() {
         final UserRemoteService mockUserRemoteService = MockUserRemoteService();
         final UserLocalService mockUserLocalService = MockUserLocalService();
 
-        const userDTO = UserDTO(avatarUrl: 'www.example.com/avatarUrl', name: 'Name', email: 'hey@hey.com');
+        const userDTO = UserDTO(id: 0, email: 'hey@hey.com');
 
         when(mockUserRemoteService.getUserDetails).thenAnswer((_) {
           return Future.value(const RemoteResponse<UserDTO>.noConnection());
@@ -89,7 +89,7 @@ void main() {
         final UserRemoteService mockUserRemoteService = MockUserRemoteService();
         final UserLocalService mockUserLocalService = MockUserLocalService();
 
-        const userDTO = UserDTO(avatarUrl: 'www.example.com/avatarUrl', name: 'Name', email: 'hey@hey.com');
+        const userDTO = UserDTO(id: 0, email: 'hey@hey.com');
 
         when(mockUserRemoteService.getUserDetails).thenAnswer((_) {
           return Future.value(const RemoteResponse<UserDTO>.notModified());
@@ -109,7 +109,7 @@ void main() {
         final UserRemoteService mockUserRemoteService = MockUserRemoteService();
         final UserLocalService mockUserLocalService = MockUserLocalService();
 
-        const userDTO = UserDTO(avatarUrl: 'www.example.com/avatarUrl', name: 'Name', email: 'hey@hey.com');
+        const userDTO = UserDTO(id: 0, email: 'hey@hey.com');
 
         when(mockUserRemoteService.getUserDetails).thenAnswer((_) {
           return Future.value(

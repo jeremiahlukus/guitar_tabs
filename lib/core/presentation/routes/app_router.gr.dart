@@ -48,6 +48,7 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: SearchedSongsPage(
           searchTerm: args.searchTerm,
+          playlistName: args.playlistName,
           key: args.key,
         ),
       );
@@ -175,12 +176,14 @@ class PlaylistSongsRouteArgs {
 class SearchedSongsRoute extends PageRouteInfo<SearchedSongsRouteArgs> {
   SearchedSongsRoute({
     required String searchTerm,
+    String playlistName = '',
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           SearchedSongsRoute.name,
           args: SearchedSongsRouteArgs(
             searchTerm: searchTerm,
+            playlistName: playlistName,
             key: key,
           ),
           initialChildren: children,
@@ -194,16 +197,19 @@ class SearchedSongsRoute extends PageRouteInfo<SearchedSongsRouteArgs> {
 class SearchedSongsRouteArgs {
   const SearchedSongsRouteArgs({
     required this.searchTerm,
+    this.playlistName = '',
     this.key,
   });
 
   final String searchTerm;
 
+  final String playlistName;
+
   final Key? key;
 
   @override
   String toString() {
-    return 'SearchedSongsRouteArgs{searchTerm: $searchTerm, key: $key}';
+    return 'SearchedSongsRouteArgs{searchTerm: $searchTerm, playlistName: $playlistName, key: $key}';
   }
 }
 

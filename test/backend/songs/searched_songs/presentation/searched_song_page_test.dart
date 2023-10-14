@@ -44,7 +44,7 @@ class FakeUserNotifier extends UserNotifier {
   @override
   Future<void> getUserPage() async {
     state = const UserState.loadSuccess(
-      User(name: 'Jon Doe', avatarUrl: 'www.example.com/avatarUrl', email: 'hey@hey.com'),
+      User(id: 0, email: 'hey@hey.com'),
     );
     return;
   }
@@ -130,6 +130,46 @@ void main() {
       final finder = find.byType(pub_search_bar.SearchBar);
 
       expect(finder, findsOneWidget);
+    });
+
+    testWidgets('when playlistName is not empty calls getSearchedPlaylistSongsPage', (tester) async {
+      final mockSearchedSongRepository = MockSearchedSongsRepository();
+      final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      const playlist = 'Hymnal';
+      when(() => mockSearchedSongRepository.getPlaylistSearchedSongsPage('query', 1, playlist)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes([mockSong(1)]))),
+      );
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+
+      // ignore: unawaited_futures, cascade_invocations
+      router.push(SearchedSongsRoute(searchTerm: 'query', playlistName: playlist));
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      await pumpRouterApp(
+        tester,
+        [
+          searchedSongsNotifierProvider.overrideWith((_) => mockProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
+        ],
+        router,
+      );
+
+      await tester.pump(Duration.zero);
+      await tester.pumpAndSettle();
+      final finder = find.byType(pub_search_bar.SearchBar);
+
+      expect(finder, findsOneWidget);
+
+      final hintText = finder.evaluate().single.widget as pub_search_bar.SearchBar;
+      expect(
+        hintText.hint,
+        'Search $playlist songs...',
+      );
     });
     testWidgets('clicking on Sign Out button triggers provided AuthNotifiers signOut method', (tester) async {
       final mockSearchedSongRepository = MockSearchedSongsRepository();

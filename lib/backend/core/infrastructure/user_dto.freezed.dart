@@ -20,10 +20,8 @@ UserDTO _$UserDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserDTO {
-  String get name => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError; // ignore: invalid_annotation_target
-  @JsonKey(name: 'avatar_url')
-  String get avatarUrl => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +32,7 @@ mixin _$UserDTO {
 abstract class $UserDTOCopyWith<$Res> {
   factory $UserDTOCopyWith(UserDTO value, $Res Function(UserDTO) then) = _$UserDTOCopyWithImpl<$Res, UserDTO>;
   @useResult
-  $Res call({String name, String email, @JsonKey(name: 'avatar_url') String avatarUrl});
+  $Res call({int id, String email});
 }
 
 /// @nodoc
@@ -49,22 +47,17 @@ class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO> implements $UserDTOCopyW
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? id = null,
     Object? email = null,
-    Object? avatarUrl = null,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatarUrl: null == avatarUrl
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -76,7 +69,7 @@ abstract class _$$UserDTOImplCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
       __$$UserDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String email, @JsonKey(name: 'avatar_url') String avatarUrl});
+  $Res call({int id, String email});
 }
 
 /// @nodoc
@@ -87,22 +80,17 @@ class __$$UserDTOImplCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res, _$Us
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? id = null,
     Object? email = null,
-    Object? avatarUrl = null,
   }) {
     return _then(_$UserDTOImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatarUrl: null == avatarUrl
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -111,23 +99,18 @@ class __$$UserDTOImplCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res, _$Us
 /// @nodoc
 @JsonSerializable()
 class _$UserDTOImpl extends _UserDTO {
-  const _$UserDTOImpl({required this.name, required this.email, @JsonKey(name: 'avatar_url') required this.avatarUrl})
-      : super._();
+  const _$UserDTOImpl({required this.id, required this.email}) : super._();
 
   factory _$UserDTOImpl.fromJson(Map<String, dynamic> json) => _$$UserDTOImplFromJson(json);
 
   @override
-  final String name;
+  final int id;
   @override
   final String email;
-// ignore: invalid_annotation_target
-  @override
-  @JsonKey(name: 'avatar_url')
-  final String avatarUrl;
 
   @override
   String toString() {
-    return 'UserDTO(name: $name, email: $email, avatarUrl: $avatarUrl)';
+    return 'UserDTO(id: $id, email: $email)';
   }
 
   @override
@@ -135,14 +118,13 @@ class _$UserDTOImpl extends _UserDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserDTOImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, email, avatarUrl);
+  int get hashCode => Object.hash(runtimeType, id, email);
 
   @JsonKey(ignore: true)
   @override
@@ -158,21 +140,15 @@ class _$UserDTOImpl extends _UserDTO {
 }
 
 abstract class _UserDTO extends UserDTO {
-  const factory _UserDTO(
-      {required final String name,
-      required final String email,
-      @JsonKey(name: 'avatar_url') required final String avatarUrl}) = _$UserDTOImpl;
+  const factory _UserDTO({required final int id, required final String email}) = _$UserDTOImpl;
   const _UserDTO._() : super._();
 
   factory _UserDTO.fromJson(Map<String, dynamic> json) = _$UserDTOImpl.fromJson;
 
   @override
-  String get name;
+  int get id;
   @override
   String get email;
-  @override // ignore: invalid_annotation_target
-  @JsonKey(name: 'avatar_url')
-  String get avatarUrl;
   @override
   @JsonKey(ignore: true)
   _$$UserDTOImplCopyWith<_$UserDTOImpl> get copyWith => throw _privateConstructorUsedError;

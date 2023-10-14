@@ -85,8 +85,7 @@ void main() {
         expect(actualStateResult, expectedStateResultMatcher);
       });
     });
-  });
-  group('SearchedSongsNotifier', () {
+
     group('.getFirstSearchedSongsPage', () {
       test(
           'sets state to PaginatedSongsState.loadSuccess if  SearchedSongRepository.getFirstSearchedSongsPage returns a Song',
@@ -112,26 +111,145 @@ void main() {
 
         expect(actualStateResult, expectedStateResultMatcher);
       });
+
+      test('resets the page to 2', () async {
+        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        const page = 1;
+        final defaultSong = [MockSong()];
+
+        when(() => mockSearchedSongRepository.getSearchedSongsPage('query', page)).thenAnswer(
+          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+        );
+
+        final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository)..page = 10;
+
+        await searchedSongNotifier.getFirstSearchedSongsPage('query');
+
+        final actualPageResult = searchedSongNotifier.page;
+
+        const expectedPageResult = 2;
+
+        expect(actualPageResult, expectedPageResult);
+      });
     });
 
-    test('resets the page to 2', () async {
-      final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
-      const page = 1;
-      final defaultSong = [MockSong()];
+    group('.getNextPlaylistSearchedSongsPage', () {
+      test(
+          'sets state to PaginatedSongsState.loadFailure if SearchedSongRepository.getNextSearchedSongsPage returns a BackendFailure',
+          () async {
+        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        const page = 1;
+        const playlist = 'Hymnal';
+        when(() => mockSearchedSongRepository.getPlaylistSearchedSongsPage('query', page, playlist)).thenAnswer(
+          (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+        );
 
-      when(() => mockSearchedSongRepository.getSearchedSongsPage('query', page)).thenAnswer(
-        (invocation) => Future.value(right(Fresh.yes(defaultSong))),
-      );
+        final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
+        final defaultSong = [MockSong()];
+        // ignore: invalid_use_of_protected_member
+        searchedSongNotifier.state = searchedSongNotifier.state.copyWith(songs: Fresh.yes(defaultSong));
 
-      final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository)..page = 10;
+        await searchedSongNotifier.getNextPlaylistSearchedSongsPage('query', playlist);
 
-      await searchedSongNotifier.getFirstSearchedSongsPage('query');
+        // ignore: invalid_use_of_protected_member
+        final actualStateResult = searchedSongNotifier.state;
 
-      final actualPageResult = searchedSongNotifier.page;
+        final expectedStateResultMatcher = equals(
+          PaginatedSongsState.loadFailure(
+            Fresh.yes(defaultSong),
+            const BackendFailure.api(400, 'message'),
+          ),
+        );
 
-      const expectedPageResult = 2;
+        expect(actualStateResult, expectedStateResultMatcher);
+      });
 
-      expect(actualPageResult, expectedPageResult);
+      test(
+          'sets state to PaginatedSongsState.loadSuccess if  SearchedSongRepository.getNextPlaylistSearchedSongsPage returns a Song',
+          () async {
+        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        const page = 1;
+        const playlist = 'Hymnal';
+        final defaultSong = [MockSong()];
+        when(() => mockSearchedSongRepository.getPlaylistSearchedSongsPage('query', page, playlist)).thenAnswer(
+          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+        );
+
+        final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
+
+        await searchedSongNotifier.getNextPlaylistSearchedSongsPage('query', playlist);
+
+        // ignore: invalid_use_of_protected_member
+        final actualStateResult = searchedSongNotifier.state;
+
+        final expectedStateResultMatcher = equals(
+          PaginatedSongsState.loadSuccess(Fresh.yes(defaultSong), isNextPageAvailable: false),
+        );
+
+        expect(actualStateResult, expectedStateResultMatcher);
+      });
+
+      test(
+          'sets state to PaginatedSongsState.initial if SearchedSongRepository.getNextPlaylistSearchedSongsPage not called',
+          () async {
+        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
+        // ignore: invalid_use_of_protected_member
+        final actualStateResult = searchedSongNotifier.state;
+
+        final expectedStateResultMatcher = equals(
+          PaginatedSongsState.initial(Fresh.yes([])),
+        );
+
+        expect(actualStateResult, expectedStateResultMatcher);
+      });
+    });
+
+    group('.getPlaylistSearchedSongsPage', () {
+      test(
+          'sets state to PaginatedSongsState.loadSuccess if  SearchedSongRepository.getFirstSearchedSongsPage returns a Song',
+          () async {
+        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        const page = 1;
+        final defaultSong = [MockSong()];
+        const playlist = 'Hymnal';
+        when(() => mockSearchedSongRepository.getPlaylistSearchedSongsPage('query', page, playlist)).thenAnswer(
+          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+        );
+
+        final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
+
+        await searchedSongNotifier.getFirstPlaylistSearchedSongsPage('query', playlist);
+
+        // ignore: invalid_use_of_protected_member
+        final actualStateResult = searchedSongNotifier.state;
+
+        final expectedStateResultMatcher = equals(
+          PaginatedSongsState.loadSuccess(Fresh.yes(defaultSong), isNextPageAvailable: false),
+        );
+
+        expect(actualStateResult, expectedStateResultMatcher);
+      });
+
+      test('resets the page to 2', () async {
+        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        const page = 1;
+        final defaultSong = [MockSong()];
+        const playlist = 'Hymnal';
+        when(() => mockSearchedSongRepository.getPlaylistSearchedSongsPage('query', page, playlist)).thenAnswer(
+          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+        );
+
+        final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository)..page = 10;
+
+        await searchedSongNotifier.getFirstPlaylistSearchedSongsPage('query', playlist);
+
+        final actualPageResult = searchedSongNotifier.page;
+
+        const expectedPageResult = 2;
+
+        expect(actualPageResult, expectedPageResult);
+      });
     });
   });
 }

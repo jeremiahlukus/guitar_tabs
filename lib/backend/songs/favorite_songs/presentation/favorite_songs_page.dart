@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/shared/providers.dart';
@@ -28,6 +29,7 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   void initState() {
     Future.microtask(() {
       ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
+      ref.read(userNotifierProvider.notifier).getUserPage();
     });
 
     super.initState();
@@ -39,6 +41,8 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   static final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final userState = ref.watch(userNotifierProvider);
+    Sentry.captureMessage('User Logged in: ${userState.user.email}');
     return Scaffold(
       key: scaffoldKey,
       drawer: const SongDrawer(),

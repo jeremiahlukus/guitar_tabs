@@ -1,12 +1,13 @@
 name: joyful_noise
 description: A Very Good Project created by Very Good CLI.
-version: 1.0.28
+version: 1.0.31
 publish_to: none
 
 environment:
   sdk: ">=3.1.0 <3.2.2"
 
 dependencies:
+  sentry_flutter: ^7.10.1
   url_launcher: ^6.1.14
   auto_route: ^7.8.4
   auto_size_text: ^3.0.0
@@ -46,7 +47,6 @@ dependencies:
   material_floating_search_bar_2: ^0.5.0
   just_audio: ^0.9.35
   rxdart: ^0.27.7
-  newrelic_mobile: ^1.0.3
   flutter_dotenv: ^5.1.0
 
 

@@ -30,4 +30,23 @@ class SearchedSongsRemoteService extends SongsPageRemoteService {
         ),
         jsonDataSelector: (dynamic json) => json as List<dynamic>,
       );
+
+  Future<RemoteResponse<List<SongDTO>>> getPlaylistSearchedSongsPage(
+    String query,
+    int page,
+    String playlistName,
+  ) async =>
+      super.getPage(
+        storeEtag: false,
+        requestUri: Uri.https(
+          BackendConstants().backendBaseUrl(),
+          '/api/v1/playlist_songs/$playlistName',
+          <String, dynamic>{
+            'query': query,
+            'page': '$page',
+            'per_page': PaginationConfig.itemsPerPage.toString(),
+          },
+        ),
+        jsonDataSelector: (dynamic json) => json as List<dynamic>,
+      );
 }

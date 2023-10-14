@@ -3,7 +3,7 @@ import 'dart:io';
 
 // Package imports:
 import 'package:dartz/dartz.dart';
-import 'package:newrelic_mobile/newrelic_mobile.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
@@ -57,7 +57,53 @@ class SearchedSongsRepository {
     } on RestApiException catch (e) {
       if (!Platform.environment.containsKey('FLUTTER_TEST')) {
         // coverage:ignore-start
-        NewrelicMobile.instance.recordError(e, StackTrace.current);
+        await Sentry.captureException(e, stackTrace: StackTrace.current);
+        // coverage:ignore-end
+      }
+      logger.e(e);
+      return left(BackendFailure.api(e.errorCode, ''));
+    }
+  }
+
+  Future<Either<BackendFailure, Fresh<List<Song>>>> getPlaylistSearchedSongsPage(
+    String query,
+    int page,
+    String playlistName,
+  ) async {
+    try {
+      final remotePageItems = await _remoteService.getPlaylistSearchedSongsPage(query, page, playlistName);
+      final localDTO = await remotePageItems.maybeWhen(
+        noConnection: () {
+          return _localService.searchLocalSongs(query).then((_) => _.toDomain());
+        },
+        orElse: () {},
+      );
+
+      final localPage = await remotePageItems.maybeWhen(
+        noConnection: () async {
+          return page < await _localService.getLocalPageCount();
+        },
+        orElse: () {},
+      );
+      return right(
+        remotePageItems.maybeWhen(
+          noConnection: () {
+            return Fresh.no(
+              localDTO!,
+              isNextPageAvailable: localPage ?? false,
+            );
+          },
+          withNewData: (data, maxPage) => Fresh.yes(
+            data.toDomain(),
+            isNextPageAvailable: page < (maxPage ?? 0),
+          ),
+          orElse: () => Fresh.no([], isNextPageAvailable: false),
+        ),
+      );
+    } on RestApiException catch (e) {
+      if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+        // coverage:ignore-start
+        await Sentry.captureException(e, stackTrace: StackTrace.current);
         // coverage:ignore-end
       }
       logger.e(e);

@@ -7,13 +7,11 @@ part of 'user_dto.dart';
 // **************************************************************************
 
 _$UserDTOImpl _$$UserDTOImplFromJson(Map<String, dynamic> json) => _$UserDTOImpl(
-      name: json['name'] as String,
+      id: json['id'] as int,
       email: json['email'] as String,
-      avatarUrl: json['avatar_url'] as String,
     );
 
 Map<String, dynamic> _$$UserDTOImplToJson(_$UserDTOImpl instance) => <String, dynamic>{
-      'name': instance.name,
+      'id': instance.id,
       'email': instance.email,
-      'avatar_url': instance.avatarUrl,
     };

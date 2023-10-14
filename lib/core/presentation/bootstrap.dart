@@ -9,8 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:newrelic_mobile/config.dart';
-import 'package:newrelic_mobile/newrelic_mobile.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/core/infrastructure/provider_logger.dart';
@@ -21,43 +20,50 @@ Logger logger = Logger();
 Future<void> bootstrap(Widget Function() builder, String envFile) async {
   // ignore: avoid_redundant_argument_values
   await dotenv.load(fileName: envFile);
-  var appToken = '';
+  var sentryUrl = '';
 
   if (Platform.isAndroid) {
-    appToken = '<android app token>';
+    sentryUrl = '<android app token>';
   } else if (Platform.isIOS) {
-    appToken = dotenv.env['NR_IOS_TOKEN']!;
+    sentryUrl = dotenv.env['SENTRY_URL']!;
   }
   WidgetsFlutterBinding.ensureInitialized();
-  final config = Config(
-    accessToken: appToken,
-  );
 
-  FlutterError.onError = (details) {
+  FlutterError.onError = (details) async {
     final errorMap = <String, String>{
       'error': details.exceptionAsString(),
       'stackTrace': details.stack.toString(),
     };
     // coverage:ignore-start
-    NewrelicMobile.instance.recordError(details, details.stack);
+    await Sentry.captureException(details, stackTrace: details.stack);
     // coverage:ignore-end
     logger.e(errorMap);
   };
   await runZonedGuarded(
     () async {
-      await NewrelicMobile.instance.start(config, () {
-        runApp(
+      await SentryFlutter.init(
+        (options) {
+          options
+            ..dsn = sentryUrl //'https://8a60663eda2040fea03dcb1516c256be@o240021.ingest.sentry.io/6089800'
+            ..tracesSampleRate = 1.0;
+
+          // Set tracesSampleRate to 1.0 to capture 100% of transactions
+          // for performance monitoring.
+          // We recommend adjusting this value in production.
+        },
+        appRunner: () => runApp(
           ProviderScope(observers: [ProviderLogger()], child: builder()),
-        );
-      });
+        ),
+      );
     },
-    (error, stackTrace) {
+    (error, stackTrace) async {
       final errorMap = <String, String>{
         'error': error.toString(),
         'stackTrace': stackTrace.toString(),
       };
+
       // coverage:ignore-start
-      NewrelicMobile.instance.recordError(error, stackTrace);
+      await Sentry.captureException(error, stackTrace: stackTrace);
       // coverage:ignore-end
       logger.e(errorMap);
     },

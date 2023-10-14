@@ -4,7 +4,7 @@ import 'dart:io';
 // Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:newrelic_mobile/newrelic_mobile.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/infrastructure/backend_base_url.dart';
@@ -90,7 +90,7 @@ class SongDetailRemoteService {
       } else if (e.response != null) {
         if (!Platform.environment.containsKey('FLUTTER_TEST')) {
           // coverage:ignore-start
-          NewrelicMobile.instance.recordError(e, StackTrace.current);
+          await Sentry.captureException(e, stackTrace: StackTrace.current);
           // coverage:ignore-end
         }
         throw RestApiException(e.response?.statusCode);
