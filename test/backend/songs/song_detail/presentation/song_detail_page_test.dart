@@ -6,7 +6,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_chord/flutter_chord.dart';
 import 'package:flutter_guitar_tabs/flutter_guitar_tabs.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
