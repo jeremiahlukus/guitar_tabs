@@ -198,7 +198,8 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
                   title: LinearProgressIndicator(),
                 ),
                 error: (_) => ListTile(
-                  title: Text('Very unexpected error ${_.error}'),
+                  title: Text(
+                      'Very unexpected error ${_.error}. Please screenshot and report this to jeremiahlukus1@gmail.com'),
                 ),
               );
             },

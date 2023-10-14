@@ -41,7 +41,7 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
     return Scaffold(
       body: pub_search_bar.SearchBar(
         title: '${toBeginningOfSentenceCase(widget.playlistName)} Songs',
-        hint: 'Search all songs...',
+        hint: 'Search ${widget.playlistName} songs...',
         // coverage:ignore-start
         onShouldNavigateToResultPage: (searchTerm) {
           AutoRouter.of(context).push(SearchedSongsRoute(searchTerm: searchTerm, playlistName: widget.playlistName));

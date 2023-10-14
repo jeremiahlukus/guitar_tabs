@@ -337,6 +337,18 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                           style: chordStyle,
                         ),
                       ),
+                      widget.song.songNumber != 0
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 16,
+                              ),
+                              child: AutoSizeText(
+                                'Song Number: ${widget.song.songNumber}',
+                                maxLines: 1,
+                                style: textStyle,
+                              ),
+                            )
+                          : Container(),
                       widget.song.url.isNotEmpty
                           ? Column(
                               children: [

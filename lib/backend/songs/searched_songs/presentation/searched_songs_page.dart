@@ -47,7 +47,7 @@ class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
     return Scaffold(
       body: pub_search_bar.SearchBar(
         title: widget.searchTerm,
-        hint: 'Search all songs...',
+        hint: widget.playlistName.isEmpty ? 'Search all songs...' : 'Search ${widget.playlistName} songs...',
         // coverage:ignore-start
         onShouldNavigateToResultPage: (searchTerm) {
           AutoRouter.of(context).pushAndPopUntil(
