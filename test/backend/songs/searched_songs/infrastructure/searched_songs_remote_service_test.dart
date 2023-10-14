@@ -91,5 +91,73 @@ void main() {
         expect(actualResult, expectedResult);
       });
     });
+
+    group('.getPlaylistSearchedSongsPage', () {
+      test('returns RemoteResponse.notModified when response status code is 304 ', () async {
+        final Dio mockDio = MockDio();
+        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
+
+        when(
+          () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenAnswer(
+          (invocation) => Future.value(
+            Response<dynamic>(
+              requestOptions: RequestOptions(),
+              statusCode: 304,
+            ),
+          ),
+        );
+
+        when(() => mockBackendHeadersCache.getHeaders(any())).thenAnswer(
+          (invocation) => Future.value(),
+        );
+
+        final searchedSongRemoteService = SearchedSongsRemoteService(mockDio, mockBackendHeadersCache);
+
+        final actualResult = await searchedSongRemoteService.getPlaylistSearchedSongsPage('query', 1, 'Hymnal');
+        const expectedResult = RemoteResponse<List<SongDTO>>.notModified(maxPage: 0);
+
+        expect(actualResult, expectedResult);
+      });
+
+      test('returns RemoteResponse.withNewData when response status code is 200 ', () async {
+        final Dio mockDio = MockDio();
+        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
+
+        final mockData = [
+          mockSongJson(1),
+          mockSongJson(2),
+        ];
+
+        final convertedData = [SongDTO.fromJson(mockData.first), SongDTO.fromJson(mockData.last)];
+
+        when(
+          () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
+        ).thenAnswer(
+          (invocation) => Future.value(
+            Response<dynamic>(
+              requestOptions: RequestOptions(),
+              statusCode: 200,
+              data: mockData,
+            ),
+          ),
+        );
+
+        when(() => mockBackendHeadersCache.getHeaders(any())).thenAnswer(
+          (invocation) => Future.value(),
+        );
+
+        when(() => mockBackendHeadersCache.saveHeaders(any(), any())).thenAnswer(
+          (invocation) => Future.value(),
+        );
+
+        final searchedSongRemoteService = SearchedSongsRemoteService(mockDio, mockBackendHeadersCache);
+
+        final actualResult = await searchedSongRemoteService.getPlaylistSearchedSongsPage('query', 1, 'Hymnal');
+        final expectedResult = RemoteResponse<List<SongDTO>>.withNewData(convertedData, maxPage: 1);
+
+        expect(actualResult, expectedResult);
+      });
+    });
   });
 }
