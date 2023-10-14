@@ -6,6 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_chord/flutter_chord.dart';
 import 'package:flutter_guitar_tabs/flutter_guitar_tabs.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
@@ -559,10 +560,46 @@ void main() {
         ],
         router,
       );
+      expect(find.textContaining('Song Number:'), findsOneWidget);
       expect(find.byIcon(Icons.play_arrow), findsNothing);
       expect(find.byIcon(Icons.pause), findsNothing);
       expect(find.byKey(SeekBar.seekbarKey), findsNothing);
       expect(find.textContaining('Suggest Changes'), findsOneWidget);
+    });
+    testWidgets('when song number is empty does not display Song Number', (tester) async {
+      final router = AppRouter();
+      final mockSongDetailRepository = MockSongDetailRepository();
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+
+      final mockDetailProvider = SongDetailNotifier(mockSongDetailRepository);
+      const songDetail = SongDetail(isFavorite: true, songId: '1');
+
+      when(() => mockSongDetailRepository.getSongDetail(0)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes(songDetail))),
+      );
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
+        (invocation) => Future.value(right(Fresh.yes([mockEmptySong(0)]))),
+      );
+
+      // ignore: invalid_use_of_protected_member
+      mockDetailProvider.state = mockDetailProvider.state.copyWith(hasFavoriteStatusChanged: true);
+
+      // ignore: invalid_use_of_protected_member
+      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockEmptySong(0)]));
+
+      // ignore: unawaited_futures
+      router.push(SongDetailRoute(song: mockEmptySong(0)));
+      await pumpRouterApp(
+        tester,
+        [
+          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
+          songDetailNotifierProvider.overrideWith((_) => mockDetailProvider),
+        ],
+        router,
+      );
+      expect(find.textContaining('Song Number:'), findsNothing);
     });
   });
 }
