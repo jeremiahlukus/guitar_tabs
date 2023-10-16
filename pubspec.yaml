@@ -31,7 +31,7 @@ dependencies:
   logger: ^2.0.2+1
   path: ^1.8.2
   responsive_framework: ^0.2.0
-  riverpod: ^2.4.3
+  riverpod: ^2.4.4
   webview_flutter: ^4.4.1
   sembast: ^3.5.0+1
   path_provider: ^2.1.1
