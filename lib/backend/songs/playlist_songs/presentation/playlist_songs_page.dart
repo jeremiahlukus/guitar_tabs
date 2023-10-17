@@ -10,7 +10,9 @@ import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
+import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
+import 'package:joyful_noise/core/presentation/toasts.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart' as pub_search_bar;
 
 @RoutePage()
@@ -33,12 +35,29 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
     });
 
     super.initState();
+    var seconds = 2;
+    const isRunningInCi = bool.fromEnvironment('CI', defaultValue: false);
+    if (isRunningInCi) {
+      seconds = 0;
+    }
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => showHelpToast(
+        'Your Searches will now be limited to the:\n ${widget.playlistName}\nSearch for title, lyircs or song number',
+        context,
+        seconds,
+      ),
+    );
   }
 
   static const signOutButtonKey = ValueKey('signOutButtonKey');
+
+  @visibleForTesting
+  static final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      drawer: const SongDrawer(),
       body: pub_search_bar.SearchBar(
         title: '${toBeginningOfSentenceCase(widget.playlistName)} Songs',
         hint: 'Search ${widget.playlistName} songs...',

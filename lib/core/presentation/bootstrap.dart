@@ -44,12 +44,8 @@ Future<void> bootstrap(Widget Function() builder, String envFile) async {
       await SentryFlutter.init(
         (options) {
           options
-            ..dsn = sentryUrl //'https://8a60663eda2040fea03dcb1516c256be@o240021.ingest.sentry.io/6089800'
+            ..dsn = sentryUrl
             ..tracesSampleRate = 1.0;
-
-          // Set tracesSampleRate to 1.0 to capture 100% of transactions
-          // for performance monitoring.
-          // We recommend adjusting this value in production.
         },
         appRunner: () => runApp(
           ProviderScope(observers: [ProviderLogger()], child: builder()),

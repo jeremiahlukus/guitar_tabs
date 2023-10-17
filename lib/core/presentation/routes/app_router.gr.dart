@@ -21,7 +21,8 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: AuthorizationPage(
           authorizationUrl: args.authorizationUrl,
-          onAuthorizationCodeRedirectAttempt: args.onAuthorizationCodeRedirectAttempt,
+          onAuthorizationCodeRedirectAttempt:
+              args.onAuthorizationCodeRedirectAttempt,
           key: args.key,
         ),
       );
@@ -90,7 +91,8 @@ class AuthorizationRoute extends PageRouteInfo<AuthorizationRouteArgs> {
           AuthorizationRoute.name,
           args: AuthorizationRouteArgs(
             authorizationUrl: authorizationUrl,
-            onAuthorizationCodeRedirectAttempt: onAuthorizationCodeRedirectAttempt,
+            onAuthorizationCodeRedirectAttempt:
+                onAuthorizationCodeRedirectAttempt,
             key: key,
           ),
           initialChildren: children,
@@ -98,7 +100,8 @@ class AuthorizationRoute extends PageRouteInfo<AuthorizationRouteArgs> {
 
   static const String name = 'AuthorizationRoute';
 
-  static const PageInfo<AuthorizationRouteArgs> page = PageInfo<AuthorizationRouteArgs>(name);
+  static const PageInfo<AuthorizationRouteArgs> page =
+      PageInfo<AuthorizationRouteArgs>(name);
 }
 
 class AuthorizationRouteArgs {
@@ -152,7 +155,8 @@ class PlaylistSongsRoute extends PageRouteInfo<PlaylistSongsRouteArgs> {
 
   static const String name = 'PlaylistSongsRoute';
 
-  static const PageInfo<PlaylistSongsRouteArgs> page = PageInfo<PlaylistSongsRouteArgs>(name);
+  static const PageInfo<PlaylistSongsRouteArgs> page =
+      PageInfo<PlaylistSongsRouteArgs>(name);
 }
 
 class PlaylistSongsRouteArgs {
@@ -191,7 +195,8 @@ class SearchedSongsRoute extends PageRouteInfo<SearchedSongsRouteArgs> {
 
   static const String name = 'SearchedSongsRoute';
 
-  static const PageInfo<SearchedSongsRouteArgs> page = PageInfo<SearchedSongsRouteArgs>(name);
+  static const PageInfo<SearchedSongsRouteArgs> page =
+      PageInfo<SearchedSongsRouteArgs>(name);
 }
 
 class SearchedSongsRouteArgs {
@@ -245,7 +250,8 @@ class SongDetailRoute extends PageRouteInfo<SongDetailRouteArgs> {
 
   static const String name = 'SongDetailRoute';
 
-  static const PageInfo<SongDetailRouteArgs> page = PageInfo<SongDetailRouteArgs>(name);
+  static const PageInfo<SongDetailRouteArgs> page =
+      PageInfo<SongDetailRouteArgs>(name);
 }
 
 class SongDetailRouteArgs {

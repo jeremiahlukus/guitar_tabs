@@ -6,8 +6,9 @@ import 'package:alchemist/alchemist.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:joyful_noise/backend/songs/playlist_songs/presentation/playlist_songs_page.dart';
 import 'package:mocktail/mocktail.dart';
-
+import 'package:flutter/scheduler.dart' show timeDilation;
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/user.dart';
 import 'package:joyful_noise/backend/core/infrastructure/backend_headers_cache.dart';
@@ -84,8 +85,10 @@ void main() {
       scaffoldKey.currentState!.openDrawer();
       await tester.pumpAndSettle(const Duration(seconds: 1));
       expect(find.byType(DrawerHeader), findsOneWidget);
+      timeDilation = 1;
     });
-    testWidgets('taping on Athens Song Book navigates to playlist song page', (tester) async {
+    testWidgets('taping on Athens Song Book navigates to playlist song page and back to favorite songs',
+        (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
       final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
       final router = AppRouter();
@@ -130,6 +133,15 @@ void main() {
       await tester.tap(find.byKey(SongDrawer.athensSongBook));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Athens Songbook'), findsOneWidget);
+
+      await tester.pump(Duration.zero);
+      PlaylistSongsPageState.scaffoldKey.currentState!.openDrawer();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.byType(DrawerHeader), findsOneWidget);
+      await tester.tap(find.byKey(SongDrawer.favoriteKey));
+      expect(router.currentUrl, '/favorite_songs');
+      expect(find.text('Favorite Songs'), findsOneWidget);
+      timeDilation = 1;
     });
     testWidgets('taping on Hymnal navigates to playlist song page', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();

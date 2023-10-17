@@ -10,6 +10,7 @@ class LoadingSongTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
+      period: const Duration(milliseconds: 1600),
       baseColor: Colors.grey.shade400,
       highlightColor: Colors.grey.shade200,
       child: ListTile(

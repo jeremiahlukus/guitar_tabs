@@ -106,7 +106,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
             icon: const Icon(Icons.arrow_back_ios),
             splashRadius: 18,
             onPressed: () {
-              AutoRouter.of(context).popUntilRouteWithName(FavoriteSongsRoute.name);
+              AutoRouter.of(context).pop();
             },
           )
         else if (AutoRouter.of(context).canPop())

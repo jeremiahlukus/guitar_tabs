@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:joyful_noise/core/presentation/toasts.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
@@ -31,8 +32,19 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
       ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
       ref.read(userNotifierProvider.notifier).getUserPage();
     });
-
     super.initState();
+    var seconds = 5;
+    const isRunningInCi = bool.fromEnvironment('CI', defaultValue: false);
+    if (isRunningInCi) {
+      seconds = 0;
+    }
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => showHelpToast(
+        'On this screen your searches will\n include results from\n ALL 6k+ songs (new and old)\nSearch for titles, lyrics and song numbers\n\nYour favorite songs will show up on this screen and will not require internet to access',
+        context,
+        seconds,
+      ),
+    );
   }
 
   static const signOutButtonKey = ValueKey('signOutButtonKey');
@@ -43,6 +55,7 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   Widget build(BuildContext context) {
     final userState = ref.watch(userNotifierProvider);
     Sentry.captureMessage('User Logged in: ${userState.user.email}');
+
     return Scaffold(
       key: scaffoldKey,
       drawer: const SongDrawer(),

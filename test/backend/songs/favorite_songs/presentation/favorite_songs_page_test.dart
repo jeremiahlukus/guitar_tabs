@@ -87,7 +87,7 @@ void main() {
         ],
         router,
       );
-
+      await tester.pumpAndSettle(const Duration(seconds: 5));
       final finder = find.byType(PaginatedSongsListView);
 
       expect(finder, findsOneWidget);
