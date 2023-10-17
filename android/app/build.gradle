@@ -70,9 +70,18 @@ android {
         }
     }
 
+    signingConfigs {
+       release {
+            storeFile file("upload-keystore.jks")
+            storePassword "Ajjmll11"
+            keyAlias "upload"
+            keyPassword "Ajjmll11"
+       }
+   }
+
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
            
         }
         debug {
