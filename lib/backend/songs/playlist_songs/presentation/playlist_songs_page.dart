@@ -51,12 +51,9 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
 
   static const signOutButtonKey = ValueKey('signOutButtonKey');
 
-  @visibleForTesting
-  static final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       drawer: const SongDrawer(),
       body: pub_search_bar.SearchBar(
         title: '${toBeginningOfSentenceCase(widget.playlistName)} Songs',

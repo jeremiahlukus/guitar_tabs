@@ -31,9 +31,6 @@ class SongDrawer extends ConsumerWidget {
     timeDilation = 0.0001;
     return Drawer(
       key: drawerKey,
-      // Add a ListView to the drawer. This ensures the user can scroll
-      // through the options in the drawer if there isn't enough vertical
-      // space to fit everything.
       child: Column(
         // Important: Remove any padding from the ListView.
         // padding: EdgeInsets.zero,
@@ -130,6 +127,7 @@ class SongDrawer extends ConsumerWidget {
               children: [
                 const Divider(),
                 ListTile(
+                  dense: true,
                   key: deleteUser,
                   title: const Text(
                     'Delete Account',
