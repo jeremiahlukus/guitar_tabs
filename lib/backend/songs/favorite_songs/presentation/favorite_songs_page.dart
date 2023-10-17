@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:joyful_noise/core/presentation/toasts.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
@@ -15,6 +14,7 @@ import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
+import 'package:joyful_noise/core/presentation/toasts.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart' as pub_search_bar;
 
 @RoutePage()
@@ -34,7 +34,7 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
     });
     super.initState();
     var seconds = 5;
-    const isRunningInCi = bool.fromEnvironment('CI', defaultValue: false);
+    const isRunningInCi = bool.fromEnvironment('CI');
     if (isRunningInCi) {
       seconds = 0;
     }

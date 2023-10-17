@@ -36,7 +36,7 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
 
     super.initState();
     var seconds = 2;
-    const isRunningInCi = bool.fromEnvironment('CI', defaultValue: false);
+    const isRunningInCi = bool.fromEnvironment('CI');
     if (isRunningInCi) {
       seconds = 0;
     }

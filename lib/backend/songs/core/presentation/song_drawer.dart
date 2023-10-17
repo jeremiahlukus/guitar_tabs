@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
 
 // Package imports:
 import 'package:auto_route/auto_route.dart';
@@ -10,7 +11,6 @@ import 'package:websafe_svg/websafe_svg.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
-import 'package:flutter/scheduler.dart' show timeDilation;
 
 class SongDrawer extends ConsumerWidget {
   const SongDrawer({super.key});
