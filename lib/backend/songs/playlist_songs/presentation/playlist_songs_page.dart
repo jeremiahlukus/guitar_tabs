@@ -42,7 +42,7 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
     }
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showHelpToast(
-        'Your Searches will now be limited to the:\n ${widget.playlistName}\nSearch for title, lyircs or song number',
+        'Your Searches will now\n be limited to the:\n ${widget.playlistName}\nSearch for title,\n lyircs or song number',
         context,
         seconds,
       ),

@@ -33,16 +33,10 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
       ref.read(userNotifierProvider.notifier).getUserPage();
     });
     super.initState();
-    var seconds = 5;
-    const isRunningInCi = bool.fromEnvironment('CI');
-    if (isRunningInCi) {
-      seconds = 0;
-    }
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => showHelpToast(
-        'On this screen your searches will\n include results from\n ALL 6k+ songs (new and old)\nSearch for titles, lyrics and song numbers\n\nYour favorite songs will show up on this screen and will not require internet to access',
+      (_) => showHelpDialog(
+        'On this screen your searches\n will include results from\n ALL 6k+ songs (new and old)\nSearch for titles, lyrics and song numbers\n\nYour favorite songs will show up on this screen and will not require internet to access',
         context,
-        seconds,
       ),
     );
   }

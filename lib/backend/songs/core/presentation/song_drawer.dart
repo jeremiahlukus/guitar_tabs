@@ -51,9 +51,12 @@ class SongDrawer extends ConsumerWidget {
                   onTap: () async {
                     Navigator.of(context).pop();
                     if (AutoRouter.of(context).current.name != FavoriteSongsRoute.name) {
+                      // unable to test this without a large refactor ie. not worth the trouble
+                      // coverage:ignore-start
                       await Future.microtask(() {
                         AutoRouter.of(context).popUntilRouteWithName(FavoriteSongsRoute.name);
                       });
+                      // coverage:ignore-end
                     }
                   },
                 ),

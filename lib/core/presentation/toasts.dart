@@ -27,7 +27,7 @@ Future<void> showNoConnectionToast(
             children: [
               const Icon(
                 FontAwesomeIcons.pooStorm,
-                size: 96,
+                size: 60,
                 color: Colors.white,
               ),
               const SizedBox(
@@ -69,12 +69,12 @@ Future<void> showHelpToast(
               ),
               margin: const EdgeInsets.all(8),
               padding: const EdgeInsets.all(10),
-              height: seconds == 2 ? 200 : 300,
+              height: 200,
               child: Column(
                 children: [
                   const Icon(
                     FontAwesomeIcons.info,
-                    size: 96,
+                    size: 50,
                     color: Colors.white,
                   ),
                   const SizedBox(
@@ -82,9 +82,10 @@ Future<void> showHelpToast(
                   ),
                   Text(
                     message,
+                    textScaleFactor: 1,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 20,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -95,5 +96,40 @@ Future<void> showHelpToast(
         ),
       );
     },
+  );
+}
+
+Future<void> showHelpDialog(
+  String message,
+  BuildContext context,
+) async {
+  await showFlash(
+    context: context,
+    barrierColor: Colors.black54,
+    barrierDismissible: true,
+    builder: (context, controller) => FadeTransition(
+      opacity: controller.controller,
+      child: AlertDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+          side: BorderSide(),
+        ),
+        contentPadding: const EdgeInsets.only(left: 24, top: 16, right: 24, bottom: 16),
+        title: const Text(
+          'Favorite Songs',
+          textAlign: TextAlign.center,
+        ),
+        content: Text(
+          message,
+          textAlign: TextAlign.center,
+        ),
+        actions: [
+          TextButton(
+            onPressed: controller.dismiss,
+            child: const Text('Ok'),
+          ),
+        ],
+      ),
+    ),
   );
 }

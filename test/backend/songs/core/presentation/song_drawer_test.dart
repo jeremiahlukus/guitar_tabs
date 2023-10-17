@@ -122,6 +122,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -169,6 +171,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -215,6 +219,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -261,6 +267,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -307,6 +315,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -353,6 +363,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -399,6 +411,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -446,6 +460,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -503,6 +519,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
