@@ -10,8 +10,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 // Project imports:
 import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
@@ -27,7 +28,6 @@ import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 import 'package:joyful_noise/search/infrastructure/search_history_repository.dart';
 import 'package:joyful_noise/search/notifiers/search_history_notifier.dart';
 import 'package:joyful_noise/search/shared/providers.dart';
-
 import '../../../../utils/device.dart';
 import '../../../../utils/golden_test_device_scenario.dart';
 

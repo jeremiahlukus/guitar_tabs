@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:upgrader/upgrader.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/shared/providers.dart';
@@ -16,7 +17,6 @@ import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 import 'package:joyful_noise/core/presentation/toasts.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart' as pub_search_bar;
-import 'package:upgrader/upgrader.dart';
 
 @RoutePage()
 class FavoriteSongsPage extends ConsumerStatefulWidget {
