@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
 
 // Package imports:
 import 'package:alchemist/alchemist.dart';
@@ -84,6 +85,53 @@ void main() {
       scaffoldKey.currentState!.openDrawer();
       await tester.pumpAndSettle(const Duration(seconds: 1));
       expect(find.byType(DrawerHeader), findsOneWidget);
+      timeDilation = 1;
+    });
+    testWidgets('taping on Favorite Songs navigates to favorite songs page', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final mockPlaylistSongRepository = MockPlaylistSongRepository();
+      final mockPlaylistProvider = PlaylistSongsNotifier(mockPlaylistSongRepository);
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockFavoriteProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      // ignore: invalid_use_of_protected_member
+      mockPlaylistProvider.state = mockPlaylistProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: invalid_use_of_protected_member
+      mockFavoriteProvider.state = mockFavoriteProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          userNotifierProvider.overrideWith(
+            (_) => fakeUserNotifier,
+          ),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
+          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
+        ],
+        router,
+      );
+
+      await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
+      FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
+
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.byType(DrawerHeader), findsOneWidget);
+      await tester.tap(find.byKey(SongDrawer.favoriteKey));
+      expect(router.currentUrl, '/favorite_songs');
+      expect(find.text('Favorite Songs'), findsWidgets);
+      timeDilation = 1;
     });
     testWidgets('taping on Athens Song Book navigates to playlist song page', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
@@ -123,6 +171,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -169,6 +219,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -215,6 +267,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -261,6 +315,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -307,6 +363,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -353,6 +411,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -400,6 +460,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -457,6 +519,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));

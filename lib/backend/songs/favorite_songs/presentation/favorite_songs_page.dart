@@ -14,6 +14,7 @@ import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
+import 'package:joyful_noise/core/presentation/toasts.dart';
 import 'package:joyful_noise/search/presentation/search_bar.dart' as pub_search_bar;
 
 @RoutePage()
@@ -31,8 +32,13 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
       ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
       ref.read(userNotifierProvider.notifier).getUserPage();
     });
-
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => showHelpDialog(
+        'On this screen your searches\n will include results from\n ALL 6k+ songs (new and old)\nSearch for titles, lyrics and song numbers\n\nYour favorite songs will show up on this screen and will not require internet to access',
+        context,
+      ),
+    );
   }
 
   static const signOutButtonKey = ValueKey('signOutButtonKey');
@@ -43,6 +49,7 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   Widget build(BuildContext context) {
     final userState = ref.watch(userNotifierProvider);
     Sentry.captureMessage('User Logged in: ${userState.user.email}');
+
     return Scaffold(
       key: scaffoldKey,
       drawer: const SongDrawer(),

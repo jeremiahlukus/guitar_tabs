@@ -87,7 +87,9 @@ void main() {
         ],
         router,
       );
-
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       final finder = find.byType(PaginatedSongsListView);
 
       expect(finder, findsOneWidget);
@@ -120,6 +122,8 @@ void main() {
         router,
       );
 
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       final finder = find.byType(PaginatedSongsListView);
       expect(finder, findsOneWidget);
 
@@ -169,7 +173,9 @@ void main() {
         ],
         router,
       );
-
+      await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       final finder = find.byType(pub_search_bar.SearchBar);
 
       expect(finder, findsOneWidget);
@@ -203,7 +209,9 @@ void main() {
         ],
         router,
       );
-
+      await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       final finder = find.byType(PaginatedSongsListView);
 
       final paginatedSongsListView = finder.evaluate().single.widget as PaginatedSongsListView;
@@ -246,7 +254,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
-
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       final signOutButtonFinder = find.byKey(const ValueKey('signOutButtonKey'));
 
       await tester.tap(signOutButtonFinder);
@@ -289,7 +298,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
-
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       final finder = find.byType(pub_search_bar.SearchBar);
       expect(finder, findsOneWidget);
 

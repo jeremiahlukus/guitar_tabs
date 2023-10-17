@@ -106,6 +106,8 @@ void main() {
       );
 
       await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
       final favoriteSongsButton = find.byKey(SongTile.songDetailButtonKey).first;
 
       await tester.tap(favoriteSongsButton);
