@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:upgrader/upgrader.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/shared/providers.dart';
@@ -50,42 +51,44 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
     final userState = ref.watch(userNotifierProvider);
     Sentry.captureMessage('User Logged in: ${userState.user.email}');
 
-    return Scaffold(
-      key: scaffoldKey,
-      drawer: const SongDrawer(),
-      body: pub_search_bar.SearchBar(
-        title: 'Favorite Songs',
-        hint: 'Search all songs...',
-        // coverage:ignore-start
-        onShouldNavigateToResultPage: (searchTerm) {
-          AutoRouter.of(context).push(SearchedSongsRoute(searchTerm: searchTerm));
-        },
-        // coverage:ignore-end
-        onSignOutButtonPressed: () {
-          ref.read(authNotifierProvider.notifier).signOut();
-        },
-        body: RefreshIndicator(
+    return UpgradeAlert(
+      child: Scaffold(
+        key: scaffoldKey,
+        drawer: const SongDrawer(),
+        body: pub_search_bar.SearchBar(
+          title: 'Favorite Songs',
+          hint: 'Search all songs...',
           // coverage:ignore-start
-
-          /// Ignoring as the provider notifier refresh throws an error during
-          /// tests due to the fact that the provider is disposed
-          onRefresh: () {
-            return Future.microtask(() {
-              ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
-            });
-            // coverage:ignore-end
+          onShouldNavigateToResultPage: (searchTerm) {
+            AutoRouter.of(context).push(SearchedSongsRoute(searchTerm: searchTerm));
           },
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: PaginatedSongsListView(
-              paginatedSongsNotifierProvider: favoriteSongsNotifierProvider,
-              // coverage:ignore-start
-              getNextPage: (ref, context) {
-                // unable to mock this so this line isn't tested.
-                ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
-              },
+          // coverage:ignore-end
+          onSignOutButtonPressed: () {
+            ref.read(authNotifierProvider.notifier).signOut();
+          },
+          body: RefreshIndicator(
+            // coverage:ignore-start
+
+            /// Ignoring as the provider notifier refresh throws an error during
+            /// tests due to the fact that the provider is disposed
+            onRefresh: () {
+              return Future.microtask(() {
+                ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
+              });
               // coverage:ignore-end
-              noResultsMessage: "That's everything we could find in your favorite songs right now.",
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: PaginatedSongsListView(
+                paginatedSongsNotifierProvider: favoriteSongsNotifierProvider,
+                // coverage:ignore-start
+                getNextPage: (ref, context) {
+                  // unable to mock this so this line isn't tested.
+                  ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
+                },
+                // coverage:ignore-end
+                noResultsMessage: "That's everything we could find in your favorite songs right now.",
+              ),
             ),
           ),
         ),

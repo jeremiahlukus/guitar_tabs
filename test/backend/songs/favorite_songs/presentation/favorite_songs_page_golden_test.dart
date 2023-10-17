@@ -10,6 +10,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
@@ -107,6 +109,25 @@ Widget buildWidgetUnderTest() {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late SharedPreferences preferences;
+
+  setUp(() async {
+    SharedPreferences.setMockInitialValues({});
+    PackageInfo.setMockInitialValues(
+      appName: 'abc',
+      packageName: 'com.example.example',
+      version: '1.0',
+      buildNumber: '2',
+      buildSignature: 'buildSignature',
+    );
+    preferences = await SharedPreferences.getInstance();
+  });
+
+  tearDown(() async {
+    await preferences.clear();
+    return true;
+  });
   router.push(const FavoriteSongsRoute());
   goldenTest(
     'renders correctly on smallPhone',
