@@ -7,6 +7,7 @@ import 'package:joyful_noise/backend/songs/song_detail/domain/song_detail.dart';
 import 'package:joyful_noise/backend/songs/song_detail/infrastructure/song_detail_remote_service.dart';
 import 'package:joyful_noise/core/domain/fresh.dart';
 import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 class SongDetailRepository {
   final SongDetailRemoteService _remoteService;
@@ -31,14 +32,14 @@ class SongDetailRepository {
     }
   }
 
-  Future<List<String>?> getChordTabs(
+  Future<List<String>> getChordTabs(
     String chord,
   ) async {
     try {
       final remoteResponse = await _remoteService.getChordTabs(chord);
       return remoteResponse;
     } on RestApiException {
-      return null;
+      return [''];
     }
   }
 
