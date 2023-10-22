@@ -50,7 +50,6 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   Widget build(BuildContext context) {
     final userState = ref.watch(userNotifierProvider);
     Sentry.captureMessage('User Logged in: ${userState.user.email}');
-
     return UpgradeAlert(
       child: Scaffold(
         key: scaffoldKey,

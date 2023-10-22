@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:shimmer/shimmer.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
 
 class LoadingSongTile extends StatelessWidget {
   const LoadingSongTile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    timeDilation = 1;
     return Shimmer.fromColors(
       period: const Duration(milliseconds: 1600),
       baseColor: Colors.grey.shade400,
