@@ -1,9 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
 
 // Package imports:
 import 'package:shimmer/shimmer.dart';
-import 'package:flutter/scheduler.dart' show timeDilation;
 
 class LoadingSongTile extends StatelessWidget {
   const LoadingSongTile({super.key});
