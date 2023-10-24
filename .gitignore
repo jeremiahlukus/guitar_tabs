@@ -1,6 +1,7 @@
 # Miscellaneous
-.env.staging
+*.env
 *.env.production
+*.env.staging
 
 *.class
 *.lock
