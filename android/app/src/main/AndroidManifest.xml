@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="joyful_noise"
+        android:label="Joyful Noise"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
