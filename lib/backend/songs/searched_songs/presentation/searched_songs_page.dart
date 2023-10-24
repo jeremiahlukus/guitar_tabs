@@ -6,7 +6,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
@@ -47,7 +46,7 @@ class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
     return Scaffold(
       body: pub_search_bar.SearchBar(
         title: widget.searchTerm,
-        hint: widget.playlistName.isEmpty ? 'Search all songs...' : 'Search ${widget.playlistName} songs...',
+        hint: widget.playlistName.isEmpty ? 'Search all songs...' : 'Search ${widget.playlistName}...',
         // coverage:ignore-start
         onShouldNavigateToResultPage: (searchTerm) {
           AutoRouter.of(context).pushAndPopUntil(

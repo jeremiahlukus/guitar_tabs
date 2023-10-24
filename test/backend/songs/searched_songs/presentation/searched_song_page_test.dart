@@ -168,7 +168,7 @@ void main() {
       final hintText = finder.evaluate().single.widget as pub_search_bar.SearchBar;
       expect(
         hintText.hint,
-        'Search $playlist songs...',
+        'Search $playlist...',
       );
     });
 
