@@ -427,8 +427,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: d6998b632a2b7ce316bab0afd3d2f3a2eaf65b09
-      url: "https://github.com/paurakhsharma/flutter_chord"
+      resolved-ref: "56a059b3bd18b5bf8a4895196743cdae14756897"
+      url: "https://github.com/jeremiahlukus/flutter_chord"
     source: git
     version: "0.1.2"
   flutter_dotenv:

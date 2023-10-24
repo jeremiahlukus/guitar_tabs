@@ -266,11 +266,13 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 child: LyricsRenderer(
-                  trailingWidget: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: ElevatedButton(
-                      onPressed: composeMail,
-                      child: const Text('Suggest Changes'),
+                  trailingWidget: Align(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: ElevatedButton(
+                        onPressed: composeMail,
+                        child: const Text('Suggest Changes'),
+                      ),
                     ),
                   ),
                   widgetPadding: 50,
@@ -283,7 +285,6 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                       if (!context.mounted) return;
                       return showDialog<void>(
                         context: context,
-                        barrierDismissible: false, // user must tap button!
                         builder: (BuildContext context) {
                           return AlertDialog(
                             content: SingleChildScrollView(
