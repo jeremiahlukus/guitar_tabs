@@ -56,9 +56,6 @@ class SearchedSongsPageState extends ConsumerState<SearchedSongsPage> {
           );
         },
         // coverage:ignore-end
-        onSignOutButtonPressed: () {
-          ref.read(authNotifierProvider.notifier).signOut();
-        },
         body: Padding(
           padding: const EdgeInsets.only(top: 20),
           child: PaginatedSongsListView(

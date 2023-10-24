@@ -171,52 +171,6 @@ void main() {
         'Search $playlist songs...',
       );
     });
-    testWidgets('clicking on Sign Out button triggers provided AuthNotifiers signOut method', (tester) async {
-      final mockSearchedSongRepository = MockSearchedSongsRepository();
-      final mockProvider = SearchedSongsNotifier(mockSearchedSongRepository);
-      final mockSearchHistoryRepository = MockSearchHistoryRepository();
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-      final router = AppRouter();
-      final AuthNotifier mockAuthNotifier = MockAuthNotifier();
-      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
-
-      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
-      when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-      when(() => mockSearchedSongRepository.getSearchedSongsPage('query', 1)).thenAnswer(
-        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
-      );
-
-      // ignore: invalid_use_of_protected_member
-      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
-
-      // ignore: unawaited_futures, cascade_invocations
-      router.push(SearchedSongsRoute(searchTerm: 'query'));
-
-      await pumpRouterApp(
-        tester,
-        [
-          userNotifierProvider.overrideWith(
-            (_) => fakeUserNotifier,
-          ),
-          authNotifierProvider.overrideWith(
-            (_) => mockAuthNotifier,
-          ),
-          searchedSongsNotifierProvider.overrideWith((_) => mockProvider),
-          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
-        ],
-        router,
-      );
-
-      await tester.pump(Duration.zero);
-
-      final signOutButtonFinder = find.byKey(const ValueKey('signOutButtonKey'));
-
-      await tester.tap(signOutButtonFinder);
-
-      await tester.pump();
-
-      verify(mockAuthNotifier.signOut).called(1);
-    });
 
     testWidgets('clicking on Search button triggers provided Navigates', (tester) async {
       final mockSearchedSongRepository = MockSearchedSongsRepository();

@@ -159,51 +159,6 @@ void main() {
         "That's everything we could find right now.",
       );
     });
-
-    testWidgets('clicking on Sign Out button triggers provided AuthNotifiers signOut method', (tester) async {
-      final mockSearchHistoryRepository = MockSearchHistoryRepository();
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-      final router = AppRouter();
-      final mockPlaylistSongRepository = MockPlaylistSongRepository();
-      final mockProvider = PlaylistSongsNotifier(mockPlaylistSongRepository);
-      final AuthNotifier mockAuthNotifier = MockAuthNotifier();
-      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
-      const page = 1;
-      const playlistName = 'test';
-
-      when(() => mockPlaylistSongRepository.getPlaylistSong(page, playlistName)).thenAnswer(
-        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
-      );
-      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
-      when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-
-      // ignore: unawaited_futures
-      router.push(PlaylistSongsRoute(playlistName: playlistName));
-      await pumpRouterApp(
-        tester,
-        [
-          userNotifierProvider.overrideWith(
-            (_) => fakeUserNotifier,
-          ),
-          authNotifierProvider.overrideWith(
-            (_) => mockAuthNotifier,
-          ),
-          playlistSongsNotifierProvider.overrideWith((_) => mockProvider),
-          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
-        ],
-        router,
-      );
-
-      await tester.pump(Duration.zero);
-
-      final signOutButtonFinder = find.byKey(const ValueKey('signOutButtonKey'));
-
-      await tester.tap(signOutButtonFinder);
-
-      await tester.pump();
-
-      verify(mockAuthNotifier.signOut).called(1);
-    });
     testWidgets('clicking on Search button navigates to SearchedSongsRoute', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
       final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);

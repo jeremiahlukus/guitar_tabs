@@ -7,6 +7,8 @@ import 'package:alchemist/alchemist.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
+import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Project imports:
@@ -49,6 +51,8 @@ class MockBackendHeadersCache extends Mock implements BackendHeadersCache {}
 class MyTypeFake extends Mock implements Uri {}
 
 class MockUserRepository extends Mock implements UserRepository {}
+
+class MockAuthNotifier extends Mock implements AuthNotifier {}
 
 class FakeUserNotifier extends UserNotifier {
   FakeUserNotifier(super.userRepository);
@@ -180,6 +184,7 @@ void main() {
       await tester.tap(find.byKey(SongDrawer.athensSongBook));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Athens Songbook'), findsOneWidget);
+      timeDilation = 1;
     });
     testWidgets('taping on Hymnal navigates to playlist song page', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
@@ -228,6 +233,7 @@ void main() {
       await tester.tap(find.byKey(SongDrawer.hymnal));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Hymnal'), findsOneWidget);
+      timeDilation = 1;
     });
     testWidgets('taping on Blue Songbook navigates to playlist song page', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
@@ -324,6 +330,7 @@ void main() {
       await tester.tap(find.byKey(SongDrawer.himnos));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Himnos'), findsOneWidget);
+      timeDilation = 1;
     });
     testWidgets('taping on Liederbuch navigates to playlist song page', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
@@ -372,6 +379,7 @@ void main() {
       await tester.tap(find.byKey(SongDrawer.liederbuch));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Liederbuch'), findsOneWidget);
+      timeDilation = 1;
     });
     testWidgets('taping on Cantiques navigates to playlist song page', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
@@ -420,6 +428,64 @@ void main() {
       await tester.tap(find.byKey(SongDrawer.cantiques));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Cantiques'), findsOneWidget);
+      timeDilation = 1;
+    });
+
+    testWidgets('taping on SignOut navigates to splash page', (tester) async {
+      final mockSearchHistoryRepository = MockSearchHistoryRepository();
+      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      final router = AppRouter();
+      final mockPlaylistSongRepository = MockPlaylistSongRepository();
+      final mockPlaylistProvider = PlaylistSongsNotifier(mockPlaylistSongRepository);
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final mockFavoriteProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
+      const playlistName = 'Cantiques';
+      final AuthNotifier mockAuthNotifier = MockAuthNotifier();
+
+      when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
+      when(() => mockPlaylistSongRepository.getPlaylistSong(1, playlistName))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
+
+      when(() => mockFavoriteSongRepository.getFavoritePage(1))
+          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
+      // ignore: invalid_use_of_protected_member
+      mockPlaylistProvider.state = mockPlaylistProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: invalid_use_of_protected_member
+      mockFavoriteProvider.state = mockFavoriteProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+
+      // ignore: unawaited_futures
+      router.push(const FavoriteSongsRoute());
+      await pumpRouterApp(
+        tester,
+        [
+          userNotifierProvider.overrideWith(
+            (_) => fakeUserNotifier,
+          ),
+          authNotifierProvider.overrideWith(
+            (_) => mockAuthNotifier,
+          ),
+          favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
+          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
+          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
+        ],
+        router,
+      );
+
+      await tester.pump(Duration.zero);
+      await tester.tap(find.text('Ok'));
+      await tester.pumpAndSettle();
+      FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
+
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.byType(DrawerHeader), findsOneWidget);
+      await tester.tap(find.byKey(SongDrawer.signOut));
+      await tester.pump();
+
+      verify(mockAuthNotifier.signOut).called(1);
+      timeDilation = 1;
     });
 
     testWidgets('taping on Delete Account opens AlertDialog', (tester) async {
@@ -432,6 +498,7 @@ void main() {
       final mockFavoriteProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
       final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
       const playlistName = 'Cantiques';
+
       when(() => mockPlaylistSongRepository.getPlaylistSong(1, playlistName))
           .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
       when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));

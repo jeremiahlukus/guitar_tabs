@@ -22,6 +22,7 @@ class SongDrawer extends ConsumerWidget {
   static const himnos = ValueKey('himnos');
   static const liederbuch = ValueKey('liederbuch');
   static const cantiques = ValueKey('cantiques');
+  static const signOut = ValueKey('signOut');
   static const deleteUser = ValueKey('deleteUser');
   static const noDeleteUser = ValueKey('noDeleteUser');
   static const yesDeleteUser = ValueKey('yesDeleteUser');
@@ -130,7 +131,19 @@ class SongDrawer extends ConsumerWidget {
               children: [
                 const Divider(),
                 ListTile(
+                  visualDensity: VisualDensity(vertical: -3),
                   dense: true,
+                  key: signOut,
+                  title: const Text(
+                    'Sign Out',
+                  ),
+                  onTap: () {
+                    ref.read(authNotifierProvider.notifier).signOut();
+                  },
+                ),
+                ListTile(
+                  dense: true,
+                  visualDensity: VisualDensity(vertical: -3),
                   key: deleteUser,
                   title: const Text(
                     'Delete Account',

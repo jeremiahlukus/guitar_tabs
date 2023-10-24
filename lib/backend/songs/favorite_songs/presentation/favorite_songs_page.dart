@@ -42,8 +42,6 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
     );
   }
 
-  static const signOutButtonKey = ValueKey('signOutButtonKey');
-
   @visibleForTesting
   static final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -62,9 +60,6 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
             AutoRouter.of(context).push(SearchedSongsRoute(searchTerm: searchTerm));
           },
           // coverage:ignore-end
-          onSignOutButtonPressed: () {
-            ref.read(authNotifierProvider.notifier).signOut();
-          },
           body: RefreshIndicator(
             // coverage:ignore-start
 

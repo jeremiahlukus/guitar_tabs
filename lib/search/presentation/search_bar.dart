@@ -25,14 +25,12 @@ class SearchBar extends ConsumerStatefulWidget {
   final String title;
   final String hint;
   final void Function(String searchTerm) onShouldNavigateToResultPage;
-  final void Function() onSignOutButtonPressed;
 
   const SearchBar({
     required this.body,
     required this.title,
     required this.hint,
     required this.onShouldNavigateToResultPage,
-    required this.onSignOutButtonPressed,
     super.key,
   });
 
@@ -42,7 +40,6 @@ class SearchBar extends ConsumerStatefulWidget {
 
 class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*/ {
   late FloatingSearchBarController _controller;
-  static const signOutButtonKey = ValueKey('signOutButtonKey');
   static const searchKey = ValueKey('searchKey');
 
   @override
@@ -123,16 +120,6 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
       actions: [
         FloatingSearchBarAction.searchToClear(
           showIfClosed: false,
-        ),
-        FloatingSearchBarAction(
-          child: IconButton(
-            key: signOutButtonKey,
-            icon: const Icon(FontAwesomeIcons.arrowRightFromBracket),
-            splashRadius: 18,
-            onPressed: () {
-              widget.onSignOutButtonPressed();
-            },
-          ),
         ),
       ],
       onQueryChanged: (query) {

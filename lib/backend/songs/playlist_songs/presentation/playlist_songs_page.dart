@@ -49,8 +49,6 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
     );
   }
 
-  static const signOutButtonKey = ValueKey('signOutButtonKey');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,9 +61,6 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
           AutoRouter.of(context).push(SearchedSongsRoute(searchTerm: searchTerm, playlistName: widget.playlistName));
         },
         // coverage:ignore-end
-        onSignOutButtonPressed: () {
-          ref.read(authNotifierProvider.notifier).signOut();
-        },
         body: Padding(
           padding: const EdgeInsets.only(top: 20),
           child: PaginatedSongsListView(
