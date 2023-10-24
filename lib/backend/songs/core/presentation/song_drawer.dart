@@ -131,7 +131,7 @@ class SongDrawer extends ConsumerWidget {
               children: [
                 const Divider(),
                 ListTile(
-                  visualDensity: VisualDensity(vertical: -3),
+                  visualDensity: const VisualDensity(vertical: -3),
                   dense: true,
                   key: signOut,
                   title: const Text(
@@ -143,7 +143,7 @@ class SongDrawer extends ConsumerWidget {
                 ),
                 ListTile(
                   dense: true,
-                  visualDensity: VisualDensity(vertical: -3),
+                  visualDensity: const VisualDensity(vertical: -3),
                   key: deleteUser,
                   title: const Text(
                     'Delete Account',
