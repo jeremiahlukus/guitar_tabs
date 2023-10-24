@@ -62,7 +62,6 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
 
   @override
   Widget build(BuildContext context) {
-    logger.e(widget.authorizationUrl);
     return Scaffold(
       body: SafeArea(
         child: Stack(
