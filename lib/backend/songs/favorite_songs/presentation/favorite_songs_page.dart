@@ -10,7 +10,6 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:upgrader/upgrader.dart';
 
 // Project imports:
-import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
@@ -42,15 +41,12 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
     );
   }
 
-  static const signOutButtonKey = ValueKey('signOutButtonKey');
-
   @visibleForTesting
   static final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final userState = ref.watch(userNotifierProvider);
     Sentry.captureMessage('User Logged in: ${userState.user.email}');
-
     return UpgradeAlert(
       child: Scaffold(
         key: scaffoldKey,
@@ -63,9 +59,6 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
             AutoRouter.of(context).push(SearchedSongsRoute(searchTerm: searchTerm));
           },
           // coverage:ignore-end
-          onSignOutButtonPressed: () {
-            ref.read(authNotifierProvider.notifier).signOut();
-          },
           body: RefreshIndicator(
             // coverage:ignore-start
 

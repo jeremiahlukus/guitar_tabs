@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 
 // Project imports:
-import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/paginated_songs_list_view.dart';
 import 'package:joyful_noise/backend/songs/core/presentation/song_drawer.dart';
@@ -49,23 +48,18 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
     );
   }
 
-  static const signOutButtonKey = ValueKey('signOutButtonKey');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const SongDrawer(),
       body: pub_search_bar.SearchBar(
-        title: '${toBeginningOfSentenceCase(widget.playlistName)} Songs',
-        hint: 'Search ${widget.playlistName} songs...',
+        title: '${toBeginningOfSentenceCase(widget.playlistName)}',
+        hint: 'Search ${widget.playlistName}...',
         // coverage:ignore-start
         onShouldNavigateToResultPage: (searchTerm) {
           AutoRouter.of(context).push(SearchedSongsRoute(searchTerm: searchTerm, playlistName: widget.playlistName));
         },
         // coverage:ignore-end
-        onSignOutButtonPressed: () {
-          ref.read(authNotifierProvider.notifier).signOut();
-        },
         body: Padding(
           padding: const EdgeInsets.only(top: 20),
           child: PaginatedSongsListView(

@@ -1,6 +1,6 @@
 name: joyful_noise
 description: A Very Good Project created by Very Good CLI.
-version: 1.0.39
+version: 1.9.5+10
 
 publish_to: none
 
@@ -43,7 +43,7 @@ dependencies:
   shimmer: ^3.0.0
   flutter_chord:
     git:
-      url: https://github.com/paurakhsharma/flutter_chord
+      url: https://github.com/jeremiahlukus/flutter_chord
   flutter_guitar_tabs: ^0.0.10
   material_floating_search_bar_2: ^0.5.0
   just_audio: ^0.9.35
@@ -70,16 +70,9 @@ dev_dependencies:
   very_good_analysis: ^5.1.0
   test: ^1.19.5
   webview_flutter_platform_interface: ^2.0.1
-  # patrol: ^1.0.0
 
 
 scripts: derry.yaml
-# patrol:
-#   app_name: Joyful Noise
-#   android:
-#     package_name: com.jparrack.joyful_noise.RunnerUITests
-#   ios:
-#     bundle_id: com.jparrack.joyful-noise.RunnerUITests
 
 flutter:
   uses-material-design: true

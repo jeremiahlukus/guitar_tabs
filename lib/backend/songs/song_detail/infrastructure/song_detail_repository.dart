@@ -31,14 +31,14 @@ class SongDetailRepository {
     }
   }
 
-  Future<List<String>?> getChordTabs(
+  Future<List<String>> getChordTabs(
     String chord,
   ) async {
     try {
       final remoteResponse = await _remoteService.getChordTabs(chord);
       return remoteResponse;
     } on RestApiException {
-      return null;
+      return [''];
     }
   }
 

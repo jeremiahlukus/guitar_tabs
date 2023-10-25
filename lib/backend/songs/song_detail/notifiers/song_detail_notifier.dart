@@ -43,7 +43,7 @@ class SongDetailNotifier extends StateNotifier<SongDetailState> {
     );
   }
 
-  Future<List<String>?> getChordTabs(String chord) {
+  Future<List<String>> getChordTabs(String chord) {
     return _repository.getChordTabs(chord);
   }
 

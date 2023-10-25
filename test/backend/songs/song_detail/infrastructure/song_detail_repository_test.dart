@@ -74,7 +74,7 @@ void main() {
     });
 
     group('.getChordTabs', () {
-      test('returns null on RestApiException', () async {
+      test('returns empty List<String> on RestApiException', () async {
         final SongDetailRemoteService mockFavoriteSongRemoteService = MockSongDetailRemoteService();
 
         const page = 'C';
@@ -84,7 +84,7 @@ void main() {
 
         final actualResult = await favoriteSongRepository.getChordTabs(page);
 
-        expect(actualResult, null);
+        expect(actualResult, ['']);
       });
 
       test('return List<String> when SongDetailRemoteService returns RemoteResponse.withNewData', () async {

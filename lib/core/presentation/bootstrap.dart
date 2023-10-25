@@ -1,6 +1,5 @@
 // Dart imports:
 import 'dart:async';
-import 'dart:io';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
@@ -18,17 +17,9 @@ import 'package:joyful_noise/core/infrastructure/provider_logger.dart';
 
 Logger logger = Logger();
 Future<void> bootstrap(Widget Function() builder, String envFile) async {
-  // ignore: avoid_redundant_argument_values
   await dotenv.load(fileName: envFile);
-  var sentryUrl = '';
-
-  if (Platform.isAndroid) {
-    sentryUrl = '<android app token>';
-  } else if (Platform.isIOS) {
-    sentryUrl = dotenv.env['SENTRY_URL']!;
-  }
+  final sentryUrl = dotenv.env['SENTRY_URL']!;
   WidgetsFlutterBinding.ensureInitialized();
-
   FlutterError.onError = (details) async {
     final errorMap = <String, String>{
       'error': details.exceptionAsString(),
@@ -39,29 +30,14 @@ Future<void> bootstrap(Widget Function() builder, String envFile) async {
     // coverage:ignore-end
     logger.e(errorMap);
   };
-  await runZonedGuarded(
-    () async {
-      await SentryFlutter.init(
-        (options) {
-          options
-            ..dsn = sentryUrl
-            ..tracesSampleRate = 1.0;
-        },
-        appRunner: () => runApp(
-          ProviderScope(observers: [ProviderLogger()], child: builder()),
-        ),
-      );
+  await SentryFlutter.init(
+    (options) {
+      options
+        ..dsn = sentryUrl
+        ..tracesSampleRate = 1.0;
     },
-    (error, stackTrace) async {
-      final errorMap = <String, String>{
-        'error': error.toString(),
-        'stackTrace': stackTrace.toString(),
-      };
-
-      // coverage:ignore-start
-      await Sentry.captureException(error, stackTrace: stackTrace);
-      // coverage:ignore-end
-      logger.e(errorMap);
-    },
+    appRunner: () => runApp(
+      ProviderScope(observers: [ProviderLogger()], child: builder()),
+    ),
   );
 }

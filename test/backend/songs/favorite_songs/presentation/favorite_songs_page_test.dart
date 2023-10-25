@@ -222,48 +222,6 @@ void main() {
       );
     });
 
-    testWidgets('clicking on Sign Out button triggers provided AuthNotifiers signOut method', (tester) async {
-      final mockSearchHistoryRepository = MockSearchHistoryRepository();
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-      final router = AppRouter();
-      final mockFavoriteSongRepository = MockFavoriteSongRepository();
-      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
-      final AuthNotifier mockAuthNotifier = MockAuthNotifier();
-      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
-      when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
-        (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
-      );
-      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
-      when(mockAuthNotifier.signOut).thenAnswer((_) => Future.value());
-
-      // ignore: unawaited_futures
-      router.push(const FavoriteSongsRoute());
-      await pumpRouterApp(
-        tester,
-        [
-          userNotifierProvider.overrideWith(
-            (_) => fakeUserNotifier,
-          ),
-          authNotifierProvider.overrideWith(
-            (_) => mockAuthNotifier,
-          ),
-          favoriteSongsNotifierProvider.overrideWith((_) => mockProvider),
-          searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
-        ],
-        router,
-      );
-
-      await tester.pump(Duration.zero);
-      await tester.tap(find.text('Ok'));
-      await tester.pumpAndSettle();
-      final signOutButtonFinder = find.byKey(const ValueKey('signOutButtonKey'));
-
-      await tester.tap(signOutButtonFinder);
-
-      await tester.pump();
-
-      verify(mockAuthNotifier.signOut).called(1);
-    });
     testWidgets('clicking on Search button navigates to SearchedSongsRoute', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
       final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);

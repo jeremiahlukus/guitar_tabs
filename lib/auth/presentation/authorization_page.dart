@@ -7,7 +7,6 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
 
 @RoutePage()
 class AuthorizationPage extends StatefulWidget {
@@ -62,7 +61,6 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
 
   @override
   Widget build(BuildContext context) {
-    logger.e(widget.authorizationUrl);
     return Scaffold(
       body: SafeArea(
         child: Stack(
