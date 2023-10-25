@@ -56,7 +56,7 @@ android {
     }
 
     flavorDimensions "default"
-    productFlavors { 
+    productFlavors {
         production {
             dimension "default"
             applicationIdSuffix ""
@@ -66,7 +66,7 @@ android {
             dimension "default"
             applicationIdSuffix ".stg"
             manifestPlaceholders = [appName: "[STG] Joyful Noise"]
-        }        
+        }
         development {
             dimension "default"
             applicationIdSuffix ".dev"
@@ -77,16 +77,16 @@ android {
     signingConfigs {
        release {
             storeFile file("upload-keystore.jks")
-            storePassword "Ajjmll11"
-            keyAlias "upload"
-            keyPassword "Ajjmll11"
+            storePassword localProperties.getProperty('key.password')
+            keyAlias localProperties.getProperty('key.alias')
+            keyPassword localProperties.getProperty('key.password')
        }
    }
 
     buildTypes {
         release {
             signingConfig signingConfigs.release
-           
+
         }
         debug {
             signingConfig signingConfigs.debug
