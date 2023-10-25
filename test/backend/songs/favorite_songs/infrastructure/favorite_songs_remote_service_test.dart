@@ -23,13 +23,14 @@ void main() {
     registerFallbackValue(Options());
     registerFallbackValue(const BackendHeaders());
   });
+
   group('FavoriteSongsRemoteService', () {
+    final Dio mockDio = MockDio();
+    final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
+    final favoriteSongRemoteService = FavoriteSongsRemoteService(mockDio, mockBackendHeadersCache);
+
     group('.getFavoriteSongsPage', () {
       test('returns RemoteResponse.notModified when response status code is 304 ', () async {
-        final Dio mockDio = MockDio();
-        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
-        final favoriteSongRemoteService = FavoriteSongsRemoteService(mockDio, mockBackendHeadersCache);
-
         when(() => mockDio.getUri<dynamic>(any(), options: any(named: 'options'))).thenAnswer(
           (_) => Future.value(Response<dynamic>(requestOptions: RequestOptions(), statusCode: 304)),
         );
@@ -43,10 +44,6 @@ void main() {
       });
 
       test('returns RemoteResponse.withNewData when response status code is 200 ', () async {
-        final Dio mockDio = MockDio();
-        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
-        final favoriteSongsRemoteService = FavoriteSongsRemoteService(mockDio, mockBackendHeadersCache);
-
         final mockData = [
           mockSongJson(1),
           mockSongJson(2),
@@ -61,7 +58,7 @@ void main() {
         when(() => mockBackendHeadersCache.getHeaders(any())).thenAnswer((_) => Future.value());
         when(() => mockBackendHeadersCache.saveHeaders(any(), any())).thenAnswer((_) => Future.value());
 
-        final actualResult = await favoriteSongsRemoteService.getFavoriteSongsPage(1);
+        final actualResult = await favoriteSongRemoteService.getFavoriteSongsPage(1);
         final expectedResult = RemoteResponse<List<SongDTO>>.withNewData(convertedData, maxPage: 1);
 
         expect(actualResult, expectedResult);
