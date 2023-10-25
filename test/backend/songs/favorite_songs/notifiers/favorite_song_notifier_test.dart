@@ -17,24 +17,24 @@ class MockSong extends Mock implements Song {}
 
 void main() {
   group('FavoriteSongNotifier', () {
+    final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
+    final defaultSong = [MockSong()];
+    const page = 1;
+
     group('.getNextFavoriteSongsPage', () {
       test(
           'sets state to PaginatedSongsState.loadFailure if FavoriteSongRepository.getFavoritePage returns a BackendFailure',
           () async {
-        final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
-        const page = 1;
         when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(
           (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
 
         final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
-        final defaultSong = [MockSong()];
-        // ignore: invalid_use_of_protected_member
+
         favoriteSongNotifier.state = favoriteSongNotifier.state.copyWith(songs: Fresh.yes(defaultSong));
 
         await favoriteSongNotifier.getNextFavoriteSongsPage();
 
-        // ignore: invalid_use_of_protected_member
         final actualStateResult = favoriteSongNotifier.state;
 
         final expectedStateResultMatcher = equals(
@@ -49,9 +49,6 @@ void main() {
 
       test('sets state to PaginatedSongsState.loadSuccess if  FavoriteSongRepository.getFavoritePage returns a Song',
           () async {
-        final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
-        const page = 1;
-        final defaultSong = [MockSong()];
         when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(
           (invocation) => Future.value(right(Fresh.yes(defaultSong))),
         );
@@ -60,7 +57,6 @@ void main() {
 
         await favoriteSongNotifier.getNextFavoriteSongsPage();
 
-        // ignore: invalid_use_of_protected_member
         final actualStateResult = favoriteSongNotifier.state;
 
         final expectedStateResultMatcher = equals(
@@ -71,7 +67,6 @@ void main() {
       });
 
       test('sets state to PaginatedSongsState.initial if FavoriteSongRepository.getFavoritePage not called', () async {
-        final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
         final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
         // ignore: invalid_use_of_protected_member
         final actualStateResult = favoriteSongNotifier.state;
@@ -83,15 +78,10 @@ void main() {
         expect(actualStateResult, expectedStateResultMatcher);
       });
     });
-  });
-  group('FavoriteSongNotifier', () {
+
     group('.getFirstFavoriteSongsPage', () {
       test('sets state to PaginatedSongsState.loadSuccess if  FavoriteSongRepository.getFavoritePage returns a Song',
           () async {
-        final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
-        const page = 1;
-        final defaultSong = [MockSong()];
-
         when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(
           (invocation) => Future.value(right(Fresh.yes(defaultSong))),
         );
@@ -100,7 +90,6 @@ void main() {
 
         await favoriteSongNotifier.getFirstFavoriteSongsPage();
 
-        // ignore: invalid_use_of_protected_member
         final actualStateResult = favoriteSongNotifier.state;
 
         final expectedStateResultMatcher = equals(
@@ -109,26 +98,22 @@ void main() {
 
         expect(actualStateResult, expectedStateResultMatcher);
       });
-    });
 
-    test('resets the page to 2', () async {
-      final FavoriteSongsRepository mockFavoriteSongRepository = MockFavoriteSongRepository();
-      const page = 1;
-      final defaultSong = [MockSong()];
+      test('resets the page to 2', () async {
+        when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(
+          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+        );
 
-      when(() => mockFavoriteSongRepository.getFavoritePage(page)).thenAnswer(
-        (invocation) => Future.value(right(Fresh.yes(defaultSong))),
-      );
+        final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository)..page = 10;
 
-      final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository)..page = 10;
+        await favoriteSongNotifier.getFirstFavoriteSongsPage();
 
-      await favoriteSongNotifier.getFirstFavoriteSongsPage();
+        final actualPageResult = favoriteSongNotifier.page;
 
-      final actualPageResult = favoriteSongNotifier.page;
+        const expectedPageResult = 2;
 
-      const expectedPageResult = 2;
-
-      expect(actualPageResult, expectedPageResult);
+        expect(actualPageResult, expectedPageResult);
+      });
     });
   });
 }
