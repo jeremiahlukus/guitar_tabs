@@ -21,23 +21,25 @@ class FakeSembastDatabase extends Fake implements SembastDatabase {
 }
 
 void main() {
+  late DatabaseFactory factory;
+  late Database memoryDatabase;
+  late SembastDatabase fakeSembastDatabase;
+  late FavoriteSongsLocalService favoriteSongLocalService;
+
+  setUp(() async {
+    factory = newDatabaseFactoryMemory();
+    memoryDatabase = await factory.openDatabase('test.db');
+    fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
+    favoriteSongLocalService = FavoriteSongsLocalService(fakeSembastDatabase);
+  });
+  final mockData = [
+    mockSongJson(1),
+    mockSongJson(2),
+  ];
   group('FavoriteSongsLocalService', () {
     group('.upsertPage', () {
       test('stores the List<Song> objects in the database', () async {
-        final factory = newDatabaseFactoryMemory();
-
-        final memoryDatabase = await factory.openDatabase('test.db');
-
-        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
-
-        final favoriteSongLocalService = FavoriteSongsLocalService(fakeSembastDatabase);
-
-        final mockData = [
-          mockSongJson(1),
-          mockSongJson(2),
-        ];
-
-        final convertedData = [SongDTO.fromJson(mockData.first), SongDTO.fromJson(mockData.last)];
+        final convertedData = mockData.map(SongDTO.fromJson).toList();
         const page = 1;
         await favoriteSongLocalService.upsertPage(convertedData, page);
         const sembastPage = page - 1;
@@ -60,20 +62,7 @@ void main() {
 
     group('.getPage', () {
       test('gets the current page of List<Song> object in the database', () async {
-        final factory = newDatabaseFactoryMemory();
-
-        final memoryDatabase = await factory.openDatabase('test.db');
-
-        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
-
-        final favoriteSongLocalService = FavoriteSongsLocalService(fakeSembastDatabase);
-
-        final mockData = [
-          mockSongJson(1),
-          mockSongJson(2),
-        ];
-
-        final convertedData = [SongDTO.fromJson(mockData.first), SongDTO.fromJson(mockData.last)];
+        final convertedData = mockData.map(SongDTO.fromJson).toList();
         const page = 1;
         const sembastPage = page - 1;
         await FavoriteSongsLocalService.store
@@ -94,19 +83,7 @@ void main() {
 
     group('.getLocalPageCount', () {
       test('gets the local page count integer', () async {
-        final factory = newDatabaseFactoryMemory();
-
-        final memoryDatabase = await factory.openDatabase('test.db');
-
-        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
-
-        final favoriteSongLocalService = FavoriteSongsLocalService(fakeSembastDatabase);
-        final mockData = [
-          mockSongJson(1),
-          mockSongJson(2),
-        ];
-
-        final convertedData = [SongDTO.fromJson(mockData.first), SongDTO.fromJson(mockData.last)];
+        final convertedData = mockData.map(SongDTO.fromJson).toList();
         const page = 1;
         const sembastPage = page - 1;
         await FavoriteSongsLocalService.store
@@ -129,20 +106,8 @@ void main() {
 
     group('.searchLocalSongs', () {
       test('searches the current List<Song> object in the database', () async {
-        final factory = newDatabaseFactoryMemory();
-
-        final memoryDatabase = await factory.openDatabase('test.db');
-
-        final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
-
-        final favoriteSongLocalService = FavoriteSongsLocalService(fakeSembastDatabase);
         final mockData = [mockSongJson(1), mockSongJson(2), mockSongJson2(3)];
-
-        final convertedData = [
-          SongDTO.fromJson(mockData.first),
-          SongDTO.fromJson(mockData[1]),
-          SongDTO.fromJson(mockData.last),
-        ];
+        final convertedData = mockData.map(SongDTO.fromJson).toList();
         const page = 1;
         const sembastPage = page - 1;
         await FavoriteSongsLocalService.store
@@ -155,7 +120,9 @@ void main() {
 
         final actualData = await favoriteSongLocalService.searchLocalSongs('test');
 
-        expect(actualData, [convertedData.last]);
+        final expectedData = [convertedData.last];
+
+        expect(actualData, expectedData);
       });
     });
   });
