@@ -38,7 +38,8 @@ abstract class MyFunction {
 class MyFunctionMock extends Mock implements MyFunction {}
 
 AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState> createPaginatedSongsNotifierProvider(
-    PaginatedSongsNotifier mockPaginatedSongsNotifier,) {
+  PaginatedSongsNotifier mockPaginatedSongsNotifier,
+) {
   return AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
     (ref) => mockPaginatedSongsNotifier,
   );

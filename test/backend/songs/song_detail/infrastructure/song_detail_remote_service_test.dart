@@ -245,8 +245,10 @@ void main() {
           ),
         );
 
-        expect(() => songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true),
-            throwsA(isA<RestApiException>()),);
+        expect(
+          () => songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true),
+          throwsA(isA<RestApiException>()),
+        );
       });
       test('returns null when no connection ', () async {
         when(
@@ -276,8 +278,10 @@ void main() {
           ),
         );
 
-        expect(() => songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true),
-            throwsA(isA<RestApiException>()),);
+        expect(
+          () => songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true),
+          throwsA(isA<RestApiException>()),
+        );
       });
     });
     test('returns DioException when DioException without status code', () async {
@@ -290,8 +294,10 @@ void main() {
         ),
       );
 
-      expect(() => songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true),
-          throwsA(isA<DioException>()),);
+      expect(
+        () => songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: true),
+        throwsA(isA<DioException>()),
+      );
     });
 
     group('isCurrentlyFavorite is false', () {
@@ -339,8 +345,10 @@ void main() {
           ),
         );
 
-        expect(() => songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: false),
-            throwsA(isA<RestApiException>()),);
+        expect(
+          () => songDetailRemoteService.switchFavoriteStatus('1', isCurrentlyFavorite: false),
+          throwsA(isA<RestApiException>()),
+        );
       });
       test('returns null when no connection ', () async {
         when(
