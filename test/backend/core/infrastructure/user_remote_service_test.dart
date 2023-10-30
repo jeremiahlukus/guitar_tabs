@@ -59,7 +59,7 @@ void main() {
           ),
         );
 
-        expect(() async => await userRemoteService.deleteUser(), throwsA(isA<RestApiException>()));
+        expect(userRemoteService.deleteUser, throwsA(isA<RestApiException>()));
       });
 
       test('returns RestApiException when response is not null ', () async {
@@ -85,7 +85,7 @@ void main() {
           ),
         );
 
-        expect(() async => await userRemoteService.deleteUser(), throwsA(isA<RestApiException>()));
+        expect(userRemoteService.deleteUser(), throwsA(isA<RestApiException>()));
       });
 
       test('returns null when no connection', () async {
@@ -172,7 +172,7 @@ void main() {
           (_) => Future.value(),
         );
 
-        expect(() async => await userRemoteService.getUserDetails(), throwsA(isA<RestApiException>()));
+        expect(userRemoteService.getUserDetails(), throwsA(isA<RestApiException>()));
       });
 
       test('returns RemoteResponse.noConnection on No Connection DioException ', () async {
@@ -209,7 +209,7 @@ void main() {
           (_) => Future.value(),
         );
 
-        expect(() async => await userRemoteService.getUserDetails(), throwsA(isA<RestApiException>()));
+        expect(userRemoteService.getUserDetails(), throwsA(isA<RestApiException>()));
       });
     });
   });

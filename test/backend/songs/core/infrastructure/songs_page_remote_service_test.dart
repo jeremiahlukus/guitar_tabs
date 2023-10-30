@@ -195,7 +195,7 @@ void main() {
         );
 
         expect(
-          () async => await songsRemoteService.getPage(
+          songsRemoteService.getPage(
             storeEtag: true,
             requestUri: Uri.https(
               'example.com',
