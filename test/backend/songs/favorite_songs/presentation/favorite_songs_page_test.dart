@@ -60,20 +60,29 @@ void main() {
     );
   });
   group('FavoriteSongsPage', () {
-    testWidgets('contains the PaginatedSongsListView widget', (tester) async {
-      final mockSearchHistoryRepository = MockSearchHistoryRepository();
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-      final router = AppRouter();
-      final mockFavoriteSongRepository = MockFavoriteSongRepository();
-      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
-      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
+    late MockSearchHistoryRepository mockSearchHistoryRepository;
+    late SearchHistoryNotifier mockSearchHistoryProvider;
+    late AppRouter router;
+    late MockFavoriteSongRepository mockFavoriteSongRepository;
+    late FavoriteSongNotifier mockProvider;
+    late UserNotifier fakeUserNotifier;
+
+    setUp(() {
+      mockSearchHistoryRepository = MockSearchHistoryRepository();
+      mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
+      router = AppRouter();
+      mockFavoriteSongRepository = MockFavoriteSongRepository();
+      mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
+      fakeUserNotifier = FakeUserNotifier(MockUserRepository());
       when(() => mockFavoriteSongRepository.getFavoritePage(1))
           .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
       when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
 
       // ignore: invalid_use_of_protected_member
       mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
+    });
 
+    testWidgets('contains the PaginatedSongsListView widget', (tester) async {
       // ignore: unawaited_futures
       router.push(const FavoriteSongsRoute());
       await pumpRouterApp(
@@ -95,19 +104,6 @@ void main() {
       expect(finder, findsOneWidget);
     });
     testWidgets('pull down to refresh, refreshes the PaginatedSongsListView widget', (tester) async {
-      final mockSearchHistoryRepository = MockSearchHistoryRepository();
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-      final router = AppRouter();
-      final mockFavoriteSongRepository = MockFavoriteSongRepository();
-      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
-      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
-      when(() => mockFavoriteSongRepository.getFavoritePage(1))
-          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
-      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
-
-      // ignore: invalid_use_of_protected_member
-      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
-
       // ignore: unawaited_futures
       router.push(const FavoriteSongsRoute());
       await pumpRouterApp(
@@ -147,19 +143,6 @@ void main() {
       expect(find.text('new 3'), findsOneWidget);
     });
     testWidgets('contains the SearchBar widget', (tester) async {
-      final mockSearchHistoryRepository = MockSearchHistoryRepository();
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-      final router = AppRouter();
-      final mockFavoriteSongRepository = MockFavoriteSongRepository();
-      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
-      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
-      when(() => mockFavoriteSongRepository.getFavoritePage(1))
-          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
-      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
-
-      // ignore: invalid_use_of_protected_member
-      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
-
       // ignore: unawaited_futures
       router.push(const FavoriteSongsRoute());
       await pumpRouterApp(
@@ -182,20 +165,6 @@ void main() {
     });
 
     testWidgets('contains the right noResultsMessage', (tester) async {
-      final mockSearchHistoryRepository = MockSearchHistoryRepository();
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-      final router = AppRouter();
-      final mockFavoriteSongRepository = MockFavoriteSongRepository();
-      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
-      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
-
-      when(() => mockFavoriteSongRepository.getFavoritePage(1))
-          .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
-      when(mockSearchHistoryRepository.watchSearchTerms).thenAnswer((_) => Stream.value(['query1', 'query2']));
-
-      // ignore: invalid_use_of_protected_member
-      mockProvider.state = mockProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
-
       // ignore: unawaited_futures
       router.push(const FavoriteSongsRoute());
       await pumpRouterApp(
@@ -223,13 +192,7 @@ void main() {
     });
 
     testWidgets('clicking on Search button navigates to SearchedSongsRoute', (tester) async {
-      final mockSearchHistoryRepository = MockSearchHistoryRepository();
-      final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
-      final router = AppRouter();
-      final mockFavoriteSongRepository = MockFavoriteSongRepository();
-      final mockProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
       final AuthNotifier mockAuthNotifier = MockAuthNotifier();
-      final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
       final mockObserver = MockNavigatorObserver();
       when(() => mockFavoriteSongRepository.getFavoritePage(1)).thenAnswer(
         (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),

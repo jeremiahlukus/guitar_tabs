@@ -25,9 +25,15 @@ void main() {
   });
 
   group('FavoriteSongsRemoteService', () {
-    final Dio mockDio = MockDio();
-    final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
-    final favoriteSongRemoteService = FavoriteSongsRemoteService(mockDio, mockBackendHeadersCache);
+    late Dio mockDio;
+    late BackendHeadersCache mockBackendHeadersCache;
+    late FavoriteSongsRemoteService favoriteSongRemoteService;
+
+    setUp(() {
+      mockDio = MockDio();
+      mockBackendHeadersCache = MockBackendHeadersCache();
+      favoriteSongRemoteService = FavoriteSongsRemoteService(mockDio, mockBackendHeadersCache);
+    });
 
     group('.getFavoriteSongsPage', () {
       test('returns RemoteResponse.notModified when response status code is 304 ', () async {

@@ -22,21 +22,15 @@ void main() {
     group('.saveUser', () {
       test('stores the User object in the database', () async {
         final factory = newDatabaseFactoryMemory();
-
         final memoryDatabase = await factory.openDatabase('test.db');
-
         final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
-
         final userLocalService = UserLocalService(fakeSembastDatabase);
-
         final userJson = {'id': 0, 'email': 'hey@hey.com'};
-
         final userDTO = UserDTO.fromJson(userJson);
 
         await userLocalService.saveUser(userDTO);
 
         final actualData = await UserLocalService.store.record(UserLocalService.key).get(fakeSembastDatabase.instance);
-
         final expectedData = userJson;
 
         expect(actualData, expectedData);
@@ -46,21 +40,15 @@ void main() {
     group('.getUser', () {
       test('gets the User object in the database', () async {
         final factory = newDatabaseFactoryMemory();
-
         final memoryDatabase = await factory.openDatabase('test.db');
-
         final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
-
         final userLocalService = UserLocalService(fakeSembastDatabase);
-
         final userJson = {'id': 0, 'email': 'hey@hey.com'};
-
         final userDTO = UserDTO.fromJson(userJson);
 
         await UserLocalService.store.record(UserLocalService.key).put(fakeSembastDatabase.instance, userJson);
 
         final actualData = await userLocalService.getUser();
-
         final expectedData = userDTO;
 
         expect(actualData, expectedData);
@@ -70,21 +58,15 @@ void main() {
     group('.deleteUser', () {
       test('deletes the User object from the database', () async {
         final factory = newDatabaseFactoryMemory();
-
         final memoryDatabase = await factory.openDatabase('test.db');
-
         final SembastDatabase fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
-
         final userLocalService = UserLocalService(fakeSembastDatabase);
-
         final userJson = {'id': 0, 'email': 'hey@hey.com'};
-
         await UserLocalService.store.record(UserLocalService.key).put(fakeSembastDatabase.instance, userJson);
 
         await userLocalService.deleteUser();
 
         final actualData = await UserLocalService.store.record(UserLocalService.key).get(fakeSembastDatabase.instance);
-
         // ignore: prefer_void_to_null
         const Null expectedData = null;
 

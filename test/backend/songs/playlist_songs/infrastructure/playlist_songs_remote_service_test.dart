@@ -25,14 +25,15 @@ void main() {
   });
   group('PlaylistSongsRemoteService', () {
     group('.getPlaylistSongsPage', () {
-      test('returns RemoteResponse.notModified when response status code is 304 ', () async {
-        final Dio mockDio = MockDio();
-        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
+      final Dio mockDio = MockDio();
+      final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
+      final playlistSongRemoteService = PlaylistSongsRemoteService(mockDio, mockBackendHeadersCache);
 
+      test('returns RemoteResponse.notModified when response status code is 304 ', () async {
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenAnswer(
-          (invocation) => Future.value(
+          (_) => Future.value(
             Response<dynamic>(
               requestOptions: RequestOptions(),
               statusCode: 304,
@@ -41,10 +42,8 @@ void main() {
         );
 
         when(() => mockBackendHeadersCache.getHeaders(any())).thenAnswer(
-          (invocation) => Future.value(),
+          (_) => Future.value(),
         );
-
-        final playlistSongRemoteService = PlaylistSongsRemoteService(mockDio, mockBackendHeadersCache);
 
         final actualResult = await playlistSongRemoteService.getPlaylistSongsPage(1, 'test');
         const expectedResult = RemoteResponse<List<SongDTO>>.notModified(maxPage: 0);
@@ -53,9 +52,6 @@ void main() {
       });
 
       test('returns RemoteResponse.withNewData when response status code is 200 ', () async {
-        final Dio mockDio = MockDio();
-        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
-
         final mockData = [
           mockSongJson(1),
           mockSongJson(2),
@@ -66,7 +62,7 @@ void main() {
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenAnswer(
-          (invocation) => Future.value(
+          (_) => Future.value(
             Response<dynamic>(
               requestOptions: RequestOptions(),
               statusCode: 200,
@@ -76,14 +72,12 @@ void main() {
         );
 
         when(() => mockBackendHeadersCache.getHeaders(any())).thenAnswer(
-          (invocation) => Future.value(),
+          (_) => Future.value(),
         );
 
         when(() => mockBackendHeadersCache.saveHeaders(any(), any())).thenAnswer(
-          (invocation) => Future.value(),
+          (_) => Future.value(),
         );
-
-        final playlistSongRemoteService = PlaylistSongsRemoteService(mockDio, mockBackendHeadersCache);
 
         final actualResult = await playlistSongRemoteService.getPlaylistSongsPage(1, 'test');
         final expectedResult = RemoteResponse<List<SongDTO>>.withNewData(convertedData, maxPage: 1);

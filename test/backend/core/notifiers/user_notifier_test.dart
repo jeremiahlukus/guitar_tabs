@@ -18,7 +18,7 @@ void main() {
         final UserRepository mockUserRepository = MockUserRepository();
 
         when(mockUserRepository.getUserPage).thenAnswer(
-          (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+          (_) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
         final userNotifier = UserNotifier(mockUserRepository);
         const defaultUser = User(id: 0, email: 'hey@hey.com');
@@ -43,7 +43,7 @@ void main() {
       test('sets state to UserState.loadSuccess if UserRepository.getUserPage returns a User', () async {
         final UserRepository mockUserRepository = MockUserRepository();
         when(mockUserRepository.getUserPage).thenAnswer(
-          (invocation) => Future.value(
+          (_) => Future.value(
             right(const User(id: 0, email: 'hey@hey.com')),
           ),
         );

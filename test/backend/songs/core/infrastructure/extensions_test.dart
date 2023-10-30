@@ -10,11 +10,13 @@ import '../../../../_mocks/song/mock_song.dart';
 class MockSong extends Mock implements SongDTO {}
 
 void main() {
-  testWidgets('Returns a List of Song from SongDTO', (tester) async {
-    final songDTOs = [mockSongDTO(1), mockSongDTO(2)];
-    final expectedSongs = [mockSong(1), mockSong(2)];
+  group('SongDTO to Domain conversion', () {
+    test('Returns a List of Song from SongDTO', () {
+      final songDTOs = [mockSongDTO(1), mockSongDTO(2)];
+      final expectedSongs = [mockSong(1), mockSong(2)];
 
-    final actualSongs = songDTOs.toDomain();
-    expect(actualSongs, expectedSongs);
+      final actualSongs = songDTOs.toDomain();
+      expect(actualSongs, expectedSongs);
+    });
   });
 }

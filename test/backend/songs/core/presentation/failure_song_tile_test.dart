@@ -19,7 +19,7 @@ class MockFavoriteSongNotifier extends Mock implements FavoriteSongNotifier {}
 
 void main() {
   group('FailureSongTile', () {
-    testWidgets('contains the error code and error text', (tester) async {
+    testWidgets('should contain the error code and error text', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
@@ -35,7 +35,7 @@ void main() {
       expect(find.text('API returned: 400'), findsOneWidget);
     });
 
-    testWidgets('when icon button pressed loads new songs', (tester) async {
+    testWidgets('should load new songs when icon button is pressed', (tester) async {
       final FavoriteSongNotifier mockFavoriteSongNotifier = MockFavoriteSongNotifier();
       when(mockFavoriteSongNotifier.getNextFavoriteSongsPage).thenAnswer((_) => Future.value());
       await tester.pumpWidget(
@@ -61,7 +61,7 @@ void main() {
     });
   });
 
-  Widget buildWidgetUnderTest() => const MaterialApp(
+  Widget buildTestWidget() => const MaterialApp(
         home: Scaffold(
           body: FailureSongTile(
             backendFailure: BackendFailure.api(400, 'message'),
@@ -71,28 +71,28 @@ void main() {
 
   group('FailureTile Golden Test', () {
     goldenTest(
-      'renders correctly on mobile',
+      'should render correctly on mobile',
       fileName: 'FailureTile',
       builder: () => GoldenTestGroup(
         children: [
           GoldenTestDeviceScenario(
             device: Device.smallPhone,
             name: 'golden test SongTile on small phone',
-            builder: buildWidgetUnderTest,
+            builder: buildTestWidget,
           ),
           GoldenTestDeviceScenario(
             device: Device.tabletLandscape,
             name: 'golden test SongTile on tablet landscape',
-            builder: buildWidgetUnderTest,
+            builder: buildTestWidget,
           ),
           GoldenTestDeviceScenario(
             device: Device.tabletPortrait,
             name: 'golden test SongTile on tablet Portrait',
-            builder: buildWidgetUnderTest,
+            builder: buildTestWidget,
           ),
           GoldenTestDeviceScenario(
             name: 'golden test SongTile on iphone11',
-            builder: buildWidgetUnderTest,
+            builder: buildTestWidget,
           ),
         ],
       ),

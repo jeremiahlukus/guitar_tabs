@@ -12,25 +12,20 @@ import 'package:joyful_noise/backend/songs/favorite_songs/infrastructure/favorit
 import 'package:joyful_noise/core/infrastructure/sembast_database.dart';
 import '../../../../_mocks/song/mock_song.dart';
 
-class FakeSembastDatabase extends Fake implements SembastDatabase {
-  FakeSembastDatabase(this._database);
-  final Database _database;
-
-  @override
-  Database get instance => _database;
-}
+class MockSembastDatabase extends Mock implements SembastDatabase {}
 
 void main() {
   late DatabaseFactory factory;
   late Database memoryDatabase;
-  late SembastDatabase fakeSembastDatabase;
+  late SembastDatabase mockSembastDatabase;
   late FavoriteSongsLocalService favoriteSongLocalService;
 
   setUp(() async {
     factory = newDatabaseFactoryMemory();
     memoryDatabase = await factory.openDatabase('test.db');
-    fakeSembastDatabase = FakeSembastDatabase(memoryDatabase);
-    favoriteSongLocalService = FavoriteSongsLocalService(fakeSembastDatabase);
+    mockSembastDatabase = MockSembastDatabase();
+    when(() => mockSembastDatabase.instance).thenReturn(memoryDatabase);
+    favoriteSongLocalService = FavoriteSongsLocalService(mockSembastDatabase);
   });
   final mockData = [
     mockSongJson(1),
@@ -49,7 +44,7 @@ void main() {
                 (index, _) => index + PaginationConfig.itemsPerPage * sembastPage,
               ),
             )
-            .get(fakeSembastDatabase.instance);
+            .get(mockSembastDatabase.instance);
 
         final expectedData = [
           mockSongStrippedJson(1),
@@ -71,7 +66,7 @@ void main() {
                 (index, _) => index + PaginationConfig.itemsPerPage * sembastPage,
               ),
             )
-            .put(fakeSembastDatabase.instance, mockData);
+            .put(mockSembastDatabase.instance, mockData);
 
         final actualData = await favoriteSongLocalService.getPage(page);
 
@@ -92,7 +87,7 @@ void main() {
                 (index, _) => index + PaginationConfig.itemsPerPage * sembastPage,
               ),
             )
-            .put(fakeSembastDatabase.instance, mockData);
+            .put(mockSembastDatabase.instance, mockData);
 
         await favoriteSongLocalService.getLocalPageCount();
 
@@ -116,7 +111,7 @@ void main() {
                 (index, _) => index + PaginationConfig.itemsPerPage * sembastPage,
               ),
             )
-            .put(fakeSembastDatabase.instance, mockData);
+            .put(mockSembastDatabase.instance, mockData);
 
         final actualData = await favoriteSongLocalService.searchLocalSongs('test');
 

@@ -85,7 +85,7 @@ void main() {
         ],
         router,
       );
-
+      await tester.pumpAndSettle(const Duration(seconds: 2));
       final finder = find.byType(PaginatedSongsListView);
 
       expect(finder, findsOneWidget);
@@ -117,7 +117,7 @@ void main() {
         ],
         router,
       );
-
+      await tester.pumpAndSettle(const Duration(seconds: 2));
       final finder = find.byType(pub_search_bar.SearchBar);
 
       expect(finder, findsOneWidget);
@@ -149,7 +149,7 @@ void main() {
         ],
         router,
       );
-
+      await tester.pumpAndSettle(const Duration(seconds: 2));
       final finder = find.byType(PaginatedSongsListView);
 
       final paginatedSongsListView = finder.evaluate().single.widget as PaginatedSongsListView;
@@ -193,8 +193,7 @@ void main() {
         router,
         mockObserverOverride: mockObserver,
       );
-
-      await tester.pump(Duration.zero);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
       final finder = find.byType(pub_search_bar.SearchBar);
       expect(finder, findsOneWidget);
