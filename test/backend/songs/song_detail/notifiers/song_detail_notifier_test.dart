@@ -19,17 +19,16 @@ void main() {
   group('SongDetailNotifier', () {
     group('.getSongDetail', () {
       test('sets state to SongDetailState.loadFailure if SongDetail.getSongDetail returns a BackendFailure', () async {
-        final SongDetailRepository mockSongDetailRepository = MockFavoriteSongRepository();
+        final mockSongDetailRepository = MockFavoriteSongRepository();
         const page = 1;
         when(() => mockSongDetailRepository.getSongDetail(page)).thenAnswer(
-          (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+          (_) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
 
         final songDetailNotifier = SongDetailNotifier(mockSongDetailRepository);
 
         await songDetailNotifier.getSongDetail(page);
 
-        // ignore: invalid_use_of_protected_member
         final actualStateResult = songDetailNotifier.state;
 
         final expectedStateResultMatcher = equals(
@@ -42,18 +41,17 @@ void main() {
       });
 
       test('sets state to SongDetailState.loadSuccess if  SongDetail.getSongDetail returns a SongDetail', () async {
-        final SongDetailRepository mockSongDetailRepository = MockFavoriteSongRepository();
+        final mockSongDetailRepository = MockFavoriteSongRepository();
         const page = 1;
         const songDetail = SongDetail(isFavorite: true, songId: '1');
         when(() => mockSongDetailRepository.getSongDetail(page)).thenAnswer(
-          (invocation) => Future.value(right(Fresh.yes(songDetail))),
+          (_) => Future.value(right(Fresh.yes(songDetail))),
         );
 
         final songDetailNotifier = SongDetailNotifier(mockSongDetailRepository);
 
         await songDetailNotifier.getSongDetail(page);
 
-        // ignore: invalid_use_of_protected_member
         final actualStateResult = songDetailNotifier.state;
 
         final expectedStateResultMatcher = equals(
@@ -66,9 +64,9 @@ void main() {
       });
 
       test('sets state to SongDetailState.initial if FavoriteSongRepository.getFavoritePage not called', () async {
-        final SongDetailRepository mockSongDetailRepository = MockFavoriteSongRepository();
+        final mockSongDetailRepository = MockFavoriteSongRepository();
         final songDetailNotifier = SongDetailNotifier(mockSongDetailRepository);
-        // ignore: invalid_use_of_protected_member
+
         final actualStateResult = songDetailNotifier.state;
 
         final expectedStateResultMatcher = equals(
@@ -80,82 +78,78 @@ void main() {
     });
     group('.switchStarredStatus', () {
       test('sets hasFavoriteStatusChanged to false if SongDetail.getSongDetail returns a BackendFailure', () async {
-        final SongDetailRepository mockSongDetailRepository = MockFavoriteSongRepository();
+        final mockSongDetailRepository = MockFavoriteSongRepository();
         const songDetail = SongDetail(isFavorite: true, songId: '1');
         when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail)).thenAnswer(
-          (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+          (_) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
 
         final songDetailNotifier = SongDetailNotifier(mockSongDetailRepository);
 
         await songDetailNotifier.switchStarredStatus(songDetail);
 
-        // ignore: invalid_use_of_protected_member
         final actualStateResult = songDetailNotifier.state;
 
         expect(actualStateResult.hasFavoriteStatusChanged, false);
       });
 
       test('sets hasFavoriteStatusChanged to true if  SongDetail.getSongDetail returns a unit', () async {
-        final SongDetailRepository mockSongDetailRepository = MockFavoriteSongRepository();
+        final mockSongDetailRepository = MockFavoriteSongRepository();
         const page = 1;
         const songDetail = SongDetail(isFavorite: true, songId: '1');
         when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail)).thenAnswer(
-          (invocation) => Future.value(right(unit)),
+          (_) => Future.value(right(unit)),
         );
 
         final songDetailNotifier = SongDetailNotifier(mockSongDetailRepository);
         when(() => mockSongDetailRepository.getSongDetail(page)).thenAnswer(
-          (invocation) => Future.value(right(Fresh.yes(songDetail))),
+          (_) => Future.value(right(Fresh.yes(songDetail))),
         );
 
         await songDetailNotifier.getSongDetail(page);
         await songDetailNotifier.switchStarredStatus(songDetail);
 
-        // ignore: invalid_use_of_protected_member
         final actualStateResult = songDetailNotifier.state;
 
         expect(actualStateResult.hasFavoriteStatusChanged, true);
       });
       test('sets hasFavoriteStatusChanged to false if  SongDetail.getSongDetail returns null', () async {
-        final SongDetailRepository mockSongDetailRepository = MockFavoriteSongRepository();
+        final mockSongDetailRepository = MockFavoriteSongRepository();
         const page = 1;
         const songDetail = SongDetail(isFavorite: false, songId: '1');
         when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail)).thenAnswer(
-          (invocation) => Future.value(right(null)),
+          (_) => Future.value(right(null)),
         );
 
         final songDetailNotifier = SongDetailNotifier(mockSongDetailRepository);
         when(() => mockSongDetailRepository.getSongDetail(page)).thenAnswer(
-          (invocation) => Future.value(right(Fresh.yes(songDetail))),
+          (_) => Future.value(right(Fresh.yes(songDetail))),
         );
 
         await songDetailNotifier.getSongDetail(page);
         await songDetailNotifier.switchStarredStatus(songDetail);
 
-        // ignore: invalid_use_of_protected_member
         final actualStateResult = songDetailNotifier.state;
 
         expect(actualStateResult.hasFavoriteStatusChanged, false);
       });
 
       test('sets hasFavoriteStatusChanged to false if  SongDetail.getSongDetail returns null', () async {
-        final SongDetailRepository mockSongDetailRepository = MockFavoriteSongRepository();
+        final mockSongDetailRepository = MockFavoriteSongRepository();
         const page = 1;
         const songDetail = SongDetail(isFavorite: false, songId: '1');
         when(() => mockSongDetailRepository.switchFavoriteStatus(songDetail)).thenAnswer(
-          (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+          (_) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
 
         final songDetailNotifier = SongDetailNotifier(mockSongDetailRepository);
         when(() => mockSongDetailRepository.getSongDetail(page)).thenAnswer(
-          (invocation) => Future.value(right(Fresh.yes(songDetail))),
+          (_) => Future.value(right(Fresh.yes(songDetail))),
         );
 
         await songDetailNotifier.getSongDetail(page);
         await songDetailNotifier.switchStarredStatus(songDetail);
 
-        // ignore: invalid_use_of_protected_member
         final actualStateResult = songDetailNotifier.state;
 
         expect(actualStateResult.hasFavoriteStatusChanged, false);

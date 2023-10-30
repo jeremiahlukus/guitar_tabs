@@ -9,6 +9,7 @@ import 'package:mocktail/mocktail.dart';
 
 // Project imports:
 import 'package:joyful_noise/backend/core/domain/backend_failure.dart';
+import 'package:joyful_noise/backend/core/domain/song.dart';
 import 'package:joyful_noise/backend/core/presentation/no_results_display.dart';
 import 'package:joyful_noise/backend/core/shared/providers.dart';
 import 'package:joyful_noise/backend/songs/core/notifiers/paginated_songs_notifier.dart';
@@ -36,6 +37,72 @@ abstract class MyFunction {
 
 class MyFunctionMock extends Mock implements MyFunction {}
 
+AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState> createPaginatedSongsNotifierProvider(
+  PaginatedSongsNotifier mockPaginatedSongsNotifier,
+) {
+  return AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
+    (ref) => mockPaginatedSongsNotifier,
+  );
+}
+
+PaginatedSongsState createLoadSuccessState(
+  List<Song> songs, {
+  required bool isNextPageAvailable,
+}) {
+  return PaginatedSongsState.loadSuccess(
+    Fresh.yes(songs, isNextPageAvailable: isNextPageAvailable),
+    isNextPageAvailable: isNextPageAvailable,
+  );
+}
+
+PaginatedSongsState createLoadInProgressState(
+  List<Song> songs,
+  int progress, {
+  required bool isNextPageAvailable,
+}) {
+  return PaginatedSongsState.loadInProgress(Fresh.yes(songs, isNextPageAvailable: isNextPageAvailable), progress);
+}
+
+PaginatedSongsState createLoadFailureState(
+  List<Song> songs,
+  BackendFailure failure, {
+  required bool isNextPageAvailable,
+}) {
+  return PaginatedSongsState.loadFailure(
+    Fresh.yes(songs, isNextPageAvailable: isNextPageAvailable),
+    failure,
+  );
+}
+
+PaginatedSongsState createInitialLoadState(
+  List<Song> songs, {
+  required bool isNextPageAvailable,
+}) {
+  return PaginatedSongsState.initial(Fresh.yes(songs, isNextPageAvailable: isNextPageAvailable));
+}
+
+Future<void> pumpPaginatedSongsListView(
+  WidgetTester tester,
+  AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState> paginatedSongsNotifierProvider,
+  FavoriteSongNotifier favoriteSongNotifier, [
+  void Function(WidgetRef, BuildContext)? getNextPage,
+]) async {
+  await tester.pumpWidget(
+    ProviderScope(
+      overrides: [favoriteSongsNotifierProvider.overrideWith((_) => favoriteSongNotifier)],
+      child: MaterialApp(
+        home: Scaffold(
+          body: PaginatedSongsListView(
+            paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
+            getNextPage: getNextPage ?? (ref, context) {},
+            noResultsMessage: "That's everything we could find in your favorite songs right now.",
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 void main() {
   setUpAll(() {
     registerFallbackValue(MockWidgetRef());
@@ -50,369 +117,108 @@ void main() {
 
     testWidgets('shows no connection toast on loading outdated songs', (tester) async {
       final mockPaginatedSongsNotifier = PaginatedSongsNotifier();
-
-      final paginatedSongsNotificerProvider =
-          AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
-        (ref) => mockPaginatedSongsNotifier,
-      );
-
-      await tester.pumpWidget(
-        ProviderScope(
-          child: MaterialApp(
-            home: Scaffold(
-              body: PaginatedSongsListView(
-                paginatedSongsNotifierProvider: paginatedSongsNotificerProvider,
-                getNextPage: (ref, context) {},
-                noResultsMessage: "That's everything we could find in your favorite songs right now.",
-              ),
-            ),
-          ),
-        ),
-      );
-
-      // ignore: invalid_use_of_protected_member
+      final paginatedSongsNotificerProvider = createPaginatedSongsNotifierProvider(mockPaginatedSongsNotifier);
+      final mockFavoriteSongRepository = MockFavoriteSongRepository();
+      final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
+      await pumpPaginatedSongsListView(tester, paginatedSongsNotificerProvider, favoriteSongNotifier);
       mockPaginatedSongsNotifier.state = PaginatedSongsState.loadSuccess(
         Fresh.no(songList),
         isNextPageAvailable: true,
       );
 
       await tester.pump();
-
-      final flashFinder = find.byType(Flash);
-
-      expect(flashFinder, findsOneWidget);
-
-      final noConnectionMessageFinder = find.text("You're not online. Some information may be outdated.");
-
-      expect(noConnectionMessageFinder, findsOneWidget);
-
-      /// Needed to let the timer for the dialog complete
+      expect(find.byType(Flash), findsOneWidget);
+      expect(find.text("You're not online. Some information may be outdated."), findsOneWidget);
+      // Let the dialog finish
       await tester.pumpAndSettle(const Duration(seconds: 2));
     });
 
     testWidgets('displays NoResultsDisplay on no results for favorite songs', (tester) async {
       final mockPaginatedSongsNotifier = PaginatedSongsNotifier();
-
-      final paginatedSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
-        (ref) => mockPaginatedSongsNotifier,
-      );
-
+      final paginatedSongsNotifierProvider = createPaginatedSongsNotifierProvider(mockPaginatedSongsNotifier);
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
-
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
-
-      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
-          child: MaterialApp(
-            home: PaginatedSongsListView(
-              paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
-              getNextPage: (ref, context) {},
-              noResultsMessage: "That's everything we could find in your favorite songs right now.",
-            ),
-          ),
-        ),
-      );
-
-      // ignore: invalid_use_of_protected_member
-      mockPaginatedSongsNotifier.state = PaginatedSongsState.loadSuccess(
-        Fresh.yes([], isNextPageAvailable: false),
-        isNextPageAvailable: false,
-      );
-
-      // ignore: invalid_use_of_protected_member
-      favoriteSongNotifier.state = PaginatedSongsState.loadSuccess(
-        Fresh.yes([], isNextPageAvailable: false),
-        isNextPageAvailable: false,
-      );
-
+      await pumpPaginatedSongsListView(tester, paginatedSongsNotifierProvider, favoriteSongNotifier);
+      mockPaginatedSongsNotifier.state = createLoadSuccessState([], isNextPageAvailable: false);
+      favoriteSongNotifier.state = createLoadSuccessState([], isNextPageAvailable: false);
       await tester.pump();
-
-      final noResultsDisplayFinder = find.byType(NoResultsDisplay);
-
-      expect(noResultsDisplayFinder, findsOneWidget);
-
-      final noResultsDisplayMessageFinder =
-          find.text("That's everything we could find in your favorite songs right now.");
-
-      expect(noResultsDisplayMessageFinder, findsOneWidget);
+      expect(find.byType(NoResultsDisplay), findsOneWidget);
+      expect(find.text("That's everything we could find in your favorite songs right now."), findsOneWidget);
     });
 
     testWidgets('LoadSuccess displays SongTile when results for favorite songs', (tester) async {
       final mockPaginatedSongsNotifier = PaginatedSongsNotifier();
-
-      final paginatedSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
-        (ref) => mockPaginatedSongsNotifier,
-      );
-
+      final paginatedSongsNotifierProvider = createPaginatedSongsNotifierProvider(mockPaginatedSongsNotifier);
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
-
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
-
-      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
-          child: MaterialApp(
-            home: Scaffold(
-              body: PaginatedSongsListView(
-                paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
-                getNextPage: (ref, context) {},
-                noResultsMessage: "That's everything we could find in your favorite songs right now.",
-              ),
-            ),
-          ),
-        ),
-      );
-
-      // ignore: invalid_use_of_protected_member
-      mockPaginatedSongsNotifier.state = PaginatedSongsState.loadSuccess(
-        Fresh.yes([mockSong(1), mockSong(2)], isNextPageAvailable: false),
-        isNextPageAvailable: false,
-      );
-
-      // ignore: invalid_use_of_protected_member
-      favoriteSongNotifier.state = PaginatedSongsState.loadSuccess(
-        Fresh.yes([mockSong(1), mockSong(2)], isNextPageAvailable: false),
-        isNextPageAvailable: false,
-      );
-
+      await pumpPaginatedSongsListView(tester, paginatedSongsNotifierProvider, favoriteSongNotifier);
+      mockPaginatedSongsNotifier.state = createLoadSuccessState([mockSong(1), mockSong(2)], isNextPageAvailable: false);
+      favoriteSongNotifier.state = createLoadSuccessState([mockSong(1), mockSong(2)], isNextPageAvailable: false);
       await tester.pump();
-
-      final songTileFinder = find.byType(SongTile);
-
-      expect(songTileFinder, findsNWidgets(2));
+      expect(find.byType(SongTile), findsNWidgets(2));
     });
     testWidgets('loadInProgress displays SongTile when results for favorite songs', (tester) async {
       final mockPaginatedSongsNotifier = PaginatedSongsNotifier();
-
-      final paginatedSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
-        (ref) => mockPaginatedSongsNotifier,
-      );
-
+      final paginatedSongsNotifierProvider = createPaginatedSongsNotifierProvider(mockPaginatedSongsNotifier);
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
-
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
-
-      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
-          child: MaterialApp(
-            home: Scaffold(
-              body: PaginatedSongsListView(
-                paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
-                getNextPage: (ref, context) {},
-                noResultsMessage: "That's everything we could find in your favorite songs right now.",
-              ),
-            ),
-          ),
-        ),
-      );
-
-      // ignore: invalid_use_of_protected_member
-      mockPaginatedSongsNotifier.state =
-          PaginatedSongsState.loadInProgress(Fresh.yes(songList, isNextPageAvailable: false), 25);
-
-      // ignore: invalid_use_of_protected_member
-      favoriteSongNotifier.state =
-          PaginatedSongsState.loadInProgress(Fresh.yes(songList, isNextPageAvailable: false), 25);
-
+      await pumpPaginatedSongsListView(tester, paginatedSongsNotifierProvider, favoriteSongNotifier);
+      mockPaginatedSongsNotifier.state = createLoadInProgressState(songList, isNextPageAvailable: false, 25);
+      favoriteSongNotifier.state = createLoadInProgressState(songList, isNextPageAvailable: false, 25);
       await tester.pump();
-
-      final songTileFinder = find.byType(SongTile);
-
-      expect(songTileFinder, findsNWidgets(3));
+      expect(find.byType(SongTile), findsNWidgets(3));
     });
     testWidgets('loadInProgress displays LoadingSongTile when NO results for favorite songs', (tester) async {
       final mockPaginatedSongsNotifier = PaginatedSongsNotifier();
-
-      final paginatedSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
-        (ref) => mockPaginatedSongsNotifier,
-      );
-
+      final paginatedSongsNotifierProvider = createPaginatedSongsNotifierProvider(mockPaginatedSongsNotifier);
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
-
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
-
-      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
-          child: MaterialApp(
-            home: Scaffold(
-              body: PaginatedSongsListView(
-                paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
-                getNextPage: (ref, context) {},
-                noResultsMessage: "That's everything we could find in your favorite songs right now.",
-              ),
-            ),
-          ),
-        ),
-      );
-
-      // ignore: invalid_use_of_protected_member
-      mockPaginatedSongsNotifier.state =
-          PaginatedSongsState.loadInProgress(Fresh.yes([], isNextPageAvailable: false), 25);
-
-      // ignore: invalid_use_of_protected_member
-      favoriteSongNotifier.state = PaginatedSongsState.loadInProgress(Fresh.yes([], isNextPageAvailable: false), 25);
-
+      await pumpPaginatedSongsListView(tester, paginatedSongsNotifierProvider, favoriteSongNotifier);
+      mockPaginatedSongsNotifier.state = createLoadInProgressState([], isNextPageAvailable: false, 25);
+      favoriteSongNotifier.state = createLoadInProgressState([], isNextPageAvailable: false, 25);
       await tester.pump();
-
-      final loadingSongTileFinder = find.byType(LoadingSongTile);
-      final songTileFinder = find.byType(SongTile);
-
-      expect(loadingSongTileFinder, findsNWidgets(9));
-      expect(songTileFinder, findsNothing);
+      expect(find.byType(LoadingSongTile), findsNWidgets(9));
+      expect(find.byType(SongTile), findsNothing);
     });
     testWidgets('loadFailure does not display SongTile when results for favorite songs', (tester) async {
       final mockPaginatedSongsNotifier = PaginatedSongsNotifier();
-
-      final paginatedSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
-        (ref) => mockPaginatedSongsNotifier,
-      );
-
+      final paginatedSongsNotifierProvider = createPaginatedSongsNotifierProvider(mockPaginatedSongsNotifier);
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
-
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
-
-      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
-          child: MaterialApp(
-            home: Scaffold(
-              body: PaginatedSongsListView(
-                paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
-                getNextPage: (ref, context) {},
-                noResultsMessage: "That's everything we could find in your favorite songs right now.",
-              ),
-            ),
-          ),
-        ),
-      );
-
-      // ignore: invalid_use_of_protected_member
-      mockPaginatedSongsNotifier.state = PaginatedSongsState.loadFailure(
-        Fresh.yes([], isNextPageAvailable: false),
-        const BackendFailure.api(400, 'message'),
-      );
-
-      // ignore: invalid_use_of_protected_member
-      favoriteSongNotifier.state = PaginatedSongsState.loadFailure(
-        Fresh.yes([], isNextPageAvailable: false),
-        const BackendFailure.api(400, 'message'),
-      );
+      await pumpPaginatedSongsListView(tester, paginatedSongsNotifierProvider, favoriteSongNotifier);
+      mockPaginatedSongsNotifier.state =
+          createLoadFailureState([], const BackendFailure.api(404, 'message'), isNextPageAvailable: false);
+      favoriteSongNotifier.state =
+          createLoadFailureState([], const BackendFailure.api(404, 'message'), isNextPageAvailable: false);
       await tester.pump();
-
-      final failureSongTileFinder = find.byType(FailureSongTile);
-      final songTileFinder = find.byType(SongTile);
-
-      expect(failureSongTileFinder, findsOneWidget);
-      expect(songTileFinder, findsNothing);
+      expect(find.byType(FailureSongTile), findsOneWidget);
+      expect(find.byType(SongTile), findsNothing);
     });
 
     testWidgets('loadInitial does not display Tiles', (tester) async {
       final mockPaginatedSongsNotifier = PaginatedSongsNotifier();
-
-      final paginatedSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
-        (ref) => mockPaginatedSongsNotifier,
-      );
-
+      final paginatedSongsNotifierProvider = createPaginatedSongsNotifierProvider(mockPaginatedSongsNotifier);
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
-
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
-
-      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
-          child: MaterialApp(
-            home: Scaffold(
-              body: PaginatedSongsListView(
-                paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
-                getNextPage: (ref, context) {},
-                noResultsMessage: "That's everything we could find in your favorite songs right now.",
-              ),
-            ),
-          ),
-        ),
-      );
-
-      // ignore: invalid_use_of_protected_member
-      mockPaginatedSongsNotifier.state = PaginatedSongsState.initial(Fresh.yes(songList, isNextPageAvailable: true));
-
-      // ignore: invalid_use_of_protected_member
-      favoriteSongNotifier.state = PaginatedSongsState.initial(Fresh.yes(songList, isNextPageAvailable: true));
-
+      await pumpPaginatedSongsListView(tester, paginatedSongsNotifierProvider, favoriteSongNotifier);
+      mockPaginatedSongsNotifier.state = createInitialLoadState(songList, isNextPageAvailable: true);
+      favoriteSongNotifier.state = createInitialLoadState(songList, isNextPageAvailable: true);
       await tester.pump();
-      final loadingSongTileFinder = find.byType(LoadingSongTile);
-      final failureSongTileFinder = find.byType(FailureSongTile);
-      final songTileFinder = find.byType(SongTile);
-
-      expect(loadingSongTileFinder, findsNothing);
-      expect(failureSongTileFinder, findsNothing);
-      expect(songTileFinder, findsNothing);
+      expect(find.byType(LoadingSongTile), findsNothing);
+      expect(find.byType(FailureSongTile), findsNothing);
+      expect(find.byType(SongTile), findsNothing);
     });
 
     testWidgets('ScrollNotification when screen is scrolled calls getNextPage', (tester) async {
       final mockPaginatedSongsNotifier = PaginatedSongsNotifier();
-
-      final paginatedSongsNotifierProvider =
-          AutoDisposeStateNotifierProvider<PaginatedSongsNotifier, PaginatedSongsState>(
-        (ref) => mockPaginatedSongsNotifier,
-      );
-
+      final paginatedSongsNotifierProvider = createPaginatedSongsNotifierProvider(mockPaginatedSongsNotifier);
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
-
       final favoriteSongNotifier = FavoriteSongNotifier(mockFavoriteSongRepository);
-
-      final mockFavoriteSongsNotifierProvider = favoriteSongNotifier;
-
       final mock = MyFunctionMock();
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteSongsNotifierProvider)],
-          child: MaterialApp(
-            home: Scaffold(
-              body: PaginatedSongsListView(
-                paginatedSongsNotifierProvider: paginatedSongsNotifierProvider,
-                getNextPage: mock.call,
-                noResultsMessage: "That's everything we could find in your favorite songs right now.",
-              ),
-            ),
-          ),
-        ),
-      );
+      await pumpPaginatedSongsListView(tester, paginatedSongsNotifierProvider, favoriteSongNotifier, mock.call);
       final songs = [mockSong(1)];
-
-      // ignore: invalid_use_of_protected_member
-      mockPaginatedSongsNotifier.state = PaginatedSongsState.loadSuccess(
-        Fresh.yes(songs, isNextPageAvailable: true),
-        isNextPageAvailable: true,
-      );
-
-      // ignore: invalid_use_of_protected_member
-      favoriteSongNotifier.state = PaginatedSongsState.loadSuccess(
-        Fresh.yes(songs, isNextPageAvailable: true),
-        isNextPageAvailable: true,
-      );
-
+      mockPaginatedSongsNotifier.state = createLoadSuccessState(songs, isNextPageAvailable: true);
+      favoriteSongNotifier.state = createLoadSuccessState(songs, isNextPageAvailable: true);
       await tester.pump();
       expect(PaginatedSongsListViewState.canLoadNextPage, true);
       verifyNever(() => mock(any(), any()));

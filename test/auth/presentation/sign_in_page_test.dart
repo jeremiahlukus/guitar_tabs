@@ -12,6 +12,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 // Project imports:
 import 'package:joyful_noise/auth/infrastructure/webapp_authenticator.dart';
 import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
+import 'package:joyful_noise/auth/presentation/authorization_page.dart';
 import 'package:joyful_noise/auth/presentation/sign_in_page.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
@@ -128,9 +129,9 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // final authorizationPageFinder = find.byType(AuthorizationPage);
+      final authorizationPageFinder = find.byType(AuthorizationPage);
 
-      // expect(authorizationPageFinder, findsOneWidget);
+      expect(authorizationPageFinder, findsOneWidget);
     });
   });
 

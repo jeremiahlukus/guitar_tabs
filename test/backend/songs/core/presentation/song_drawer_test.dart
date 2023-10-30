@@ -48,7 +48,7 @@ class MockDio extends Mock implements Dio {}
 
 class MockBackendHeadersCache extends Mock implements BackendHeadersCache {}
 
-class MyTypeFake extends Mock implements Uri {}
+class UriFake extends Mock implements Uri {}
 
 class MockUserRepository extends Mock implements UserRepository {}
 
@@ -69,7 +69,7 @@ class FakeUserNotifier extends UserNotifier {
 void main() {
   group('SongDrawer', () {
     setUpAll(() {
-      registerFallbackValue(MyTypeFake());
+      registerFallbackValue(UriFake());
     });
     testWidgets('contains DrawerHeader', (tester) async {
       final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -95,8 +95,6 @@ void main() {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
       final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
       final router = AppRouter();
-      final mockPlaylistSongRepository = MockPlaylistSongRepository();
-      final mockPlaylistProvider = PlaylistSongsNotifier(mockPlaylistSongRepository);
       final mockFavoriteSongRepository = MockFavoriteSongRepository();
       final mockFavoriteProvider = FavoriteSongNotifier(mockFavoriteSongRepository);
       final UserNotifier fakeUserNotifier = FakeUserNotifier(MockUserRepository());
@@ -104,9 +102,6 @@ void main() {
 
       when(() => mockFavoriteSongRepository.getFavoritePage(1))
           .thenAnswer((invocation) => Future.value(right(Fresh.yes([mockSong(1)]))));
-      // ignore: invalid_use_of_protected_member
-      mockPlaylistProvider.state = mockPlaylistProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
-
       // ignore: invalid_use_of_protected_member
       mockFavoriteProvider.state = mockFavoriteProvider.state.copyWith(songs: Fresh.yes([mockSong(1)]));
 
@@ -119,7 +114,6 @@ void main() {
             (_) => fakeUserNotifier,
           ),
           favoriteSongsNotifierProvider.overrideWith((_) => mockFavoriteProvider),
-          playlistSongsNotifierProvider.overrideWith((_) => mockPlaylistProvider),
           searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
         ],
         router,

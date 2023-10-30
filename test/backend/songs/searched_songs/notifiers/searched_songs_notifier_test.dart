@@ -21,10 +21,10 @@ void main() {
       test(
           'sets state to PaginatedSongsState.loadFailure if SearchedSongRepository.getNextSearchedSongsPage returns a BackendFailure',
           () async {
-        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final mockSearchedSongRepository = MockSearchedSongRepository();
         const page = 1;
         when(() => mockSearchedSongRepository.getSearchedSongsPage('query', page)).thenAnswer(
-          (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+          (_) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
 
         final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
@@ -50,11 +50,11 @@ void main() {
       test(
           'sets state to PaginatedSongsState.loadSuccess if  SearchedSongRepository.getNextSearchedSongsPage returns a Song',
           () async {
-        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final mockSearchedSongRepository = MockSearchedSongRepository();
         const page = 1;
         final defaultSong = [MockSong()];
         when(() => mockSearchedSongRepository.getSearchedSongsPage('query', page)).thenAnswer(
-          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+          (_) => Future.value(right(Fresh.yes(defaultSong))),
         );
 
         final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
@@ -73,7 +73,7 @@ void main() {
 
       test('sets state to PaginatedSongsState.initial if SearchedSongRepository.getNextSearchedSongsPage not called',
           () async {
-        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final mockSearchedSongRepository = MockSearchedSongRepository();
         final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
         // ignore: invalid_use_of_protected_member
         final actualStateResult = searchedSongNotifier.state;
@@ -90,12 +90,12 @@ void main() {
       test(
           'sets state to PaginatedSongsState.loadSuccess if  SearchedSongRepository.getFirstSearchedSongsPage returns a Song',
           () async {
-        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final mockSearchedSongRepository = MockSearchedSongRepository();
         const page = 1;
         final defaultSong = [MockSong()];
 
         when(() => mockSearchedSongRepository.getSearchedSongsPage('query', page)).thenAnswer(
-          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+          (_) => Future.value(right(Fresh.yes(defaultSong))),
         );
 
         final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
@@ -113,12 +113,12 @@ void main() {
       });
 
       test('resets the page to 2', () async {
-        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final mockSearchedSongRepository = MockSearchedSongRepository();
         const page = 1;
         final defaultSong = [MockSong()];
 
         when(() => mockSearchedSongRepository.getSearchedSongsPage('query', page)).thenAnswer(
-          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+          (_) => Future.value(right(Fresh.yes(defaultSong))),
         );
 
         final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository)..page = 10;
@@ -137,11 +137,11 @@ void main() {
       test(
           'sets state to PaginatedSongsState.loadFailure if SearchedSongRepository.getNextSearchedSongsPage returns a BackendFailure',
           () async {
-        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final mockSearchedSongRepository = MockSearchedSongRepository();
         const page = 1;
         const playlist = 'Hymnal';
         when(() => mockSearchedSongRepository.getPlaylistSearchedSongsPage('query', page, playlist)).thenAnswer(
-          (invocation) => Future.value(left(const BackendFailure.api(400, 'message'))),
+          (_) => Future.value(left(const BackendFailure.api(400, 'message'))),
         );
 
         final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
@@ -167,12 +167,12 @@ void main() {
       test(
           'sets state to PaginatedSongsState.loadSuccess if  SearchedSongRepository.getNextPlaylistSearchedSongsPage returns a Song',
           () async {
-        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final mockSearchedSongRepository = MockSearchedSongRepository();
         const page = 1;
         const playlist = 'Hymnal';
         final defaultSong = [MockSong()];
         when(() => mockSearchedSongRepository.getPlaylistSearchedSongsPage('query', page, playlist)).thenAnswer(
-          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+          (_) => Future.value(right(Fresh.yes(defaultSong))),
         );
 
         final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
@@ -192,7 +192,7 @@ void main() {
       test(
           'sets state to PaginatedSongsState.initial if SearchedSongRepository.getNextPlaylistSearchedSongsPage not called',
           () async {
-        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final mockSearchedSongRepository = MockSearchedSongRepository();
         final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
         // ignore: invalid_use_of_protected_member
         final actualStateResult = searchedSongNotifier.state;
@@ -209,12 +209,12 @@ void main() {
       test(
           'sets state to PaginatedSongsState.loadSuccess if  SearchedSongRepository.getFirstSearchedSongsPage returns a Song',
           () async {
-        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final mockSearchedSongRepository = MockSearchedSongRepository();
         const page = 1;
         final defaultSong = [MockSong()];
         const playlist = 'Hymnal';
         when(() => mockSearchedSongRepository.getPlaylistSearchedSongsPage('query', page, playlist)).thenAnswer(
-          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+          (_) => Future.value(right(Fresh.yes(defaultSong))),
         );
 
         final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository);
@@ -232,12 +232,12 @@ void main() {
       });
 
       test('resets the page to 2', () async {
-        final SearchedSongsRepository mockSearchedSongRepository = MockSearchedSongRepository();
+        final mockSearchedSongRepository = MockSearchedSongRepository();
         const page = 1;
         final defaultSong = [MockSong()];
         const playlist = 'Hymnal';
         when(() => mockSearchedSongRepository.getPlaylistSearchedSongsPage('query', page, playlist)).thenAnswer(
-          (invocation) => Future.value(right(Fresh.yes(defaultSong))),
+          (_) => Future.value(right(Fresh.yes(defaultSong))),
         );
 
         final searchedSongNotifier = SearchedSongsNotifier(mockSearchedSongRepository)..page = 10;

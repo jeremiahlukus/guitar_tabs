@@ -18,89 +18,70 @@ class MockFavoriteSongRemoteService extends Mock implements PlaylistSongsRemoteS
 
 void main() {
   group('PlaylistSongRepository', () {
-    group('.getFavoritePage', () {
-      test('returns Left<BackendFailure, Fresh<List<Song>>> on RestApiException', () async {
-        final PlaylistSongsRemoteService mockPlaylistSongRemoteService = MockFavoriteSongRemoteService();
+    late PlaylistSongsRemoteService mockPlaylistSongRemoteService;
+    late PlaylistSongsRepository favoriteSongRepository;
+    const playlistName = 'test';
+    const page = 1;
 
-        const playlistName = 'test';
-        const page = 1;
-        when(() => mockPlaylistSongRemoteService.getPlaylistSongsPage(page, playlistName))
-            .thenThrow(RestApiException(400));
+    setUp(() {
+      mockPlaylistSongRemoteService = MockFavoriteSongRemoteService();
+      favoriteSongRepository = PlaylistSongsRepository(mockPlaylistSongRemoteService);
+    });
 
-        final favoriteSongRepository = PlaylistSongsRepository(mockPlaylistSongRemoteService);
+    test('returns Left<BackendFailure, Fresh<List<Song>>> on RestApiException', () async {
+      when(() => mockPlaylistSongRemoteService.getPlaylistSongsPage(page, playlistName))
+          .thenThrow(RestApiException(400));
 
-        final actualResult = await favoriteSongRepository.getPlaylistSong(page, playlistName);
-        final expectedResult = isA<Left<BackendFailure, Fresh<List<Song>>>>();
+      final actualResult = await favoriteSongRepository.getPlaylistSong(page, playlistName);
+      final expectedResult = isA<Left<BackendFailure, Fresh<List<Song>>>>();
 
-        expect(actualResult, expectedResult);
+      expect(actualResult, expectedResult);
+    });
+
+    test(
+        'returns Right<BackendFailure,  Fresh<List<Song>>> when FavoriteSongRemoteService returns RemoteResponse.noConnection',
+        () async {
+      when(() => mockPlaylistSongRemoteService.getPlaylistSongsPage(page, playlistName)).thenAnswer((_) {
+        return Future.value(const RemoteResponse<List<SongDTO>>.noConnection());
       });
 
-      test(
-          'returns Right<BackendFailure,  Fresh<List<Song>>> when FavoriteSongRemoteService returns RemoteResponse.noConnection',
-          () async {
-        final PlaylistSongsRemoteService mockPlaylistSongRemoteService = MockFavoriteSongRemoteService();
+      final actualResult = await favoriteSongRepository.getPlaylistSong(page, playlistName);
+      final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
 
-        const playlistName = 'test';
-        const page = 1;
+      expect(actualResult, expectedResult);
+    });
 
-        when(() => mockPlaylistSongRemoteService.getPlaylistSongsPage(page, playlistName)).thenAnswer((_) {
-          return Future.value(const RemoteResponse<List<SongDTO>>.noConnection());
-        });
-
-        final favoriteSongRepository = PlaylistSongsRepository(mockPlaylistSongRemoteService);
-
-        final actualResult = await favoriteSongRepository.getPlaylistSong(page, playlistName);
-        final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
-
-        expect(actualResult, expectedResult);
+    test(
+        'returns Right<BackendFailure,  Fresh<List<Song>>> when FavoriteSongRemoteService returns RemoteResponse.notModified',
+        () async {
+      when(() => mockPlaylistSongRemoteService.getPlaylistSongsPage(page, playlistName)).thenAnswer((_) {
+        return Future.value(const RemoteResponse<List<SongDTO>>.notModified());
       });
 
-      test(
-          'returns Right<BackendFailure,  Fresh<List<Song>>> when FavoriteSongRemoteService returns RemoteResponse.notModified',
-          () async {
-        final PlaylistSongsRemoteService mockPlaylistSongRemoteService = MockFavoriteSongRemoteService();
+      final actualResult = await favoriteSongRepository.getPlaylistSong(page, playlistName);
+      final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
 
-        const playlistName = 'test';
-        const page = 1;
+      expect(actualResult, expectedResult);
+    });
 
-        when(() => mockPlaylistSongRemoteService.getPlaylistSongsPage(page, playlistName)).thenAnswer((_) {
-          return Future.value(const RemoteResponse<List<SongDTO>>.notModified());
-        });
+    test(
+        'returns Right<BackendFailure, Fresh<List<Song>>> when FavoriteSongRemoteService returns RemoteResponse.withNewData',
+        () async {
+      final songDTO = [
+        mockSongDTO(1),
+        mockSongDTO(2),
+      ];
 
-        final favoriteSongRepository = PlaylistSongsRepository(mockPlaylistSongRemoteService);
-
-        final actualResult = await favoriteSongRepository.getPlaylistSong(page, playlistName);
-        final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
-
-        expect(actualResult, expectedResult);
+      when(() => mockPlaylistSongRemoteService.getPlaylistSongsPage(page, playlistName)).thenAnswer((_) {
+        return Future.value(
+          RemoteResponse<List<SongDTO>>.withNewData(songDTO),
+        );
       });
 
-      test(
-          'returns Right<BackendFailure, Fresh<List<Song>>> when FavoriteSongRemoteService returns RemoteResponse.withNewData',
-          () async {
-        final PlaylistSongsRemoteService mockPlaylistSongRemoteService = MockFavoriteSongRemoteService();
+      final actualResult = await favoriteSongRepository.getPlaylistSong(page, playlistName);
+      final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
 
-        const playlistName = 'test';
-        const page = 1;
-
-        final songDTO = [
-          mockSongDTO(1),
-          mockSongDTO(2),
-        ];
-
-        when(() => mockPlaylistSongRemoteService.getPlaylistSongsPage(page, playlistName)).thenAnswer((_) {
-          return Future.value(
-            RemoteResponse<List<SongDTO>>.withNewData(songDTO),
-          );
-        });
-
-        final favoriteSongRepository = PlaylistSongsRepository(mockPlaylistSongRemoteService);
-
-        final actualResult = await favoriteSongRepository.getPlaylistSong(page, playlistName);
-        final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
-
-        expect(actualResult, expectedResult);
-      });
+      expect(actualResult, expectedResult);
     });
   });
 }

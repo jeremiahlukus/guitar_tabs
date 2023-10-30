@@ -427,7 +427,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "56a059b3bd18b5bf8a4895196743cdae14756897"
+      resolved-ref: "3bf0b110700247153460c8781a26c4fb9f3f6c48"
       url: "https://github.com/jeremiahlukus/flutter_chord"
     source: git
     version: "0.1.2"

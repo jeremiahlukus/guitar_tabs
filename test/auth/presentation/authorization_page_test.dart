@@ -58,29 +58,6 @@ void main() {
       expect(webViewWidgetFinder, findsOneWidget);
     });
 
-    // testWidgets('clicking on the back button pops the navigation', (tester) async {
-    //   final mockObserver = MockNavigatorObserver();
-    //   await tester.pumpWidget(
-    //     MaterialApp(
-    //       home: AuthorizationPage(
-    //         authorizationUrl: Uri(scheme: ''),
-    //         onAuthorizationCodeRedirectAttempt: (Uri _) => <String, String>{},
-    //       ),
-    //       navigatorObservers: [mockObserver],
-    //     ),
-    //   );
-
-    //   await tester.pump(Duration.zero);
-
-    //   final backButtonFinder = find.byKey(AuthorizationPage.backButtonKey);
-
-    //   await tester.tap(backButtonFinder);
-
-    //   await tester.pump();
-
-    //   verify(() => mockObserver.didPop(any(), any()));
-    // });
-
     testWidgets('WebViewController clears cached when the page is created', (tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(

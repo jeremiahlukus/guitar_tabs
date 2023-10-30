@@ -14,9 +14,9 @@ void main() {
   group('AuthNotifier', () {
     group('.checkAndUpdateAuthStatus', () {
       test('sets state to AuthState.authenticated() if WebAppAuthenticator().isSignedIn returns true', () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+        final mockWebAppAuthenticator = MockWebAppAuthenticator();
 
-        when(mockWebAppAuthenticator.isSignedIn).thenAnswer((invocation) => Future.value(true));
+        when(mockWebAppAuthenticator.isSignedIn).thenAnswer((_) => Future.value(true));
 
         final authNotifier = AuthNotifier(mockWebAppAuthenticator);
 
@@ -31,9 +31,9 @@ void main() {
       });
 
       test('sets state to AuthState.unauthenticated() if WebAppAuthenticator().isSignedIn returns false', () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+        final mockWebAppAuthenticator = MockWebAppAuthenticator();
 
-        when(mockWebAppAuthenticator.isSignedIn).thenAnswer((invocation) => Future.value(false));
+        when(mockWebAppAuthenticator.isSignedIn).thenAnswer((_) => Future.value(false));
 
         final authNotifier = AuthNotifier(mockWebAppAuthenticator);
 
@@ -51,14 +51,14 @@ void main() {
     group('.signIn', () {
       test('sets state to AuthState.failure if WebAppAuthenticator().handleAuthorizationResponse() returns a Left',
           () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+        final mockWebAppAuthenticator = MockWebAppAuthenticator();
 
         final uri = Uri.https('example.org', '/path', <String, String>{'q': 'dart'});
 
         when(mockWebAppAuthenticator.getAuthorizationUrl).thenReturn(uri);
 
         when(() => mockWebAppAuthenticator.handleAuthorizationResponse(any())).thenAnswer(
-          (invocation) => Future.value(left(const AuthFailure.storage())),
+          (_) => Future.value(left(const AuthFailure.storage())),
         );
 
         final authNotifier = AuthNotifier(mockWebAppAuthenticator);
@@ -75,14 +75,14 @@ void main() {
       test(
           'sets state to AuthState.authenticated() if WebAppAuthenticator().handleAuthorizationResponse() returns a Right',
           () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+        final mockWebAppAuthenticator = MockWebAppAuthenticator();
 
         final uri = Uri.http('example.org', '/path', <String, String>{'q': 'dart'});
 
         when(mockWebAppAuthenticator.getAuthorizationUrl).thenReturn(uri);
 
         when(() => mockWebAppAuthenticator.handleAuthorizationResponse(any()))
-            .thenAnswer((invocation) => Future.value(right(unit)));
+            .thenAnswer((_) => Future.value(right(unit)));
 
         final authNotifier = AuthNotifier(mockWebAppAuthenticator);
         await authNotifier.signIn((_) async => _);
@@ -98,10 +98,10 @@ void main() {
 
     group('.signOut', () {
       test('sets state to AuthState.failure if WebAppAuthenticator().signOut returns a Left', () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+        final mockWebAppAuthenticator = MockWebAppAuthenticator();
 
         when(mockWebAppAuthenticator.signOut).thenAnswer(
-          (invocation) => Future.value(left(const AuthFailure.storage())),
+          (_) => Future.value(left(const AuthFailure.storage())),
         );
 
         final authNotifier = AuthNotifier(mockWebAppAuthenticator);
@@ -115,9 +115,9 @@ void main() {
       });
 
       test('sets state to AuthState.unauthenticated if WebAppAuthenticator().signOut returns a Right', () async {
-        final WebAppAuthenticator mockWebAppAuthenticator = MockWebAppAuthenticator();
+        final mockWebAppAuthenticator = MockWebAppAuthenticator();
 
-        when(mockWebAppAuthenticator.signOut).thenAnswer((invocation) => Future.value(right(unit)));
+        when(mockWebAppAuthenticator.signOut).thenAnswer((_) => Future.value(right(unit)));
 
         final authNotifier = AuthNotifier(mockWebAppAuthenticator);
         await authNotifier.signOut();

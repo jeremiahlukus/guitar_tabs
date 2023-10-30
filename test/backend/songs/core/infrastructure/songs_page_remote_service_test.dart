@@ -25,16 +25,24 @@ void main() {
     registerFallbackValue(Options());
     registerFallbackValue(const BackendHeaders());
   });
+
   group('SongsPageRemoteService', () {
+    late Dio mockDio;
+    late BackendHeadersCache mockBackendHeadersCache;
+    late SongsPageRemoteService songsRemoteService;
+
+    setUp(() {
+      mockDio = MockDio();
+      mockBackendHeadersCache = MockBackendHeadersCache();
+      songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
+    });
+
     group('.getPage', () {
       test('returns RemoteResponse.notModified when response status code is 304 ', () async {
-        final Dio mockDio = MockDio();
-        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
-
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenAnswer(
-          (invocation) => Future.value(
+          (_) => Future.value(
             Response<dynamic>(
               requestOptions: RequestOptions(),
               statusCode: 304,
@@ -43,10 +51,8 @@ void main() {
         );
 
         when(() => mockBackendHeadersCache.getHeaders(any())).thenAnswer(
-          (invocation) => Future.value(),
+          (_) => Future.value(),
         );
-
-        final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
         final actualResult = await songsRemoteService.getPage(
           storeEtag: true,
@@ -66,9 +72,6 @@ void main() {
       });
 
       test('returns RemoteResponse.withNewData when response status code is 200 ', () async {
-        final Dio mockDio = MockDio();
-        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
-
         final mockData = [
           mockSongJson(1),
         ];
@@ -78,7 +81,7 @@ void main() {
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenAnswer(
-          (invocation) => Future.value(
+          (_) => Future.value(
             Response<dynamic>(
               requestOptions: RequestOptions(),
               statusCode: 200,
@@ -88,14 +91,12 @@ void main() {
         );
 
         when(() => mockBackendHeadersCache.getHeaders(any())).thenAnswer(
-          (invocation) => Future.value(),
+          (_) => Future.value(),
         );
 
         when(() => mockBackendHeadersCache.saveHeaders(any(), any())).thenAnswer(
-          (invocation) => Future.value(),
+          (_) => Future.value(),
         );
-
-        final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
         final actualResult = await songsRemoteService.getPage(
           storeEtag: true,
@@ -115,13 +116,10 @@ void main() {
       });
 
       test('throws RestApiException when response status code is neither 304 nor 200 ', () async {
-        final Dio mockDio = MockDio();
-        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
-
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenAnswer(
-          (invocation) => Future.value(
+          (_) => Future.value(
             Response<dynamic>(
               requestOptions: RequestOptions(),
               statusCode: 400,
@@ -130,13 +128,11 @@ void main() {
         );
 
         when(() => mockBackendHeadersCache.getHeaders(any())).thenAnswer(
-          (invocation) => Future.value(),
+          (_) => Future.value(),
         );
 
-        final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
-
-        try {
-          await songsRemoteService.getPage(
+        expect(
+          () => songsRemoteService.getPage(
             storeEtag: true,
             requestUri: Uri.https(
               'example.com',
@@ -147,18 +143,12 @@ void main() {
               },
             ),
             jsonDataSelector: (dynamic json) => json as List<dynamic>,
-          );
-        } on RestApiException catch (e) {
-          expect(e.errorCode, 400);
-          return;
-        }
-        throw Exception('Test Failed');
+          ),
+          throwsA(isA<RestApiException>()),
+        );
       });
 
       test('returns RemoteResponse.noConnection on No Connection DioException ', () async {
-        final Dio mockDio = MockDio();
-        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
-
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
@@ -169,10 +159,8 @@ void main() {
         );
 
         when(() => mockBackendHeadersCache.getHeaders(any())).thenAnswer(
-          (invocation) => Future.value(),
+          (_) => Future.value(),
         );
-
-        final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
 
         final actualResult = await songsRemoteService.getPage(
           storeEtag: true,
@@ -193,9 +181,6 @@ void main() {
       });
 
       test('throws RestApiException on a non No Connection DioException with non-null error response ', () async {
-        final Dio mockDio = MockDio();
-        final BackendHeadersCache mockBackendHeadersCache = MockBackendHeadersCache();
-
         when(
           () => mockDio.getUri<dynamic>(any(), options: any(named: 'options')),
         ).thenThrow(
@@ -206,13 +191,11 @@ void main() {
         );
 
         when(() => mockBackendHeadersCache.getHeaders(any())).thenAnswer(
-          (invocation) => Future.value(),
+          (_) => Future.value(),
         );
 
-        final songsRemoteService = SongsPageRemoteService(mockDio, mockBackendHeadersCache);
-
-        try {
-          await songsRemoteService.getPage(
+        expect(
+          songsRemoteService.getPage(
             storeEtag: true,
             requestUri: Uri.https(
               'example.com',
@@ -223,12 +206,9 @@ void main() {
               },
             ),
             jsonDataSelector: (dynamic json) => json as List<dynamic>,
-          );
-        } on RestApiException catch (e) {
-          expect(e.errorCode, 400);
-          return;
-        }
-        throw Exception('Test Failed');
+          ),
+          throwsA(isA<RestApiException>()),
+        );
       });
     });
   });

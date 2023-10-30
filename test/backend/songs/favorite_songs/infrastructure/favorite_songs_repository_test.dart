@@ -15,21 +15,24 @@ import 'package:joyful_noise/core/infrastructure/network_exceptions.dart';
 import 'package:joyful_noise/core/infrastructure/remote_response.dart';
 import '../../../../_mocks/song/mock_song.dart';
 
-class MockFavoriteSongRemoteService extends Mock implements FavoriteSongsRemoteService {}
+class FavoriteSongRemoteServiceMock extends Mock implements FavoriteSongsRemoteService {}
 
-class MockFavoriteSongLocalService extends Mock implements FavoriteSongsLocalService {}
+class FavoriteSongLocalServiceMock extends Mock implements FavoriteSongsLocalService {}
 
 void main() {
   group('FavoriteSongRepository', () {
+    final FavoriteSongsRemoteService remoteServiceMock = FavoriteSongRemoteServiceMock();
+    final FavoriteSongsLocalService localServiceMock = FavoriteSongLocalServiceMock();
+    const page = 1;
+    final songDTO = [
+      mockSongDTO(1),
+      mockSongDTO(2),
+    ];
+    final favoriteSongRepository = FavoriteSongsRepository(remoteServiceMock, localServiceMock);
+
     group('.getFavoritePage', () {
       test('returns Left<BackendFailure, Fresh<List<Song>>> on RestApiException', () async {
-        final FavoriteSongsRemoteService mockFavoriteSongRemoteService = MockFavoriteSongRemoteService();
-        final FavoriteSongsLocalService mockFavoriteSongLocalService = MockFavoriteSongLocalService();
-        const page = 1;
-        when(() => mockFavoriteSongRemoteService.getFavoriteSongsPage(page)).thenThrow(RestApiException(400));
-
-        final favoriteSongRepository =
-            FavoriteSongsRepository(mockFavoriteSongRemoteService, mockFavoriteSongLocalService);
+        when(() => remoteServiceMock.getFavoriteSongsPage(page)).thenThrow(RestApiException(400));
 
         final actualResult = await favoriteSongRepository.getFavoritePage(page);
         final expectedResult = isA<Left<BackendFailure, Fresh<List<Song>>>>();
@@ -40,25 +43,13 @@ void main() {
       test(
           'returns Right<BackendFailure,  Fresh<List<Song>>> when FavoriteSongRemoteService returns RemoteResponse.noConnection',
           () async {
-        final FavoriteSongsRemoteService mockFavoriteSongRemoteService = MockFavoriteSongRemoteService();
-        final FavoriteSongsLocalService mockFavoriteSongLocalService = MockFavoriteSongLocalService();
-        const page = 1;
-
-        final songDTO = [
-          mockSongDTO(1),
-          mockSongDTO(2),
-        ];
-
-        when(() => mockFavoriteSongRemoteService.getFavoriteSongsPage(page)).thenAnswer((_) {
+        when(() => remoteServiceMock.getFavoriteSongsPage(page)).thenAnswer((_) {
           return Future.value(const RemoteResponse<List<SongDTO>>.noConnection());
         });
 
-        when(() => mockFavoriteSongLocalService.getPage(page)).thenAnswer((_) => Future.value(songDTO));
+        when(() => localServiceMock.getPage(page)).thenAnswer((_) => Future.value(songDTO));
 
-        when(mockFavoriteSongLocalService.getLocalPageCount).thenAnswer((_) => Future.value(1));
-
-        final favoriteSongRepository =
-            FavoriteSongsRepository(mockFavoriteSongRemoteService, mockFavoriteSongLocalService);
+        when(localServiceMock.getLocalPageCount).thenAnswer((_) => Future.value(1));
 
         final actualResult = await favoriteSongRepository.getFavoritePage(page);
         final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
@@ -69,23 +60,11 @@ void main() {
       test(
           'returns Right<BackendFailure,  Fresh<List<Song>>> when FavoriteSongRemoteService returns RemoteResponse.notModified',
           () async {
-        final FavoriteSongsRemoteService mockFavoriteSongRemoteService = MockFavoriteSongRemoteService();
-        final FavoriteSongsLocalService mockFavoriteSongLocalService = MockFavoriteSongLocalService();
-        const page = 1;
-
-        final songDTO = [
-          mockSongDTO(1),
-          mockSongDTO(2),
-        ];
-
-        when(() => mockFavoriteSongRemoteService.getFavoriteSongsPage(page)).thenAnswer((_) {
+        when(() => remoteServiceMock.getFavoriteSongsPage(page)).thenAnswer((_) {
           return Future.value(const RemoteResponse<List<SongDTO>>.notModified());
         });
 
-        when(() => mockFavoriteSongLocalService.getPage(page)).thenAnswer((_) => Future.value(songDTO));
-
-        final favoriteSongRepository =
-            FavoriteSongsRepository(mockFavoriteSongRemoteService, mockFavoriteSongLocalService);
+        when(() => localServiceMock.getPage(page)).thenAnswer((_) => Future.value(songDTO));
 
         final actualResult = await favoriteSongRepository.getFavoritePage(page);
         final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();
@@ -96,25 +75,13 @@ void main() {
       test(
           'returns Right<BackendFailure, Fresh<List<Song>>> when FavoriteSongRemoteService returns RemoteResponse.withNewData',
           () async {
-        final FavoriteSongsRemoteService mockFavoriteSongRemoteService = MockFavoriteSongRemoteService();
-        final FavoriteSongsLocalService mockFavoriteSongLocalService = MockFavoriteSongLocalService();
-        const page = 1;
-
-        final songDTO = [
-          mockSongDTO(1),
-          mockSongDTO(2),
-        ];
-
-        when(() => mockFavoriteSongRemoteService.getFavoriteSongsPage(page)).thenAnswer((_) {
+        when(() => remoteServiceMock.getFavoriteSongsPage(page)).thenAnswer((_) {
           return Future.value(
             RemoteResponse<List<SongDTO>>.withNewData(songDTO),
           );
         });
 
-        when(() => mockFavoriteSongLocalService.upsertPage(songDTO, page)).thenAnswer((_) => Future.value());
-
-        final favoriteSongRepository =
-            FavoriteSongsRepository(mockFavoriteSongRemoteService, mockFavoriteSongLocalService);
+        when(() => localServiceMock.upsertPage(songDTO, page)).thenAnswer((_) => Future.value());
 
         final actualResult = await favoriteSongRepository.getFavoritePage(page);
         final expectedResult = isA<Right<BackendFailure, Fresh<List<Song>>>>();

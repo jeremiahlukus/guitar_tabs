@@ -19,111 +19,61 @@ class MockUserLocalService extends Mock implements UserLocalService {}
 
 void main() {
   group('UserRepository', () {
+    final UserRemoteService mockUserRemoteService = MockUserRemoteService();
+    final UserLocalService mockUserLocalService = MockUserLocalService();
+    final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
+
     group('.deleteUser', () {
       test('returns Left<BackendFailure, Unit> on RestApiException', () async {
-        final UserRemoteService mockUserRemoteService = MockUserRemoteService();
-        final UserLocalService mockUserLocalService = MockUserLocalService();
-
         when(mockUserRemoteService.deleteUser).thenThrow(RestApiException(400));
-
-        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
-
         final actualResult = await userRepository.deleteUser();
         final expectedResult = isA<Left<BackendFailure, Unit>>();
-
         expect(actualResult, expectedResult);
       });
 
       test('returns Right<BackendFailure, Unit> when UserRemoteService returns Unit', () async {
-        final UserRemoteService mockUserRemoteService = MockUserRemoteService();
-        final UserLocalService mockUserLocalService = MockUserLocalService();
-
-        when(mockUserRemoteService.deleteUser).thenAnswer((_) {
-          return Future.value();
-        });
-
-        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
-
+        when(mockUserRemoteService.deleteUser).thenAnswer((_) => Future.value());
         final actualResult = await userRepository.deleteUser();
         final expectedResult = isA<Right<BackendFailure, Unit>>();
-
         expect(actualResult, expectedResult);
       });
     });
+
     group('.getUserPage', () {
       test('returns Left<BackendFailure, User> on RestApiException', () async {
-        final UserRemoteService mockUserRemoteService = MockUserRemoteService();
-        final UserLocalService mockUserLocalService = MockUserLocalService();
-
         when(mockUserRemoteService.getUserDetails).thenThrow(RestApiException(400));
-
-        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
-
         final actualResult = await userRepository.getUserPage();
         final expectedResult = isA<Left<BackendFailure, User>>();
-
         expect(actualResult, expectedResult);
       });
 
       test('returns Right<BackendFailure, User> when UserRemoteService returns RemoteResponse.noConnection', () async {
-        final UserRemoteService mockUserRemoteService = MockUserRemoteService();
-        final UserLocalService mockUserLocalService = MockUserLocalService();
-
         const userDTO = UserDTO(id: 0, email: 'hey@hey.com');
-
-        when(mockUserRemoteService.getUserDetails).thenAnswer((_) {
-          return Future.value(const RemoteResponse<UserDTO>.noConnection());
-        });
-
+        when(mockUserRemoteService.getUserDetails)
+            .thenAnswer((_) => Future.value(const RemoteResponse<UserDTO>.noConnection()));
         when(mockUserLocalService.getUser).thenAnswer((_) => Future.value(userDTO));
-
-        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
-
         final actualResult = await userRepository.getUserPage();
         final expectedResult = isA<Right<BackendFailure, User>>();
-
         expect(actualResult, expectedResult);
       });
 
       test('returns Right<BackendFailure, User> when UserRemoteService returns RemoteResponse.notModified', () async {
-        final UserRemoteService mockUserRemoteService = MockUserRemoteService();
-        final UserLocalService mockUserLocalService = MockUserLocalService();
-
         const userDTO = UserDTO(id: 0, email: 'hey@hey.com');
-
-        when(mockUserRemoteService.getUserDetails).thenAnswer((_) {
-          return Future.value(const RemoteResponse<UserDTO>.notModified());
-        });
-
+        when(mockUserRemoteService.getUserDetails)
+            .thenAnswer((_) => Future.value(const RemoteResponse<UserDTO>.notModified()));
         when(mockUserLocalService.getUser).thenAnswer((_) => Future.value(userDTO));
-
-        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
-
         final actualResult = await userRepository.getUserPage();
         final expectedResult = isA<Right<BackendFailure, User>>();
-
         expect(actualResult, expectedResult);
       });
 
       test('returns Right<BackendFailure, User> when UserRemoteService returns RemoteResponse.withNewData', () async {
-        final UserRemoteService mockUserRemoteService = MockUserRemoteService();
-        final UserLocalService mockUserLocalService = MockUserLocalService();
-
         const userDTO = UserDTO(id: 0, email: 'hey@hey.com');
-
-        when(mockUserRemoteService.getUserDetails).thenAnswer((_) {
-          return Future.value(
-            const RemoteResponse<UserDTO>.withNewData(userDTO),
-          );
-        });
-
+        when(mockUserRemoteService.getUserDetails)
+            .thenAnswer((_) => Future.value(const RemoteResponse<UserDTO>.withNewData(userDTO)));
         when(() => mockUserLocalService.saveUser(userDTO)).thenAnswer((_) => Future.value());
-
-        final userRepository = UserRepository(mockUserRemoteService, mockUserLocalService);
-
         final actualResult = await userRepository.getUserPage();
         final expectedResult = isA<Right<BackendFailure, User>>();
-
         expect(actualResult, expectedResult);
       });
     });
