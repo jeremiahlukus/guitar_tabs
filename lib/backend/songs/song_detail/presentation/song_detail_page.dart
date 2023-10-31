@@ -278,7 +278,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   widgetPadding: 50,
                   lyrics: widget.song.lyrics,
                   textStyle: Theme.of(context).textTheme.bodyMedium!,
-                  chordStyle: !hideChords ? Theme.of(context).textTheme.labelSmall! : const TextStyle(fontSize: 0),
+                  chordStyle: !hideChords ? Theme.of(context).textTheme.labelMedium! : const TextStyle(fontSize: 0),
                   onTapChord: (String chord) async {
                     final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
                     if (tabs.first != '') {

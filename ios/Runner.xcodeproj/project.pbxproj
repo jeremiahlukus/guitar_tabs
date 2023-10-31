@@ -66,7 +66,7 @@
 		85AB05F2C5FA005E0461CBC1 /* Pods-Runner-RunnerUITests.profile-production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner-RunnerUITests.profile-production.xcconfig"; path = "Target Support Files/Pods-Runner-RunnerUITests/Pods-Runner-RunnerUITests.profile-production.xcconfig"; sourceTree = "<group>"; };
 		8944EAE1EF4CE8EB3C939915 /* Pods-Runner-RunnerUITests.release-development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner-RunnerUITests.release-development.xcconfig"; path = "Target Support Files/Pods-Runner-RunnerUITests/Pods-Runner-RunnerUITests.release-development.xcconfig"; sourceTree = "<group>"; };
 		90356C24299BD28F00AB4EE6 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
-		904859512996683A00AB0A4C /* RunnerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		90485951.9.7683A00AB0A4C /* RunnerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		904859532996683B00AB0A4C /* RunnerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RunnerUITests.m; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
-				904859512996683A00AB0A4C /* RunnerUITests.xctest */,
+				90485951.9.7683A00AB0A4C /* RunnerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,7 +216,7 @@
 			);
 			name = RunnerUITests;
 			productName = RunnerUITests;
-			productReference = 904859512996683A00AB0A4C /* RunnerUITests.xctest */;
+			productReference = 90485951.9.7683A00AB0A4C /* RunnerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		97C146ED1CF9000F007C117D /* Runner */ = {
@@ -563,7 +563,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.6;
+				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -644,7 +644,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.6;
+				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.RunnerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1254,7 +1254,7 @@
 			};
 			name = "Profile-development";
 		};
-		904859612996683B00AB0A4C /* Profile-staging */ = {
+		90485961.9.7683B00AB0A4C /* Profile-staging */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F651E54B1ACAC184EFF859E2 /* Pods-Runner-RunnerUITests.profile-staging.xcconfig */;
 			buildSettings = {
@@ -1443,7 +1443,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.6;
+				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1469,7 +1469,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.6;
+				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1550,7 +1550,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.6;
+				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1560,7 +1560,7 @@
 			};
 			name = "Debug-development";
 		};
-		DC2A913425CA1.9.6048C013 /* Release-development */ = {
+		DC2A913425CA1.9.7048C013 /* Release-development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1613,7 +1613,7 @@
 			};
 			name = "Release-development";
 		};
-		DC2A913525CA1.9.6048C013 /* Release-development */ = {
+		DC2A913525CA1.9.7048C013 /* Release-development */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
@@ -1629,7 +1629,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.6;
+				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1705,7 +1705,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.6;
+				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1770,7 +1770,7 @@
 			};
 			name = "Debug-staging";
 		};
-		DC2A91.9.6CA16400048C013 /* Debug-staging */ = {
+		DC2A91.9.7CA16400048C013 /* Debug-staging */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
@@ -1786,7 +1786,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.6;
+				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.stg";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1865,7 +1865,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.6;
+				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.stg";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1941,7 +1941,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.6;
+				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.stg";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1965,7 +1965,7 @@
 				9048595E2996683B00AB0A4C /* Release-staging */,
 				9048595F2996683B00AB0A4C /* Profile-production */,
 				904859602996683B00AB0A4C /* Profile-development */,
-				904859612996683B00AB0A4C /* Profile-staging */,
+				90485961.9.7683B00AB0A4C /* Profile-staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1978,7 +1978,7 @@
 				90356C21299BCB3D00AB4EE6 /* Debug */,
 				DC2A913825CA16400048C013 /* Debug-staging */,
 				97C147041CF9000F007C117D /* Release-production */,
-				DC2A913425CA1.9.6048C013 /* Release-development */,
+				DC2A913425CA1.9.7048C013 /* Release-development */,
 				DC2A913A25CA16460048C013 /* Release-staging */,
 				249021D3217E4FDB00AE95B9 /* Profile-production */,
 				DC2A913625CA15A70048C013 /* Profile-development */,
@@ -1993,9 +1993,9 @@
 				97C147061CF9000F007C117D /* Debug-production */,
 				DC2A913325CA15840048C013 /* Debug-development */,
 				90356C22299BCB3D00AB4EE6 /* Debug */,
-				DC2A91.9.6CA16400048C013 /* Debug-staging */,
+				DC2A91.9.7CA16400048C013 /* Debug-staging */,
 				97C147071CF9000F007C117D /* Release-production */,
-				DC2A913525CA1.9.6048C013 /* Release-development */,
+				DC2A913525CA1.9.7048C013 /* Release-development */,
 				DC2A913B25CA16460048C013 /* Release-staging */,
 				249021D4217E4FDB00AE95B9 /* Profile-production */,
 				DC2A913725CA15A70048C013 /* Profile-development */,
