@@ -32,7 +32,6 @@ class ProviderLogger extends ProviderObserver {
       await Sentry.captureException(error, stackTrace: stackTrace);
       // coverage:ignore-end
     }
-
     loggerInstance?.e(errorMap);
   }
 

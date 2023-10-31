@@ -30,7 +30,6 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   void initState() {
     Future.microtask(() {
       ref.read(favoriteSongsNotifierProvider.notifier).getNextFavoriteSongsPage();
-      ref.read(userNotifierProvider.notifier).getUserPage();
     });
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
@@ -45,8 +44,6 @@ class FavoriteSongsPageState extends ConsumerState<FavoriteSongsPage> {
   static final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    final userState = ref.watch(userNotifierProvider);
-    Sentry.captureMessage('User Logged in: ${userState.user.email}');
     return UpgradeAlert(
       child: Scaffold(
         key: scaffoldKey,

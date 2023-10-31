@@ -110,7 +110,6 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
       // golden test break setting the audio source
       if (widget.song.url.isNotEmpty && !Platform.environment.containsKey('FLUTTER_TEST')) {
         await _player.setAudioSource(AudioSource.uri(Uri.parse(widget.song.url)));
-        await Sentry.captureMessage('Playing song ${widget.song.id}: ${widget.song.url}');
       }
     } catch (e) {
       await Sentry.captureException(e, stackTrace: StackTrace.current);
