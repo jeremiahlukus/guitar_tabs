@@ -53,6 +53,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   int scrollSpeed = 0;
   int scrollSpeedUI = 0;
   bool hideChords = false;
+  final scrollController = ScrollController();
   final _player = AudioPlayer();
 
   @visibleForTesting
@@ -129,6 +130,38 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      scrollController.addListener(() {
+        logger.e('scrolling');
+      });
+      scrollController.position.isScrollingNotifier.addListener(() {
+        if (!scrollController.position.isScrollingNotifier.value) {
+          logger.e('scroll is stopped');
+          if (scrollSpeed > 0 && scrollController.hasClients) {
+            logger.e('scroll has clients');
+            final extentToGo = scrollController.position.maxScrollExtent - scrollController.offset;
+            final seconds = (extentToGo / scrollSpeed).floor();
+            logger.e(seconds);
+            // If scroll has stopped, continue manually scrolling
+            try {
+              // if (scrollController.position.pixels != scrollController.position.maxScrollExtent) {
+              //   scrollController.animateTo(
+              //     scrollController.position.maxScrollExtent,
+              //     duration: Duration(
+              //       seconds: seconds,
+              //     ),
+              //     curve: Curves.linear,
+              //   );
+              // }
+            } catch (e) {
+              logger.e('Its ok:: $e');
+            }
+          }
+        } else {
+          logger.e('scroll is started');
+        }
+      });
+    });
     final state = ref.watch(songDetailNotifierProvider);
     // Not going to test url launcher
     // coverage:ignore-start
@@ -265,6 +298,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 child: LyricsRenderer(
+                  scrollController: scrollController,
                   trailingWidget: Align(
                     child: Padding(
                       padding: const EdgeInsets.all(12),
