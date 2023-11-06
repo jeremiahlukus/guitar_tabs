@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_chord/flutter_chord.dart';
 import 'package:flutter_guitar_tabs/flutter_guitar_tabs.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -131,28 +132,25 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ScrollDirection? lastDirection;
       scrollController.addListener(() {
+        lastDirection = scrollController.position.userScrollDirection;
         logger.e('scrolling');
       });
       scrollController.position.isScrollingNotifier.addListener(() {
         if (!scrollController.position.isScrollingNotifier.value) {
           logger.e('scroll is stopped');
-          if (scrollSpeed > 0 && scrollController.hasClients) {
-            logger.e('scroll has clients');
+          if (scrollSpeed > 0 && scrollController.hasClients && lastDirection == ScrollDirection.reverse) {
+            logger.e('scroll has clients and last direction was down');
             final extentToGo = scrollController.position.maxScrollExtent - scrollController.offset;
             final seconds = (extentToGo / scrollSpeed).floor();
             logger.e(seconds);
-            // If scroll has stopped, continue manually scrolling
             try {
-              // if (scrollController.position.pixels != scrollController.position.maxScrollExtent) {
-              //   scrollController.animateTo(
-              //     scrollController.position.maxScrollExtent,
-              //     duration: Duration(
-              //       seconds: seconds,
-              //     ),
-              //     curve: Curves.linear,
-              //   );
-              // }
+              scrollController.animateTo(
+                scrollController.position.maxScrollExtent,
+                duration: Duration(seconds: seconds),
+                curve: Curves.linear,
+              );
             } catch (e) {
               logger.e('Its ok:: $e');
             }
