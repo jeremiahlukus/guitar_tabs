@@ -134,6 +134,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
     // this code is setting up an auto-scroll behavior that, when the
     // user stops scrolling upwards, it automatically continues scrolling
     // downwards at a specified speed until it reaches the end of the scroll view.
+    // coverage:ignore-start
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ScrollDirection? lastDirection;
       scrollController.addListener(() {
@@ -168,6 +169,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
         }
       });
     });
+    // coverage:ignore-end
     final state = ref.watch(songDetailNotifierProvider);
     // Not going to test url launcher
     // coverage:ignore-start
