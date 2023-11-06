@@ -3,6 +3,7 @@ import 'dart:io';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 // Package imports:
 import 'package:auto_route/auto_route.dart';
@@ -53,6 +54,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
   int scrollSpeed = 0;
   int scrollSpeedUI = 0;
   bool hideChords = false;
+  final scrollController = ScrollController();
   final _player = AudioPlayer();
 
   @visibleForTesting
@@ -129,6 +131,43 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    // this code is setting up an auto-scroll behavior that, when the
+    // user stops scrolling upwards, it automatically continues scrolling
+    // downwards at a specified speed until it reaches the end of the scroll view.
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ScrollDirection? lastDirection;
+      scrollController.addListener(() {
+        lastDirection = scrollController.position.userScrollDirection;
+      });
+      scrollController.position.isScrollingNotifier.addListener(() {
+        //  If scrollController has stopped, and the last scroll direction
+        //  was reverse (upwards), it calculates the remaining scroll extent
+        // (extentToGo) and the time it should take to scroll to the end at the
+        // current scrollSpeed
+        if (!scrollController.position.isScrollingNotifier.value) {
+          if (scrollSpeed > 0 && scrollController.hasClients && lastDirection == ScrollDirection.reverse) {
+            final extentToGo = scrollController.position.maxScrollExtent - scrollController.offset;
+            final seconds = (extentToGo / scrollSpeed).floor();
+            try {
+              // We know this will error since scrollController.hasClients is true at this point
+              // To avoid Failed assertion '_hold == null || _drag == null'
+              // We need to stop the scrolling by calling jumpTo with the current scroll position.
+              // This will effectively stop the scrolling animation.
+              // Then we start it again
+              scrollController
+                ..jumpTo(scrollController.offset)
+                ..animateTo(
+                  scrollController.position.maxScrollExtent,
+                  duration: Duration(seconds: seconds),
+                  curve: Curves.linear,
+                );
+            } catch (e) {
+              Sentry.captureException(e, stackTrace: StackTrace.current);
+            }
+          }
+        }
+      });
+    });
     final state = ref.watch(songDetailNotifierProvider);
     // Not going to test url launcher
     // coverage:ignore-start
@@ -265,6 +304,7 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 child: LyricsRenderer(
+                  scrollController: scrollController,
                   trailingWidget: Align(
                     child: Padding(
                       padding: const EdgeInsets.all(12),
