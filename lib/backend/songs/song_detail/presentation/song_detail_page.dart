@@ -146,6 +146,9 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
             final seconds = (extentToGo / scrollSpeed).floor();
             logger.e(seconds);
             try {
+              if (scrollController.hasClients) {
+                scrollController.jumpTo(scrollController.offset);
+              }
               scrollController.animateTo(
                 scrollController.position.maxScrollExtent,
                 duration: Duration(seconds: seconds),
