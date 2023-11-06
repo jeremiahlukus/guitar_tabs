@@ -131,35 +131,40 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    // this code is setting up an auto-scroll behavior that, when the
+    // user stops scrolling upwards, it automatically continues scrolling
+    // downwards at a specified speed until it reaches the end of the scroll view.
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ScrollDirection? lastDirection;
       scrollController.addListener(() {
         lastDirection = scrollController.position.userScrollDirection;
-        logger.e('scrolling');
       });
       scrollController.position.isScrollingNotifier.addListener(() {
+        //  If scrollController has stopped, and the last scroll direction
+        //  was reverse (upwards), it calculates the remaining scroll extent
+        // (extentToGo) and the time it should take to scroll to the end at the
+        // current scrollSpeed
         if (!scrollController.position.isScrollingNotifier.value) {
-          logger.e('scroll is stopped');
           if (scrollSpeed > 0 && scrollController.hasClients && lastDirection == ScrollDirection.reverse) {
-            logger.e('scroll has clients and last direction was down');
             final extentToGo = scrollController.position.maxScrollExtent - scrollController.offset;
             final seconds = (extentToGo / scrollSpeed).floor();
-            logger.e(seconds);
             try {
-              if (scrollController.hasClients) {
-                scrollController.jumpTo(scrollController.offset);
-              }
-              scrollController.animateTo(
-                scrollController.position.maxScrollExtent,
-                duration: Duration(seconds: seconds),
-                curve: Curves.linear,
-              );
+              // We know this will error since scrollController.hasClients is true at this point
+              // To avoid Failed assertion '_hold == null || _drag == null'
+              // We need to stop the scrolling by calling jumpTo with the current scroll position.
+              // This will effectively stop the scrolling animation.
+              // Then we start it again
+              scrollController
+                ..jumpTo(scrollController.offset)
+                ..animateTo(
+                  scrollController.position.maxScrollExtent,
+                  duration: Duration(seconds: seconds),
+                  curve: Curves.linear,
+                );
             } catch (e) {
-              logger.e('Its ok:: $e');
+              Sentry.captureException(e, stackTrace: StackTrace.current);
             }
           }
-        } else {
-          logger.e('scroll is started');
         }
       });
     });
