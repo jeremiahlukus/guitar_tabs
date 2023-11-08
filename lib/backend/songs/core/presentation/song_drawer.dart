@@ -5,7 +5,6 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 // Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:websafe_svg/websafe_svg.dart';
 
 // Project imports:
 import 'package:joyful_noise/auth/shared/providers.dart';
@@ -39,12 +38,7 @@ class SongDrawer extends ConsumerWidget {
           Expanded(
             child: Column(
               children: [
-                SizedBox(
-                  height: 150,
-                  child: DrawerHeader(
-                    child: WebsafeSvg.asset('assets/logo.svg'),
-                  ),
-                ),
+                const SizedBox(height: 75),
                 ListTile(
                   key: favoriteKey,
                   title: const Text('Favorite Songs'),
@@ -62,7 +56,6 @@ class SongDrawer extends ConsumerWidget {
                   },
                 ),
                 ListTile(
-                  dense: true,
                   key: athensSongBook,
                   title: const Text('Athens Songbook'),
                   onTap: () {
@@ -72,7 +65,6 @@ class SongDrawer extends ConsumerWidget {
                   },
                 ),
                 ListTile(
-                  dense: true,
                   key: hymnal,
                   title: const Text('Hymnal'),
                   onTap: () {
@@ -82,7 +74,6 @@ class SongDrawer extends ConsumerWidget {
                   },
                 ),
                 ListTile(
-                  dense: true,
                   key: blueSongbook,
                   title: const Text('Blue Songbook'),
                   onTap: () {
@@ -92,7 +83,6 @@ class SongDrawer extends ConsumerWidget {
                   },
                 ),
                 ListTile(
-                  dense: true,
                   key: himnos,
                   title: const Text('Himnos'),
                   onTap: () {
@@ -102,7 +92,6 @@ class SongDrawer extends ConsumerWidget {
                   },
                 ),
                 ListTile(
-                  dense: true,
                   key: liederbuch,
                   title: const Text('Liederbuch'),
                   onTap: () {
@@ -112,7 +101,6 @@ class SongDrawer extends ConsumerWidget {
                   },
                 ),
                 ListTile(
-                  dense: true,
                   key: cantiques,
                   title: const Text('Cantiques'),
                   onTap: () {

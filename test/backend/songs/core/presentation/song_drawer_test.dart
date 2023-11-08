@@ -71,26 +71,7 @@ void main() {
     setUpAll(() {
       registerFallbackValue(UriFake());
     });
-    testWidgets('contains DrawerHeader', (tester) async {
-      final scaffoldKey = GlobalKey<ScaffoldState>();
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            key: scaffoldKey,
-            drawer: const SongDrawer(),
-            appBar: AppBar(title: const Text('test')),
-            body: const Center(
-              child: Text('My Page!'),
-            ),
-          ),
-        ),
-      );
-      await tester.pump(Duration.zero);
-      scaffoldKey.currentState!.openDrawer();
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
-      timeDilation = 1;
-    });
+
     testWidgets('taping on Favorite Songs navigates to favorite songs page', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
       final mockSearchHistoryProvider = SearchHistoryNotifier(mockSearchHistoryRepository);
@@ -125,7 +106,6 @@ void main() {
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.favoriteKey));
       expect(router.currentUrl, '/favorite_songs');
       expect(find.text('Favorite Songs'), findsWidgets);
@@ -174,7 +154,6 @@ void main() {
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.athensSongBook));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Athens Songbook'), findsOneWidget);
@@ -223,7 +202,6 @@ void main() {
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.hymnal));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Hymnal'), findsOneWidget);
@@ -272,7 +250,6 @@ void main() {
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.blueSongbook));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Blue Songbook'), findsOneWidget);
@@ -320,7 +297,6 @@ void main() {
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.himnos));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Himnos'), findsOneWidget);
@@ -369,7 +345,6 @@ void main() {
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.liederbuch));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Liederbuch'), findsOneWidget);
@@ -418,7 +393,6 @@ void main() {
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.cantiques));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Cantiques'), findsOneWidget);
@@ -474,7 +448,6 @@ void main() {
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.signOut));
       await tester.pump();
 
@@ -526,7 +499,6 @@ void main() {
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.deleteUser));
       await tester.pumpAndSettle();
       expect(router.currentUrl, '/favorite_songs');
@@ -585,7 +557,6 @@ void main() {
       FavoriteSongsPageState.scaffoldKey.currentState!.openDrawer();
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.byType(DrawerHeader), findsOneWidget);
       await tester.tap(find.byKey(SongDrawer.deleteUser));
       await tester.pumpAndSettle();
       expect(router.currentUrl, '/favorite_songs');

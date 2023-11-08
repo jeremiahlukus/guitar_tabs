@@ -68,6 +68,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
       _controller.close();
     }
 
+    final searchTitle = widget.title.contains('Fav') ? 'All Songs' : widget.title;
     return FloatingSearchBar(
       key: searchKey,
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
@@ -89,7 +90,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
             style: Theme.of(context).textTheme.titleLarge,
           ),
           AutoSizeText(
-            'Tap to search 👆',
+            'Tap to search $searchTitle 👆',
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],

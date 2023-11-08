@@ -65,11 +65,11 @@ Future<void> showHelpToast(
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: Colors.black.withOpacity(0.7),
+                color: Colors.black54.withOpacity(0.7),
               ),
               margin: const EdgeInsets.all(8),
               padding: const EdgeInsets.all(10),
-              height: 200,
+              height: 250,
               child: Column(
                 children: [
                   const Icon(
@@ -115,8 +115,9 @@ Future<void> showHelpDialog(
           side: BorderSide(),
         ),
         contentPadding: const EdgeInsets.only(left: 24, top: 16, right: 24, bottom: 16),
-        title: const Text(
+        title: Text(
           'Favorite Songs',
+          style: Theme.of(context).textTheme.headlineMedium,
           textAlign: TextAlign.center,
         ),
         content: Text(
