@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:joyful_noise/core/presentation/styles/hex_to_color.dart';
 import 'package:joyful_noise/core/presentation/styles/text_theme.dart';
 

@@ -6,8 +6,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:joyful_noise/core/presentation/styles/dark_style.dart';
-import 'package:joyful_noise/core/presentation/styles/light_style.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -15,6 +13,8 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
+import 'package:joyful_noise/core/presentation/styles/dark_style.dart';
+import 'package:joyful_noise/core/presentation/styles/light_style.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
 
 final initializationProvider = FutureProvider<Unit>(
