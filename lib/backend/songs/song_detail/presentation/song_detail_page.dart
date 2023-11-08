@@ -201,95 +201,122 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                 children: [
                   Row(
                     children: [
-                      ElevatedButton(
-                        key: transposeDecrementKey,
-                        onPressed: () {
-                          setState(() {
-                            transposeIncrement--;
-                          });
-                        },
-                        child: const Text('-'),
+                      SizedBox(
+                        width: 60,
+                        height: 30,
+                        child: ElevatedButton(
+                          key: transposeDecrementKey,
+                          onPressed: () {
+                            setState(() {
+                              transposeIncrement--;
+                            });
+                          },
+                          child: const Text('-'),
+                        ),
                       ),
-                      // const SizedBox(width: 5),
+                      const SizedBox(width: 2.5),
                       Text('$transposeIncrement'),
-                      // const SizedBox(width: 5),
-                      ElevatedButton(
-                        key: transposeIncrementKey,
-                        onPressed: () {
-                          setState(() {
-                            transposeIncrement++;
-                          });
-                        },
-                        child: const Text('+'),
+                      const SizedBox(width: 2.5),
+                      SizedBox(
+                        width: 60,
+                        height: 30,
+                        child: ElevatedButton(
+                          key: transposeIncrementKey,
+                          onPressed: () {
+                            setState(() {
+                              transposeIncrement++;
+                            });
+                          },
+                          child: const Text('+'),
+                        ),
                       ),
                     ],
                   ),
                   const Text('Transpose'),
                 ],
               ),
+              const SizedBox(width: 5),
               Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
                     children: [
-                      ElevatedButton(
-                        key: scrollSpeedDecrementKey,
-                        onPressed: scrollSpeed <= 0
-                            ? null
-                            // coverage:ignore-start
-                            : () {
-                                setState(() {
-                                  if (scrollSpeed > 5) {
-                                    scrollSpeedUI -= 1;
-                                    scrollSpeed = scrollSpeed - 6;
-                                  }
-                                });
-                                // coverage:ignore-end
-                              },
-                        child: const Text('-'),
+                      SizedBox(
+                        width: 60,
+                        height: 30,
+                        child: ElevatedButton(
+                          key: scrollSpeedDecrementKey,
+                          onPressed: scrollSpeed <= 0
+                              ? null
+                              // coverage:ignore-start
+                              : () {
+                                  setState(() {
+                                    if (scrollSpeed > 5) {
+                                      scrollSpeedUI -= 1;
+                                      scrollSpeed = scrollSpeed - 6;
+                                    }
+                                  });
+                                  // coverage:ignore-end
+                                },
+                          child: const Text('-'),
+                        ),
                       ),
-                      // const SizedBox(width: 5),
+                      const SizedBox(width: 2.5),
                       Text('$scrollSpeedUI'),
-                      // const SizedBox(width: 5),
-                      ElevatedButton(
-                        key: scrollSpeedIncrementKey,
-                        onPressed: () {
-                          setState(() {
-                            scrollSpeedUI += 1;
-                            scrollSpeed = scrollSpeed + 6;
-                          });
-                        },
-                        child: const Text('+'),
+                      const SizedBox(width: 2.5),
+                      SizedBox(
+                        width: 60,
+                        height: 30,
+                        child: ElevatedButton(
+                          key: scrollSpeedIncrementKey,
+                          onPressed: () {
+                            setState(() {
+                              scrollSpeedUI += 1;
+                              scrollSpeed = scrollSpeed + 6;
+                            });
+                          },
+                          child: const Text('+'),
+                        ),
                       ),
                     ],
                   ),
                   const Text('Auto Scroll'),
                 ],
               ),
-              const SizedBox(width: 20),
-              state.maybeMap(
-                orElse: () => Shimmer.fromColors(
-                  baseColor: Colors.grey.shade400,
-                  highlightColor: Colors.grey.shade300,
-                  child: IconButton(
-                    icon: const Icon(Icons.star),
-                    onPressed: null,
-                    disabledColor: Theme.of(context).iconTheme.color,
+              const SizedBox(width: 5),
+              Column(
+                children: [
+                  state.maybeMap(
+                    orElse: () => Shimmer.fromColors(
+                      baseColor: Colors.grey.shade400,
+                      highlightColor: Colors.grey.shade300,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.star,
+                        ),
+                        onPressed: null,
+                        disabledColor: Theme.of(context).iconTheme.color,
+                      ),
+                    ),
+                    loadSuccess: (state) {
+                      return IconButton(
+                        key: favoriteKey,
+                        onPressed: !state.songDetail.isFresh
+                            ? null
+                            : () {
+                                ref
+                                    .read(songDetailNotifierProvider.notifier)
+                                    .switchStarredStatus(state.songDetail.entity!);
+                                ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
+                              },
+                        icon: state.songDetail.entity?.isFavorite ?? true
+                            ? const Icon(Icons.star, size: 30)
+                            : const Icon(Icons.star_outline, size: 30),
+                      );
+                    },
                   ),
-                ),
-                loadSuccess: (state) {
-                  return IconButton(
-                    key: favoriteKey,
-                    onPressed: !state.songDetail.isFresh
-                        ? null
-                        : () {
-                            ref.read(songDetailNotifierProvider.notifier).switchStarredStatus(state.songDetail.entity!);
-                            ref.refresh(favoriteSongsNotifierProvider.notifier).getFirstFavoriteSongsPage();
-                          },
-                    icon: state.songDetail.entity?.isFavorite ?? true
-                        ? const Icon(Icons.star)
-                        : const Icon(Icons.star_outline),
-                  );
-                },
+                  const Text(''),
+                ],
               ),
             ],
           ),
@@ -319,7 +346,9 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                   widgetPadding: 50,
                   lyrics: widget.song.lyrics,
                   textStyle: Theme.of(context).textTheme.bodyMedium!,
-                  chordStyle: !hideChords ? Theme.of(context).textTheme.labelMedium! : const TextStyle(fontSize: 0),
+                  chordStyle: !hideChords
+                      ? Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold)
+                      : const TextStyle(fontSize: 0),
                   onTapChord: (String chord) async {
                     final tabs = await ref.read(songDetailNotifierProvider.notifier).getChordTabs(chord);
                     if (tabs.first != '') {
@@ -333,9 +362,9 @@ class SongDetailPageState extends ConsumerState<SongDetailPage> {
                                 children: <Widget>[
                                   Center(
                                     child: TabWidget(
+                                      color: Theme.of(context).textTheme.bodyMedium!.color ?? Colors.black,
                                       name: chord,
                                       tabs: tabs,
-                                      size: 4,
                                     ),
                                   ),
                                 ],

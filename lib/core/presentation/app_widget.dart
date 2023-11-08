@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -14,6 +13,8 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:joyful_noise/auth/notifiers/auth_notifier.dart';
 import 'package:joyful_noise/auth/shared/providers.dart';
 import 'package:joyful_noise/core/presentation/routes/app_router.dart';
+import 'package:joyful_noise/core/presentation/styles/dark_style.dart';
+import 'package:joyful_noise/core/presentation/styles/light_style.dart';
 import 'package:joyful_noise/core/shared/providers.dart';
 
 final initializationProvider = FutureProvider<Unit>(
@@ -72,27 +73,8 @@ class AppWidget extends ConsumerWidget {
           ResponsiveBreakpoint.autoScale(1700, name: 'XL'),
         ],
       ),
-      theme: FlexThemeData.light(
-        scheme: FlexScheme.flutterDash,
-        surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-        blendLevel: 20,
-        appBarOpacity: 0.95,
-        subThemesData: const FlexSubThemesData(
-          blendOnLevel: 20,
-          blendOnColors: false,
-        ),
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      ),
-      darkTheme: FlexThemeData.dark(
-        scheme: FlexScheme.flutterDash,
-        surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-        blendLevel: 15,
-        appBarOpacity: 0.90,
-        subThemesData: const FlexSubThemesData(
-          blendOnLevel: 30,
-        ),
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       title: 'Joyful Noise',
       routerDelegate: AutoRouterDelegate(
         _appRouter,
