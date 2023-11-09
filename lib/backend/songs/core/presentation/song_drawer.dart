@@ -14,6 +14,7 @@ import 'package:joyful_noise/core/presentation/routes/app_router.dart';
 class SongDrawer extends ConsumerWidget {
   const SongDrawer({super.key});
   static const drawerKey = ValueKey('drawerKey');
+  static const tunerKey = ValueKey('tunerKey');
   static const favoriteKey = ValueKey('favoriteKey');
   static const athensSongBook = ValueKey('athensSongBook');
   static const hymnal = ValueKey('hymnal');
@@ -37,7 +38,8 @@ class SongDrawer extends ConsumerWidget {
         children: [
           const SizedBox(height: 25),
           ListTile(
-            title: const Text('Tuner'),
+            key: tunerKey,
+            title: const Text('Guitar Tuner'),
             onTap: () {
               AutoRouter.of(context).push(const TunerRoute());
               Navigator.of(context).pop();
