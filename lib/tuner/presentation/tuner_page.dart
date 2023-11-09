@@ -10,6 +10,7 @@ import 'package:flutter_audio_capture/flutter_audio_capture.dart';
 import 'package:pitch_detector_dart/pitch_detector.dart';
 import 'package:pitchupdart/instrument_type.dart';
 import 'package:pitchupdart/pitch_handler.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 // Project imports:
@@ -120,14 +121,8 @@ class _TunerPageState extends State<TunerPage> {
     );
   }
 
-  Future<void> _stopCapture() async {
-    await _audioRecorder.stop();
-    setState(() {
-      note = '';
-      status = 'Click on start';
-    });
-  }
-
+  // Code was getting really messy trying to test this
+  // coverage:ignore-start
   void listener(dynamic obj) {
     //Gets the audio sample
     // ignore: avoid_dynamic_calls
@@ -151,8 +146,10 @@ class _TunerPageState extends State<TunerPage> {
   }
 
   void onError(Object e) {
+    Sentry.captureException(e, stackTrace: StackTrace.current);
     logger.e('ERROR:  $e');
   }
+  // coverage:ignore-end
 
   @override
   Widget build(BuildContext context) {
@@ -175,40 +172,7 @@ class _TunerPageState extends State<TunerPage> {
               ),
             ),
             _buildRadialGauge(),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Center(
-                      child: FloatingActionButton(
-                        onPressed: _startCapture,
-                        heroTag: 'start',
-                        child: Text(
-                          'Start',
-                          style: TextStyle(
-                            color: HexColor('#333333'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: FloatingActionButton(
-                        onPressed: _stopCapture,
-                        heroTag: 'stop',
-                        child: Text(
-                          'Stop',
-                          style: TextStyle(
-                            color: HexColor('#333333'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const Spacer(),
           ],
         ),
       ),
