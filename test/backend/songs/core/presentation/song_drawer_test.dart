@@ -253,6 +253,7 @@ void main() {
       await tester.tap(find.byKey(SongDrawer.blueSongbook));
       expect(router.currentUrl, '/playlist_songs');
       expect(find.text('Blue Songbook'), findsOneWidget);
+      timeDilation = 1;
     });
     testWidgets('taping on Himnos navigates to playlist song page', (tester) async {
       final mockSearchHistoryRepository = MockSearchHistoryRepository();
@@ -506,6 +507,7 @@ void main() {
       await tester.tap(find.byKey(SongDrawer.noDeleteUser));
       await tester.pumpAndSettle();
       expect(find.byType(AlertDialog), findsNothing);
+      timeDilation = 1;
     });
 
     testWidgets('taping on Delete Account opens AlertDialog and deletes account', (tester) async {
@@ -565,6 +567,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(AlertDialog), findsNothing);
       expect(router.currentUrl, '/favorite_songs');
+      timeDilation = 1;
     });
   });
 
