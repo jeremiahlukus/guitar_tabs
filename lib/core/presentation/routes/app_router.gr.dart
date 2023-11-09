@@ -75,6 +75,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SplashPage(),
       );
     },
+    TunerRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TunerPage(),
+      );
+    },
   };
 }
 
@@ -274,6 +280,20 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TunerPage]
+class TunerRoute extends PageRouteInfo<void> {
+  const TunerRoute({List<PageRouteInfo>? children})
+      : super(
+          TunerRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TunerRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

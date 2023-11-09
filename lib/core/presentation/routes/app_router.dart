@@ -13,6 +13,7 @@ import 'package:joyful_noise/backend/songs/playlist_songs/presentation/playlist_
 import 'package:joyful_noise/backend/songs/searched_songs/presentation/searched_songs_page.dart';
 import 'package:joyful_noise/backend/songs/song_detail/presentation/song_detail_page.dart';
 import 'package:joyful_noise/splash/presentation/splash_page.dart';
+import 'package:joyful_noise/tuner/presentation/tuner_page.dart';
 
 part 'app_router.gr.dart';
 
@@ -27,5 +28,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: PlaylistSongsRoute.page, path: '/playlist_songs'),
         AutoRoute(page: SearchedSongsRoute.page, path: '/searched_songs'),
         AutoRoute(page: SongDetailRoute.page, path: '/song_detail'),
+        AutoRoute(page: TunerRoute.page, path: '/tuner'),
       ];
 }

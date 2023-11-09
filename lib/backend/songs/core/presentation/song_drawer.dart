@@ -40,6 +40,14 @@ class SongDrawer extends ConsumerWidget {
               children: [
                 const SizedBox(height: 75),
                 ListTile(
+                  title: const Text('Tuner'),
+                  onTap: () {
+                    AutoRouter.of(context).push(const TunerRoute());
+                    Navigator.of(context).pop();
+                    timeDilation = 1;
+                  },
+                ),
+                ListTile(
                   key: favoriteKey,
                   title: const Text('Favorite Songs'),
                   subtitle: const Text('(Search ALL songs)'),

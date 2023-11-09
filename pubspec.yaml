@@ -8,6 +8,12 @@ environment:
   sdk: ">=3.1.0 <3.2.2"
 
 dependencies:
+  pitch_detector_dart: ^0.0.2
+  pitchupdart: ^0.0.2
+  flutter_audio_capture: ^1.1.4
+  syncfusion_flutter_gauges: ^21.1.41
+  permission_handler: ^10.2.0
+  sleek_circular_slider: ^2.0.1
   google_fonts: ^6.1.0
   sentry_flutter: ^7.10.1
   url_launcher: ^6.1.14
