@@ -95,17 +95,29 @@ class _TunerPageState extends State<TunerPage> {
           ],
           pointers: <GaugePointer>[
             NeedlePointer(
-              value: status == 'TuningStatus.waytoolow'
-                  ? 20
-                  : status == 'TuningStatus.toolow'
-                      ? 40
-                      : status == 'TuningStatus.tuned'
-                          ? 50
-                          : status == 'TuningStatus.toohigh'
-                              ? 60
-                              : status == 'TuningStatus.waytoohigh'
-                                  ? 80
-                                  : 0,
+              value: status == 'TuningStatus.extremelyLow'
+                  ? 0
+                  : status == 'TuningStatus.wayTooLow'
+                      ? 10
+                      : status == 'TuningStatus.tooLow'
+                          ? 20
+                          : status == 'TuningStatus.slightlyLower'
+                              ? 30
+                              : status == 'TuningStatus.slightlyLow'
+                                  ? 40
+                                  : status == 'TuningStatus.tuned'
+                                      ? 50
+                                      : status == 'TuningStatus.slightlyHigh'
+                                          ? 60
+                                          : status == 'TuningStatus.slightlyHigher'
+                                              ? 70
+                                              : status == 'TuningStatus.tooHigh'
+                                                  ? 80
+                                                  : status == 'TuningStatus.wayTooHigh'
+                                                      ? 90
+                                                      : status == 'TuningStatus.extremelyHigh'
+                                                          ? 100
+                                                          : 0,
               needleEndWidth: 5,
               needleColor: Colors.black,
               knobStyle: const KnobStyle(

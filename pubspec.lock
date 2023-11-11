@@ -940,10 +940,11 @@ packages:
   pitchupdart:
     dependency: "direct main"
     description:
-      name: pitchupdart
-      sha256: "0212482447e052b593aee70cbf7a9d1aba4a001be7a3ff095a435ab769dd3154"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "5b4f58eb0760d83d9973abca274a0ed92f51917f"
+      url: "https://github.com/jeremiahlukus/pitchup_dart"
+    source: git
     version: "0.0.2"
   platform:
     dependency: "direct main"
