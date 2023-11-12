@@ -38,14 +38,10 @@ jobs:
           echo "FAILED_STEP=Analyze|flutter analyze lib test" >> $GITHUB_ENV
           flutter analyze lib test
 
-      - name: Run unit tests
+      - name: Run unit tests and extract failed tests
         run: |
           echo "FAILED_STEP=Run unit tests|flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random" >> $GITHUB_ENV
-          flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random > test_results.txt || true
-
-      - name: Extract failed tests
-        run: |
-          python3 extract_failed_tests.py || echo "" > failed_tests.txt
+          flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random > test_results.txt || (python3 extract_failed_tests.py && exit 1)
 
       - uses: codecov/codecov-action@v2
         with:
