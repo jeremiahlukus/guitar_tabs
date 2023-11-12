@@ -59,7 +59,10 @@ jobs:
             if (fs.existsSync('failed_tests.txt')) {
               failedTests = fs.readFileSync('failed_tests.txt', 'utf8');
             }
-            const message = `${step} stage failed. Please run the following command to fix the error: \`${command}\`. Check the logs and the failed tests below for more details:\n\`\`\`\n${failedTests}\n\`\`\``;
+            let message = `${step} stage failed. Please run the following command to fix the error: \`${command}\`. Check the logs for more details.`;
+            if (failedTests) {
+              message += `\nFailed tests:\n\`\`\`\n${failedTests}\n\`\`\``;
+            }
             github.rest.issues.createComment({
               issue_number: issue_number,
               owner: context.repo.owner,
