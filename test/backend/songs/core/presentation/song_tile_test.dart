@@ -114,7 +114,7 @@ void main() {
       await tester.pumpAndSettle();
       final finder = find.byType(AppBar);
       expect(finder, findsOneWidget);
-      expect(router.currentUrl, '/song_detailsss');
+      expect(router.currentUrl, '/song_detail');
     });
   });
 
