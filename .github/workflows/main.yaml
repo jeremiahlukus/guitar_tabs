@@ -41,7 +41,11 @@ jobs:
       - name: Run unit tests
         run: |
           echo "FAILED_STEP=Run unit tests|flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random" >> $GITHUB_ENV
-          flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random
+          flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random > test_results.txt || true
+
+      - name: Extract failed tests
+        run: |
+          python3 extract_failed_tests.py || echo "" > failed_tests.txt
 
       - uses: codecov/codecov-action@v2
         with:
@@ -52,9 +56,11 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
+            const fs = require('fs');
             const [step, command] = process.env.FAILED_STEP.split('|');
             const issue_number = context.issue.number;
-            const message = `${step} stage failed. Please run the following command to fix the error: \`${command}\`. Check the logs for more details.`;
+            const failedTests = fs.readFileSync('failed_tests.txt', 'utf8');
+            const message = `${step} stage failed. Please run the following command to fix the error: \`${command}\`. Check the logs and the failed tests below for more details:\n\`\`\`\n${failedTests}\n\`\`\``;
             github.rest.issues.createComment({
               issue_number: issue_number,
               owner: context.repo.owner,

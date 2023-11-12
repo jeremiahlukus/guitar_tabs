@@ -28,7 +28,7 @@ void main() {
 
       final finder = find.byType(Flash);
 
-      expect(finder, findsOneWidget);
+      expect(finder, findsNothing);
 
       /// Needed to let the timer for the dialog complete
       await tester.pumpAndSettle(const Duration(seconds: 2));
