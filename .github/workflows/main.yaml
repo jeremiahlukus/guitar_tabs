@@ -1,6 +1,10 @@
 name: joyful_noise
 
-on: [pull_request, push]
+on: 
+  pull_request:
+
+env:
+  FAILED_STEP: ''
 
 jobs:
   build:
@@ -11,28 +15,52 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.6'
+          flutter-version: '3.13.9'
           channel: 'stable'
 
       - name: Install Dependencies
-        run: flutter packages get
+        run: |
+          echo "FAILED_STEP=Install Dependencies" >> $GITHUB_ENV
+          flutter packages get
 
       - name: Format
-        run: dart format -l  120 --set-exit-if-changed lib test
+        run: |
+          echo "FAILED_STEP=Format" >> $GITHUB_ENV
+          dart format -l  120 --set-exit-if-changed lib test
 
       - name: Sort Imports
-        run: flutter pub run import_sorter:main --exit-if-changed
+        run: |
+          echo "FAILED_STEP=Sort Imports" >> $GITHUB_ENV
+          flutter pub run import_sorter:main --exit-if-changed
 
       - name: Analyze
-        run: flutter analyze lib test
+        run: |
+          echo "FAILED_STEP=Analyze" >> $GITHUB_ENV
+          flutter analyze lib test
 
       - name: Run unit tests
-        run: flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random
+        run: |
+          echo "FAILED_STEP=Run unit tests" >> $GITHUB_ENV
+          flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random
 
       - uses: codecov/codecov-action@v2
         with:
           files: coverage/lcov.info
 
+      - name: Comment PR
+        if: failure()
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const issue_number = context.issue.number;
+            const message = `${process.env.FAILED_STEP} stage failed. Please check the logs for more details.`;
+            github.rest.issues.createComment({
+              issue_number: issue_number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+            
   # id of job, a string that is unique to the "jobs" node above.
   # drive:
   #   # Creates a build matrix for your jobs. You can define different
@@ -71,3 +99,4 @@ jobs:
   #       channel: 'master' # or: 'stable', 'dev' or 'beta'
   #   - name: "Run Flutter Driver tests"
   #     run: "flutter test --flavor development -d iPhone integration_test"
+
