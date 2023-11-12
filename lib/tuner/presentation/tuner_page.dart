@@ -63,38 +63,44 @@ class _TunerPageState extends State<TunerPage> {
           maximum: 99,
           ranges: <GaugeRange>[
             GaugeRange(
-              startValue: 0, endValue: 33,
-              // color: const Color(0xFFFE2A25),
-              label: 'Low',
-              gradient: const SweepGradient(colors: <Color>[Color(0xFFACB6E5)], stops: <double>[0.25]),
-              sizeUnit: GaugeSizeUnit.factor,
-              labelStyle: GaugeTextStyle(color: HexColor('#333333'), fontSize: 20),
-              startWidth: 0.40, endWidth: 0.40,
-            ),
-            GaugeRange(
-              startValue: 33, endValue: 66,
-              // color:const Color(0xFFFFBA00),
+              startValue: 0,
+              endValue: 99,
               label: 'Tuned',
-              gradient: const SweepGradient(
-                colors: <Color>[Color(0xFFACB6E5), Color(0xFF74ebd5)],
-                stops: <double>[0.25, 0.75],
-              ),
               labelStyle: GaugeTextStyle(color: HexColor('#333333'), fontSize: 20),
-              startWidth: 0.40, endWidth: 0.40,
+              gradient: const SweepGradient(
+                colors: <Color>[Color(0xFFACB6E5), Color(0xFF86C5E7), Color(0xFF74ebd5)],
+                stops: <double>[0, 0.5, 1],
+              ),
               sizeUnit: GaugeSizeUnit.factor,
+              startWidth: 0.40,
+              endWidth: 0.40,
             ),
             GaugeRange(
-              startValue: 66, endValue: 99,
-              // color:const Color(0xFF00AB47),
-              label: 'High',
-              gradient: const SweepGradient(colors: <Color>[Color(0xFF74ebd5)], stops: <double>[0.75]),
+              startValue: 0,
+              endValue: 34,
+              label: 'Low',
               labelStyle: GaugeTextStyle(color: HexColor('#333333'), fontSize: 20),
+              color: Colors.transparent,
               sizeUnit: GaugeSizeUnit.factor,
-              startWidth: 0.40, endWidth: 0.40,
+              startWidth: 0.40,
+              endWidth: 0.40,
+            ),
+            GaugeRange(
+              startValue: 66,
+              endValue: 99,
+              label: 'High',
+              labelStyle: GaugeTextStyle(color: HexColor('#333333'), fontSize: 20),
+              color: Colors.transparent,
+              sizeUnit: GaugeSizeUnit.factor,
+              startWidth: 0.40,
+              endWidth: 0.40,
             ),
           ],
           pointers: <GaugePointer>[
             NeedlePointer(
+              animationDuration: 2000,
+              enableAnimation: true, // Enable the animation
+
               value: status == 'TuningStatus.extremelyLow'
                   ? 0
                   : status == 'TuningStatus.wayTooLow'
@@ -119,7 +125,7 @@ class _TunerPageState extends State<TunerPage> {
                                                           ? 100
                                                           : 0,
               needleEndWidth: 5,
-              needleColor: Colors.black,
+              needleColor: Theme.of(context).textTheme.bodyMedium!.color,
               knobStyle: const KnobStyle(
                 knobRadius: 0.09,
                 borderColor: Colors.white,
