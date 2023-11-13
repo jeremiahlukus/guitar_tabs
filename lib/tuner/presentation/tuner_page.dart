@@ -224,7 +224,7 @@ class _TunerPageState extends State<TunerPage> {
               children: <Widget>[
                 _buildRadialGauge(),
                 Padding(
-                  padding: EdgeInsets.only(top: screenHeight * 0.3), // 30% of screen height
+                  padding: EdgeInsets.only(top: screenHeight * 0.37), // 30% of screen height
                   child: Stack(
                     children: [
                       Align(
