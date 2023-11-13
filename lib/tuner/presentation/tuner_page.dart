@@ -1,23 +1,14 @@
-// Dart imports:
 import 'dart:typed_data';
-
-// Flutter imports:
 import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_audio_capture/flutter_audio_capture.dart';
+import 'package:joyful_noise/core/presentation/bootstrap.dart';
+import 'package:joyful_noise/core/presentation/styles/hex_to_color.dart';
 import 'package:pitch_detector_dart/pitch_detector.dart';
 import 'package:pitchupdart/instrument_type.dart';
 import 'package:pitchupdart/pitch_handler.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-// Project imports:
-import 'package:joyful_noise/core/presentation/bootstrap.dart';
-import 'package:joyful_noise/core/presentation/styles/hex_to_color.dart';
-
-@RoutePage()
 class TunerPage extends StatefulWidget {
   const TunerPage({super.key});
 
@@ -28,10 +19,11 @@ class TunerPage extends StatefulWidget {
 class _TunerPageState extends State<TunerPage> {
   final _audioRecorder = FlutterAudioCapture();
   final pitchDetectorDart = PitchDetector(44100, 2000);
-  final pitchupDart = PitchHandler(InstrumentType.guitar);
-
+  PitchHandler pitchupDart = PitchHandler(InstrumentType.guitar);
+  bool isAutoTune = true;
   String note = '';
   String status = 'Click on start';
+  String selectedString = '';
 
   Future<void> _startCapture() async {
     await _audioRecorder.start(listener, onError, sampleRate: 44100, bufferSize: 3000);
@@ -100,30 +92,21 @@ class _TunerPageState extends State<TunerPage> {
             NeedlePointer(
               animationDuration: 2000,
               enableAnimation: true, // Enable the animation
-
-              value: status == 'TuningStatus.extremelyLow'
-                  ? 0
-                  : status == 'TuningStatus.wayTooLow'
-                      ? 10
-                      : status == 'TuningStatus.tooLow'
-                          ? 20
-                          : status == 'TuningStatus.slightlyLower'
-                              ? 30
-                              : status == 'TuningStatus.slightlyLow'
-                                  ? 40
-                                  : status == 'TuningStatus.tuned'
-                                      ? 50
-                                      : status == 'TuningStatus.slightlyHigh'
-                                          ? 60
-                                          : status == 'TuningStatus.slightlyHigher'
-                                              ? 70
-                                              : status == 'TuningStatus.tooHigh'
-                                                  ? 80
-                                                  : status == 'TuningStatus.wayTooHigh'
-                                                      ? 90
-                                                      : status == 'TuningStatus.extremelyHigh'
-                                                          ? 100
-                                                          : 0,
+              value: status == 'TuningStatus.wayTooLow'
+                  ? 10
+                  : status == 'TuningStatus.tooLow'
+                      ? 20
+                      : status == 'TuningStatus.slightlyLow'
+                          ? 30
+                          : status == 'TuningStatus.tuned'
+                              ? 50
+                              : status == 'TuningStatus.slightlyHigh'
+                                  ? 60
+                                  : status == 'TuningStatus.tooHigh'
+                                      ? 70
+                                      : status == 'TuningStatus.wayTooHigh'
+                                          ? 90
+                                          : 0,
               needleEndWidth: 5,
               needleColor: Theme.of(context).textTheme.bodyMedium!.color,
               knobStyle: const KnobStyle(
@@ -139,23 +122,22 @@ class _TunerPageState extends State<TunerPage> {
     );
   }
 
-  // Code was getting really messy trying to test this
-  // coverage:ignore-start
   void listener(dynamic obj) {
-    //Gets the audio sample
+    // Gets the audio sample
     // ignore: avoid_dynamic_calls
     final buffer = Float64List.fromList(obj.cast<double>() as List<double>);
     final audioSample = buffer.toList();
 
-    //Uses pitch_detector_dart library to detect a pitch from the audio sample
+    // Uses pitch_detector_dart library to detect a pitch from the audio sample
     final result = pitchDetectorDart.getPitch(audioSample);
 
-    //If there is a pitch - evaluate it
+    // If there is a pitch - evaluate it
     if (result.pitched) {
-      //Uses the pitchupDart library to check a given pitch for a Guitar
+      logger.e('pitched');
+      // Uses the pitchupDart library to check a given pitch for a Guitar
       final handledPitchResult = pitchupDart.handlePitch(result.pitch);
-
-      //Updates the state with the result
+      logger.e(handledPitchResult.tuningStatus.toString());
+      // Updates the state with the result
       setState(() {
         note = handledPitchResult.note;
         status = handledPitchResult.tuningStatus.toString();
@@ -165,32 +147,147 @@ class _TunerPageState extends State<TunerPage> {
 
   void onError(Object e) {
     Sentry.captureException(e, stackTrace: StackTrace.current);
-    logger.e('ERROR:  $e');
   }
-  // coverage:ignore-end
+
+  Widget _buildStringButton(String note, double padding) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: Theme.of(context).textTheme.bodyMedium!.color!, // Set border color
+          width: 2, // Set border width
+        ),
+      ),
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            isAutoTune = false;
+            selectedString = note;
+            pitchupDart = PitchHandler(InstrumentType.guitar, selectedNote: selectedString);
+          });
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: padding),
+          child: Text(
+            note,
+            style: TextStyle(color: Theme.of(context).textTheme.bodyMedium!.color),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final padding = screenWidth * 0.02;
+    final horizontalPadding = padding + 40;
+
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Guitar Tuner'),
+        actions: <Widget>[
+          const Text('Manual'),
+          Switch(
+            value: isAutoTune,
+            onChanged: (value) {
+              setState(() {
+                isAutoTune = value;
+                if (isAutoTune) {
+                  setState(() {
+                    selectedString = '';
+                    pitchupDart = PitchHandler(InstrumentType.guitar);
+                  });
+                } else {
+                  setState(() {
+                    selectedString = 'E2';
+                    pitchupDart = PitchHandler(InstrumentType.guitar, selectedNote: 'E2');
+                  });
+                }
+              });
+            },
+          ),
+          const Text('Auto Detect'),
+        ],
+      ),
       body: Center(
         child: Column(
           children: [
-            const Center(
-              child: Text(
-                'Guitar Tuner',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const Spacer(),
             Center(
               child: Text(
-                note,
+                selectedString.isEmpty ? note : selectedString,
                 style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
-            _buildRadialGauge(),
-            const Spacer(),
+            Stack(
+              children: <Widget>[
+                _buildRadialGauge(),
+                Padding(
+                  padding: EdgeInsets.only(top: screenHeight * 0.3), // 30% of screen height
+                  child: Stack(
+                    children: [
+                      Align(
+                        child: SizedBox(
+                          height: screenHeight / 2.5,
+                          width: screenWidth / 2.5,
+                          child: Image.network(
+                            'https://stuff.fendergarage.com/f-com/prod/fender-tuner/assets/tuner/img/paramount/bg-fc9aaea058f25df1786edebc8127c8df.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Positioned.fill(
+                        top: 40,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(right: horizontalPadding, bottom: padding, top: padding),
+                                    child: _buildStringButton('D3', padding),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(right: horizontalPadding, bottom: padding, top: padding),
+                                    child: _buildStringButton('A2', padding),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(right: horizontalPadding, bottom: padding, top: padding),
+                                    child: _buildStringButton('E2', padding),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(left: horizontalPadding, bottom: padding, top: padding),
+                                    child: _buildStringButton('G3', padding),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: horizontalPadding, bottom: padding, top: padding),
+                                    child: _buildStringButton('B3', padding),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: horizontalPadding, bottom: padding, top: padding),
+                                    child: _buildStringButton('E4', padding),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
