@@ -1,6 +1,6 @@
 name: joyful_noise
 description: A Very Good Project created by Very Good CLI.
-version: 1.9.23+22
+version: 1.9.26+26
 
 publish_to: none
 
@@ -8,6 +8,14 @@ environment:
   sdk: ">=3.1.0 <3.2.2"
 
 dependencies:
+  pitch_detector_dart: ^0.0.2
+  pitchupdart:
+    git: 
+      url: 'https://github.com/jeremiahlukus/pitchup_dart'
+  flutter_audio_capture: ^1.1.4
+  syncfusion_flutter_gauges: ^21.1.41
+  permission_handler: ^10.2.0
+  sleek_circular_slider: ^2.0.1
   google_fonts: ^6.1.0
   sentry_flutter: ^7.10.1
   url_launcher: ^6.1.14

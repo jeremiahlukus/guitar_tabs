@@ -1,6 +1,10 @@
 name: joyful_noise
 
-on: [pull_request, push]
+on: 
+  pull_request:
+
+env:
+  FAILED_STEP: ''
 
 jobs:
   build:
@@ -11,27 +15,60 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.6'
+          flutter-version: '3.13.9'
           channel: 'stable'
 
       - name: Install Dependencies
-        run: flutter packages get
+        run: |
+          echo "FAILED_STEP=Install Dependencies|flutter packages get" >> $GITHUB_ENV
+          flutter packages get
 
       - name: Format
-        run: dart format -l  120 --set-exit-if-changed lib test
+        run: |
+          echo "FAILED_STEP=Format|dart format -l  120 lib test" >> $GITHUB_ENV
+          dart format -l  120 --set-exit-if-changed lib test
 
       - name: Sort Imports
-        run: flutter pub run import_sorter:main --exit-if-changed
+        run: |
+          echo "FAILED_STEP=Sort Imports|flutter pub run import_sorter:main" >> $GITHUB_ENV
+          flutter pub run import_sorter:main --exit-if-changed
 
       - name: Analyze
-        run: flutter analyze lib test
+        run: |
+          echo "FAILED_STEP=Analyze|flutter analyze lib test" >> $GITHUB_ENV
+          flutter analyze lib test
 
-      - name: Run unit tests
-        run: flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random
+      - name: Run unit tests and extract failed tests
+        run: |
+          echo "FAILED_STEP=Run unit tests|flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random" >> $GITHUB_ENV
+          flutter test --dart-define=CI=true --no-pub --coverage --test-randomize-ordering-seed random > test_results.txt || (python3 extract_failed_tests.py && exit 1)
 
       - uses: codecov/codecov-action@v2
         with:
           files: coverage/lcov.info
+
+      - name: Comment PR
+        if: failure()
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const fs = require('fs');
+            const [step, command] = process.env.FAILED_STEP.split('|');
+            const issue_number = context.issue.number;
+            let failedTests = '';
+            if (fs.existsSync('failed_tests.txt')) {
+              failedTests = fs.readFileSync('failed_tests.txt', 'utf8');
+            }
+            let message = `${step} stage failed. Please run the following command to fix the error: \`${command}\`. Check the logs for more details.`;
+            if (failedTests) {
+              message += `\nFailed tests:\n\`\`\`\n${failedTests}\n\`\`\``;
+            }
+            github.rest.issues.createComment({
+              issue_number: issue_number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
 
   # id of job, a string that is unique to the "jobs" node above.
   # drive:
@@ -71,3 +108,4 @@ jobs:
   #       channel: 'master' # or: 'stable', 'dev' or 'beta'
   #   - name: "Run Flutter Driver tests"
   #     run: "flutter test --flavor development -d iPhone integration_test"
+
