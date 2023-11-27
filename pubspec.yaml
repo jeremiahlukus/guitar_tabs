@@ -31,7 +31,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   font_awesome_flutter: ^10.5.0
   freezed_annotation: ^2.4.1
-  hooks_riverpod: ^2.4.3
+  hooks_riverpod: ^2.4.9
   intl: ^0.18.0
   oauth2: ^2.0.2
   json_annotation: ^4.8.1
