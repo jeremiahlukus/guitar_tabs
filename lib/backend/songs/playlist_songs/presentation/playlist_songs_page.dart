@@ -53,7 +53,7 @@ class PlaylistSongsPageState extends ConsumerState<PlaylistSongsPage> {
     return Scaffold(
       drawer: const SongDrawer(),
       body: pub_search_bar.SearchBar(
-        title: '${toBeginningOfSentenceCase(widget.playlistName)}',
+        title: toBeginningOfSentenceCase(widget.playlistName),
         hint: 'Search ${widget.playlistName}...',
         // coverage:ignore-start
         onShouldNavigateToResultPage: (searchTerm) {

@@ -105,7 +105,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
             icon: const Icon(Icons.arrow_back_ios),
             splashRadius: 18,
             onPressed: () {
-              AutoRouter.of(context).pop();
+              AutoRouter.of(context).maybePop();
             },
           )
         else if (AutoRouter.of(context).canPop())
@@ -113,7 +113,7 @@ class SearchBarState extends ConsumerState<SearchBar> /*with ConsumerStateMixin*
             icon: const Icon(Icons.arrow_back),
             splashRadius: 18,
             onPressed: () {
-              AutoRouter.of(context).pop();
+              AutoRouter.of(context).maybePop();
             },
           ),
       ],
