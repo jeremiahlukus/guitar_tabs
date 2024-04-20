@@ -12,7 +12,7 @@ part of 'user_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserDTO _$UserDTOFromJson(Map<String, dynamic> json) {
   return _UserDTO.fromJson(json);
@@ -30,13 +30,15 @@ mixin _$UserDTO {
 
 /// @nodoc
 abstract class $UserDTOCopyWith<$Res> {
-  factory $UserDTOCopyWith(UserDTO value, $Res Function(UserDTO) then) = _$UserDTOCopyWithImpl<$Res, UserDTO>;
+  factory $UserDTOCopyWith(UserDTO value, $Res Function(UserDTO) then) =
+      _$UserDTOCopyWithImpl<$Res, UserDTO>;
   @useResult
   $Res call({int id, String email});
 }
 
 /// @nodoc
-class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO> implements $UserDTOCopyWith<$Res> {
+class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO>
+    implements $UserDTOCopyWith<$Res> {
   _$UserDTOCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -65,7 +67,8 @@ class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO> implements $UserDTOCopyW
 
 /// @nodoc
 abstract class _$$UserDTOImplCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
-  factory _$$UserDTOImplCopyWith(_$UserDTOImpl value, $Res Function(_$UserDTOImpl) then) =
+  factory _$$UserDTOImplCopyWith(
+          _$UserDTOImpl value, $Res Function(_$UserDTOImpl) then) =
       __$$UserDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -73,9 +76,12 @@ abstract class _$$UserDTOImplCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$UserDTOImplCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res, _$UserDTOImpl>
+class __$$UserDTOImplCopyWithImpl<$Res>
+    extends _$UserDTOCopyWithImpl<$Res, _$UserDTOImpl>
     implements _$$UserDTOImplCopyWith<$Res> {
-  __$$UserDTOImplCopyWithImpl(_$UserDTOImpl _value, $Res Function(_$UserDTOImpl) _then) : super(_value, _then);
+  __$$UserDTOImplCopyWithImpl(
+      _$UserDTOImpl _value, $Res Function(_$UserDTOImpl) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -101,7 +107,8 @@ class __$$UserDTOImplCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res, _$Us
 class _$UserDTOImpl extends _UserDTO {
   const _$UserDTOImpl({required this.id, required this.email}) : super._();
 
-  factory _$UserDTOImpl.fromJson(Map<String, dynamic> json) => _$$UserDTOImplFromJson(json);
+  factory _$UserDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserDTOImplFromJson(json);
 
   @override
   final int id;
@@ -114,7 +121,7 @@ class _$UserDTOImpl extends _UserDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserDTOImpl &&
@@ -129,7 +136,8 @@ class _$UserDTOImpl extends _UserDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserDTOImplCopyWith<_$UserDTOImpl> get copyWith => __$$UserDTOImplCopyWithImpl<_$UserDTOImpl>(this, _$identity);
+  _$$UserDTOImplCopyWith<_$UserDTOImpl> get copyWith =>
+      __$$UserDTOImplCopyWithImpl<_$UserDTOImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -140,7 +148,8 @@ class _$UserDTOImpl extends _UserDTO {
 }
 
 abstract class _UserDTO extends UserDTO {
-  const factory _UserDTO({required final int id, required final String email}) = _$UserDTOImpl;
+  const factory _UserDTO({required final int id, required final String email}) =
+      _$UserDTOImpl;
   const _UserDTO._() : super._();
 
   factory _UserDTO.fromJson(Map<String, dynamic> json) = _$UserDTOImpl.fromJson;
@@ -151,5 +160,6 @@ abstract class _UserDTO extends UserDTO {
   String get email;
   @override
   @JsonKey(ignore: true)
-  _$$UserDTOImplCopyWith<_$UserDTOImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$UserDTOImplCopyWith<_$UserDTOImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
