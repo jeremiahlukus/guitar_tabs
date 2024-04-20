@@ -100,7 +100,6 @@ Widget buildWidgetUnderTest() {
       searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
     ],
     child: MaterialApp.router(
-      
       routerDelegate: AutoRouterDelegate(
         router,
         navigatorObservers: () => [mockObserver],
