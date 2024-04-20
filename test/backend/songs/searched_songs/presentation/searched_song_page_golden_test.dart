@@ -101,7 +101,7 @@ Widget buildWidgetUnderTest() {
       routerDelegate: AutoRouterDelegate(
         router,
         navigatorObservers: () => [mockObserver],
-        initialDeepLink: FavoriteSongsRoute.name,
+        deepLinkBuilder: (_) => const DeepLink.path(FavoriteSongsRoute.name),
       ),
       routeInformationParser: AppRouter().defaultRouteParser(),
     ),

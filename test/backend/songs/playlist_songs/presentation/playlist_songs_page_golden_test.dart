@@ -100,10 +100,11 @@ Widget buildWidgetUnderTest() {
       searchHistoryNotifierProvider.overrideWith((_) => mockSearchHistoryProvider),
     ],
     child: MaterialApp.router(
+      
       routerDelegate: AutoRouterDelegate(
         router,
         navigatorObservers: () => [mockObserver],
-        initialDeepLink: PlaylistSongsRoute.name,
+        deepLinkBuilder: (_) => const DeepLink.path(PlaylistSongsRoute.name),
       ),
       routeInformationParser: AppRouter().defaultRouteParser(),
     ),
