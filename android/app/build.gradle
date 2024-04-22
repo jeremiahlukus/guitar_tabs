@@ -77,9 +77,9 @@ android {
     signingConfigs {
        release {
             storeFile file("upload-keystore.jks")
-            storePassword localProperties.getProperty('key.password')
-            keyAlias localProperties.getProperty('key.alias')
-            keyPassword localProperties.getProperty('key.password')
+            storePassword "Ajjmll11*"
+            keyAlias "upload"
+            keyPassword "Ajjmll11*"
        }
    }
 
