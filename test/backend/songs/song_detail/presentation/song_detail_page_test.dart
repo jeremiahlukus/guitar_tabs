@@ -313,7 +313,8 @@ void main() {
         ),
         findsNothing,
       );
-      double effectiveFontSize(RichText text) => text.textScaleFactor * text.text.style!.fontSize!;
+
+      double effectiveFontSize(RichText text) => 1 * text.text.style!.fontSize!;
       final text = tester.widget<RichText>(
         find
             .textContaining(

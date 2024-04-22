@@ -31,7 +31,7 @@ class GoldenTestDeviceScenario extends StatelessWidget {
             padding: device.safeArea,
             platformBrightness: device.brightness,
             devicePixelRatio: device.devicePixelRatio,
-            textScaleFactor: device.textScaleFactor,
+            textScaler: TextScaler.linear(device.textScaleFactor),
           ),
           child: SizedBox(
             height: device.size.height,

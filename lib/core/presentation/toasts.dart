@@ -82,7 +82,7 @@ Future<void> showHelpToast(
                   ),
                   Text(
                     message,
-                    textScaleFactor: 1,
+                    textScaler: TextScaler.noScaling,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
