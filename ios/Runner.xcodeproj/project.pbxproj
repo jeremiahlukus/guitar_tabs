@@ -599,7 +599,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.26;
+				MARKETING_VERSION = 1.9.27;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -680,7 +680,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.26;
+				MARKETING_VERSION = 1.9.27;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.RunnerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1479,7 +1479,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.26;
+				MARKETING_VERSION = 1.9.27;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1505,7 +1505,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.26;
+				MARKETING_VERSION = 1.9.27;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1530,7 +1530,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.26;
+				MARKETING_VERSION = 1.9.27;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.stg";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1612,7 +1612,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.26;
+				MARKETING_VERSION = 1.9.27;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1691,7 +1691,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.26;
+				MARKETING_VERSION = 1.9.27;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1767,7 +1767,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.26;
+				MARKETING_VERSION = 1.9.27;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1901,7 +1901,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.26;
+				MARKETING_VERSION = 1.9.27;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.stg";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1977,7 +1977,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.26;
+				MARKETING_VERSION = 1.9.27;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jparrack.joyful-noise.stg";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
